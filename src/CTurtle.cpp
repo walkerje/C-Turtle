@@ -1522,4 +1522,163 @@ namespace cturtle{
     const Color& Color::fromName(const std::string& name){
         return NAMEDCOLORS.at(name);
     }
+    
+    /*KEYS===============================================*/
+    
+    namespace{
+        const std::map<std::string, KeyboardKey> NAMEDKEYS = {
+            {"ESC", KEY_ESC},
+            {"F1", KEY_F1},
+            {"F2", KEY_F2},
+            {"F3", KEY_F3},
+            {"F4", KEY_F4},
+            {"F5", KEY_F5},
+            {"F6", KEY_F6},
+            {"F7", KEY_F7},
+            {"F8", KEY_F8},
+            {"F9", KEY_F9},
+            {"F10", KEY_F10},
+            {"F11", KEY_F11},
+            {"F12", KEY_F12},
+            {"PAUSE", KEY_PAUSE},
+            {"1", KEY_1},
+            {"2", KEY_2},
+            {"3", KEY_3},
+            {"4", KEY_4},
+            {"5", KEY_5},
+            {"6", KEY_6},
+            {"7", KEY_7},
+            {"8", KEY_8},
+            {"9", KEY_9},
+            {"0", KEY_0},
+            {"BACKSPACE", KEY_BACKSPACE},
+            {"INSERT", KEY_INSERT},
+            {"HOME", KEY_HOME},
+            {"PAGEUP", KEY_PAGEUP},
+            {"TAB", KEY_TAB},
+            {"Q", KEY_Q},
+            {"W", KEY_W},
+            {"E", KEY_E},
+            {"R", KEY_R},
+            {"T", KEY_T},
+            {"Y", KEY_Y},
+            {"U", KEY_U},
+            {"I", KEY_I},
+            {"O", KEY_O},
+            {"P", KEY_P},
+            {"DELETE", KEY_DELETE},
+            {"END", KEY_END},
+            {"PAGEDOWN", KEY_PAGEDOWN},
+            {"CAPSLOCK", KEY_CAPSLOCK},
+            {"A", KEY_A},
+            {"S", KEY_S},
+            {"D", KEY_D},
+            {"F", KEY_F},
+            {"G", KEY_G},
+            {"H", KEY_H},
+            {"J", KEY_J},
+            {"K", KEY_K},
+            {"L", KEY_L},
+            {"ENTER", KEY_ENTER},
+            {"SHIFTLEFT", KEY_SHIFTLEFT},
+            {"Z", KEY_Z},
+            {"X", KEY_X},
+            {"C", KEY_C},
+            {"V", KEY_V},
+            {"B", KEY_B},
+            {"N", KEY_N},
+            {"M", KEY_M},
+            {"SHIFTRIGHT", KEY_SHIFTRIGHT},
+            {"ARROWUP", KEY_ARROWUP},
+            {"CTRLLEFT", KEY_CTRLLEFT},
+            {"APPLEFT", KEY_APPLEFT},
+            {"ALT", KEY_ALT},
+            {"SPACE", KEY_SPACE},
+            {"ALTGR", KEY_ALTGR},
+            {"APPRIGHT", KEY_APPRIGHT},
+            {"MENU", KEY_MENU},
+            {"CTRLRIGHT", KEY_CTRLRIGHT},
+            {"ARROWLEFT", KEY_ARROWLEFT},
+            {"ARROWDOWN", KEY_ARROWDOWN},
+            {"ARROWRIGHT", KEY_ARROWRIGHT},
+            {"PAD0", KEY_PAD0},
+            {"PAD1", KEY_PAD1},
+            {"PAD2", KEY_PAD2},
+            {"PAD3", KEY_PAD3},
+            {"PAD4", KEY_PAD4},
+            {"PAD5", KEY_PAD5},
+            {"PAD6", KEY_PAD6},
+            {"PAD7", KEY_PAD7},
+            {"PAD8", KEY_PAD8},
+            {"PAD9", KEY_PAD9},
+            {"PADADD", KEY_PADADD},
+            {"PADSUB", KEY_PADSUB},
+            {"PADMUL", KEY_PADMUL},
+            {"PADDIV", KEY_PADDIV}
+        };
+    }
+    
+    KeyboardKey keyFromName(const std::string& name){
+        return NAMEDKEYS.at(name);
+    }
+    
+    /*TurtleScreen =======================================*/
+    
+    void TurtleScreen::bgcolor(const Color& color){
+        backgroundColor = color;
+    }
+    
+    Color TurtleScreen::bgcolor(){
+        return backgroundColor;
+    }
+    
+    void TurtleScreen::mode(ScreenMode mode){
+        curMode = mode;
+    }
+    
+    ScreenMode TurtleScreen::mode(){
+        return curMode;
+    }
+    
+    void TurtleScreen::colormode(int val){
+        colorCap = val;
+    }
+    
+    int TurtleScreen::colormode(){
+        return colorCap;
+    }
+    
+    void TurtleScreen::clearscreen(){
+        //TODO: Implement Me
+    }
+    
+    void TurtleScreen::resetscreen(){
+        //TODO: Implement Me
+    }
+    
+    vec2 TurtleScreen::screensize(Color& bg){
+        bg = backgroundColor;
+        return {(float)display.screen_width(), (float)display.screen_height()};
+    }
+    
+    void TurtleScreen::setworldcoordinates(vec2 lowerLeft, vec2 upperRight){
+        worldLowerLeft = lowerLeft;
+        worldUpperRight = upperRight;
+    }
+    
+    void TurtleScreen::update(){
+        //TODO: Implement Me
+    }
+    
+    void TurtleScreen::delay(unsigned int ms){
+        //TODO: Implement Me
+    }
+    
+    unsigned int TurtleScreen::delay(){
+        return 0;//TODO: Implement Me
+    }
+    
+    void TurtleScreen::bye(){
+        display.close();
+    }
 }

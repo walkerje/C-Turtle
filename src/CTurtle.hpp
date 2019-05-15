@@ -19,11 +19,11 @@
 #endif
 
 /*Standard Includes*/
+#include <cstdint>
 #include <string>
 #include <list>
 #include <functional>
 #include <utility>
-
 
 /*Local Includes*/
 #include "CImg.h"
@@ -34,7 +34,6 @@ namespace cturtle{
     typedef linalg::vec<float, 2> vec2;
     typedef linalg::vec<float, 4> vec4;
     typedef linalg::mat<float, 4, 4> mat4;
-    typedef std::list<vec2> polygon_t;
     
     /* Color
      *      Defines an interface for RGBA Colors.
@@ -42,8 +41,7 @@ namespace cturtle{
      *      of a static function. Color documentation from the specified link:
      *      https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm
      */
-    class Color{
-    public:
+    struct Color{
         static const Color alice_blue;
         static const Color AliceBlue;
         static const Color antique_white;
@@ -797,29 +795,25 @@ namespace cturtle{
         static const Color yellow4;
         static const Color YellowGreen;
         
-        union{
-            struct{
-                uint8_t r;
-                uint8_t g;
-                uint8_t b;
-                uint8_t a;
-            } components;
-            uint32_t value;
-        };
+        typedef uint8_t component_t;
+
+        component_t r;
+        component_t g;
+        component_t b;
+        component_t a;
         
         /*TODO: Document Me*/
-        Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-            components.r = r;
-            components.g = g;
-            components.a = a;
-            components.b = b;
-        }
+        Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) :
+            r(r), g(g), b(b), a(a){};
         
         /*TODO: Document Me*/
-        Color(uint32_t value) : value(value){}
+        Color(const Color& other) : 
+            r(other.r), g(other.g), b(other.b), a(other.a){}
         
         /*TODO: Document Me*/
-        Color(const std::string& name) : value(fromName(name).value){}
+        Color(const std::string& name) : Color(fromName(name)){}
+        
+        Color(){r = g = b = a = 255;}
         
         /*TODO: Document Me*/
         static const Color& fromName(const std::string& name);
@@ -827,48 +821,229 @@ namespace cturtle{
     
     namespace cimg = cimg_library;
     
+    /**/
+    enum KeyboardKey {
+        KEY_ESC = cimg::cimg::keyESC,
+        KEY_F1 = cimg::cimg::keyF1,
+        KEY_F2 = cimg::cimg::keyF2,
+        KEY_F3 = cimg::cimg::keyF3,
+        KEY_F4 = cimg::cimg::keyF4,
+        KEY_F5 = cimg::cimg::keyF5,
+        KEY_F6 = cimg::cimg::keyF6,
+        KEY_F7 = cimg::cimg::keyF7,
+        KEY_F8 = cimg::cimg::keyF8,
+        KEY_F9 = cimg::cimg::keyF9,
+        KEY_F10 = cimg::cimg::keyF10,
+        KEY_F11 = cimg::cimg::keyF11,
+        KEY_F12 = cimg::cimg::keyF12,
+        KEY_PAUSE = cimg::cimg::keyPAUSE,
+        KEY_1 = cimg::cimg::key1,
+        KEY_2 = cimg::cimg::key2,
+        KEY_3 = cimg::cimg::key3,
+        KEY_4 = cimg::cimg::key4,
+        KEY_5 = cimg::cimg::key5,
+        KEY_6 = cimg::cimg::key6,
+        KEY_7 = cimg::cimg::key7,
+        KEY_8 = cimg::cimg::key8,
+        KEY_9 = cimg::cimg::key9,
+        KEY_0 = cimg::cimg::key0,
+        KEY_BACKSPACE = cimg::cimg::keyBACKSPACE,
+        KEY_INSERT = cimg::cimg::keyINSERT,
+        KEY_HOME = cimg::cimg::keyHOME,
+        KEY_PAGEUP = cimg::cimg::keyPAGEUP,
+        KEY_TAB = cimg::cimg::keyTAB,
+        KEY_Q = cimg::cimg::keyQ,
+        KEY_W = cimg::cimg::keyW,
+        KEY_E = cimg::cimg::keyE,
+        KEY_R = cimg::cimg::keyR,
+        KEY_T = cimg::cimg::keyT,
+        KEY_Y = cimg::cimg::keyY,
+        KEY_U = cimg::cimg::keyU,
+        KEY_I = cimg::cimg::keyI,
+        KEY_O = cimg::cimg::keyO,
+        KEY_P = cimg::cimg::keyP,
+        KEY_DELETE = cimg::cimg::keyDELETE,
+        KEY_END = cimg::cimg::keyEND,
+        KEY_PAGEDOWN = cimg::cimg::keyPAGEDOWN,
+        KEY_CAPSLOCK = cimg::cimg::keyCAPSLOCK,
+        KEY_A = cimg::cimg::keyA,
+        KEY_S = cimg::cimg::keyS,
+        KEY_D = cimg::cimg::keyD,
+        KEY_F = cimg::cimg::keyF,
+        KEY_G = cimg::cimg::keyG,
+        KEY_H = cimg::cimg::keyH,
+        KEY_J = cimg::cimg::keyJ,
+        KEY_K = cimg::cimg::keyK,
+        KEY_L = cimg::cimg::keyL,
+        KEY_ENTER = cimg::cimg::keyENTER,
+        KEY_SHIFTLEFT = cimg::cimg::keySHIFTLEFT,
+        KEY_Z = cimg::cimg::keyZ,
+        KEY_X = cimg::cimg::keyX,
+        KEY_C = cimg::cimg::keyC,
+        KEY_V = cimg::cimg::keyV,
+        KEY_B = cimg::cimg::keyB,
+        KEY_N = cimg::cimg::keyN,
+        KEY_M = cimg::cimg::keyM,
+        KEY_SHIFTRIGHT = cimg::cimg::keySHIFTRIGHT,
+        KEY_ARROWUP = cimg::cimg::keyARROWUP,
+        KEY_CTRLLEFT = cimg::cimg::keyCTRLLEFT,
+        KEY_APPLEFT = cimg::cimg::keyAPPLEFT,
+        KEY_ALT = cimg::cimg::keyALT,
+        KEY_SPACE = cimg::cimg::keySPACE,
+        KEY_ALTGR = cimg::cimg::keyALTGR,
+        KEY_APPRIGHT = cimg::cimg::keyAPPRIGHT,
+        KEY_MENU = cimg::cimg::keyMENU,
+        KEY_CTRLRIGHT = cimg::cimg::keyCTRLRIGHT,
+        KEY_ARROWLEFT = cimg::cimg::keyARROWLEFT,
+        KEY_ARROWDOWN = cimg::cimg::keyARROWDOWN,
+        KEY_ARROWRIGHT = cimg::cimg::keyARROWRIGHT,
+        KEY_PAD0 = cimg::cimg::keyPAD0,
+        KEY_PAD1 = cimg::cimg::keyPAD1,
+        KEY_PAD2 = cimg::cimg::keyPAD2,
+        KEY_PAD3 = cimg::cimg::keyPAD3,
+        KEY_PAD4 = cimg::cimg::keyPAD4,
+        KEY_PAD5 = cimg::cimg::keyPAD5,
+        KEY_PAD6 = cimg::cimg::keyPAD6,
+        KEY_PAD7 = cimg::cimg::keyPAD7,
+        KEY_PAD8 = cimg::cimg::keyPAD8,
+        KEY_PAD9 = cimg::cimg::keyPAD9,
+        KEY_PADADD = cimg::cimg::keyPADADD,
+        KEY_PADSUB = cimg::cimg::keyPADSUB,
+        KEY_PADMUL = cimg::cimg::keyPADMUL,
+        KEY_PADDIV = cimg::cimg::keyPADDIV
+    };
+    
+    /*May need to make this match TKinter names, depending on requirements
+      of the project.*/
+    /*Returns a key with the specified name.
+      Will throw a runtime exception if no key with the specified name exists.*/
+    KeyboardKey keyFromName(const std::string& name);
+    
+//    class RawTurtle;
+    class TurtleScreen;
+    
+    /*TODO: Document Me*/
+    enum ScreenMode{
+        SM_STANDARD,
+        SM_LOGO,
+        SM_WORLD
+    };
+    
+    /*Callback function typedefs for event listeners.*/
+    typedef std::function<void(vec2)> MouseFunc;
+    typedef std::function<void(KeyboardKey)> KeyFunc;
+    typedef std::function<void(void)> TimerFunc;
+    
     /* TurtleScreen
-     *      
+     *      Holds and maintains all facilities in relation to displaying
+     *      turtles and consuming input events from users through callbacks.
      */
     class TurtleScreen{
     public:
-        /*Resets all turtles belonging to this screen to their original state.*/
-        void reset();
+        TurtleScreen() : display(800, 600){
+            display.set_title("CTurtle");
+        }
+        TurtleScreen(const std::string& title) : display(800, 600){
+            display.set_title(title.c_str());
+        }
+        TurtleScreen(int width, int height, const std::string& title) : display(width, height){
+            display.set_title(title.c_str());
+        }
         
+        /*Sets the background color of the screen.*/
+        void bgcolor(const Color& color);
         
+        /*Returns the background color of the screen.*/
+        Color bgcolor();
         
+        //TODO: bgpic()
+
+        /*TODO: Document Me*/        
+        void mode(ScreenMode mode);
+        
+        /*TODO: Document Me*/
+        ScreenMode mode();
+        
+        /*TODO: Document Me*/
+        void colormode(int val);
+        
+        /*TODO: Document Me*/
+        int colormode();
+        
+        /*TODO: Document Me*/
         void clearscreen();
+        
+        /*Alias for @clearscreen*/
+        inline void clear(){clearscreen();}
+        
+        /*Resets all turtles belonging to this screen to their original state.*/
+        void resetscreen();
+        
+        /*Resets all turtles belonging to this screen to their original state.*/
+        inline void reset(){resetscreen();}
+        
+        /*Returns the size of this screen, in pixels.
+          Also returns the background color of the screen,
+          by assigning the input reference.*/
+        vec2 screensize(Color& bg);
+        
+        /*Returns the size of the screen, in pixels.*/
+        inline vec2 screensize(){
+            Color temp;
+            return screensize(temp);
+        }
+        
+        /*Sets the world coordinates.*/
+        void setworldcoordinates(vec2 lowerLeft, vec2 upperRight);
+        
+        //TODO: Tracer Func
+        
+        /*TODO: Document Me*/
+        void update();
+        
+        /*Sets the delay set between turtle commands.*/
+        void delay(unsigned int ms);
+        
+        /*Returns the delay set between turtle commands in MS.*/
+        unsigned int delay();
+        
+        /*Returns the width of the window, in pixels.*/
+        int window_width(){
+            return display.window_width();
+        }
+        
+        /*Returns the height of the window, in pixels.*/
+        int window_height(){
+            return display.window_height();
+        }
+        
+        /*Closes this window.*/
+        void bye();
     protected:
+        cimg::CImgDisplay display;
+        cimg::CImg<uint8_t> image;
         
+        Color backgroundColor   = Color::white;
+        ScreenMode curMode      = SM_STANDARD;
+        int colorCap            = 255;
+        
+        vec2 worldLowerLeft, worldUpperRight;
+        
+        KeyFunc     keyFunc     = [](char){};
+        MouseFunc   clickFunc   = [](vec2){};
+        TimerFunc   timerFunc   = [](void){};
     };
     
-    /* TurtleCommandType
-     *      TODO: Finish and document
-     */
-    enum TurtleCommandType{
-        /*TC_<TYPE> Enumeration*/
-        TCT_UNKNOWN,
-        TCT_MOVE,
-        TCT_SLEEP,
-        
-        TCT_ENUM_MAX
-    };
-    
-    //TODO: Finish and document
-    struct TurtleCommand{
-        union{
-            
-        } data;
-        
-        TurtleCommandType type = TCT_UNKNOWN;
-    };
-    
-    //TODO: Finish and document
-    class Turtle{
-    public:
-        Turtle(TurtleScreen& screen) : screen(screen){}
-    protected:
-        TurtleScreen& screen;
-        std::list<TurtleCommand> commands;
-    };
+//    //TODO: Finish and document
+//    class RawTurtle{
+//    public:
+//        RawTurtle(TurtleScreen& screen) : screen(screen){}
+//        
+//        virtual ~RawTurtle(){}
+//    protected:
+//        RawTurtle(){}
+//        
+//        mat4 transformMatrix;
+//        TurtleScreen& screen;
+//    };
 }
