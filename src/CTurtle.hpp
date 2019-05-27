@@ -31,6 +31,9 @@
 #include "Color.hpp"
 #include "UserIO.hpp"
 
+//TODO: Just a personal note; active v. passive rendering is something to
+//think about. I think turtles use a form of passive rendering.
+
 namespace cturtle{
     /*Callback function typedefs for event listeners.*/
     
@@ -43,15 +46,6 @@ namespace cturtle{
     /*Timer event callback type.*/
     typedef std::function<void(void)> TimerFunc;
     
-    /*  AffineTransform
-     *      This class handles the maths behind the transformations
-     *      of turtle objects. This includes rotation, movement,
-     *      and scaling.
-     */
-    struct AffineTransform{
-        
-    };
-
     //RawTurtle prototype definition
     class RawTurtle;
     //TurtleScreen prototype definition
@@ -59,6 +53,189 @@ namespace cturtle{
     
     //Alias for the CImg library, for convenience.
     namespace cimg = cimg_library;
+    
+    /*Shape Registration and deletion.*/
+     
+    void registerShape(const std::string& name, const Polygon& p);
+    inline void addShape(const std::string& name, const Polygon& p){
+        registerShape(name, p);
+    }
+    
+    const Polygon& shape(const std::string name);
+    
+    enum TurtleSpeed{
+        TS_FASTEST  = 0,
+        TS_FAST     = 10,
+        TS_NORMAL   = 6,
+        TS_SLOW     = 3,
+        TS_SLOWEST  = 1
+    };
+    
+    struct SceneObject{
+        //Owns whatever geometry it contains.
+        //When the scene object is deconstructed,
+        //the geometry is automatically deleted.
+        std::unique_ptr<IDrawableGeometry> geom;
+        Color color;
+        AffineTransform transform;
+        
+        bool stamp = false;
+        int stampid = -1;
+        
+        SceneObject(){}
+        SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t) :
+            geom(geom), color(color), transform(t){}
+        
+        SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t, int stampid) :
+            geom(geom), color(color), transform(t), stamp(true), stampid(stampid){}
+    };
+
+    //TODO: Finish and document
+    class RawTurtle{
+    public:
+        /*Implemented in source impl. file*/
+        RawTurtle(TurtleScreen& scr);
+        
+        //Motion
+        void forward(int pixels);
+        inline void fd(int pixels){forward(pixels);}
+        
+        void backward(int pixels);
+        inline void bk(int pixels){backward(pixels);}
+        inline void back(int pixels){backward(pixels);}
+        
+        void right(float amt);
+        inline void rt(float angle){right(angle);}
+        
+        void left(float amt);
+        inline void lt(float angle){left(angle);}
+        
+        void goTo(int x, int y);
+        inline void setpos(int x, int y){goTo(x,y);}
+        inline void setposition(int x, int y){goTo(x,y);}
+        
+        void setx(int x);
+        void sety(int y);
+        
+        //TODO: refine
+        void setheading(){}
+        inline void seth(){setheading();}
+        
+        void home();
+        
+        void circle(int radius, int steps, Color color);
+        
+        inline void circle(Color color){
+            circle(30, 15, color);
+        }
+        
+        void dot(Color color, int size = 10){
+            circle(size/2, 4, color);
+        }
+        
+        /*Sets the "filling" state.*/
+        void fill(bool state);
+        
+        inline void begin_fill(){fill(true);}
+        inline void end_fill(){fill(false);}
+        
+        void fillcolor(Color c){fillColor = c;}
+        Color fillcolor(){return fillColor;}
+        
+        //TODO: Stamps boiiiii
+        int stamp();
+        void clearstamp(int stampid);
+        void clearstamps(int stampid = -1);
+        
+        /*Sets the shape of this turtle.*/
+        void shape(const std::string& name){
+            cursor = cturtle::shape(name);
+        }
+        
+        void shape(const Polygon& p){
+            cursor = p;
+        }
+        
+        /*Returns the shape of this turtle.*/
+        const Polygon& shape(){
+            return cursor;
+        }
+        
+        void undo();
+        
+        void speed(float val){
+            moveSpeed = val;
+        }
+        
+        float speed(){
+            return moveSpeed;
+        }
+        
+        //TODO: Tracer Funcs
+        void trace(bool state){
+            tracing = state;
+        }
+        bool trace(){return tracing;}
+        
+        void draw(const AffineTransform& screenTransform, Image& canvas);
+        
+        void degrees(){angleMode = false;}
+        inline void radians(){angleMode = true;}
+        
+        /*Resets this turtle.*/
+        void reset();
+        
+        virtual ~RawTurtle(){}
+    protected:
+        std::list<SceneObject> objects;
+        
+        std::vector<Point> tracePoints = {{0,0}};
+        AffineTransform transform;
+        
+        /*Pushes the specified object attibutes as an object to this turtle's
+          "drawing" list.*/
+        inline void pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom){
+            objects.emplace_back(geom, color, t);
+        }
+        
+        inline void pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom){
+            objects.emplace_back(geom, color, t, curStamp++);
+        }
+        
+        /*Returns the speed, of any applicable animation,
+          in milliseconds, based off of this turtle's speed setting.*/
+        inline long getAnimMS(){
+            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
+        }
+        
+        /*Pushes the current transformed point.*/
+        inline void pushCurrent(){
+            if(tracing)
+                tracePoints.push_back(transform.getTranslation());
+            if (filling) 
+                fillAccum.points.push_back(transform.getTranslation());
+        }
+        
+        //Pen Attributes
+        float moveSpeed = TS_NORMAL;
+        bool angleMode = false;//Using Radians = true, degrees = false
+        bool tracing = true;
+        bool filling = false;
+        Color penColor = Color::black;
+        
+        //Accumulors
+        Polygon fillAccum;
+        Color fillColor = Color::black;
+        
+        //Cursor (shape)
+        Polygon cursor = cturtle::shape("indented triangle");
+        int curStamp = 0;
+        
+        TurtleScreen* screen = nullptr;
+        
+        /*Inheritors must assign screen reference!*/
+        RawTurtle(){}
+    };
     
     /*TODO: Document Me*/
     enum ScreenMode{
@@ -73,18 +250,20 @@ namespace cturtle{
      */
     class TurtleScreen{
     public:
-        TurtleScreen() : display(800, 600){
-            display.set_title("CTurtle");
+        TurtleScreen() : display(800, 600, "CTurte", 0){
             canvas.assign(display);
             swapDisplay(2);
+            canvas.fill(255,255,255);
         }
         TurtleScreen(const std::string& title) : display(800, 600){
             display.set_title(title.c_str());
+            display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
         }
         TurtleScreen(int width, int height, const std::string& title) : display(width, height){
             display.set_title(title.c_str());
+            display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
         }
@@ -154,9 +333,8 @@ namespace cturtle{
         }
         
         /*Sets the world coordinates.*/
-        void setworldcoordinates(vec2 lowerLeft, vec2 upperRight);
-        
-        //TODO: Tracer Func
+//        void setworldcoordinates(vec2 lowerLeft, vec2 upperRight);
+        //might just leave this function out
         
         /*TODO: Document Me*/
         void update();
@@ -180,8 +358,8 @@ namespace cturtle{
         
         /*Saves the display as a file, the format of which is dependent
           on the file extension given in the specified file path string.*/
-        inline void save(const std::string& file){
-            cimg::CImg<uint8_t> screenshotImg;
+        void save(const std::string& file){
+            Image screenshotImg;
             display.screenshot(screenshotImg);
             screenshotImg.save(file.c_str());
         }
@@ -190,9 +368,7 @@ namespace cturtle{
         /*Closes this window.*/
         void bye();
         
-        /*Returns the canvas image used by this screen.
-          In all actuality, this function returns a reference
-          to */
+        /*Returns the canvas image used by this screen.*/
         Image& getcanvas(){
             return canvas;
         }
@@ -202,8 +378,32 @@ namespace cturtle{
             return display;
         }
         
+        /*Returns a boolean indicating if the
+          screen has been closed.*/
+        inline bool getIsClosed(){
+            return getInternalDisplay().is_closed();
+        }
+        
+        /*Draws all geometry from all child turtles.*/
+        void redraw();
+        
         /*Swaps the display.*/
         inline void swap(){swapDisplay();}
+        
+        /*Returns the screen-level AffineTransform
+          of this screen. This is what puts the origin
+          at the center of the screen rather than at
+          at the top left, for example.*/
+        AffineTransform screentransform(){
+            //TODO: Change with the screen modes.
+            AffineTransform t;
+            t.translate(canvas.width() / 2, canvas.height() / 2);
+            return t;
+        }
+        
+        void add(RawTurtle& turtle){
+            turtles.push_back(&turtle);
+        }
     protected:
         cimg::CImgDisplay   display;
         Image               canvas;
@@ -214,106 +414,32 @@ namespace cturtle{
         int colorCap            = 255;
         bool  tracing = true;
         
-        vec2 worldLowerLeft, worldUpperRight;
-        
         unsigned int delayMS = 10;
         
         /*Swaps the front and back buffers, then displays the front buffer.*/
         inline void swapDisplay(int times = 1){
             for(int i = 0; i < times; i++){
                 display.display(canvas);
+                display.flush();
                 /*Reset the display to just have background image or color.*/
                 if(!backgroundImage.is_empty()){
-                    canvas.draw_image(backgroundImage);
+                    canvas.assign(backgroundImage);
                 }else{
-                    canvas.draw_rectangle(0, 0, window_width(), window_height(), backgroundColor.rgbPtr());
+                    
+                    //It really seems to me that these two methods do the
+                    //exact same thing-- flicker and all.
+                    //TODO: Fix the "flickering" issue.
+//                    std::memset(canvas.data(), 255, canvas.size()*sizeof(uint8_t));
+                    canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
                 }
             }
         }
         
-//        std::list<RawTurtle&> turtles;
+        std::list<RawTurtle*> turtles;
         
         //TODO: Map to individual buttons (e.g, key is button, val is callback)
 //        KeyFunc     keyFunc     = [](char){};
 //        MouseFunc   clickFunc   = [](vec2){};
         TimerFunc   timerFunc   = [](void){};
-    };
-    
-    enum TurtleSpeed{
-        TS_FASTEST  = 0,
-        TS_FAST     = 10,
-        TS_NORMAL   = 6,
-        TS_SLOW     = 3,
-        TS_SLOWEST  = 1
-    };
-
-    //TODO: Finish and document
-    class RawTurtle{
-    public:
-        RawTurtle(TurtleScreen& screen) : screen(screen){}
-        
-        //Motion
-        void forward(int pixels);
-        inline void fd(int pixels){forward(pixels);}
-        
-        void backward(int pixels);
-        inline void bk(int pixels){backward(pixels);}
-        inline void back(int pixels){backward(pixels);}
-        
-        void right(float amt){
-            angle += (!angleMode ? (toRadians(amt)) : amt);
-        }
-        inline void rt(float angle){right(angle);}
-        
-        void left(float amt){
-            angle -= (!angleMode ? (toRadians(amt)) : amt);
-        }
-        inline void lt(float angle){left(angle);}
-        
-        void go_to(int x, int y);//had to change due to C++ keyword "goto"
-        inline void setpos(int x, int y){go_to(x,y);}
-        inline void setposition(int x, int y){go_to(x,y);}
-        
-        void setx(int x);
-        void sety(int y);
-        
-        //TODO: refine
-        void setheading();
-        inline void seth(){setheading();}
-        
-        void home();
-        
-        void circle();
-        
-        void dot();
-        
-        void clearstamp();
-        void clearstamps();
-        
-        void undo();
-        
-        void speed(float val){
-            moveSpeed = val;
-        }
-        
-        float speed(){
-            return moveSpeed;
-        }
-        
-        void degrees(){angleMode = false;}
-        inline void radians(){angleMode = true;}
-        
-        void reset();
-        
-        virtual ~RawTurtle(){}
-    protected:
-        TurtleScreen& screen = *((TurtleScreen*)nullptr);
-        double angle = 0;
-        vec2 position = {0,0};
-        bool angleMode = false;//Using Radians = true, degrees = false
-        float moveSpeed = TS_NORMAL;
-        
-        RawTurtle(){}
-        //Children which overload this MUST redefine the screen reference.
     };
 }

@@ -17,7 +17,8 @@
 #include "linalg.hpp"
 #include "CImg.h"
 
-/*Common header so we don't have to redefine common typedefs.*/
+/*Common header so we don't have to redefine common typedefs,
+  such as Image or the vector types.*/
 namespace cturtle{
     namespace cimg = cimg_library;
     typedef cimg::CImg<uint8_t> Image;
@@ -27,7 +28,13 @@ namespace cturtle{
     typedef linalg::vec<float, 4>       vec4;
     typedef linalg::mat<float, 4, 4>    mat4;
     
+    /*Sleeps the calling thread for the specified number of milliseconds.*/
     inline void sleep(long ms){
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+    }
+    
+    inline unsigned long epochTime(){
+        return std::chrono::high_resolution_clock::now().time_since_epoch() 
+                    / std::chrono::milliseconds(1);
     }
 }
