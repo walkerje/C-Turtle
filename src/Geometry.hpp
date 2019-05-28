@@ -14,7 +14,16 @@
 
 #include <cstring>//memcpy
 #include <vector>//for polygon points
+
+//MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
+//when compiling under VisualC++.
+#ifndef _MSC_VER
 #include <cmath>//for M_PI
+#else
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
+#endif
 
 #include "Common.hpp"
 #include "Color.hpp"
@@ -204,6 +213,7 @@ namespace cturtle {
         AffineTransform& setTranslation(int x, int y){
             at(0, 2) = x;
             at(1, 2) = y;
+            return *this;
         }
         
         Point getTranslation(){
@@ -213,11 +223,13 @@ namespace cturtle {
         /*Sets the X translation of this affine transform.*/
         AffineTransform& setTranslationX(int x){
             at(0, 2) = x;
+            return *this;
         }
         
         /*Sets the Y translation of this affine transform.*/
         AffineTransform& setTranslationY(int y){
             at(1, 2) = y;
+            return *this;
         }
 
         /*Translates this affine transform.*/

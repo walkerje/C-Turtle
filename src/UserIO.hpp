@@ -107,9 +107,9 @@ namespace cturtle{
     };
     
     enum MouseButton{//Stored as bitwise flags from CImgDisplay
-        MB_LEFT = 0x1,//Left Mouse Button
-        MB_RIGHT = 0x2,//Right Mouse Button
-        MB_MIDDLE = 0x4//Middle Mouse Button
+        MOUSEB_LEFT = 0x1,//Left Mouse Button
+        MOUSEB_RIGHT = 0x2,//Right Mouse Button
+        MOUSEB_MIDDLE = 0x4//Middle Mouse Button
     };
     
     /*May need to make this match TKinter names, depending on requirements

@@ -105,6 +105,7 @@ namespace cturtle {
     int RawTurtle::stamp(){
         Polygon* p = new Polygon(cursor);
         pushStamp(transform, Color::black, p);
+        return curStamp;
     }
     
     void RawTurtle::clearstamp(int stampid){
