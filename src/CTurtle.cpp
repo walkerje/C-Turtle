@@ -60,9 +60,9 @@ namespace cturtle {
         //        }
     }
 
-    vec2 TurtleScreen::screensize(Color& bg) {
+    ivec2 TurtleScreen::screensize(Color& bg) {
         bg = backgroundColor;
-        return {(float) display.screen_width(), (float) display.screen_height()};
+        return {display.screen_width(), display.screen_height()};
     }
 
     void TurtleScreen::update() {

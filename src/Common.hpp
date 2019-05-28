@@ -14,7 +14,6 @@
 
 #include <cstdint>
 #include <thread>
-#include "linalg.hpp"
 #include "CImg.h"
 
 /*Common header so we don't have to redefine common typedefs,
@@ -23,10 +22,19 @@ namespace cturtle{
     namespace cimg = cimg_library;
     typedef cimg::CImg<uint8_t> Image;
     
-    typedef linalg::vec<int, 2>         ivec2;
-    typedef linalg::vec<float, 2>       vec2;
-    typedef linalg::vec<float, 4>       vec4;
-    typedef linalg::mat<float, 4, 4>    mat4;
+    struct ivec2{
+        int x = 0;
+        int y = 0;
+        
+        ivec2(){}
+        ivec2(int x, int y) : x(x), y(y){}
+        ivec2(const ivec2& other) : x(other.x), y(other.y){}
+        
+        /*Array access operator overload.*/
+        inline int& operator[](int index){
+            return ((int*)this)[index];
+        }
+    };
     
     /*Sleeps the calling thread for the specified number of milliseconds.*/
     inline void sleep(long ms){

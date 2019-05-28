@@ -9,7 +9,6 @@
       <itemPath>src/Common.hpp</itemPath>
       <itemPath>src/Geometry.hpp</itemPath>
       <itemPath>src/UserIO.hpp</itemPath>
-      <itemPath>src/linalg.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -62,8 +61,6 @@
       </item>
       <item path="src/UserIO.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/linalg.hpp" ex="false" tool="3" flavor2="0">
-      </item>
     </conf>
     <conf name="Release" type="3">
       <toolsSet>
@@ -99,8 +96,6 @@
       <item path="src/Geometry.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/UserIO.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/linalg.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

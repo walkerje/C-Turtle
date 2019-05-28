@@ -14,6 +14,7 @@
 
 #include <cstring>//memcpy
 #include <vector>//for polygon points
+#include <array>//For AffineTransform storage.
 
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
@@ -42,20 +43,6 @@ namespace cturtle {
     template<typename T>
     inline T toDegrees(T val) {
         return T(val * (180.0/M_PI));
-    }
-
-    /*Performs a linear interpolation.
-      Considers first argument as the value,
-      with the second two being min and max values.
-      Step is considered to be the quantity of "distance"
-      the variable is intended to be moved, defined as a percentage
-      of the space it has (e.g, difference of min and max).
-     
-      Step must be in range of 0...1!!*/
-    template<typename T>
-    inline T lerp(T val, T min, T max, T step) {
-        const T result = T(val + (step * (max - min)));
-        return result > max ? max : result;
     }
 
     /*An interface virtual class which just defines a common
@@ -140,14 +127,8 @@ namespace cturtle {
 
     class AffineTransform {
     public:
-        //0, 0 is x scaling
-        //1, 0 is y shearing
-        //0, 1 is x shearing
-        //1, 1 is y scaling 
-        //0, 2 is x translation
-        //1, 2 is y translation
-        typedef linalg::mat<float, 3, 3> mat_t;
-
+        typedef std::array<float, 9> mat_t;
+        
         /*Constructs an empty affine transform.
           Initializes as an identity matrix,
           meaning all transformed points aren't moved. */
@@ -160,9 +141,8 @@ namespace cturtle {
 
         /*Sets this transform to an identity.*/
         AffineTransform& identity() {
-            value = mat_t();
+            value.fill(0.0f);
             at(0, 0) = at(1, 1) = 1.0f;
-            at(0, 1) = at(0, 2) = at(1, 0) = at(1, 2) = 0.0f;
             rotation = 0;
             return *this;
         }
@@ -379,11 +359,11 @@ namespace cturtle {
         float rotation = 0;
         
         inline float& at(int row, int col) {
-            return value[col][row];
+            return value[row*3+col];
         }
 
         float constAt(int row, int col) const {
-            return value[col][row];
+            return value[row*3+col];
         }
     };
 }

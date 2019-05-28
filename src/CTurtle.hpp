@@ -38,7 +38,7 @@ namespace cturtle{
     /*Callback function typedefs for event listeners.*/
     
     /*Mouse event callback type.*/
-    typedef std::function<void(vec2)> MouseFunc;
+    typedef std::function<void(ivec2)> MouseFunc;
     
     /*Keyboard event callback type.*/
     typedef std::function<void(KeyboardKey)> KeyFunc;
@@ -324,10 +324,10 @@ namespace cturtle{
         /*Returns the size of this screen, in pixels.
           Also returns the background color of the screen,
           by assigning the input reference.*/
-        vec2 screensize(Color& bg);
+        ivec2 screensize(Color& bg);
         
         /*Returns the size of the screen, in pixels.*/
-        inline vec2 screensize(){
+        inline ivec2 screensize(){
             Color temp;
             return screensize(temp);
         }
