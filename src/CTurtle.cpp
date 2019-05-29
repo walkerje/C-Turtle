@@ -83,9 +83,8 @@ namespace cturtle {
 
     void TurtleScreen::redraw() {
         //TODO: Move this somewhere else 
-        if(getIsClosed()){
-            exit(EXIT_SUCCESS);
-        }
+        if(getIsClosed())
+            return;
         AffineTransform screen = screentransform();
         for (RawTurtle* turtle : turtles) {
             turtle->draw(screen, canvas);

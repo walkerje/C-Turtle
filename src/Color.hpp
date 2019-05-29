@@ -7,7 +7,9 @@
 #pragma once
 
 namespace cturtle{
-    /* Color
+    /** \brief Color: Unsigned 8-bit RGB Color Implementation
+     *         Just contains R, G and B elements.  
+     * Color
      *      Defines an interface for RGB Colors.
      *      Also provides a way to retrieve color by name strings in the form
      *      of a static function. Color documentation from the specified link:
@@ -773,20 +775,31 @@ namespace cturtle{
         component_t g;
         component_t b;
         
-        /*TODO: Document Me*/
+        /*\brief Color constructor for unsigned 8-bit RGB values.
+          \param r Red component.
+          \param g Green component. 
+          \param b Blue component.*/
         Color(component_t r, component_t g, component_t b) :
             r(r), g(g), b(b){};
         
-        /*TODO: Document Me*/
+        /*\brief Copy constructor.
+          \param other Constant reference to other instance of a color object.*/
         Color(const Color& other) : 
             r(other.r), g(other.g), b(other.b){}
         
-        /*TODO: Document Me*/
+        /*\brief Name constructor.
+                 Takes a literal color name as an input.
+          \param name The name of the color from which to derive value.
+          \sa fromName()*/
         Color(const std::string& name) : Color(fromName(name)){}
         
+        /*\brief Default constructor.
+                 Initializes this color to white. (all components 255)*/
         Color(){r = g = b = 255;}
         
-        /*Returns a read-only pointer to the elements, in sequential order.*/
+        /*\brief Returns a pointer to the first component of this color.
+                 This is useful for functions which require color as an input array.
+          Returns a read-only pointer to the elements, in sequential order.*/
         const component_t* const rgbPtr() const{
             return &r;
         }
@@ -2309,6 +2322,11 @@ namespace cturtle{
         };
     }
     
+    /**\brief Retrieves a read-only reference to a color
+    *         associated with the specified input name string.
+    * Default colors have an associated name string you can use to retrieve
+    * their values. All of the names can be found here:
+    * https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm */
     const Color& Color::fromName(const std::string& name){
         return NAMEDCOLORS.at(name);
     }
