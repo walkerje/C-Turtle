@@ -1,3 +1,4 @@
+![Logo](https://publicdomainvectors.org/photos/Tortoise-.png)
 # C-Turtle
 ## What is it?
 A port of Python's Turtle facility for C++, with the intent of being a 1:1 to the Python API. 
