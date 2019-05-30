@@ -2,7 +2,7 @@
   <img width="460" height="300" src="https://publicdomainvectors.org/photos/Tortoise-.png">
 </p>
 
-# C-Turtle
+# C-Turtle - Documentation [Here!](http://www.walkerje.github.io/c-turtle)
 
 ## What is it?
 A port of Python's Turtle facility for C++, with the intent of being a 1:1 to the Python API. 
@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
     ct::TurtleScreen scr;
     scr.bgcolor(ct::Color::white);
     ct::RawTurtle rt(scr);
-    rt.shape("triangle");
     rt.speed(ct::TS_SLOWEST);    
     rt.fillcolor(ct::Color::purple);
 
