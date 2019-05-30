@@ -34,11 +34,15 @@
 //TODO: Just a personal note; active v. passive rendering is something to
 //think about. I think turtles use a form of passive rendering.
 
+/**
+ * \brief Only namespace which contains functions and classes for this project.
+ * 
+ */
 namespace cturtle{
     /*Callback function typedefs for event listeners.*/
     
     /*Mouse event callback type.*/
-    typedef std::function<void(vec2)> MouseFunc;
+    typedef std::function<void(ivec2)> MouseFunc;
     
     /*Keyboard event callback type.*/
     typedef std::function<void(KeyboardKey)> KeyFunc;
@@ -63,9 +67,11 @@ namespace cturtle{
     
     const Polygon& shape(const std::string name);
     
+    /**\brief Describes the speed at which a Turtle moves and rotates.
+     * \sa RawTurtle::getAnimMS()*/
     enum TurtleSpeed{
-        TS_FASTEST  = 0,
-        TS_FAST     = 10,
+        TS_FASTEST  = 10,
+        TS_FAST     = 9,
         TS_NORMAL   = 6,
         TS_SLOW     = 3,
         TS_SLOWEST  = 1
@@ -205,7 +211,7 @@ namespace cturtle{
         /*Returns the speed, of any applicable animation,
           in milliseconds, based off of this turtle's speed setting.*/
         inline long getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
+            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 2000);
         }
         
         /*Pushes the current transformed point.*/
@@ -233,15 +239,15 @@ namespace cturtle{
         
         TurtleScreen* screen = nullptr;
         
-        /*Inheritors must assign screen reference!*/
+        /*Inheritors must assign screen pointer!*/
         RawTurtle(){}
     };
     
     /*TODO: Document Me*/
     enum ScreenMode{
         SM_STANDARD,
-        SM_LOGO,
-        SM_WORLD
+        SM_LOGO//,
+//        SM_WORLD
     };
     
     /* TurtleScreen
@@ -324,10 +330,10 @@ namespace cturtle{
         /*Returns the size of this screen, in pixels.
           Also returns the background color of the screen,
           by assigning the input reference.*/
-        vec2 screensize(Color& bg);
+        ivec2 screensize(Color& bg);
         
         /*Returns the size of the screen, in pixels.*/
-        inline vec2 screensize(){
+        inline ivec2 screensize(){
             Color temp;
             return screensize(temp);
         }

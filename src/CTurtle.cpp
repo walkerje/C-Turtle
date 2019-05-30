@@ -21,10 +21,10 @@ namespace cturtle {
             })},
             {"indented triangle",
                 Polygon({
-                    {0, 5},
-                    {-5, 5},
+                    {0, 7},
+                    {-7, 7},
                     {0, 0},
-                    {5, 5}
+                    {7, 7}
             })}
         };
     }
@@ -60,9 +60,9 @@ namespace cturtle {
         //        }
     }
 
-    vec2 TurtleScreen::screensize(Color& bg) {
+    ivec2 TurtleScreen::screensize(Color& bg) {
         bg = backgroundColor;
-        return {(float) display.screen_width(), (float) display.screen_height()};
+        return {display.screen_width(), display.screen_height()};
     }
 
     void TurtleScreen::update() {
@@ -83,9 +83,8 @@ namespace cturtle {
 
     void TurtleScreen::redraw() {
         //TODO: Move this somewhere else 
-        if(getIsClosed()){
-            exit(EXIT_SUCCESS);
-        }
+        if(getIsClosed())
+            return;
         AffineTransform screen = screentransform();
         for (RawTurtle* turtle : turtles) {
             turtle->draw(screen, canvas);
@@ -105,6 +104,7 @@ namespace cturtle {
     int RawTurtle::stamp(){
         Polygon* p = new Polygon(cursor);
         pushStamp(transform, Color::black, p);
+        return curStamp;
     }
     
     void RawTurtle::clearstamp(int stampid){
@@ -301,7 +301,9 @@ namespace cturtle {
         //Optionally disable cursor?
         //TODO: Is this in tracer options?
         //Add the extra rotate to start cursor facing right :)
-        cursor.draw(screen.copyConcatenate(transform).rotate(1.5708f), canvas);
+        AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(1.5708f);
+        cursor.draw(cursorTransform, canvas, fillColor);
+        cursor.drawOutline(cursorTransform, canvas);
     }
 
     void RawTurtle::undo() {
