@@ -15,6 +15,9 @@
 #include <functional>
 
 namespace cturtle{
+    /**\brief The KeyboardKey Enumeration contains declarations for all
+     *        accepted keyboard input keys.
+     * \see keyFromName()*/
     enum KeyboardKey {
         KEY_ESC = cimg_library::cimg::keyESC,
         KEY_F1 = cimg_library::cimg::keyF1,
@@ -106,16 +109,20 @@ namespace cturtle{
         KEY_PADDIV = cimg_library::cimg::keyPADDIV
     };
     
+    /**\brief The MouseButton Enumeration holds all accepted mouse
+     *        input buttons.
+     *  These button enumerations are represented as bitwise flags.*/
     enum MouseButton{//Stored as bitwise flags from CImgDisplay
         MOUSEB_LEFT = 0x1,//Left Mouse Button
         MOUSEB_RIGHT = 0x2,//Right Mouse Button
         MOUSEB_MIDDLE = 0x4//Middle Mouse Button
     };
     
-    /*May need to make this match TKinter names, depending on requirements
-      of the project.*/
-    /*Returns a key with the specified name.
-      Will throw a runtime exception if no key with the specified name exists.*/
+    /**\brief Returns a KeyboardKey when given its name as a string.
+     * All key names are capitalized, and the only difference from
+     * their names as a string representation is the omission of the
+     * "KEY_" prefix.
+     * \see KeyboardKey*/
     KeyboardKey keyFromName(const std::string& name);
 }
 

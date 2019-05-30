@@ -21,10 +21,10 @@ namespace cturtle {
             })},
             {"indented triangle",
                 Polygon({
-                    {0, 5},
-                    {-5, 5},
+                    {0, 7},
+                    {-7, 7},
                     {0, 0},
-                    {5, 5}
+                    {7, 7}
             })}
         };
     }
@@ -301,7 +301,9 @@ namespace cturtle {
         //Optionally disable cursor?
         //TODO: Is this in tracer options?
         //Add the extra rotate to start cursor facing right :)
-        cursor.draw(screen.copyConcatenate(transform).rotate(1.5708f), canvas);
+        AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(1.5708f);
+        cursor.draw(cursorTransform, canvas, fillColor);
+        cursor.drawOutline(cursorTransform, canvas);
     }
 
     void RawTurtle::undo() {

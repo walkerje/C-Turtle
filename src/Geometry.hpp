@@ -30,7 +30,6 @@
 #include "Color.hpp"
 
 namespace cturtle {
-    
     /**\brief An alias for ivec2. Strictly for convenience and clarity.*/
     typedef ivec2 Point;
     
@@ -111,8 +110,8 @@ namespace cturtle {
         
         /*Moves this transform "forward" according to its rotation.*/
         AffineTransform& forward(float distance){
-            at(0,2) += std::cos(rotation) * distance;//x component
-            at(1,2) += std::sin(rotation) * distance;//y component
+            at(0,2) += int(std::cos(rotation) * distance);//x component
+            at(1,2) += int(std::sin(rotation) * distance);//y component
             return *this;
         }
         
@@ -469,6 +468,12 @@ namespace cturtle {
         void transform(const AffineTransform& t);
 
         void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+        
+        /**\brief   Draws the outline of this polygon using a series of lines.
+         *\param t The affine transform to draw the outline at.
+         *\param imgRef The canvas to draw on.
+         *\param c The color to draw the outline in.*/
+        void drawOutline(const AffineTransform& t, Image& imgRef, Color c = Color::black);
     };
 }
 
@@ -517,6 +522,29 @@ namespace cturtle {
         }
         
         imgRef.draw_polygon(passPts, c.rgbPtr());
+    }
+    
+    void Polygon::drawOutline(const AffineTransform& t, Image& imgRef, Color c){
+        if(points.size() < 2)
+            return;
+        
+        typedef decltype(points.begin()) iter_t;
+        
+        iter_t cur = points.begin()++;
+        iter_t last = points.begin();
+        
+        while(cur != points.end()){
+            Point a = t(*cur);
+            Point b = t(*last);
+            imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
+            last = cur;
+            cur++;
+        }
+        
+        /*Draw a line between the first and last points.*/
+        Point a = t(points.front());
+        Point b = t(points.back());
+        imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
     }
 }
 #endif
