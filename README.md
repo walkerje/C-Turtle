@@ -2,7 +2,7 @@
   <img width="460" height="300" src="https://publicdomainvectors.org/photos/Tortoise-.png">
 </p>
 
-# C-Turtle - Documentation [Here!](https://walkerje.github.io/C-Turtle/)
+# C-Turtle - Documentation [Here!](https://walkerje.github.io/C-Turtle/docs/index.html)
 
 ## What is it?
 A port of Python's Turtle facility for C++, with the intent of being a 1:1 to the Python API. 
