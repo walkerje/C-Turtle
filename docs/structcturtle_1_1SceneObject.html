@@ -89,6 +89,9 @@ $(document).ready(function(){initNavTree('structcturtle_1_1SceneObject.html','')
 </div><!--header-->
 <div class="contents">
 
+<p>Turtles append Scene Objects to a list to keep track of what it has drawn (a history). <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a> holds a description of something that needs to be on the screen. It's a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings.  
+ <a href="structcturtle_1_1SceneObject.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for cturtle::SceneObject:</div>
@@ -108,6 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9f880417ef0a7c66f2dd255e487ee455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada78d5de88582e5bbd3f14a09590d786"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html#ada78d5de88582e5bbd3f14a09590d786">SceneObject</a> (<a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> *<a class="el" href="structcturtle_1_1SceneObject.html#aeb0c628c0eca2a160ef7a1bb621a4e98">geom</a>, <a class="el" href="structcturtle_1_1Color.html">Color</a> <a class="el" href="structcturtle_1_1SceneObject.html#a9fe53b4970c61a8f86cb57d31880eb99">color</a>, const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t, int <a class="el" href="structcturtle_1_1SceneObject.html#ae6094918613e5d4d284805cd5afb2e65">stampid</a>)</td></tr>
 <tr class="separator:ada78d5de88582e5bbd3f14a09590d786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed353436f5f259fb1fe4c8aa982d0536"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html#aed353436f5f259fb1fe4c8aa982d0536">SceneObject</a> (const std::string &amp;<a class="el" href="structcturtle_1_1SceneObject.html#a2975529755ea2c36696e39ed7ec3baa0">text</a>, <a class="el" href="structcturtle_1_1Color.html">Color</a> <a class="el" href="structcturtle_1_1SceneObject.html#a9fe53b4970c61a8f86cb57d31880eb99">color</a>, const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t)</td></tr>
+<tr class="separator:aed353436f5f259fb1fe4c8aa982d0536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -121,13 +126,16 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a014644aee0792d77bd84a0b98464f39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6094918613e5d4d284805cd5afb2e65"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html#ae6094918613e5d4d284805cd5afb2e65">stampid</a> = -1</td></tr>
 <tr class="separator:ae6094918613e5d4d284805cd5afb2e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2975529755ea2c36696e39ed7ec3baa0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html#a2975529755ea2c36696e39ed7ec3baa0">text</a></td></tr>
+<tr class="separator:a2975529755ea2c36696e39ed7ec3baa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00080">80</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<div class="textblock"><p>Turtles append Scene Objects to a list to keep track of what it has drawn (a history). <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a> holds a description of something that needs to be on the screen. It's a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. </p>
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00085">85</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac51b04f4e0509e37a7acce739e608e49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac51b04f4e0509e37a7acce739e608e49">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac51b04f4e0509e37a7acce739e608e49">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,13 +156,14 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00091">91</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00102">102</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a9f880417ef0a7c66f2dd255e487ee455"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f880417ef0a7c66f2dd255e487ee455">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f880417ef0a7c66f2dd255e487ee455">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,13 +201,21 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>General geometry constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">geom</td><td>A dynamically allocated pointer to a Geometry object. Please note that, after this constructor call, the <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a> controls the life of the given pointer. Do not delete it yourself. </td></tr>
+    <tr><td class="paramname">color</td><td>The color to draw the geometry in. </td></tr>
+    <tr><td class="paramname">t</td><td>The transform at which to draw the geometry. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00092">92</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00110">110</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
 <a id="ada78d5de88582e5bbd3f14a09590d786"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada78d5de88582e5bbd3f14a09590d786">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ada78d5de88582e5bbd3f14a09590d786">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,8 +259,69 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Stamp constructor which takes an ID. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">geom</td><td>The geometry of the stamp. Follows the same rules as the Geometry constructor. </td></tr>
+    <tr><td class="paramname">color</td><td>The color with which to draw the stamp. </td></tr>
+    <tr><td class="paramname">t</td><td>The transform at which to draw the stamp. </td></tr>
+    <tr><td class="paramname">stampid</td><td>The ID of the stamp this object is related to.. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00095">95</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00119">119</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aed353436f5f259fb1fe4c8aa982d0536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed353436f5f259fb1fe4c8aa982d0536">&#9670;&nbsp;</a></span>SceneObject() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">cturtle::SceneObject::SceneObject </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcturtle_1_1Color.html">Color</a>&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>String constructor. Please note that strings are not subject to rotation, scaling, or shear! </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>The text content of this object. </td></tr>
+    <tr><td class="paramname">color</td><td>The color with which to daraw this string. </td></tr>
+    <tr><td class="paramname">t</td><td>The transform at which to draw this string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00127">127</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -259,8 +337,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The color with which to draw this <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00085">85</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00090">90</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -275,8 +354,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The unique pointer to the geometry of this object. Can be null if the text string is not empty. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00084">84</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00088">88</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +372,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00088">88</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00096">96</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -308,7 +388,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00089">89</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00097">97</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2975529755ea2c36696e39ed7ec3baa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2975529755ea2c36696e39ed7ec3baa0">&#9670;&nbsp;</a></span>text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string cturtle::SceneObject::text</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00099">99</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -323,8 +419,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The transform at which to draw this <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a>. Note that this is concatenated onto the ScreenTransform of the drawing turtle's screen. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00086">86</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00094">94</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>

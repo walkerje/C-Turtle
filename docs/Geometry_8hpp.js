@@ -6,6 +6,7 @@ var Geometry_8hpp =
     [ "Circle", "classcturtle_1_1Circle.html", "classcturtle_1_1Circle" ],
     [ "Polygon", "classcturtle_1_1Polygon.html", "classcturtle_1_1Polygon" ],
     [ "Point", "Geometry_8hpp.html#a268a7e565c0f47760e56a0a2e2518ffa", null ],
+    [ "drawLine", "Geometry_8hpp.html#a97aa30ca8e1f170600e4a6b79c37fb96", null ],
     [ "toDegrees", "Geometry_8hpp.html#a31f5509e4fb5a67bee9f56c7114b0b10", null ],
     [ "toRadians", "Geometry_8hpp.html#a4ba2ffb49932e0132670b4544c504897", null ]
 ];

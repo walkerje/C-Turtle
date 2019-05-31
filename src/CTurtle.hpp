@@ -77,23 +77,55 @@ namespace cturtle{
         TS_SLOWEST  = 1
     };
     
+    /**\brief Turtles append Scene Objects to a list to keep 
+     *              track of what it has drawn (a history).
+     * SceneObject holds a description of something that needs to be on the screen.
+     * It's a general object which encompasses ALL things that can be on screen,
+     * ranging from stamps, misc. geometry, and strings.*/
     struct SceneObject{
-        //Owns whatever geometry it contains.
-        //When the scene object is deconstructed,
-        //the geometry is automatically deleted.
+        /**The unique pointer to the geometry of this object.
+         *Can be null if the text string is not empty.*/
         std::unique_ptr<IDrawableGeometry> geom;
+        /**The color with which to draw this SceneObject.*/
         Color color;
+        /**The transform at which to draw this SceneObject.
+         * Note that this is concatenated onto the ScreenTransform of
+         * the drawing turtle's screen.*/
         AffineTransform transform;
         
         bool stamp = false;
         int stampid = -1;
         
+        std::string text;//Stays empty unless this object is for text.
+        
+        /**Empty constructor.*/
         SceneObject(){}
+        
+        /**General geometry constructor.
+         *\param geom A dynamically allocated pointer to a Geometry object.
+         *            Please note that, after this constructor call, the SceneObject
+         *            controls the life of the given pointer. Do not delete it yourself.
+         *\param color The color to draw the geometry in.
+         *\param t The transform at which to draw the geometry.*/
         SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t) :
             geom(geom), color(color), transform(t){}
         
+        /**Stamp constructor which takes an ID.
+         *\param geom The geometry of the stamp. Follows the 
+         *            same rules as the Geometry constructor.
+         *\param color The color with which to draw the stamp.
+         *\param t The transform at which to draw the stamp.
+         *\param stampid The ID of the stamp this object is related to..*/
         SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t, int stampid) :
             geom(geom), color(color), transform(t), stamp(true), stampid(stampid){}
+        
+        /**String constructor.
+         * Please note that strings are not subject to rotation, scaling, or shear!
+         *\param text The text content of this object.
+         *\param color The color with which to daraw this string.
+         *\param t The transform at which to draw this string.*/
+        SceneObject(const std::string& text, Color color, const AffineTransform& t) : 
+            text(text), color(color), transform(t){}
     };
 
     //TODO: Finish and document
@@ -103,54 +135,124 @@ namespace cturtle{
         RawTurtle(TurtleScreen& scr);
         
         //Motion
+        
+        /**\brief Moves the turtle forward the specified number of pixels.*/
         void forward(int pixels);
+        /**\copydoc forward(int)*/
         inline void fd(int pixels){forward(pixels);}
         
+        /**\brief Moves the turtle backward the specified number of pixels.*/
         void backward(int pixels);
+        /**\copydoc backward(int)*/
         inline void bk(int pixels){backward(pixels);}
+        /**\copydoc backward(int)*/
         inline void back(int pixels){backward(pixels);}
         
+        /**\brief Rotates the turtle the specified number of units to the right.
+         * The unit by which the input is specified is determined by the current
+         * angle mode. The difference between Clockwise and Counterclockwise
+         * is determined by the current screen's mode.
+         * \sa degrees()
+         * \sa radians()
+         * \sa TurtleScreen::mode()*/
         void right(float amt);
+        /**\copydoc right(float)*/
         inline void rt(float angle){right(angle);}
         
+        /**\brief Rotates the turtle the specified number of units to the left.
+         * The unit by which the input is specified is determined by the current
+         * angle mode. The difference between Clockwise and Counterclockwise
+         * is determined by the current screen's mode.
+         * \sa degrees()
+         * \sa radians()
+         * \sa TurtleScreen::mode()*/
         void left(float amt);
+        /**\copydoc left(float)*/
         inline void lt(float angle){left(angle);}
         
+        /**\brief Sets the tranform location of this turtle.*/
         void goTo(int x, int y);
+        /**\copydoc goTo(int,int)*/
         inline void setpos(int x, int y){goTo(x,y);}
+        /**\copydoc goTo(int,int)*/
         inline void setposition(int x, int y){goTo(x,y);}
         
+        /**\brief Sets the X-axis transform location of this turtle.*/
         void setx(int x);
+        /**\brief Sets the Y-axis transform location of this turtle.*/
         void sety(int y);
         
-        //TODO: refine
-        void setheading(){}
-        inline void seth(){setheading();}
+        /**\brief Sets the rotation of this turtle.
+         * The unit by which the input is specified is determined by the current
+         * angle mode. The difference between Clockwise and Counterclockwise
+         * is determined by the current screen's mode.
+         * \sa degrees()
+         * \sa radians()
+         * \sa TurtleScreen::mode()*/
+        void setheading(float angle);
+        /**\copydoc setheading(float)*/
+        inline void seth(float angle){setheading(angle);}
         
+        /**\Brings the turtle back to its origin.
+         * Depends on the current screen mode. 
+         * If the screen mode is set to "world", The turtle is turned to the right and
+         * positive angles are counterclockwise.
+         * Otherwise, if it is set to "logo", The turtle face upwards and positive
+         * angles are clockwise.
+         * \sa TurtleScreen::mode()*/
         void home();
         
+        /**\brief Adds a circle to the screen.
+         *\param radius The radius, in pixels, of the circle.
+         *\param steps The "quality" of the circle. Higher is slow but looks better.
+         *\param color The color of the circle.*/
         void circle(int radius, int steps, Color color);
         
+        /**\brief Adds a circle to the screen.
+         * Default parameters are circle with a radius of 30 with 15 steps.
+         *\param color The color of the circle.*/
         inline void circle(Color color){
             circle(30, 15, color);
         }
         
+        /**\brief Adds a dot to the screen.
+         *\param The color of the dot.
+         *\param size The size of the dot.
+         */
         void dot(Color color, int size = 10){
             circle(size/2, 4, color);
         }
         
-        /*Sets the "filling" state.*/
+        /**\brief Sets the "filling" state.
+         * If the input is false but the prior state is true, a SceneObject
+         * is put on the screen in the shape of the previously captured points.
+         *\param state Whether or not the turtle is filling a polygon.*/
         void fill(bool state);
-        
+        /**\brief Begins filling a polygon.
+         *\sa fill(bool)*/
         inline void begin_fill(){fill(true);}
+        /**\brief Stops filling a polygon.
+         *\sa fill(bool)*/
         inline void end_fill(){fill(false);}
         
+        /**\brief Sets the fill color of this turtle.
+         *\param c The color with which to fill polygons.*/
         void fillcolor(Color c){fillColor = c;}
+        /**\brief Returns the fill color of this turtle.
+         *\return The current fill color.*/
         Color fillcolor(){return fillColor;}
         
-        //TODO: Stamps boiiiii
+        /**/
+        void write(const std::string& text);
+        
+        /**\brief Puts the current shape of this turtle on the screen
+         *        with the current fill color and the outline of the shape.
+         *\return The stamp ID of the put stamp.*/
         int stamp();
+        /**\brief Removes the stamp with the specified ID.*/
         void clearstamp(int stampid);
+        /**\brief Removes all stamps with an ID less than that which is specified.
+         *        If the specified stampid is less than 0, it removes ALL stamps.*/
         void clearstamps(int stampid = -1);
         
         /*Sets the shape of this turtle.*/
@@ -177,11 +279,27 @@ namespace cturtle{
             return moveSpeed;
         }
         
+        void tilt(float angle){
+            cursorTilt += angleMode ? angle : toRadians(angle);
+            //TODO: Move to implementation and call redraw on screen.
+        }
+        
+        float tilt(){return angleMode ? cursorTilt : toDegrees(cursorTilt);}
+        
         //TODO: Tracer Funcs
         void trace(bool state){
             tracing = state;
         }
         bool trace(){return tracing;}
+        
+        void penup(){tracing = false;}
+        void pendown(){tracing = true;}
+        
+        void pencolor(Color c){penColor = c;}
+        Color pencolor(){return penColor;}
+        
+        void width(int pixels){penWidth = pixels;}
+        int width(){return penWidth;}
         
         void draw(const AffineTransform& screenTransform, Image& canvas);
         
@@ -194,9 +312,9 @@ namespace cturtle{
         virtual ~RawTurtle(){}
     protected:
         std::list<SceneObject> objects;
-        
-        std::vector<Point> tracePoints = {{0,0}};
-        AffineTransform transform;
+        std::vector<std::pair<Color, Line>> traceLines;
+        std::list<AffineTransform> transformStack = {AffineTransform()};
+        AffineTransform& transform = transformStack.back();
         
         /*Pushes the specified object attibutes as an object to this turtle's
           "drawing" list.*/
@@ -208,24 +326,33 @@ namespace cturtle{
             objects.emplace_back(geom, color, t, curStamp++);
         }
         
+        inline void pushText(const AffineTransform& t, Color color, const std::string text){
+            objects.emplace_back(text, color, t);
+        }
+        
         /*Returns the speed, of any applicable animation,
           in milliseconds, based off of this turtle's speed setting.*/
         inline long getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 2000);
+            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 3000);
         }
         
         /*Pushes the current transformed point.*/
         inline void pushCurrent(){
-            if(tracing)
-                tracePoints.push_back(transform.getTranslation());
+            if(tracing){
+                Point src = traceLines.empty() ? Point() : traceLines.back().second.pointB;
+                traceLines.push_back(std::make_pair(penColor, Line(src, transform.getTranslation(), penWidth)));
+            }
             if (filling) 
                 fillAccum.points.push_back(transform.getTranslation());
+            transformStack.push_back(transform);
+            transform = transformStack.back();
         }
         
         //Pen Attributes
         float moveSpeed = TS_NORMAL;
         bool angleMode = false;//Using Radians = true, degrees = false
         bool tracing = true;
+        int penWidth = 1;
         bool filling = false;
         Color penColor = Color::black;
         
@@ -236,6 +363,7 @@ namespace cturtle{
         //Cursor (shape)
         Polygon cursor = cturtle::shape("indented triangle");
         int curStamp = 0;
+        float cursorTilt = 0.0f;
         
         TurtleScreen* screen = nullptr;
         
@@ -396,7 +524,7 @@ namespace cturtle{
         /*Swaps the display.*/
         inline void swap(){swapDisplay();}
         
-        /*Returns the screen-level AffineTransform
+        /**Returns the screen-level AffineTransform
           of this screen. This is what puts the origin
           at the center of the screen rather than at
           at the top left, for example.*/

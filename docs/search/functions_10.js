@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['tilt',['tilt',['../classcturtle_1_1RawTurtle.html#ac869a47cdd168818e6e531688d64f464',1,'cturtle::RawTurtle::tilt(float angle)'],['../classcturtle_1_1RawTurtle.html#a0a4327c4d7f4015be1217f6fa13ca37c',1,'cturtle::RawTurtle::tilt()']]],
   ['todegrees',['toDegrees',['../namespacecturtle.html#a31f5509e4fb5a67bee9f56c7114b0b10',1,'cturtle']]],
   ['toradians',['toRadians',['../namespacecturtle.html#a4ba2ffb49932e0132670b4544c504897',1,'cturtle']]],
   ['trace',['trace',['../classcturtle_1_1RawTurtle.html#a804cd38c011addd3fca6a1d4364864c8',1,'cturtle::RawTurtle::trace(bool state)'],['../classcturtle_1_1RawTurtle.html#aeae61e4e5d21be50eabe018a4ef330e4',1,'cturtle::RawTurtle::trace()']]],

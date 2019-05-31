@@ -100,10 +100,16 @@ namespace cturtle {
         screen->add(*this);
     }
     
+    //write
+    void RawTurtle::write(const std::string& text){
+        pushText(transform, fillColor, text);
+        screen->redraw();
+    }
+    
     //Stamps
     int RawTurtle::stamp(){
         Polygon* p = new Polygon(cursor);
-        pushStamp(transform, Color::black, p);
+        pushStamp(transform, fillColor, p);
         return curStamp;
     }
     
@@ -189,6 +195,8 @@ namespace cturtle {
 
     void RawTurtle::right(float amt) {
         amt = angleMode ? amt : toRadians(amt);
+        //Flip angle orientation based on screen mode.
+        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
         
         const float duration = getAnimMS();
         const unsigned long startTime = epochTime();
@@ -211,6 +219,8 @@ namespace cturtle {
 
     void RawTurtle::left(float amt) {
         amt = angleMode ? -amt : -toRadians(amt);
+        //Flip angle orientation based on screen mode.
+        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
         
         const float duration = getAnimMS();
         const unsigned long startTime = epochTime();
@@ -228,6 +238,16 @@ namespace cturtle {
         
         transform.assign(start);
         transform.rotate(amt);
+        screen->redraw();
+    }
+    
+    void RawTurtle::setheading(float amt){
+        //TODO: Animation for setheading
+        amt = angleMode ? amt : toRadians(amt);
+        //Flip angle orientation based on screen mode.
+        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
+        
+        transform.setRotation(amt);
         screen->redraw();
     }
 
@@ -282,33 +302,51 @@ namespace cturtle {
             AffineTransform t(screen.copyConcatenate(object.transform));
             Color& color = object.color;
             IDrawableGeometry* geom = object.geom.get();
-            geom->draw(t, canvas, color);
+            if(!object.text.empty()){
+                Point trans = t.getTranslation();
+                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
+            }else if(object.stamp){
+                Polygon* p = static_cast<Polygon*>(geom);
+                p->draw(t, canvas, color);
+                p->drawOutline(t, canvas);
+            }else geom->draw(t, canvas, color);
         }
-
-        if (tracing && !tracePoints.empty()) {
-            Point cur = screen(tracePoints[0]);
-
-            for (int i = 1; i < tracePoints.size(); i++) {
-                cur = screen(tracePoints[i]);
-                Point prev = screen(tracePoints[i - 1]);
-                canvas.draw_line(prev.x, prev.y, cur.x, cur.y, Color::black.rgbPtr());
+        
+        if(traceLines.empty()){
+            //Draw a line from origin to turtle.
+            Point src = screen(Point(0,0));
+            Point dest = screen(transform.getTranslation());
+            drawLine(canvas, src.x, src.y, dest.x, dest.y, penColor, penWidth);
+        }else{
+            
+            for(auto& pair : traceLines){
+                Color& color = pair.first;
+                Line& line = pair.second;
+                line.draw(screen, canvas, color);
             }
-
-            Point tPos = screen(transform.getTranslation());
-            canvas.draw_line(cur.x, cur.y, tPos.x, tPos.y, Color::black.rgbPtr());
+            Point a = screen(traceLines.back().second.pointB);
+            Point b = screen(transform.getTranslation());;
+            
+            drawLine(canvas, a.x, a.y, b.x, b.y, penColor, penWidth);
         }
         
         //Optionally disable cursor?
         //TODO: Is this in tracer options?
         //Add the extra rotate to start cursor facing right :)
-        AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(1.5708f);
+        //This distinguishes rotation vs. 
+        const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
+        AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
         cursor.draw(cursorTransform, canvas, fillColor);
         cursor.drawOutline(cursorTransform, canvas);
     }
 
     void RawTurtle::undo() {
-        objects.pop_back();
-        tracePoints.pop_back();
-        transform = objects.back().transform;
+        if(transformStack.size() <= 1)
+            return;//Cannot undo anymore.
+        objects.pop_back();//TODO: Will pop regardless of previous action
+        traceLines.pop_back();
+        transformStack.pop_back();
+        transform = transformStack.back();
+        screen->redraw();
     }
 }

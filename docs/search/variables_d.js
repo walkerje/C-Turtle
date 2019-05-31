@@ -29,6 +29,7 @@ var searchData=
   ['peachpuff3',['PeachPuff3',['../structcturtle_1_1Color.html#a33c0348435a5b529768954d707df609f',1,'cturtle::Color']]],
   ['peachpuff4',['PeachPuff4',['../structcturtle_1_1Color.html#ad7290709fdb8f34a1a6b9fdd7a4adcec',1,'cturtle::Color']]],
   ['pencolor',['penColor',['../classcturtle_1_1RawTurtle.html#a745880f9ea98278db7d4e917cad795e0',1,'cturtle::RawTurtle']]],
+  ['penwidth',['penWidth',['../classcturtle_1_1RawTurtle.html#a0f5ac7e75dac5bf31186f539ff7f0572',1,'cturtle::RawTurtle']]],
   ['peru',['peru',['../structcturtle_1_1Color.html#a005d92e203ff850fa017fe239425ad82',1,'cturtle::Color']]],
   ['pink',['pink',['../structcturtle_1_1Color.html#a02de31ec7fd35c4919b9cd304cfe78c5',1,'cturtle::Color']]],
   ['pink1',['pink1',['../structcturtle_1_1Color.html#a5e7946d110574b71cf37d984c5ebdcd2',1,'cturtle::Color']]],

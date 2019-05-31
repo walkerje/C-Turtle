@@ -23,6 +23,7 @@ var classcturtle_1_1AffineTransform =
     [ "rotate", "classcturtle_1_1AffineTransform.html#a9143968aba5f1527c897161bed3c1316", null ],
     [ "rotateAround", "classcturtle_1_1AffineTransform.html#a927c5319d02b95df7e573d8eba418e3d", null ],
     [ "scale", "classcturtle_1_1AffineTransform.html#abb5208baa2385957f5958c170c38711d", null ],
+    [ "setRotation", "classcturtle_1_1AffineTransform.html#a56f5f355adce91c8c183cac1fe5f66df", null ],
     [ "setTranslation", "classcturtle_1_1AffineTransform.html#ac8a0bc3f9bee1eb1fec7404bfc184c02", null ],
     [ "setTranslationX", "classcturtle_1_1AffineTransform.html#a9b6b7e55c7ee526b058a061b1387afec", null ],
     [ "setTranslationY", "classcturtle_1_1AffineTransform.html#aa5d111e31f207e1d7cfea623279c9d87", null ],

@@ -49,6 +49,7 @@ var searchData=
   ['cturtle_5fimplementation',['CTURTLE_IMPLEMENTATION',['../CTurtle_8cpp.html#ae2d6a1760f57dbe985bc42ddcda025cb',1,'CTurtle.cpp']]],
   ['curmode',['curMode',['../classcturtle_1_1TurtleScreen.html#a853ac931317fe9d4cf91be353ca08c5d',1,'cturtle::TurtleScreen']]],
   ['cursor',['cursor',['../classcturtle_1_1RawTurtle.html#a2f13423026e5cd2bd3e1f5c4e6229541',1,'cturtle::RawTurtle']]],
+  ['cursortilt',['cursorTilt',['../classcturtle_1_1RawTurtle.html#a8f4a5008078e12a370c8c0421ebdc9d0',1,'cturtle::RawTurtle']]],
   ['curstamp',['curStamp',['../classcturtle_1_1RawTurtle.html#ab007dc20614b8a30f8a991ae5666612c',1,'cturtle::RawTurtle']]],
   ['cyan',['cyan',['../structcturtle_1_1Color.html#ade33b1c961373217dd5dc3991bb28632',1,'cturtle::Color']]],
   ['cyan1',['cyan1',['../structcturtle_1_1Color.html#ada87875e90f760de3d1c365f1eb10c47',1,'cturtle::Color']]],

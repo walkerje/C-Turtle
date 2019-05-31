@@ -33,6 +33,18 @@ namespace cturtle {
     /**\brief An alias for ivec2. Strictly for convenience and clarity.*/
     typedef ivec2 Point;
     
+    /**\brief Draws a line of variable thickness on the specified image.
+     * This needed to be implemented because the CImg display backend
+     * has no facility to draw lines with a width greater than a single pixel!
+     *\param imgRef The image on which to draw the line.
+     *\param The X component of the first coordinate.
+     *\param The Y component of the first coordinate.
+     *\param the X component of the second coordinate.
+     *\param the Y component of the second coordinate.
+     *\param c The color with which to draw the line.
+     *\param width The width of the line.*/
+    void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width = 1);
+    
     /**\brief The AffineTransform class provides a myriad of functions to
      *        simply transform points.
      * This class it the backbone of almost all cartesian plane math in CTurtle.
@@ -184,6 +196,15 @@ namespace cturtle {
             rotation += theta;
             
             return *this;
+        }
+        
+        /**\brief Sets the rotation of this transform.
+         *\param val The angle at which to rotate, in radians.
+         *\return A reference to this transform. (e.g, *this)*/
+        AffineTransform& setRotation(float val){
+            if(rotation != 0.0f)
+                rotate(-rotation);
+            rotate(val);
         }
 
         /**\brief Rotates this transform around a specified point.
@@ -377,6 +398,8 @@ namespace cturtle {
         /**The "To" point.
            Lines drawn with this object end here.*/
         Point pointB;
+        
+        int width = 1;
 
         /**\brief Empty default constructor.*/
         Line() {
@@ -386,13 +409,13 @@ namespace cturtle {
          *        merely assigns value of pointA and pointB to respective A and B.
          *\param a The "From" point.
          *\param b The "To" point.*/
-        Line(Point a, Point b) : pointA(a), pointB(b) {
+        Line(Point a, Point b, int width = 1) : pointA(a), pointB(b), width(width){
         }
         
         /**\brief Copy constructor.
          *        Merely assigns the "to" and "from" points.
          *\param other The other instance of a line from which to derive value.*/
-        Line(const Line& other) : pointA(other.pointA), pointB(other.pointB){}
+        Line(const Line& other) : pointA(other.pointA), pointB(other.pointB), width(other.width){}
 
         /**\brief Empty de-constructor.*/
         ~Line() {
@@ -479,10 +502,33 @@ namespace cturtle {
 
 #ifdef CTURTLE_IMPLEMENTATION
 namespace cturtle {
+    void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width){
+        if (x1 == x2 && y1 == y2) {
+            return;
+        }
+        const double xoffs = std::abs(x1 - x2);
+        const double yoffs = std::abs(y1 - y2);
+        const double woffs = width / 2.0;
+        const int xadjacent = yoffs * woffs / std::sqrt(std::pow(xoffs, 2) + std::pow(yoffs, 2));
+        const int yadjacent = xoffs * woffs / std::sqrt(std::pow(xoffs, 2) + std::pow(yoffs, 2));
+
+        //Clockwise
+        cimg_library::CImg<int> points(4, 2);
+        points(0, 0) = x1 - xadjacent;
+        points(0, 1) = y1 + yadjacent;
+        points(1, 0) = x1 + xadjacent;
+        points(1, 1) = y1 - yadjacent;
+        points(2, 0) = x2 + xadjacent;
+        points(2, 1) = y2 - yadjacent;
+        points(3, 0) = x2 - xadjacent;
+        points(3, 1) = y2 + yadjacent;
+        imgRef.draw_polygon(points, c.rgbPtr());
+    }
+    
     void Line::draw(const AffineTransform& t, Image& imgRef, Color c) {
         const Point a = t(pointA);
         const Point b = t(pointB);
-        imgRef.draw_line((int) a.x, (int) a.y, (int) b.x, (int) b.y, c.rgbPtr());
+        drawLine(imgRef, a.x, a.y, b.x, b.y, c, width);
     }
 
     void Circle::draw(const AffineTransform& t, Image& imgRef, Color c) {
