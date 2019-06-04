@@ -28,7 +28,10 @@ var searchData=
   ['peachpuff2',['PeachPuff2',['../structcturtle_1_1Color.html#a32ec52150a85f45f515e04e4257fe1a6',1,'cturtle::Color']]],
   ['peachpuff3',['PeachPuff3',['../structcturtle_1_1Color.html#a33c0348435a5b529768954d707df609f',1,'cturtle::Color']]],
   ['peachpuff4',['PeachPuff4',['../structcturtle_1_1Color.html#ad7290709fdb8f34a1a6b9fdd7a4adcec',1,'cturtle::Color']]],
-  ['pencolor',['penColor',['../classcturtle_1_1RawTurtle.html#a745880f9ea98278db7d4e917cad795e0',1,'cturtle::RawTurtle']]],
+  ['pencolor',['pencolor',['../classcturtle_1_1RawTurtle.html#a740cf97fde653e87dcb015a41079f7e9',1,'cturtle::RawTurtle::pencolor(Color c)'],['../classcturtle_1_1RawTurtle.html#a88f288f88beddd8e7af5da347574c671',1,'cturtle::RawTurtle::pencolor()'],['../classcturtle_1_1RawTurtle.html#a745880f9ea98278db7d4e917cad795e0',1,'cturtle::RawTurtle::penColor()']]],
+  ['pendown',['pendown',['../classcturtle_1_1RawTurtle.html#a1d487a26ff7463c8c451118f5a4feaac',1,'cturtle::RawTurtle']]],
+  ['penup',['penup',['../classcturtle_1_1RawTurtle.html#ad3a6c4cf76585e73dc9966b6c10345b3',1,'cturtle::RawTurtle']]],
+  ['penwidth',['penWidth',['../classcturtle_1_1RawTurtle.html#a0f5ac7e75dac5bf31186f539ff7f0572',1,'cturtle::RawTurtle']]],
   ['peru',['peru',['../structcturtle_1_1Color.html#a005d92e203ff850fa017fe239425ad82',1,'cturtle::Color']]],
   ['pink',['pink',['../structcturtle_1_1Color.html#a02de31ec7fd35c4919b9cd304cfe78c5',1,'cturtle::Color']]],
   ['pink1',['pink1',['../structcturtle_1_1Color.html#a5e7946d110574b71cf37d984c5ebdcd2',1,'cturtle::Color']]],
@@ -54,5 +57,6 @@ var searchData=
   ['purple4',['purple4',['../structcturtle_1_1Color.html#ad111928ca8cab4c399457d025318fe42',1,'cturtle::Color']]],
   ['pushcurrent',['pushCurrent',['../classcturtle_1_1RawTurtle.html#a5ff99d0c95cff25969b5a6f680356d20',1,'cturtle::RawTurtle']]],
   ['pushgeom',['pushGeom',['../classcturtle_1_1RawTurtle.html#a442357b702bcab185c94ff6e493eab45',1,'cturtle::RawTurtle']]],
-  ['pushstamp',['pushStamp',['../classcturtle_1_1RawTurtle.html#a50705b8adb7efd38c7ad3bdf3be73867',1,'cturtle::RawTurtle']]]
+  ['pushstamp',['pushStamp',['../classcturtle_1_1RawTurtle.html#a50705b8adb7efd38c7ad3bdf3be73867',1,'cturtle::RawTurtle']]],
+  ['pushtext',['pushText',['../classcturtle_1_1RawTurtle.html#a0c0ee5fe5abb8c5bd07bcbadb34fdbca',1,'cturtle::RawTurtle']]]
 ];

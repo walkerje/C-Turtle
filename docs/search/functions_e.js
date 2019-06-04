@@ -1,8 +1,10 @@
 var searchData=
 [
   ['radians',['radians',['../classcturtle_1_1RawTurtle.html#a073b580ccc078015263bfb9b7b790dd7',1,'cturtle::RawTurtle']]],
+  ['randomcolor',['randomColor',['../namespacecturtle.html#a168a12774c831b2996a42ade553b6871',1,'cturtle']]],
   ['rawturtle',['RawTurtle',['../classcturtle_1_1RawTurtle.html#a57d46c586408b442467b0728912ce612',1,'cturtle::RawTurtle::RawTurtle(TurtleScreen &amp;scr)'],['../classcturtle_1_1RawTurtle.html#ad2b8751ccc6498082304fb3fa4232e6e',1,'cturtle::RawTurtle::RawTurtle()']]],
   ['redraw',['redraw',['../classcturtle_1_1TurtleScreen.html#a974271a60cb64413b8646b2c41525b2a',1,'cturtle::TurtleScreen']]],
+  ['redrawparent',['redrawParent',['../classcturtle_1_1RawTurtle.html#a066fbbebc58e9714abeb7377f2fbf16d',1,'cturtle::RawTurtle']]],
   ['registershape',['registerShape',['../namespacecturtle.html#afaa54f821226d88adfcf791861acd7c6',1,'cturtle']]],
   ['reset',['reset',['../classcturtle_1_1RawTurtle.html#a48568c580752e0aa10140c89d480c333',1,'cturtle::RawTurtle::reset()'],['../classcturtle_1_1TurtleScreen.html#abffd80e103751190440d66ce558d4da1',1,'cturtle::TurtleScreen::reset()']]],
   ['resetscreen',['resetscreen',['../classcturtle_1_1TurtleScreen.html#aaf47f670af1a2b48b0a691d150acac68',1,'cturtle::TurtleScreen']]],

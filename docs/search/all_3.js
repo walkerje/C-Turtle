@@ -90,5 +90,6 @@ var searchData=
   ['dodgerblue4',['DodgerBlue4',['../structcturtle_1_1Color.html#a539845b02d7e6ab610fd56b2e490cb2e',1,'cturtle::Color']]],
   ['dot',['dot',['../classcturtle_1_1RawTurtle.html#a877c587b6ff5b5a9514f50480e48af3b',1,'cturtle::RawTurtle']]],
   ['draw',['draw',['../classcturtle_1_1RawTurtle.html#a8cc375080efc12524920e1df9f991093',1,'cturtle::RawTurtle::draw()'],['../classcturtle_1_1IDrawableGeometry.html#a59570807e086cf39cddac7311f5f5593',1,'cturtle::IDrawableGeometry::draw()'],['../classcturtle_1_1Line.html#a5c5b4211f2d111b32d557efb3d79f968',1,'cturtle::Line::draw()'],['../classcturtle_1_1Circle.html#adc759e75e7a91a9bedc27dab1cd7e82c',1,'cturtle::Circle::draw()'],['../classcturtle_1_1Polygon.html#abd146aec909eaf27481efd6f279c012f',1,'cturtle::Polygon::draw()']]],
+  ['drawline',['drawLine',['../namespacecturtle.html#a97aa30ca8e1f170600e4a6b79c37fb96',1,'cturtle']]],
   ['drawoutline',['drawOutline',['../classcturtle_1_1Polygon.html#a3069ceae412eb4adba8f5c29b919ae96',1,'cturtle::Polygon']]]
 ];

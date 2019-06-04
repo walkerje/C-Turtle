@@ -149,6 +149,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9143968aba5f1527c897161bed3c1316"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a9143968aba5f1527c897161bed3c1316">rotate</a> (float theta)</td></tr>
 <tr class="memdesc:a9143968aba5f1527c897161bed3c1316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates this transform.  <a href="#a9143968aba5f1527c897161bed3c1316">More...</a><br /></td></tr>
 <tr class="separator:a9143968aba5f1527c897161bed3c1316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56f5f355adce91c8c183cac1fe5f66df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a56f5f355adce91c8c183cac1fe5f66df">setRotation</a> (float val)</td></tr>
+<tr class="memdesc:a56f5f355adce91c8c183cac1fe5f66df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rotation of this transform.  <a href="#a56f5f355adce91c8c183cac1fe5f66df">More...</a><br /></td></tr>
+<tr class="separator:a56f5f355adce91c8c183cac1fe5f66df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a927c5319d02b95df7e573d8eba418e3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a927c5319d02b95df7e573d8eba418e3d">rotateAround</a> (int x, int y, float theta)</td></tr>
 <tr class="memdesc:a927c5319d02b95df7e573d8eba418e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates this transform around a specified point.  <a href="#a927c5319d02b95df7e573d8eba418e3d">More...</a><br /></td></tr>
 <tr class="separator:a927c5319d02b95df7e573d8eba418e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +167,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f9ae55796063a7e54f9abb836cb7c45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a5f9ae55796063a7e54f9abb836cb7c45">copyConcatenate</a> (const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t) const</td></tr>
 <tr class="memdesc:a5f9ae55796063a7e54f9abb836cb7c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a copy of this transform, concatenates the input, and returns it.  <a href="#a5f9ae55796063a7e54f9abb836cb7c45">More...</a><br /></td></tr>
 <tr class="separator:a5f9ae55796063a7e54f9abb836cb7c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d480bda64ecb04c587c94bcd61d7706"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a0d480bda64ecb04c587c94bcd61d7706">lerp</a> (const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t, float progress) const</td></tr>
+<tr class="memdesc:a0d480bda64ecb04c587c94bcd61d7706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolates between this and the specified transform. Progress is a float in range of 0 to 1.  <a href="#a0d480bda64ecb04c587c94bcd61d7706">More...</a><br /></td></tr>
+<tr class="separator:a0d480bda64ecb04c587c94bcd61d7706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a110a3dd04f6182fe2d0e3dc439cf1018"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AffineTransform.html#a110a3dd04f6182fe2d0e3dc439cf1018">assign</a> (const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t)</td></tr>
 <tr class="memdesc:a110a3dd04f6182fe2d0e3dc439cf1018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of this transform to that of another.  <a href="#a110a3dd04f6182fe2d0e3dc439cf1018">More...</a><br /></td></tr>
 <tr class="separator:a110a3dd04f6182fe2d0e3dc439cf1018"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,7 +208,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classcturtle_1_1AffineTransform.html" title="The AffineTransform class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link: http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/. ">AffineTransform</a> class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link: <a href="http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/">http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00042">42</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00054">54</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a54a8254a3fa5ac6eebaf819b707d0353"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54a8254a3fa5ac6eebaf819b707d0353">&#9670;&nbsp;</a></span>mat_t</h2>
@@ -225,7 +231,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The underlying matrix type. It's defined simply as an array of 9 floats. Retrieved from coordinate pairs using (x*3+y) as indices. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00301">301</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00344">344</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -254,7 +260,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructs an empty affine transform. Initializes, by default, as an identity transform. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00046">46</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00058">58</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +296,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00052">52</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00064">64</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -327,7 +333,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00262">262</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00305">305</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -374,7 +380,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00312">312</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00355">355</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -402,7 +408,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00120">120</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00132">132</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -439,7 +445,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00232">232</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00258">258</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -486,7 +492,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00319">319</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00362">362</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -523,7 +529,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the concatenated copy of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00253">253</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00279">279</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -551,7 +557,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00112">112</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00124">124</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -581,7 +587,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns rotation of this transform, in radians. </p>
 <dl class="section return"><dt>Returns</dt><dd>The rotation of this transform, in radians. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00107">107</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00119">119</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +617,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the X scale of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the X scale of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00070">70</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00082">82</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -641,7 +647,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the Y scale of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the Y scale of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00076">76</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00088">88</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +677,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the X shear of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the X shear of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00082">82</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00094">94</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +707,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the Y shear of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the Y shear of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00089">89</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00101">101</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -731,7 +737,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the X translation of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the X translation of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00095">95</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00107">107</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -761,7 +767,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the Y translation of this transform. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns the Y translation of this transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00101">101</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00113">113</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -791,7 +797,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the translation of this transform as a point. </p>
 <dl class="section return"><dt>Returns</dt><dd>The point which represents the transform. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00136">136</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00148">148</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -821,7 +827,55 @@ Protected Attributes</h2></td></tr>
 <p>Sets this transform to an identity. When you concatenate an identity transform onto another object, The resulting point is the same as it would have been pre-concatenation. Such is the point of an identity transform, and is why AffineTransforms are initialized to have this value. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00061">61</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00073">73</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0d480bda64ecb04c587c94bcd61d7706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d480bda64ecb04c587c94bcd61d7706">&#9670;&nbsp;</a></span>lerp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> cturtle::AffineTransform::lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>progress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Interpolates between this and the specified transform. Progress is a float in range of 0 to 1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>The destination transform. </td></tr>
+    <tr><td class="paramname">progress</td><td>A progress float in range of 0 to 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The resulting interpolated transform. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00291">291</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -857,7 +911,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00294">294</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00337">337</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -894,7 +948,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00170">170</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00182">182</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -949,7 +1003,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00194">194</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00220">220</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -996,7 +1050,44 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00204">204</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00230">230</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a56f5f355adce91c8c183cac1fe5f66df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56f5f355adce91c8c183cac1fe5f66df">&#9670;&nbsp;</a></span>setRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a>&amp; cturtle::AffineTransform::setRotation </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the rotation of this transform. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>The angle at which to rotate, in radians. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00209">209</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1044,7 +1135,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00128">128</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00140">140</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1172,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00143">143</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00155">155</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1118,7 +1209,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00151">151</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00163">163</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1166,7 +1257,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00216">216</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00242">242</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1216,7 +1307,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 Also assigns the value of dst pointer to the result. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00272">272</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00315">315</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1265,7 +1356,7 @@ template&lt;typename ITER_T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00284">284</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00327">327</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1313,7 +1404,7 @@ template&lt;typename ITER_T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this transform. (e.g, *this) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00160">160</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00172">172</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1339,7 +1430,7 @@ template&lt;typename ITER_T &gt; </div>
 </div><div class="memdoc">
 <p>The rotation of this transform, in radians. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00307">307</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00350">350</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -1364,7 +1455,7 @@ template&lt;typename ITER_T &gt; </div>
 </div><div class="memdoc">
 <p>The value of this affine transform. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00304">304</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00347">347</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>

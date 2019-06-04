@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include <random>
 
 namespace cturtle{
     /** \brief Color: Unsigned 8-bit RGB Color Implementation
@@ -807,10 +808,19 @@ namespace cturtle{
         /*TODO: Document Me*/
         static const Color& fromName(const std::string& name);
     };
+    
+    /**\brief Returns a color, generated randomly.*/
+    inline Color randomColor(){
+        std::default_random_engine rng(epochTime());
+        std::uniform_int_distribution<int> rng_dist(0, 255);
+        return Color((uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng));
+    }
 }
     
 #ifdef CTURTLE_IMPLEMENTATION
 #include <map>
+
+#include "Common.hpp"
 namespace cturtle{
     const Color Color::alice_blue(240,248,255);
     const Color Color::AliceBlue(240,248,255);

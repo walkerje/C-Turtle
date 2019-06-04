@@ -16,6 +16,7 @@ var searchData=
   ['lemonchiffon2',['LemonChiffon2',['../structcturtle_1_1Color.html#aa62641de5a79ff396d2d33e8f15945cc',1,'cturtle::Color']]],
   ['lemonchiffon3',['LemonChiffon3',['../structcturtle_1_1Color.html#a5982aa1d8f83f5d72f80678bd667603a',1,'cturtle::Color']]],
   ['lemonchiffon4',['LemonChiffon4',['../structcturtle_1_1Color.html#a360183e8a7009fffcd597ce6ea8acae3',1,'cturtle::Color']]],
+  ['lerp',['lerp',['../classcturtle_1_1AffineTransform.html#a0d480bda64ecb04c587c94bcd61d7706',1,'cturtle::AffineTransform']]],
   ['light_5fblue',['light_blue',['../structcturtle_1_1Color.html#a62768977eeff34743752363524f5a3e8',1,'cturtle::Color']]],
   ['light_5fcoral',['light_coral',['../structcturtle_1_1Color.html#aad4c3cd82222cf70206c7eff1b8e2d2a',1,'cturtle::Color']]],
   ['light_5fcyan',['light_cyan',['../structcturtle_1_1Color.html#a1ad55de1cb7890843246e81b87e30236',1,'cturtle::Color']]],
@@ -84,7 +85,7 @@ var searchData=
   ['lightyellow4',['LightYellow4',['../structcturtle_1_1Color.html#a0ee7f852d58ec94a409c72f49b7bf5ec',1,'cturtle::Color']]],
   ['lime_5fgreen',['lime_green',['../structcturtle_1_1Color.html#a92d018639f15cd54feca5f5fff2c8fdf',1,'cturtle::Color']]],
   ['limegreen',['LimeGreen',['../structcturtle_1_1Color.html#a9f0322f549fe0ed8e67ffb79f2732cac',1,'cturtle::Color']]],
-  ['line',['Line',['../classcturtle_1_1Line.html',1,'cturtle::Line'],['../classcturtle_1_1Line.html#ac6d8c8133ddbb5cafa31be364b0ed4f6',1,'cturtle::Line::Line()'],['../classcturtle_1_1Line.html#a76f7ff5c967ab56525a07abae9e70bd9',1,'cturtle::Line::Line(Point a, Point b)'],['../classcturtle_1_1Line.html#ac1b144ecd3e23c5f296b4f845f332c73',1,'cturtle::Line::Line(const Line &amp;other)']]],
+  ['line',['Line',['../classcturtle_1_1Line.html',1,'cturtle::Line'],['../classcturtle_1_1Line.html#ac6d8c8133ddbb5cafa31be364b0ed4f6',1,'cturtle::Line::Line()'],['../classcturtle_1_1Line.html#acf3807ead26607d8a39cb6c759299fe0',1,'cturtle::Line::Line(Point a, Point b, int width=1)'],['../classcturtle_1_1Line.html#ac1b144ecd3e23c5f296b4f845f332c73',1,'cturtle::Line::Line(const Line &amp;other)']]],
   ['linen',['linen',['../structcturtle_1_1Color.html#aa56e93b79127269296bf6ace0a1e7e0b',1,'cturtle::Color']]],
   ['lt',['lt',['../classcturtle_1_1RawTurtle.html#a0fea5fff296adfebc50a984da33380b6',1,'cturtle::RawTurtle']]]
 ];

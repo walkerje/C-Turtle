@@ -119,6 +119,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html">RawTurtle</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html">SceneObject</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turtles append Scene Objects to a list to keep track of what it has drawn (a history). <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a> holds a description of something that needs to be on the screen. It's a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings.  <a href="structcturtle_1_1SceneObject.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1TurtleScreen.html">TurtleScreen</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +153,8 @@ Enumerations</h2></td></tr>
 <tr class="separator:ace32adb2690310f5eb9ace55fe0ffc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df9113d6867f86881e2b96f629f50ab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50ab">ScreenMode</a> { <a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a">SM_STANDARD</a>, 
 <a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d">SM_LOGO</a>
- }</td></tr>
+ }<tr class="memdesc:a8df9113d6867f86881e2b96f629f50ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">ScreenMode Enumeration, used to decide orientation of the drawing calls on TurtleScreens.  <a href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50ab">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a8df9113d6867f86881e2b96f629f50ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a17f5630364a76196a683e1565217e4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4">KeyboardKey</a> { <br />
 &#160;&#160;<a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4a1f882e7e88fb60c83ab1e543f12c12b5">KEY_ESC</a> = cimg_library::cimg::keyESC, 
@@ -277,6 +279,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a168a12774c831b2996a42ade553b6871"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcturtle_1_1Color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a168a12774c831b2996a42ade553b6871">randomColor</a> ()</td></tr>
+<tr class="memdesc:a168a12774c831b2996a42ade553b6871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a color, generated randomly.  <a href="#a168a12774c831b2996a42ade553b6871">More...</a><br /></td></tr>
+<tr class="separator:a168a12774c831b2996a42ade553b6871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4983d682ebfb9a5623b35013b8f2bde7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a4983d682ebfb9a5623b35013b8f2bde7">sleep</a> (long ms)</td></tr>
 <tr class="memdesc:a4983d682ebfb9a5623b35013b8f2bde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the calling thread the specified amount of milliseconds.  <a href="#a4983d682ebfb9a5623b35013b8f2bde7">More...</a><br /></td></tr>
 <tr class="separator:a4983d682ebfb9a5623b35013b8f2bde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -289,6 +294,9 @@ Functions</h2></td></tr>
 <tr class="separator:ae2e349a76f705f92b327c4e0ace314b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a146018d2a39dba0f26ab01680e89d6c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a146018d2a39dba0f26ab01680e89d6c5">addShape</a> (const std::string &amp;name, const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;p)</td></tr>
 <tr class="separator:a146018d2a39dba0f26ab01680e89d6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a97aa30ca8e1f170600e4a6b79c37fb96">drawLine</a> (<a class="el" href="namespacecturtle.html#abbe4fca095b8a8668b17053e8551aae9">Image</a> &amp;imgRef, int x1, int y1, int x2, int y2, <a class="el" href="structcturtle_1_1Color.html">Color</a> c, unsigned int width=1)</td></tr>
+<tr class="memdesc:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a line of variable thickness on the specified image. This needed to be implemented because the CImg display backend has no facility to draw lines with a width greater than a single pixel!  <a href="#a97aa30ca8e1f170600e4a6b79c37fb96">More...</a><br /></td></tr>
+<tr class="separator:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ba2ffb49932e0132670b4544c504897"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4ba2ffb49932e0132670b4544c504897"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a4ba2ffb49932e0132670b4544c504897">toRadians</a> (T val)</td></tr>
 <tr class="memdesc:a4ba2ffb49932e0132670b4544c504897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts degrees to radians. A generic toRadians function. Performs the following: val*(PI/180.0)  <a href="#a4ba2ffb49932e0132670b4544c504897">More...</a><br /></td></tr>
@@ -531,12 +539,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>ScreenMode Enumeration, used to decide orientation of the drawing calls on TurtleScreens. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1TurtleScreen.html#add6a659f016bc3ee1ea859c7abe4da4b">TurtleScreen::mode(ScreenMode)</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a"></a>SM_STANDARD&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d"></a>SM_LOGO&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00247">247</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00464">464</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -605,6 +616,78 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a97aa30ca8e1f170600e4a6b79c37fb96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97aa30ca8e1f170600e4a6b79c37fb96">&#9670;&nbsp;</a></span>drawLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cturtle::drawLine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacecturtle.html#abbe4fca095b8a8668b17053e8551aae9">Image</a> &amp;&#160;</td>
+          <td class="paramname"><em>imgRef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcturtle_1_1Color.html">Color</a>&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>width</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draws a line of variable thickness on the specified image. This needed to be implemented because the CImg display backend has no facility to draw lines with a width greater than a single pixel! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">imgRef</td><td>The image on which to draw the line. </td></tr>
+    <tr><td class="paramname">The</td><td>X component of the first coordinate. </td></tr>
+    <tr><td class="paramname">The</td><td>Y component of the first coordinate. </td></tr>
+    <tr><td class="paramname">the</td><td>X component of the second coordinate. </td></tr>
+    <tr><td class="paramname">the</td><td>Y component of the second coordinate. </td></tr>
+    <tr><td class="paramname">c</td><td>The color with which to draw the line. </td></tr>
+    <tr><td class="paramname">width</td><td>The width of the line. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a76b52278ec9e3142ae4e57525ea94498"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76b52278ec9e3142ae4e57525ea94498">&#9670;&nbsp;</a></span>epochTime()</h2>
 
@@ -652,6 +735,35 @@ Functions</h2></td></tr>
 
 <p>Returns a KeyboardKey when given its name as a string. All key names are capitalized, and the only difference from their names as a string representation is the omission of the "KEY_" prefix. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4" title="The KeyboardKey Enumeration contains declarations for all accepted keyboard input keys...">KeyboardKey</a> </dd></dl>
+
+</div>
+</div>
+<a id="a168a12774c831b2996a42ade553b6871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a168a12774c831b2996a42ade553b6871">&#9670;&nbsp;</a></span>randomColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcturtle_1_1Color.html">Color</a> cturtle::randomColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a color, generated randomly. </p>
+
+<p class="definition">Definition at line <a class="el" href="Color_8hpp_source.html#l00813">813</a> of file <a class="el" href="Color_8hpp_source.html">Color.hpp</a>.</p>
 
 </div>
 </div>
@@ -776,7 +888,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to degrees. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00340">340</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00383">383</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -815,7 +927,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to radians. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00330">330</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00373">373</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
