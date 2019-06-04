@@ -180,6 +180,11 @@ namespace cturtle {
          *\param theta The angle at which to rotate, in radians
          *\return A reference to this transform. (e.g, *this)*/
         AffineTransform& rotate(float theta) {
+            //6.28319 is a full circle in radians.
+            if(rotation + theta > 6.28319){//Loop back around. Avoid overflow.
+                theta = (rotation + theta) - 6.28319;
+                setRotation(0);
+            }
             const float c = std::cos(theta);
             const float s = std::sin(theta);
 
@@ -276,6 +281,23 @@ namespace cturtle {
             copy.assign(*this);
             copy.concatenate(t);
             return copy;
+        }
+        
+        /**\brief Interpolates between this and the specified transform.
+         *        Progress is a float in range of 0 to 1.
+         *\param t The destination transform.
+         *\param progress A progress float in range of 0 to 1.
+         *\return The resulting interpolated transform.*/
+        AffineTransform lerp(const AffineTransform& t, float progress) const{
+            if(progress <= 0)
+                return *this;
+            else if(progress >= 1)
+                return t;
+            AffineTransform result;
+            for(int i = 0; i < 9; i++){
+                result.value[i] = (progress * (t.value[i] - value[i])) + value[i];
+            }
+            return result;
         }
         
         /**\brief Assigns the value of this transform to that of another.

@@ -45,19 +45,23 @@ namespace cturtle {
         //4) No event bindings
         //5) Tracing turned on
 
+        for(RawTurtle* turtle : turtles){
+            turtle->setScreen(nullptr);
+        }
         turtles.clear();
         backgroundColor = Color::white;
         backgroundImage.assign();
         //TODO: Reset other callbacks
         timerFunc = [](void) {
         };
-        tracing = true;
+        curMode = SM_STANDARD;
+        redraw();
     }
 
     void TurtleScreen::resetscreen() {
-        //        for(auto& turtle : turtles){
-        //            turtle.reset();
-        //        }
+        for (RawTurtle* turtle : turtles) {
+            turtle->reset();
+        }
     }
 
     ivec2 TurtleScreen::screensize(Color& bg) {
@@ -78,6 +82,7 @@ namespace cturtle {
     }
 
     void TurtleScreen::bye() {
+        resetscreen();
         display.close();
     }
 
@@ -103,7 +108,7 @@ namespace cturtle {
     //write
     void RawTurtle::write(const std::string& text){
         pushText(transform, fillColor, text);
-        screen->redraw();
+        redrawParent();
     }
     
     //Stamps
@@ -150,154 +155,113 @@ namespace cturtle {
     //Movement
 
     void RawTurtle::forward(int pixels) {
-        const float duration = getAnimMS();
-        const unsigned long startTime = epochTime();
-        const unsigned long endTime = duration + startTime;
-        
-        AffineTransform start;
-        start.assign(transform);
-        
-        float progress = duration == 0 ? 1 : 0;
-        while (progress < 1.0f) {
-            progress = (epochTime() - startTime) / duration;
-            transform.assign(start);
-            transform.forward(progress * pixels);
-            screen->redraw();
-        }
-        
-        transform.assign(start);
-        transform.forward(pixels);
-        pushCurrent();
-        screen->redraw();
+        if(screen == nullptr)
+            return;
+        travelTo(AffineTransform(transform).forward(pixels));
     }
 
     void RawTurtle::backward(int pixels) {
-        const float duration = getAnimMS();
-        const unsigned long startTime = epochTime();
-        const unsigned long endTime = duration + startTime;
-        
-        AffineTransform start;
-        start.assign(transform);
-        
-        float progress = duration == 0 ? 1 : 0;
-        while (progress < 1.0f) {
-            progress = (epochTime() - startTime) / duration;
-            transform.assign(start);
-            transform.backward(progress * pixels);
-            screen->redraw();
-        }
-        
-        transform.assign(start);
-        transform.backward(pixels);
-        pushCurrent();
-        screen->redraw();
+        if(screen == nullptr)
+            return;
+        travelTo(AffineTransform(transform).backward(pixels));
     }
 
     void RawTurtle::right(float amt) {
         amt = angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
-        
-        const float duration = getAnimMS();
-        const unsigned long startTime = epochTime();
-        const unsigned long endTime = duration + startTime;
-        
-        AffineTransform start;
-        start.assign(transform);
-        
-        float progress = duration == 0 ? 1 : 0;
-        while (progress < 1.0f) {
-            progress = (epochTime() - startTime) / duration;
-            transform.assign(start);
-            transform.rotate(progress * amt);
-            screen->redraw();
-        }
-        transform.assign(start);
-        transform.rotate(amt);
-        screen->redraw();
+        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD; 
+        travelTo(AffineTransform(transform).rotate(amt));
     }
 
     void RawTurtle::left(float amt) {
         amt = angleMode ? -amt : -toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
-        
-        const float duration = getAnimMS();
-        const unsigned long startTime = epochTime();
-        const unsigned long endTime = duration + startTime;
-        
-        AffineTransform start = transform;
-        
-        float progress = duration == 0 ? 1 : 0;
-        while (progress < 1.0f) {
-            progress = (epochTime() - startTime) / duration;
-            transform.assign(start);
-            transform.rotate(progress * amt);
-            screen->redraw();
-        }
-        
-        transform.assign(start);
-        transform.rotate(amt);
-        screen->redraw();
+        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD; 
+        travelTo(AffineTransform(transform).rotate(amt));
     }
     
     void RawTurtle::setheading(float amt){
         //TODO: Animation for setheading
         amt = angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
-        
+        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD; 
         transform.setRotation(amt);
-        screen->redraw();
+        redrawParent();
     }
 
     void RawTurtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
         transform.setTranslation(x, y);
         pushCurrent();
-        screen->redraw();
+        redrawParent();
     };
 
     void RawTurtle::setx(int x) {
         transform.setTranslationX(x);
         pushCurrent();
-        screen->redraw();
+        redrawParent();
     }
 
     void RawTurtle::sety(int y) {
         transform.setTranslationY(y);
         pushCurrent();
-        screen->redraw();
+        redrawParent();
     }
 
     void RawTurtle::home() {
         transform.identity();
         //TODO: sethome?
         pushCurrent();
-        screen->redraw();
+        redrawParent();
     }
 
     //Drawing & Misc.
 
     void RawTurtle::reset() {
-
+        //Reset transform.
+        transformStack.clear();
+        transformStack.push_back(AffineTransform());
+        transform = transformStack.back();
+        
+        //Clear scene objects
+        objects.clear();
+        
+        //Reset all small variables to their defaults
+        penColor = Color::black;
+        moveSpeed = TS_NORMAL;
+        angleMode = false;
+        tracing = true;
+        penWidth = 1;
+        filling = false;
+        fillAccum.points.clear();
+        fillColor = Color::black;
+        cursor = cturtle::shape("indented triangle");
+        curStamp = 0;
+        cursorVisible = true;
+        cursorTilt = 0.0f;
+    }
+    
+    void RawTurtle::redrawParent(){
+        if(screen != nullptr)
+            screen->redraw();
     }
 
     void RawTurtle::circle(int radius, int steps, Color color) {
         pushGeom(transform, color, new Circle(radius, steps));
-        screen->redraw();
+        redrawParent();
     }
 
     void RawTurtle::fill(bool state) {
         if (filling && !state) {
             pushGeom(AffineTransform(), fillColor, new Polygon(fillAccum.points));
             fillAccum.points.clear();
-            screen->redraw();
+            redrawParent();
         }
         filling = state;
     }
 
     void RawTurtle::draw(const AffineTransform& screen, Image& canvas) {
-        
+        if(this->screen == nullptr)
+            return;
         for (SceneObject& object : objects) {
             AffineTransform t(screen.copyConcatenate(object.transform));
             Color& color = object.color;
@@ -312,32 +276,34 @@ namespace cturtle {
             }else geom->draw(t, canvas, color);
         }
         
-        if(traceLines.empty()){
+        if(traceLines.empty() && tracing){
             //Draw a line from origin to turtle.
             Point src = screen(Point(0,0));
             Point dest = screen(transform.getTranslation());
             drawLine(canvas, src.x, src.y, dest.x, dest.y, penColor, penWidth);
-        }else{
+        }else if(!traceLines.empty()){
             
             for(auto& pair : traceLines){
                 Color& color = pair.first;
                 Line& line = pair.second;
                 line.draw(screen, canvas, color);
             }
-            Point a = screen(traceLines.back().second.pointB);
-            Point b = screen(transform.getTranslation());;
             
-            drawLine(canvas, a.x, a.y, b.x, b.y, penColor, penWidth);
+            if(tracing){
+                Point a = screen(traceLines.back().second.pointB);
+                Point b = screen(transform.getTranslation());;
+
+                drawLine(canvas, a.x, a.y, b.x, b.y, penColor, penWidth);
+            }
         }
         
-        //Optionally disable cursor?
-        //TODO: Is this in tracer options?
-        //Add the extra rotate to start cursor facing right :)
-        //This distinguishes rotation vs. 
-        const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
-        AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
-        cursor.draw(cursorTransform, canvas, fillColor);
-        cursor.drawOutline(cursorTransform, canvas);
+        if(cursorVisible){
+            //Add the extra rotate to start cursor facing right :)
+            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
+            AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
+            cursor.draw(cursorTransform, canvas, fillColor);
+            cursor.drawOutline(cursorTransform, canvas);
+        }
     }
 
     void RawTurtle::undo() {
@@ -347,6 +313,19 @@ namespace cturtle {
         traceLines.pop_back();
         transformStack.pop_back();
         transform = transformStack.back();
-        screen->redraw();
+        redrawParent();
+    }
+    
+    void RawTurtle::tilt(float amt){
+        amt = angleMode ? amt : toRadians(amt);
+        //Flip angle orientation based on screen mode.
+        amt = screen->mode() == SM_STANDARD ? amt : -amt; 
+        cursorTilt += amt;
+        redrawParent();
+    }
+    
+    void RawTurtle::setshowturtle(bool state) {
+        cursorVisible = state;
+        redrawParent();
     }
 }

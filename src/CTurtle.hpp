@@ -255,60 +255,105 @@ namespace cturtle{
          *        If the specified stampid is less than 0, it removes ALL stamps.*/
         void clearstamps(int stampid = -1);
         
-        /*Sets the shape of this turtle.*/
+        /**\brief Sets the shape of this turtle from the specified shape name.
+         *\param name The name of the shape to set.*/
         void shape(const std::string& name){
             cursor = cturtle::shape(name);
         }
         
+        /**\brief Sets the shape of this turtle.
+         *\param p The polygon to derive shape geometry from.*/
         void shape(const Polygon& p){
             cursor = p;
         }
         
-        /*Returns the shape of this turtle.*/
+        /**\brief Returns the shape of this turtle.*/
         const Polygon& shape(){
             return cursor;
         }
         
+        /**\brief Undoes the previous action of this turtle.
+         *\todo: Currently undoes geometry regardless of previous action.*/
         void undo();
         
+        /**\brief Sets the speed of this turtle in range of 0 to 10.
+         *\param The speed of the turtle, in range of 0 to 10.
+         *\sa cturtle::TurtleSpeed*/
         void speed(float val){
             moveSpeed = val;
         }
         
+        /**\brief Returns the speed of this turtle.*/
         float speed(){
             return moveSpeed;
         }
         
-        void tilt(float angle){
-            cursorTilt += angleMode ? angle : toRadians(angle);
-            //TODO: Move to implementation and call redraw on screen.
-        }
+        /**\brief Applies a rotation to the */
+        void tilt(float angle);
         
+        /**\brief Returns the rotation of the cursor. Not the heading,
+         *        or the angle at which the forward function will move.*/
         float tilt(){return angleMode ? cursorTilt : toDegrees(cursorTilt);}
         
-        //TODO: Tracer Funcs
-        void trace(bool state){
-            tracing = state;
-        }
-        bool trace(){return tracing;}
+        /**\brief Set whether or not the turtle is being shown.
+         *\param state True when showing, false othewise.*/
+        void setshowturtle(bool state);
         
+        /**\brief Shows the turtle.
+         *        Equivalent to calling setshowturtle(true).
+         *\sa setshowturtle(bool)*/
+        inline void showturtle(){
+            setshowturtle(true);
+        }
+        
+        /**\brief Hides the turtle.
+         *\sa setshowturtle(bool)*/
+        inline void hideturtle(){
+            setshowturtle(false);
+        }
+        
+        /**\brief Brings the pen up.*/
         void penup(){tracing = false;}
+        /**\brief Brings the pen down.*/
         void pendown(){tracing = true;}
         
+        /**\brief Sets the pen color.
+         *\param c The color used by the pen; the color of lines between movements.*/
         void pencolor(Color c){penColor = c;}
+        /**\brief Returns the pen color; the color of the lines between movements.
+         *\return The color of the pen.*/
         Color pencolor(){return penColor;}
         
+        /**Sets the width of the pen line.
+         *\param pixels The total width, in pixels, of the pen line.*/
         void width(int pixels){penWidth = pixels;}
+        /**Returns the width of the pen line.
+         *\return The width of the line, in pixels.*/
         int width(){return penWidth;}
         
+        /**\brief Draws this turtle on the specified canvas with the specified transform.
+         *\param screenTransform The transform at which to draw the turtle objects.
+         *\param canvas The canvas on which to draw this turtle.*/
         void draw(const AffineTransform& screenTransform, Image& canvas);
         
+        /**Sets this turtle to use angles measured in degrees.
+         *\sa radians()*/
         void degrees(){angleMode = false;}
+        /**Sets this turtle to use angles measured in radians.
+         *\sa degress()*/
         inline void radians(){angleMode = true;}
         
-        /*Resets this turtle.*/
+        /**\brief Resets this turtle.
+         * Moves this turtle home, resets all pen attributes,
+         * and removes all previously added scene objects.*/
         void reset();
         
+        /**Sets this turtles screen.*/
+        void setScreen(TurtleScreen* scr){
+            screen = scr;
+        }
+        
+        /**\brief Empty virtual destructor.*/
         virtual ~RawTurtle(){}
     protected:
         std::list<SceneObject> objects;
@@ -317,24 +362,38 @@ namespace cturtle{
         AffineTransform& transform = transformStack.back();
         
         /*Pushes the specified object attibutes as an object to this turtle's
-          "drawing" list.*/
+         *"drawing" list.
+         *\param t The transform at which to draw the geometry.
+         *\param color The color with which to draw the geometry.
+         *\param geom The geometry.*/
         inline void pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom){
             objects.emplace_back(geom, color, t);
         }
         
+        /**\brief Internal function used to add a stamp object to the turtle screen.
+         *\param t The transform at which to draw the stamp.
+         *\param color The color with which to draw the stamp.
+         *\param geom The geometry of the stamp.*/
         inline void pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom){
             objects.emplace_back(geom, color, t, curStamp++);
         }
         
+        /**\brief Internal function used to add a text object to the turtle screen.
+         *\param t The transform at which to draw the text.
+         *\param color The color with which to draw the text.
+         *\param text The string to draw.*/
         inline void pushText(const AffineTransform& t, Color color, const std::string text){
             objects.emplace_back(text, color, t);
         }
         
-        /*Returns the speed, of any applicable animation,
+        /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
         inline long getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 3000);
+            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
         }
+        
+        /**Redraws the parent screen.*/
+        void redrawParent();
         
         /*Pushes the current transformed point.*/
         inline void pushCurrent(){
@@ -346,6 +405,28 @@ namespace cturtle{
                 fillAccum.points.push_back(transform.getTranslation());
             transformStack.push_back(transform);
             transform = transformStack.back();
+        }
+        
+        /**Performs an interpolation, with animation,
+         * between the current transform and the specified one.*/
+        inline void travelTo(const AffineTransform dest){
+            if(screen != nullptr){
+                const float duration = getAnimMS();
+                const unsigned long startTime = epochTime();
+                const unsigned long endTime = duration + startTime;
+
+                AffineTransform start;
+                start.assign(transform);
+                float progress = duration == 0 ? 1 : 0;
+                while(progress < 1.0f){
+                    transform.assign(start.lerp(dest, progress));
+                    redrawParent();
+                    progress = (epochTime() - startTime) / duration;
+                }
+            }
+            transform.assign(dest);
+            pushCurrent();
+            redrawParent();
         }
         
         //Pen Attributes
@@ -361,40 +442,60 @@ namespace cturtle{
         Color fillColor = Color::black;
         
         //Cursor (shape)
+        /**The shape of the turtle. Named cursor for obvious reasons.*/
         Polygon cursor = cturtle::shape("indented triangle");
+        /**The current unique stamp ID. Incremented with every call to the stamp function.*/
         int curStamp = 0;
+        /**A boolean indicating if the cursor is visible or not.*/
+        bool cursorVisible = true;
+        /**Cursor tilt (rotation applied to cursor).*/
         float cursorTilt = 0.0f;
         
+        /*Screen pointer. Assign before calling any other function!*/
         TurtleScreen* screen = nullptr;
         
-        /*Inheritors must assign screen pointer!*/
+        /**Inheritors must assign screen pointer!*/
         RawTurtle(){}
     };
     
-    /*TODO: Document Me*/
+    /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
+     *        on TurtleScreens.
+     *\sa TurtleScreen::mode(ScreenMode)*/
     enum ScreenMode{
         SM_STANDARD,
         SM_LOGO//,
 //        SM_WORLD
+                
     };
     
-    /* TurtleScreen
+    /** TurtleScreen
      *      Holds and maintains all facilities in relation to displaying
      *      turtles and consuming input events from users through callbacks.
      */
     class TurtleScreen{
     public:
-        TurtleScreen() : display(800, 600, "CTurte", 0){
+        /**Empty constructor.
+         * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
+        TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
             swapDisplay(2);
             canvas.fill(255,255,255);
         }
+        /**Title constructor.
+         * Assigns an 800 x 600 pixel display with a specified title.
+         *\param title The title to assign the display with.*/
         TurtleScreen(const std::string& title) : display(800, 600){
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
         }
+        /**Width, height, and title constructor.
+         * Assigns the display with the specified dimensions, in pixels, and
+         * assigns the display the specified title.
+         *\param width The width of the display, in pixels.
+         *\param height The height of the display, in pixels.
+         *\param title The title of the display.*/
         TurtleScreen(int width, int height, const std::string& title) : display(width, height){
             display.set_title(title.c_str());
             display.set_normalization(0);
@@ -402,65 +503,72 @@ namespace cturtle{
             swapDisplay(2);
         }
         
-        /*Sets the background color of the screen.*/
+        /**Sets the background color of the screen.
+         * Please note that, if there is a background image, this color is not
+         * applied until it is removed.
+         *\param color The background color.
+         *\sa bgpic(image)*/
         void bgcolor(const Color& color){
             backgroundColor = color;
+            redraw();
         }
         
-        /*Returns the background color of the screen.*/
+        /**Returns the background color of the screen.
+         *\return The background color of the screen.*/
         Color bgcolor(){
             return backgroundColor;
         }
         
-        //TODO: bgpic()
+        /**\brief Sets the background image of the display.
+         * Sets the background image. Please note that the background image
+         * takes precedence over background color.
+         *\param img The background image.*/
         void bgpic(const Image& img){
             backgroundImage.assign(img);
             backgroundImage.resize(window_width(), window_height());
+            redraw();
         }
         
-        /*Returns a reference to the background image.*/
+        /**Returns a const reference to the background image.*/
         const Image& bgpic(){
             return backgroundImage;
         }
 
-        /*TODO: Document Me*/        
+        /**Sets the screen mode of this screen.
+         *\param mode The screen mode.
+         *\todo Refine this documentation.*/
         void mode(ScreenMode mode){
             curMode = mode;
         }
         
-        /*TODO: Document Me*/
+        /**Returns the screen mode of this screen.*/
         ScreenMode mode(){
             return curMode;
         }
         
-        /*TODO: Document Me*/
-        void colormode(int val){
-            colorCap = val;
-        }
-        
-        /*TODO: Document Me*/
-        int colormode(){
-            return colorCap;
-        }
-        
-        /*TODO: Document Me*/
+        /**\brief Clears this screen.
+         * Deletes all drawings and turtles,
+         * Resets the background to plain white,
+         * Clears all event bindings,
+         */
         void clearscreen();
         
-        /*Alias for @clearscreen*/
+        /**Alias for clearscreen function
+         *\sa clearscreen()*/
         inline void clear(){clearscreen();}
         
-        /*Resets all turtles belonging to this screen to their original state.*/
+        /**Resets all turtles belonging to this screen to their original state.*/
         void resetscreen();
         
-        /*Resets all turtles belonging to this screen to their original state.*/
+        /**Resets all turtles belonging to this screen to their original state.*/
         inline void reset(){resetscreen();}
         
-        /*Returns the size of this screen, in pixels.
+        /**Returns the size of this screen, in pixels.
           Also returns the background color of the screen,
           by assigning the input reference.*/
         ivec2 screensize(Color& bg);
         
-        /*Returns the size of the screen, in pixels.*/
+        /**Returns the size of the screen, in pixels.*/
         inline ivec2 screensize(){
             Color temp;
             return screensize(temp);
@@ -498,30 +606,29 @@ namespace cturtle{
             screenshotImg.save(file.c_str());
         }
         
-        //TODO: Document me more
-        /*Closes this window.*/
+        /**Resets and closes this display.*/
         void bye();
         
-        /*Returns the canvas image used by this screen.*/
+        /**Returns the canvas image used by this screen.*/
         Image& getcanvas(){
             return canvas;
         }
         
-        /*Returns the internal CImg display.*/
+        /**Returns the internal CImg display.*/
         cimg::CImgDisplay& getInternalDisplay(){
             return display;
         }
         
-        /*Returns a boolean indicating if the
+        /**Returns a boolean indicating if the
           screen has been closed.*/
         inline bool getIsClosed(){
             return getInternalDisplay().is_closed();
         }
         
-        /*Draws all geometry from all child turtles.*/
+        /**Draws all geometry from all child turtles and swaps this display.*/
         void redraw();
         
-        /*Swaps the display.*/
+        /**Swaps the display.*/
         inline void swap(){swapDisplay();}
         
         /**Returns the screen-level AffineTransform
@@ -535,6 +642,7 @@ namespace cturtle{
             return t;
         }
         
+        /**Adds the specified turtle to this screen.*/
         void add(RawTurtle& turtle){
             turtles.push_back(&turtle);
         }
@@ -545,12 +653,12 @@ namespace cturtle{
         Color backgroundColor   = Color::white;
         Image backgroundImage;
         ScreenMode curMode      = SM_STANDARD;
-        int colorCap            = 255;
-        bool  tracing = true;
+//        int colorCap            = 255; TODO: Maybe implement this?
         
+        /**Redraw delay, in milliseconds.*/
         unsigned int delayMS = 10;
         
-        /*Swaps the front and back buffers, then displays the front buffer.*/
+        /**Swaps the front and back buffers, then displays the front buffer.*/
         inline void swapDisplay(int times = 1){
             for(int i = 0; i < times; i++){
                 display.display(canvas);
@@ -559,11 +667,6 @@ namespace cturtle{
                 if(!backgroundImage.is_empty()){
                     canvas.assign(backgroundImage);
                 }else{
-                    
-                    //It really seems to me that these two methods do the
-                    //exact same thing-- flicker and all.
-                    //TODO: Fix the "flickering" issue.
-//                    std::memset(canvas.data(), 255, canvas.size()*sizeof(uint8_t));
                     canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
                 }
             }
