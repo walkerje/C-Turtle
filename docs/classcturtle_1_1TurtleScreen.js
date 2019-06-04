@@ -11,8 +11,6 @@ var classcturtle_1_1TurtleScreen =
     [ "bye", "classcturtle_1_1TurtleScreen.html#a51bfb976ee510d32735d0f59e44d8135", null ],
     [ "clear", "classcturtle_1_1TurtleScreen.html#a7a514d8830a8e2d80fd96b40ab109ec5", null ],
     [ "clearscreen", "classcturtle_1_1TurtleScreen.html#a9a592b0a204ce4e316b648c35c415072", null ],
-    [ "colormode", "classcturtle_1_1TurtleScreen.html#a3bade15a333526bf00231fe32de60f89", null ],
-    [ "colormode", "classcturtle_1_1TurtleScreen.html#aacaff7fe35d26e3ac80f2f26ce0d01da", null ],
     [ "delay", "classcturtle_1_1TurtleScreen.html#ad52b4d5b710bd7bb3652f6da8ca1ade5", null ],
     [ "delay", "classcturtle_1_1TurtleScreen.html#a11ddeea648c87b034562045b7272a1fd", null ],
     [ "getcanvas", "classcturtle_1_1TurtleScreen.html#a8105c3ca6a12200c26a43f2a2714218c", null ],
@@ -35,11 +33,9 @@ var classcturtle_1_1TurtleScreen =
     [ "backgroundColor", "classcturtle_1_1TurtleScreen.html#a7865adfa136df2bacb861f66a7853e64", null ],
     [ "backgroundImage", "classcturtle_1_1TurtleScreen.html#ae687fcf6bb50288e1b0c2eb26fe57569", null ],
     [ "canvas", "classcturtle_1_1TurtleScreen.html#a3369a44eed6c99fb5b9809cb00cae73d", null ],
-    [ "colorCap", "classcturtle_1_1TurtleScreen.html#a36486551cdfd0344c567de882d3457b0", null ],
     [ "curMode", "classcturtle_1_1TurtleScreen.html#a853ac931317fe9d4cf91be353ca08c5d", null ],
     [ "delayMS", "classcturtle_1_1TurtleScreen.html#affa310db6feceaa87d59eed61404e868", null ],
     [ "display", "classcturtle_1_1TurtleScreen.html#ac3bed088df2bc88838ca1870bd593717", null ],
     [ "timerFunc", "classcturtle_1_1TurtleScreen.html#a72602d787592b6c5121c4adfced1de63", null ],
-    [ "tracing", "classcturtle_1_1TurtleScreen.html#a79526f11408b5aa484eb0160317e5948", null ],
     [ "turtles", "classcturtle_1_1TurtleScreen.html#a8cb6d87906df57f36205a7dc49e4c6f7", null ]
 ];

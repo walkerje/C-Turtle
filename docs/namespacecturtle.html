@@ -153,7 +153,8 @@ Enumerations</h2></td></tr>
 <tr class="separator:ace32adb2690310f5eb9ace55fe0ffc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df9113d6867f86881e2b96f629f50ab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50ab">ScreenMode</a> { <a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a">SM_STANDARD</a>, 
 <a class="el" href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d">SM_LOGO</a>
- }</td></tr>
+ }<tr class="memdesc:a8df9113d6867f86881e2b96f629f50ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">ScreenMode Enumeration, used to decide orientation of the drawing calls on TurtleScreens.  <a href="namespacecturtle.html#a8df9113d6867f86881e2b96f629f50ab">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a8df9113d6867f86881e2b96f629f50ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a17f5630364a76196a683e1565217e4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4">KeyboardKey</a> { <br />
 &#160;&#160;<a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4a1f882e7e88fb60c83ab1e543f12c12b5">KEY_ESC</a> = cimg_library::cimg::keyESC, 
@@ -278,6 +279,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a168a12774c831b2996a42ade553b6871"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcturtle_1_1Color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a168a12774c831b2996a42ade553b6871">randomColor</a> ()</td></tr>
+<tr class="memdesc:a168a12774c831b2996a42ade553b6871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a color, generated randomly.  <a href="#a168a12774c831b2996a42ade553b6871">More...</a><br /></td></tr>
+<tr class="separator:a168a12774c831b2996a42ade553b6871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4983d682ebfb9a5623b35013b8f2bde7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a4983d682ebfb9a5623b35013b8f2bde7">sleep</a> (long ms)</td></tr>
 <tr class="memdesc:a4983d682ebfb9a5623b35013b8f2bde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the calling thread the specified amount of milliseconds.  <a href="#a4983d682ebfb9a5623b35013b8f2bde7">More...</a><br /></td></tr>
 <tr class="separator:a4983d682ebfb9a5623b35013b8f2bde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -535,12 +539,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>ScreenMode Enumeration, used to decide orientation of the drawing calls on TurtleScreens. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1TurtleScreen.html#add6a659f016bc3ee1ea859c7abe4da4b">TurtleScreen::mode(ScreenMode)</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a"></a>SM_STANDARD&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d"></a>SM_LOGO&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00375">375</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00464">464</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -731,6 +738,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a168a12774c831b2996a42ade553b6871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a168a12774c831b2996a42ade553b6871">&#9670;&nbsp;</a></span>randomColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcturtle_1_1Color.html">Color</a> cturtle::randomColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a color, generated randomly. </p>
+
+<p class="definition">Definition at line <a class="el" href="Color_8hpp_source.html#l00813">813</a> of file <a class="el" href="Color_8hpp_source.html">Color.hpp</a>.</p>
+
+</div>
+</div>
 <a id="afaa54f821226d88adfcf791861acd7c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afaa54f821226d88adfcf791861acd7c6">&#9670;&nbsp;</a></span>registerShape()</h2>
 
@@ -852,7 +888,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to degrees. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00361">361</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00383">383</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -891,7 +927,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to radians. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00351">351</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00373">373</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>

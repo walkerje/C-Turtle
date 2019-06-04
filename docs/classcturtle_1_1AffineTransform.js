@@ -19,6 +19,7 @@ var classcturtle_1_1AffineTransform =
     [ "getTranslateY", "classcturtle_1_1AffineTransform.html#a0ac98302a2d6e2cdcbadf3bd94b3454b", null ],
     [ "getTranslation", "classcturtle_1_1AffineTransform.html#a3ad0ee2835f78fd128d2ba1f7f9c515d", null ],
     [ "identity", "classcturtle_1_1AffineTransform.html#a689870e7f19af7ecaac919152649b875", null ],
+    [ "lerp", "classcturtle_1_1AffineTransform.html#a0d480bda64ecb04c587c94bcd61d7706", null ],
     [ "operator()", "classcturtle_1_1AffineTransform.html#a26aa5f73bd8fe55e27622eb11959ff9c", null ],
     [ "rotate", "classcturtle_1_1AffineTransform.html#a9143968aba5f1527c897161bed3c1316", null ],
     [ "rotateAround", "classcturtle_1_1AffineTransform.html#a927c5319d02b95df7e573d8eba418e3d", null ],

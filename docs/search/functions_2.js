@@ -6,7 +6,6 @@ var searchData=
   ['clearstamp',['clearstamp',['../classcturtle_1_1RawTurtle.html#a3a4ca181cad41ca6a1e2487713ede825',1,'cturtle::RawTurtle']]],
   ['clearstamps',['clearstamps',['../classcturtle_1_1RawTurtle.html#a214c6670ab230dbc929c9a7128b33ebc',1,'cturtle::RawTurtle']]],
   ['color',['Color',['../structcturtle_1_1Color.html#a759c7ab4973583164f86c9371d637fe6',1,'cturtle::Color::Color(component_t r, component_t g, component_t b)'],['../structcturtle_1_1Color.html#afcd035af137a24bef76c3699f1470b6f',1,'cturtle::Color::Color(const Color &amp;other)'],['../structcturtle_1_1Color.html#a3a3acf7d28bd8259ce7c43666f403447',1,'cturtle::Color::Color(const std::string &amp;name)'],['../structcturtle_1_1Color.html#ad6077cd64444220f6f1993c9288c35f0',1,'cturtle::Color::Color()']]],
-  ['colormode',['colormode',['../classcturtle_1_1TurtleScreen.html#a3bade15a333526bf00231fe32de60f89',1,'cturtle::TurtleScreen::colormode(int val)'],['../classcturtle_1_1TurtleScreen.html#aacaff7fe35d26e3ac80f2f26ce0d01da',1,'cturtle::TurtleScreen::colormode()']]],
   ['concatenate',['concatenate',['../classcturtle_1_1AffineTransform.html#a74d8c5f36f33f3ec3481f4569718f3c1',1,'cturtle::AffineTransform']]],
   ['constat',['constAt',['../classcturtle_1_1AffineTransform.html#a1cf60a6b31f746fc21cc9401edb216d2',1,'cturtle::AffineTransform']]],
   ['copyconcatenate',['copyConcatenate',['../classcturtle_1_1AffineTransform.html#a5f9ae55796063a7e54f9abb836cb7c45',1,'cturtle::AffineTransform']]]

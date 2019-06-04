@@ -18,7 +18,7 @@ var searchData=
   ['tomato3',['tomato3',['../structcturtle_1_1Color.html#ae6a9d368f762e48033336883b475b5e3',1,'cturtle::Color']]],
   ['tomato4',['tomato4',['../structcturtle_1_1Color.html#a59f29d848205459afb866258ded51d21',1,'cturtle::Color']]],
   ['tracelines',['traceLines',['../classcturtle_1_1RawTurtle.html#a26ce702b56df100638e5b90ab8208e35',1,'cturtle::RawTurtle']]],
-  ['tracing',['tracing',['../classcturtle_1_1RawTurtle.html#af9407dcb948e9c8ec52e0f26a86c3839',1,'cturtle::RawTurtle::tracing()'],['../classcturtle_1_1TurtleScreen.html#a79526f11408b5aa484eb0160317e5948',1,'cturtle::TurtleScreen::tracing()']]],
+  ['tracing',['tracing',['../classcturtle_1_1RawTurtle.html#af9407dcb948e9c8ec52e0f26a86c3839',1,'cturtle::RawTurtle']]],
   ['transform',['transform',['../structcturtle_1_1SceneObject.html#aa5919cbb53a52c62833015e7ee192bdf',1,'cturtle::SceneObject::transform()'],['../classcturtle_1_1RawTurtle.html#ac17e273b5661ba0b35f32b4967efa0ae',1,'cturtle::RawTurtle::transform()']]],
   ['transformstack',['transformStack',['../classcturtle_1_1RawTurtle.html#aab8a0757ee870a3eacc9ab836d19b775',1,'cturtle::RawTurtle']]],
   ['turquoise',['turquoise',['../structcturtle_1_1Color.html#af8a59508454f80ae829a742c8919b373',1,'cturtle::Color']]],

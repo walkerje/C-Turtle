@@ -16,6 +16,7 @@ var searchData=
   ['lemonchiffon2',['LemonChiffon2',['../structcturtle_1_1Color.html#aa62641de5a79ff396d2d33e8f15945cc',1,'cturtle::Color']]],
   ['lemonchiffon3',['LemonChiffon3',['../structcturtle_1_1Color.html#a5982aa1d8f83f5d72f80678bd667603a',1,'cturtle::Color']]],
   ['lemonchiffon4',['LemonChiffon4',['../structcturtle_1_1Color.html#a360183e8a7009fffcd597ce6ea8acae3',1,'cturtle::Color']]],
+  ['lerp',['lerp',['../classcturtle_1_1AffineTransform.html#a0d480bda64ecb04c587c94bcd61d7706',1,'cturtle::AffineTransform']]],
   ['light_5fblue',['light_blue',['../structcturtle_1_1Color.html#a62768977eeff34743752363524f5a3e8',1,'cturtle::Color']]],
   ['light_5fcoral',['light_coral',['../structcturtle_1_1Color.html#aad4c3cd82222cf70206c7eff1b8e2d2a',1,'cturtle::Color']]],
   ['light_5fcyan',['light_cyan',['../structcturtle_1_1Color.html#a1ad55de1cb7890843246e81b87e30236',1,'cturtle::Color']]],

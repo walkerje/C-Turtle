@@ -28,7 +28,7 @@ var searchData=
   ['peachpuff2',['PeachPuff2',['../structcturtle_1_1Color.html#a32ec52150a85f45f515e04e4257fe1a6',1,'cturtle::Color']]],
   ['peachpuff3',['PeachPuff3',['../structcturtle_1_1Color.html#a33c0348435a5b529768954d707df609f',1,'cturtle::Color']]],
   ['peachpuff4',['PeachPuff4',['../structcturtle_1_1Color.html#ad7290709fdb8f34a1a6b9fdd7a4adcec',1,'cturtle::Color']]],
-  ['pencolor',['penColor',['../classcturtle_1_1RawTurtle.html#a745880f9ea98278db7d4e917cad795e0',1,'cturtle::RawTurtle::penColor()'],['../classcturtle_1_1RawTurtle.html#a740cf97fde653e87dcb015a41079f7e9',1,'cturtle::RawTurtle::pencolor(Color c)'],['../classcturtle_1_1RawTurtle.html#a88f288f88beddd8e7af5da347574c671',1,'cturtle::RawTurtle::pencolor()']]],
+  ['pencolor',['pencolor',['../classcturtle_1_1RawTurtle.html#a740cf97fde653e87dcb015a41079f7e9',1,'cturtle::RawTurtle::pencolor(Color c)'],['../classcturtle_1_1RawTurtle.html#a88f288f88beddd8e7af5da347574c671',1,'cturtle::RawTurtle::pencolor()'],['../classcturtle_1_1RawTurtle.html#a745880f9ea98278db7d4e917cad795e0',1,'cturtle::RawTurtle::penColor()']]],
   ['pendown',['pendown',['../classcturtle_1_1RawTurtle.html#a1d487a26ff7463c8c451118f5a4feaac',1,'cturtle::RawTurtle']]],
   ['penup',['penup',['../classcturtle_1_1RawTurtle.html#ad3a6c4cf76585e73dc9966b6c10345b3',1,'cturtle::RawTurtle']]],
   ['penwidth',['penWidth',['../classcturtle_1_1RawTurtle.html#a0f5ac7e75dac5bf31186f539ff7f0572',1,'cturtle::RawTurtle']]],
