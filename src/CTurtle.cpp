@@ -1,3 +1,25 @@
+//MIT License
+//
+//Copyright (c) 2019 Jesse W. Walker
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+
 #define CTURTLE_IMPLEMENTATION
 #include "CTurtle.hpp"
 #include <cstdlib>
@@ -25,7 +47,22 @@ namespace cturtle {
                     {-7, 7},
                     {0, 0},
                     {7, 7}
-            })}
+            })},
+            {"arrow",
+                Polygon({
+                    {0, 0},
+                    {-5, 5},
+                    {-3, 5},
+                    {-3, 10},
+                    {3, 10},
+                    {3, 5},
+                    {5, 5}
+            })},
+//            {"turtle", TODO: Add turtle geometry.
+//                Polygon({
+//                
+//            })},
+            
         };
     }
     
@@ -51,11 +88,7 @@ namespace cturtle {
         turtles.clear();
         backgroundColor = Color::white;
         backgroundImage.assign();
-        //TODO: Reset other callbacks
-        timerFunc = [](void) {
-        };
         curMode = SM_STANDARD;
-        redraw();
     }
 
     void TurtleScreen::resetscreen() {
@@ -70,7 +103,40 @@ namespace cturtle {
     }
 
     void TurtleScreen::update() {
-        //TODO: Implement Me?
+        redraw();
+        
+        //Updates all input.
+        if(display.is_closed())
+            return;
+        
+        //Update mouse button input.
+        const unsigned int button = display.button();
+        bool buttons[3] = {
+            button & 1,//left
+            button & 2,//right
+            button & 4//middle
+        };
+        
+        for(int i = 0; i < 3; i++){
+            if(!buttons[i])//is this button state "down"?
+                continue;//if not, skip its processing loop.
+            for(MouseFunc& func : mouseBindings[i]){
+                func(display.mouse_x(), display.mouse_y());
+            }
+        }
+        
+        //Update keyboard key input.
+        for(auto& kbPair : keyBindings){
+            KeyboardKey key = kbPair.first;
+            //is key for assigned pair being called?
+            //if not, skip its processing loop.
+            if(!display.is_key((unsigned int)key))
+                continue;
+            auto& callbackList = kbPair.second;
+            for(KeyFunc& func : callbackList){
+                func();
+            }
+        }
     }
 
     void TurtleScreen::delay(unsigned int ms) {
@@ -82,14 +148,18 @@ namespace cturtle {
     }
 
     void TurtleScreen::bye() {
-        resetscreen();
+        if(display.is_closed())
+            return;
         display.close();
+        clearscreen();
     }
 
     void TurtleScreen::redraw() {
-        //TODO: Move this somewhere else 
         if(getIsClosed())
             return;
+        
+        //Moved to initialization of the event thread.
+//        update();//TODO: Move this to somewhere more appropriate.
         AffineTransform screen = screentransform();
         for (RawTurtle* turtle : turtles) {
             turtle->draw(screen, canvas);
@@ -97,7 +167,7 @@ namespace cturtle {
         sleep(delayMS);
         swap();
     }
-
+    
     /*Raw Turtle========================================*/
 
     RawTurtle::RawTurtle(TurtleScreen& scr) {
@@ -108,7 +178,7 @@ namespace cturtle {
     //write
     void RawTurtle::write(const std::string& text){
         pushText(transform, fillColor, text);
-        redrawParent();
+        updateParent();
     }
     
     //Stamps
@@ -181,80 +251,84 @@ namespace cturtle {
     }
     
     void RawTurtle::setheading(float amt){
-        //TODO: Animation for setheading
+        //Swap to correct unit if necessary.
         amt = angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD; 
-        transform.setRotation(amt);
-        redrawParent();
+        travelTo(AffineTransform(transform).setRotation(amt));
+        updateParent();
     }
 
     void RawTurtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
         transform.setTranslation(x, y);
         pushCurrent();
-        redrawParent();
+        updateParent();
     };
 
     void RawTurtle::setx(int x) {
         transform.setTranslationX(x);
         pushCurrent();
-        redrawParent();
+        updateParent();
     }
 
     void RawTurtle::sety(int y) {
         transform.setTranslationY(y);
         pushCurrent();
-        redrawParent();
+        updateParent();
     }
 
     void RawTurtle::home() {
         transform.identity();
         //TODO: sethome?
         pushCurrent();
-        redrawParent();
+        updateParent();
     }
 
     //Drawing & Misc.
 
     void RawTurtle::reset() {
-        //Reset transform.
-        transformStack.clear();
-        transformStack.push_back(AffineTransform());
-        transform = transformStack.back();
-        
-        //Clear scene objects
+        //Reset objects, transforms, and trace lines
         objects.clear();
-        
-        //Reset all small variables to their defaults
-        penColor = Color::black;
+        traceLines.clear();
+        //Note to self, clearing the list, appending a new transform,
+        //then reassigning the transform reference just didn't want to work.
+        //I have no idea why. Therefore, we're resetting it in the same
+        //manner we initially construct it.
+        transformStack = {AffineTransform()};
+        transform = transformStack.back();
+
+        //reset values pulled from initial.
         moveSpeed = TS_NORMAL;
         angleMode = false;
         tracing = true;
         penWidth = 1;
         filling = false;
+        penColor = Color::black;
         fillAccum.points.clear();
         fillColor = Color::black;
-        cursor = cturtle::shape("indented triangle");
+        cursor = cturtle::shape("triangle");
         curStamp = 0;
         cursorVisible = true;
         cursorTilt = 0.0f;
+        
+        updateParent();
     }
     
-    void RawTurtle::redrawParent(){
+    void RawTurtle::updateParent(){
         if(screen != nullptr)
-            screen->redraw();
+            screen->update();
     }
 
     void RawTurtle::circle(int radius, int steps, Color color) {
         pushGeom(transform, color, new Circle(radius, steps));
-        redrawParent();
+        updateParent();
     }
 
     void RawTurtle::fill(bool state) {
         if (filling && !state) {
             pushGeom(AffineTransform(), fillColor, new Polygon(fillAccum.points));
             fillAccum.points.clear();
-            redrawParent();
+            updateParent();
         }
         filling = state;
     }
@@ -313,7 +387,7 @@ namespace cturtle {
         traceLines.pop_back();
         transformStack.pop_back();
         transform = transformStack.back();
-        redrawParent();
+        updateParent();
     }
     
     void RawTurtle::tilt(float amt){
@@ -321,11 +395,15 @@ namespace cturtle {
         //Flip angle orientation based on screen mode.
         amt = screen->mode() == SM_STANDARD ? amt : -amt; 
         cursorTilt += amt;
-        redrawParent();
+        updateParent();
     }
     
     void RawTurtle::setshowturtle(bool state) {
         cursorVisible = state;
-        redrawParent();
+        updateParent();
+    }
+    
+    void RawTurtle::setpenstate(bool down){
+        tracing = down;
     }
 }
