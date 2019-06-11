@@ -23,6 +23,7 @@
 #define CTURTLE_IMPLEMENTATION
 #include "CTurtle.hpp"
 #include <cstdlib>
+#include <iostream>
 
 namespace cturtle {
     /*Shape Registration =================================*/
@@ -105,38 +106,20 @@ namespace cturtle {
     void TurtleScreen::update() {
         redraw();
         
-        //Updates all input.
-        if(display.is_closed())
+        if(cacheConsumed)
             return;
         
-        //Update mouse button input.
-        const unsigned int button = display.button();
-        bool buttons[3] = {
-            button & 1,//left
-            button & 2,//right
-            button & 4//middle
-        };
-        
-        for(int i = 0; i < 3; i++){
-            if(!buttons[i])//is this button state "down"?
-                continue;//if not, skip its processing loop.
-            for(MouseFunc& func : mouseBindings[i]){
-                func(display.mouse_x(), display.mouse_y());
+        for(InputEvent& event : cachedEvents){
+            if(event.type){//process keyboard event
+                KeyFunc& keyFunc = *reinterpret_cast<KeyFunc*>(event.cbPointer);
+                keyFunc();
+            }else{//process mouse event
+                MouseFunc& mFunc = *reinterpret_cast<MouseFunc*>(event.cbPointer);
+                mFunc(event.mX, event.mY);
             }
         }
-        
-        //Update keyboard key input.
-        for(auto& kbPair : keyBindings){
-            KeyboardKey key = kbPair.first;
-            //is key for assigned pair being called?
-            //if not, skip its processing loop.
-            if(!display.is_key((unsigned int)key))
-                continue;
-            auto& callbackList = kbPair.second;
-            for(KeyFunc& func : callbackList){
-                func();
-            }
-        }
+        cachedEvents.clear();
+        cacheConsumed = true;
     }
 
     void TurtleScreen::delay(unsigned int ms) {
@@ -151,13 +134,13 @@ namespace cturtle {
         if(display.is_closed())
             return;
         display.close();
+        eventThread->join();
         clearscreen();
     }
 
     void TurtleScreen::redraw() {
         if(getIsClosed())
             return;
-        
         //Moved to initialization of the event thread.
 //        update();//TODO: Move this to somewhere more appropriate.
         AffineTransform screen = screentransform();
@@ -166,6 +149,59 @@ namespace cturtle {
         }
         sleep(delayMS);
         swap();
+    }
+    
+    void TurtleScreen::initEventThread(){
+        eventThread.reset(new std::thread([=](){
+            while(!display.is_closed()){
+                //Updates all input.
+                if(!cacheConsumed){
+                    std::this_thread::yield();
+
+                    continue;
+                }
+                
+                //Update mouse button input.
+                const unsigned int button = display.button();
+                bool buttons[3] = {
+                    button & 1,//left
+                    button & 2,//right
+                    button & 4//middle
+                };
+
+                for(int i = 0; i < 3; i++){
+                    if(!buttons[i])//is this button state "down"?
+                        continue;//if not, skip its processing loop.
+                    for(MouseFunc& func : mouseBindings[i]){
+                        //append to the event cache.
+                        InputEvent e;
+                        e.type = false;
+                        e.mX = display.mouse_x();
+                        e.mY = display.mouse_y();
+                        e.cbPointer = reinterpret_cast<void*>(&func);
+                        cachedEvents.push_back(e);
+                    }
+                }
+
+                //Update keyboard key input.
+                for(auto& kbPair : keyBindings){
+                    KeyboardKey key = kbPair.first;
+                    //is key for assigned pair being called?
+                    //if not, skip its processing loop.
+                    if(!display.is_key((unsigned int)key))
+                        continue;
+                    auto& callbackList = kbPair.second;
+                    for(KeyFunc& func : callbackList){
+                        InputEvent e;
+                        e.type = true;
+                        e.cbPointer = reinterpret_cast<void*>(&func);
+                        cachedEvents.push_back(e);
+                    }
+                }
+                cacheConsumed = false;
+                std::this_thread::yield();
+            }
+        }));
     }
     
     /*Raw Turtle========================================*/

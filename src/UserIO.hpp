@@ -134,6 +134,16 @@ namespace cturtle{
         MOUSEB_MIDDLE//Middle Mouse Button
     };
     
+    struct InputEvent{
+        //True for keyboard, false for mouse
+        bool type = false;
+        //mouseX, mouseY
+        int mX = 0;
+        int mY = 0;
+        /*void callback pointer. cast and called when processed.*/
+        void* cbPointer = nullptr;
+    };
+    
     /**\brief Returns a KeyboardKey when given its name as a string.
      * All key names are capitalized, and the only difference from
      * their names as a string representation is the omission of the

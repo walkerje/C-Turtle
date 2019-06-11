@@ -508,6 +508,7 @@ namespace cturtle{
         TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
             swapDisplay(2);
+            initEventThread();
         }
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
@@ -517,6 +518,7 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
+            initEventThread();
         }
         /**Width, height, and title constructor.
          * Assigns the display with the specified dimensions, in pixels, and
@@ -529,6 +531,7 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
+            initEventThread();
         }
         
         /**Sets the background color of the screen.
@@ -728,7 +731,7 @@ namespace cturtle{
         inline void swapDisplay(int times = 1){
             for(int i = 0; i < times; i++){
                 display.display(canvas);
-                display.flush();
+//                display.flush();
                 /*Reset the display to just have background image or color.*/
                 if(!backgroundImage.is_empty()){
                     canvas.assign(backgroundImage);
@@ -738,7 +741,12 @@ namespace cturtle{
             }
         }
         
+        void initEventThread();
+        
         std::list<RawTurtle*> turtles;
+        std::unique_ptr<std::thread> eventThread;
+        std::list<InputEvent> cachedEvents;
+        bool cacheConsumed = true;//true because cache list is empty to start
         
         std::map<KeyboardKey, std::list<KeyFunc>> keyBindings;
         std::list<MouseFunc> mouseBindings[3] = {{},{},{}};
