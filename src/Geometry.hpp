@@ -28,6 +28,7 @@
 
 #pragma once
 
+#include <tuple>
 #include <cstring>//memcpy
 #include <vector>//for polygon points
 #include <array>//For AffineTransform storage.
@@ -161,8 +162,8 @@ namespace cturtle {
         
         /**\brief Returns the translation of this transform as a point.
          *\return The point which represents the transform.*/
-        Point getTranslation(){
-            return Point((int)at(0,2), (int)at(1, 2));
+        Point getTranslation() const{
+            return Point((int)constAt(0,2), (int)constAt(1, 2));
         }
         
         /**\brief Sets the X axis translation of this transform.
@@ -537,6 +538,23 @@ namespace cturtle {
          *\param c The color to draw the outline in.*/
         void drawOutline(const AffineTransform& t, Image& imgRef, Color c = Color::black);
     };
+    
+    class CompoundPolygon : public IDrawableGeometry{
+    public:
+        //Polygon, Fill, Outline
+        typedef std::tuple<std::unique_ptr<Polygon>, Color, bool, Color> component_t;
+        
+        /**Adds a component to this Compound Polygon.*/
+        void addcomponent(const Polygon& p, Color fill);
+        /**Adds a component to this Compound Polygon, with the specified outline.*/
+        void addcomponent(const Polygon& p, Color fill, Color outline);
+        
+        /**Draws this CompoundPolygon.
+         * Disregards the Color attribute in favor of the components' colors*/
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+    protected:
+        std::list<component_t> components;
+    };
 }
 
 #ifdef CTURTLE_IMPLEMENTATION
@@ -567,6 +585,8 @@ namespace cturtle {
     void Line::draw(const AffineTransform& t, Image& imgRef, Color c) {
         const Point a = t(pointA);
         const Point b = t(pointB);
+        if(a.x == b.x && a.y == b.y)
+            return;//no point in drawing a line between like points
         drawLine(imgRef, a.x, a.y, b.x, b.y, c, width);
     }
 
@@ -630,6 +650,27 @@ namespace cturtle {
         Point a = t(points.front());
         Point b = t(points.back());
         imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
+    }
+            
+    void CompoundPolygon::addcomponent(const Polygon& p, Color fill){
+        components.push_back(std::make_tuple(std::unique_ptr<Polygon>(new Polygon(p)), fill, false, Color::black));
+    }
+    
+    void CompoundPolygon::addcomponent(const Polygon& p, Color fill, Color outline){
+        components.push_back(std::make_tuple(std::unique_ptr<Polygon>(new Polygon(p)), fill, true, outline));
+    }
+    
+    void CompoundPolygon::draw(const AffineTransform& t, Image& imgRef, Color c){
+        for(component_t& comp : components){
+            Polygon* p = std::get<0>(comp).get();
+            Color fill = std::get<1>(comp);
+            bool doOutline = std::get<2>(comp);
+            Color outline = std::get<3>(comp);
+            
+            p->draw(t, imgRef, fill);
+            if(doOutline)
+                p->drawOutline(t, imgRef, outline);
+        }
     }
 }
 #endif

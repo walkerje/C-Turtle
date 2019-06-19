@@ -46,9 +46,10 @@
 #include <map>
 #include <list>
 #include <functional>
-#include <queue>
 #include <utility>
 #include <memory>
+#include <mutex>
+#include <iostream>
 
 /*Local Includes*/
 #include "Common.hpp"
@@ -80,13 +81,14 @@ namespace cturtle{
     //Alias for the CImg library, for convenience.
     namespace cimg = cimg_library;
     
-    /*Shape Registration and deletion.*/
-     
+    /*Shape Registration.*/
+    
     void registerShape(const std::string& name, const Polygon& p);
     inline void addShape(const std::string& name, const Polygon& p){
         registerShape(name, p);
     }
     
+    /**Returns a shape with the specified name.*/
     const Polygon& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
@@ -442,46 +444,19 @@ namespace cturtle{
         
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
-        inline long getAnimMS(){
+        inline long int getAnimMS(){
             return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
         }
         
         /**Redraws the parent screen.*/
-        void updateParent();
+        void updateParent(bool redraw = true);
         
         /*Pushes the current transformed point.*/
-        inline void pushCurrent(){
-            if(tracing){
-                Point src = traceLines.empty() ? Point() : traceLines.back().second.pointB;
-                traceLines.push_back(std::make_pair(penColor, Line(src, transform.getTranslation(), penWidth)));
-            }
-            if (filling) 
-                fillAccum.points.push_back(transform.getTranslation());
-            transformStack.push_back(transform);
-            transform = transformStack.back();
-        }
+        void pushCurrent();
         
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.*/
-        inline void travelTo(const AffineTransform dest){
-            if(screen != nullptr){
-                const float duration = getAnimMS();
-                const unsigned long startTime = epochTime();
-                const unsigned long endTime = duration + startTime;
-
-                AffineTransform start;
-                start.assign(transform);
-                float progress = duration == 0 ? 1 : 0;
-                while(progress < 1.0f){
-                    transform.assign(start.lerp(dest, progress));
-                    updateParent();
-                    progress = (epochTime() - startTime) / duration;
-                }
-            }
-            transform.assign(dest);
-            pushCurrent();
-            updateParent();
-        }
+        void travelTo(const AffineTransform dest);
         
         /**Inheritors must assign screen pointer!*/
         RawTurtle(){}
@@ -526,7 +501,7 @@ namespace cturtle{
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        TurtleScreen(int width, int height, const std::string& title) : display(width, height){
+        TurtleScreen(int width, int height, const std::string& title = "CTurtle") : display(width, height){
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
@@ -534,48 +509,37 @@ namespace cturtle{
             initEventThread();
         }
         
+        ~TurtleScreen() {
+            bye();
+        }
+        
         /**Sets the background color of the screen.
          * Please note that, if there is a background image, this color is not
          * applied until it is removed.
          *\param color The background color.
          *\sa bgpic(image)*/
-        void bgcolor(const Color& color){
-            backgroundColor = color;
-            redraw();
-        }
+        void bgcolor(const Color& color);
         
         /**Returns the background color of the screen.
          *\return The background color of the screen.*/
-        Color bgcolor(){
-            return backgroundColor;
-        }
+        Color bgcolor();
         
         /**\brief Sets the background image of the display.
          * Sets the background image. Please note that the background image
          * takes precedence over background color.
          *\param img The background image.*/
-        void bgpic(const Image& img){
-            backgroundImage.assign(img);
-            backgroundImage.resize(window_width(), window_height());
-            redraw();
-        }
+        void bgpic(const Image& img);
         
         /**Returns a const reference to the background image.*/
-        const Image& bgpic(){
-            return backgroundImage;
-        }
+        const Image& bgpic();
 
         /**Sets the screen mode of this screen.
          *\param mode The screen mode.
          *\todo Refine this documentation.*/
-        void mode(ScreenMode mode){
-            curMode = mode;
-        }
+        void mode(ScreenMode mode);
         
         /**Returns the screen mode of this screen.*/
-        ScreenMode mode(){
-            return curMode;
-        }
+        ScreenMode mode(){return curMode;}
         
         /**\brief Clears this screen.
          * Deletes all drawings and turtles,
@@ -610,7 +574,7 @@ namespace cturtle{
         //might just leave this function out
         
         /*TODO: Document Me*/
-        void update();
+        void update(bool doRedraw = true);
         
         /**Sets the delay set between turtle commands.*/
         void delay(unsigned int ms);
@@ -634,6 +598,15 @@ namespace cturtle{
             Image screenshotImg;
             display.screenshot(screenshotImg);
             screenshotImg.save(file.c_str());
+        }
+        
+        /**Enters a loop, lasting until the display has been closed,
+         * which updates the screen. This is useful for programs which
+         * rely heavily on user input, as events are still called like normal.*/
+        void mainloop(){
+            while(!display.is_closed()){
+                update(false);
+            }
         }
         
         /**Resets and closes this display.*/
@@ -674,12 +647,14 @@ namespace cturtle{
         
         /**TODO: Document Me*/
         void onkey(KeyFunc func, KeyboardKey key){
+            cacheMutex.lock();
             //determine if key list exists
             if(keyBindings.find(key) == keyBindings.end()){
                 keyBindings[key] = std::list<KeyFunc>();
             }
             //then push it to the end of the list
             keyBindings[key].push_back(func);
+            cacheMutex.unlock();
         }
         
         /**TODO: Document Me*/
@@ -692,8 +667,10 @@ namespace cturtle{
         }
         
         /**TODO: Document Me*/
-        void onclick(MouseFunc func, MouseButton button){
+        void onclick(MouseFunc func, MouseButton button = MOUSEB_LEFT){
+            cacheMutex.lock();
             mouseBindings[button].push_back(func);
+            cacheMutex.unlock();
         }
         
         /**Calls all previously added mouse button call-backs.*/
@@ -706,9 +683,10 @@ namespace cturtle{
         /**Binds the "bye" function to the onclick event for the left
          * mouse button.*/
         void exitonclick(){
-            onclick([=](int x, int y){
-                bye();
-            }, MOUSEB_LEFT);
+            while(!this->display.is_closed() && !this->display.button()){
+                std::this_thread::yield();
+                //We don't update or anything here.
+            }
         }
         
         /**Adds the specified turtle to this screen.*/
@@ -724,29 +702,20 @@ namespace cturtle{
         ScreenMode curMode      = SM_STANDARD;
         
         /**Redraw delay, in milliseconds.*/
-        unsigned int delayMS = 10;
+        long int delayMS = 10;
         
         /**Swaps the front and back display
           pixel buffers, then displays the front buffer.*/
-        inline void swapDisplay(int times = 1){
-            for(int i = 0; i < times; i++){
-                display.display(canvas);
-//                display.flush();
-                /*Reset the display to just have background image or color.*/
-                if(!backgroundImage.is_empty()){
-                    canvas.assign(backgroundImage);
-                }else{
-                    canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
-                }
-            }
-        }
+        void swapDisplay(int times = 1);
         
         void initEventThread();
         
         std::list<RawTurtle*> turtles;
+        
         std::unique_ptr<std::thread> eventThread;
         std::list<InputEvent> cachedEvents;
-        bool cacheConsumed = true;//true because cache list is empty to start
+        bool killEventThread = false;
+        std::mutex cacheMutex;
         
         std::map<KeyboardKey, std::list<KeyFunc>> keyBindings;
         std::list<MouseFunc> mouseBindings[3] = {{},{},{}};

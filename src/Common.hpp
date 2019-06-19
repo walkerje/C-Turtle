@@ -30,6 +30,13 @@
 
 #include <cstdint>
 #include <thread>
+
+#ifndef _MSC_VER
+    #ifndef cimg_use_openmp
+        #define cimg_use_openmp 1
+    #endif
+#endif
+
 #include "CImg.h"
 
 /*Common header so we don't have to redefine common typedefs,
