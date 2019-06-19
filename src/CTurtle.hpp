@@ -82,14 +82,18 @@ namespace cturtle{
     namespace cimg = cimg_library;
     
     /*Shape Registration.*/
+    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom);
     
-    void registerShape(const std::string& name, const Polygon& p);
-    inline void addShape(const std::string& name, const Polygon& p){
-        registerShape(name, p);
+    /**Registers the specified drawable geometry as a shape.
+     * Please note that type T must inherit from IDrawableGeometry and
+     * specify a copy constructor, default or otherwise.*/
+    template<typename T>
+    void registerShape(const std::string& name, const T& geom){
+        __registerShapeImpl(name, std::shared_ptr<IDrawableGeometry>(new T(geom)));
     }
     
-    /**Returns a shape with the specified name.*/
-    const Polygon& shape(const std::string name);
+    /**Returns the shape with the specified name.*/
+    const IDrawableGeometry& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa RawTurtle::getAnimMS()*/
@@ -286,7 +290,7 @@ namespace cturtle{
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
-            cursor = cturtle::shape(name);
+            cursor = (const Polygon&)cturtle::shape(name);
         }
         
         /**\brief Sets the shape of this turtle.
@@ -296,7 +300,7 @@ namespace cturtle{
         }
         
         /**\brief Returns the shape of this turtle.*/
-        const Polygon& shape(){
+        const IDrawableGeometry& shape(){
             return cursor;
         }
         
@@ -406,7 +410,7 @@ namespace cturtle{
         
         //Cursor (shape)
         /**The shape of the turtle. Named cursor for obvious reasons.*/
-        Polygon cursor = cturtle::shape("triangle");
+        IDrawableGeometry& cursor = const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
         /**The current unique stamp ID. Incremented with every call to the stamp function.*/
         int curStamp = 0;
         /**A boolean indicating if the cursor is visible or not.*/
@@ -449,13 +453,15 @@ namespace cturtle{
         }
         
         /**Redraws the parent screen.*/
-        void updateParent(bool redraw = true);
+        void updateParent(bool redraw = true, bool processInput = true);
         
         /*Pushes the current transformed point.*/
         void pushCurrent();
         
         /**Performs an interpolation, with animation,
-         * between the current transform and the specified one.*/
+         * between the current transform and the specified one.
+         * Pushes a new fill vertex if filling, and applies appropriate
+         * lines if the pen is down.*/
         void travelTo(const AffineTransform dest);
         
         /**Inheritors must assign screen pointer!*/
@@ -574,7 +580,7 @@ namespace cturtle{
         //might just leave this function out
         
         /*TODO: Document Me*/
-        void update(bool doRedraw = true);
+        void update(bool doRedraw = true, bool processInput = true);
         
         /**Sets the delay set between turtle commands.*/
         void delay(unsigned int ms);

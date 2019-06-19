@@ -26,36 +26,43 @@
 #include <iostream>
 #include <vector>
 #include <locale>
+#include <memory>
 
 namespace cturtle {
     /*Shape Registration =================================*/
     namespace {
-        std::map<std::string, Polygon> shapes = {
+        std::map<std::string, std::shared_ptr<IDrawableGeometry>> shapes = {
             {"triangle",
-                Polygon(
+                std::shared_ptr<IDrawableGeometry>(
+                new Polygon(
                 {
                     {0, 0},
                     {-5, 5},
                     {5, 5}
-                })},
+                }))},
             {"square",
-                Polygon(
+                    
+                std::shared_ptr<IDrawableGeometry>(
+                new Polygon(
                 {
                     {-5, -5},
                     {-5, 5},
                     {5, 5},
                     {5, -5}
-                })},
+                }))},
             {"indented triangle",
-                Polygon(
+                    
+                std::shared_ptr<IDrawableGeometry>(
+                new Polygon(
                 {
                     {0, 7},
                     {-7, 7},
                     {0, 0},
                     {7, 7}
-                })},
+                }))},
             {"arrow",
-                Polygon(
+                std::shared_ptr<IDrawableGeometry>(
+                new Polygon(
                 {
                     {0, 0},
                     {-5, 5},
@@ -64,20 +71,17 @@ namespace cturtle {
                     {3, 10},
                     {3, 5},
                     {5, 5}
-                })},
-            //            {"turtle", TODO: Add turtle geometry.
-            //                Polygon({
-            //                
-            //            })},
+                }
+            ))}
         };
     }
-
-    void registerShape(const std::string& name, const Polygon& p) {
-        shapes[name] = p;
+    
+    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom){
+        shapes[name] = geom;
     }
 
-    const Polygon& shape(const std::string name) {
-        return shapes[name];
+    const IDrawableGeometry& shape(const std::string name) {
+        return *shapes[name].get();
     }
 
     /*TurtleScreen =======================================*/
@@ -115,6 +119,7 @@ namespace cturtle {
         backgroundImage.assign(img);
         backgroundImage.resize(window_width(), window_height());
         redraw();
+        redraw();//2 redraw calls due to swap order
     }
     
     const Image& TurtleScreen::bgpic(){
@@ -136,7 +141,7 @@ namespace cturtle {
         return {display.screen_width(), display.screen_height()};
     }
 
-    void TurtleScreen::update(bool doRedraw) {
+    void TurtleScreen::update(bool doRedraw, bool input) {
         /*Resize canvas.*/
         bool resized = display.is_resized();
         if(resized){
@@ -145,8 +150,8 @@ namespace cturtle {
         }else if ((doRedraw && delayMS > -1))
             redraw();
         
-        /**No events to process in the cache.*/
-        if(cachedEvents.empty())
+        /**No events to process in the cache, or we're not processing it right now.*/
+        if(cachedEvents.empty() || !input)
             return;//No events to process.
         
         if(!cacheMutex.try_lock())
@@ -186,7 +191,7 @@ namespace cturtle {
     }
 
     void TurtleScreen::redraw() {
-        if (getIsClosed())
+        if (getIsClosed() || delayMS <= -1)
             return;
 
         //Moved to initialization of the event thread.
@@ -298,7 +303,7 @@ namespace cturtle {
     //Stamps
 
     int RawTurtle::stamp() {
-        Polygon* p = new Polygon(cursor);
+        Polygon* p = new Polygon((Polygon&)cursor);
         pushStamp(transform, fillColor, p);
         return curStamp;
     }
@@ -371,7 +376,6 @@ namespace cturtle {
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).setRotation(amt));
-        updateParent();
     }
 
     void RawTurtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
@@ -380,21 +384,14 @@ namespace cturtle {
 
     void RawTurtle::setx(int x) {
         travelTo(AffineTransform(transform).setTranslationX(x));
-        pushCurrent();
-        updateParent();
     }
 
     void RawTurtle::sety(int y) {
         travelTo(AffineTransform(transform).setTranslationY(y));
-        pushCurrent();
-        updateParent();
     }
 
     void RawTurtle::home() {
-        transform.identity();
-        //TODO: sethome?
-        pushCurrent();
-        updateParent();
+        travelTo(AffineTransform());
     }
 
     //Drawing & Misc.
@@ -419,7 +416,7 @@ namespace cturtle {
         penColor = Color::black;
         fillAccum.points.clear();
         fillColor = Color::black;
-        cursor = cturtle::shape("triangle");
+        cursor = (const Polygon&)cturtle::shape("triangle");
         curStamp = 0;
         cursorVisible = true;
         cursorTilt = 0.0f;
@@ -427,9 +424,9 @@ namespace cturtle {
         updateParent();
     }
 
-    void RawTurtle::updateParent(bool redraw) {
+    void RawTurtle::updateParent(bool redraw, bool input) {
         if (screen != nullptr)
-            screen->update(redraw);
+            screen->update(redraw, input);
     }
 
     void RawTurtle::circle(int radius, int steps, Color color) {
@@ -474,7 +471,7 @@ namespace cturtle {
             const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
             AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
             cursor.draw(cursorTransform, canvas, fillColor);
-            cursor.drawOutline(cursorTransform, canvas);
+//            cursor.drawOutline(cursorTransform, canvas);
         }
     }
 
@@ -505,13 +502,6 @@ namespace cturtle {
         tracing = down;
     }
     
-    void RawTurtle::pushCurrent() {
-        if (filling)
-            fillAccum.points.push_back(transform.getTranslation());
-        transformStack.push_back(transform);
-        transform = transformStack.back();
-    }
-    
     void RawTurtle::travelTo(const AffineTransform dest) {
         AffineTransform begin;
         begin.assign(transform);
@@ -526,25 +516,35 @@ namespace cturtle {
             float progress = duration == 0 ? 1 : 0;
             while (progress < 1.0f) {
                 if(tracing){
+                    //Push up a temporary line if we're tracing
+                    //This is to draw a pen line from where we were to where we
+                    //are at in the animation.
                     transform.assign(start.lerp(dest, progress));
                     traceLines.push_back(std::make_pair(penColor, Line(transform.getTranslation(), begin.getTranslation(), penWidth)));
-                    updateParent();
+                    updateParent(true, false);
                     traceLines.pop_back();
                 }else{
                     transform.assign(start.lerp(dest, progress));
-                    updateParent();
+                    updateParent(true, false);
                 }
                 
                 progress = (epochTime() - startTime) / duration;
             }
         }
         
+        //Contents of PushCurrent moved here because every function
+        //that called this one called PushCurrent immediately after it.
         if(tracing){
             traceLines.push_back(std::make_pair(penColor, Line(begin.getTranslation(), dest.getTranslation(), penWidth)));
         }
         
         transform.assign(dest);
-        pushCurrent();
+        
+        if (filling)
+            fillAccum.points.push_back(transform.getTranslation());
+        transformStack.push_back(transform);
+        transform = transformStack.back();
+        
         updateParent();
     }
 }

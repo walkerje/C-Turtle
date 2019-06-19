@@ -555,6 +555,15 @@ namespace cturtle {
     protected:
         std::list<component_t> components;
     };
+    
+    class Sprite : public IDrawableGeometry{
+    public:
+        Sprite(Image& img) : spriteImg(img){}
+        
+        
+    protected:
+        Image& spriteImg;
+    };
 }
 
 #ifdef CTURTLE_IMPLEMENTATION

@@ -78,6 +78,8 @@ namespace cturtle{
     /**\brief Sleeps the calling thread the specified amount of milliseconds.
      *\param ms The total number of milliseconds to sleep.*/
     inline void sleep(long ms){
+        if(ms <= 0)
+            return;
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
     }
     
