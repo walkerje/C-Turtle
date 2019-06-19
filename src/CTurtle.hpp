@@ -1,3 +1,25 @@
+//MIT License
+//
+//Copyright (c) 2019 Jesse W. Walker
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+
 /* 
  * File:    CTurtle.hpp
  * Project: C-Turtle
@@ -14,25 +36,26 @@
     #endif
 #endif
 
-/*Remember to link against X11 libs to get the */
+//Under UNIX, link X11 and PThread.
 
 /*Standard Includes*/
 #include <cstdint>
 #include <cmath>
 #include <algorithm>
 #include <string>
+#include <map>
 #include <list>
 #include <functional>
 #include <utility>
+#include <memory>
+#include <mutex>
+#include <iostream>
 
 /*Local Includes*/
 #include "Common.hpp"
 #include "Geometry.hpp"
 #include "Color.hpp"
 #include "UserIO.hpp"
-
-//TODO: Just a personal note; active v. passive rendering is something to
-//think about. I think turtles use a form of passive rendering.
 
 /**
  * \brief Only namespace which contains functions and classes for this project.
@@ -42,10 +65,10 @@ namespace cturtle{
     /*Callback function typedefs for event listeners.*/
     
     /*Mouse event callback type.*/
-    typedef std::function<void(ivec2)> MouseFunc;
+    typedef std::function<void(int, int)> MouseFunc;
     
     /*Keyboard event callback type.*/
-    typedef std::function<void(KeyboardKey)> KeyFunc;
+    typedef std::function<void()> KeyFunc;
     
     /*Timer event callback type.*/
     typedef std::function<void(void)> TimerFunc;
@@ -58,14 +81,19 @@ namespace cturtle{
     //Alias for the CImg library, for convenience.
     namespace cimg = cimg_library;
     
-    /*Shape Registration and deletion.*/
-     
-    void registerShape(const std::string& name, const Polygon& p);
-    inline void addShape(const std::string& name, const Polygon& p){
-        registerShape(name, p);
+    /*Shape Registration.*/
+    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom);
+    
+    /**Registers the specified drawable geometry as a shape.
+     * Please note that type T must inherit from IDrawableGeometry and
+     * specify a copy constructor, default or otherwise.*/
+    template<typename T>
+    void registerShape(const std::string& name, const T& geom){
+        __registerShapeImpl(name, std::shared_ptr<IDrawableGeometry>(new T(geom)));
     }
     
-    const Polygon& shape(const std::string name);
+    /**Returns the shape with the specified name.*/
+    const IDrawableGeometry& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa RawTurtle::getAnimMS()*/
@@ -93,9 +121,13 @@ namespace cturtle{
          * the drawing turtle's screen.*/
         AffineTransform transform;
         
+        /**A boolean indicating if this scene object is a stamp.*/
         bool stamp = false;
+        /**The integer representing the stamp ID, if this is a stamp.*/
         int stampid = -1;
         
+        /**A text string. If non-empty, this object is a string, regardless
+          of the status of the stamp variables.*/
         std::string text;//Stays empty unless this object is for text.
         
         /**Empty constructor.*/
@@ -258,7 +290,7 @@ namespace cturtle{
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
-            cursor = cturtle::shape(name);
+            cursor = (const Polygon&)cturtle::shape(name);
         }
         
         /**\brief Sets the shape of this turtle.
@@ -268,7 +300,7 @@ namespace cturtle{
         }
         
         /**\brief Returns the shape of this turtle.*/
-        const Polygon& shape(){
+        const IDrawableGeometry& shape(){
             return cursor;
         }
         
@@ -312,10 +344,13 @@ namespace cturtle{
             setshowturtle(false);
         }
         
+        /**\brief Sets whether or not the pen is down.*/
+        void setpenstate(bool down);
+        
         /**\brief Brings the pen up.*/
-        void penup(){tracing = false;}
+        inline void penup(){setpenstate(false);}
         /**\brief Brings the pen down.*/
-        void pendown(){tracing = true;}
+        inline void pendown(){setpenstate(true);}
         
         /**\brief Sets the pen color.
          *\param c The color used by the pen; the color of lines between movements.*/
@@ -361,6 +396,31 @@ namespace cturtle{
         std::list<AffineTransform> transformStack = {AffineTransform()};
         AffineTransform& transform = transformStack.back();
         
+        //Pen Attributes
+        float moveSpeed = TS_NORMAL;
+        bool angleMode = false;//Using Radians = true, degrees = false
+        bool tracing = true;
+        int penWidth = 1;
+        bool filling = false;
+        Color penColor = Color::black;
+        
+        //Accumulators
+        Polygon fillAccum;
+        Color fillColor = Color::black;
+        
+        //Cursor (shape)
+        /**The shape of the turtle. Named cursor for obvious reasons.*/
+        IDrawableGeometry& cursor = const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
+        /**The current unique stamp ID. Incremented with every call to the stamp function.*/
+        int curStamp = 0;
+        /**A boolean indicating if the cursor is visible or not.*/
+        bool cursorVisible = true;
+        /**Cursor tilt (rotation applied to cursor).*/
+        float cursorTilt = 0.0f;
+        
+        /*Screen pointer. Assign before calling any other function!*/
+        TurtleScreen* screen = nullptr;
+        
         /*Pushes the specified object attibutes as an object to this turtle's
          *"drawing" list.
          *\param t The transform at which to draw the geometry.
@@ -388,71 +448,21 @@ namespace cturtle{
         
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
-        inline long getAnimMS(){
+        inline long int getAnimMS(){
             return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
         }
         
         /**Redraws the parent screen.*/
-        void redrawParent();
+        void updateParent(bool redraw = true, bool processInput = true);
         
         /*Pushes the current transformed point.*/
-        inline void pushCurrent(){
-            if(tracing){
-                Point src = traceLines.empty() ? Point() : traceLines.back().second.pointB;
-                traceLines.push_back(std::make_pair(penColor, Line(src, transform.getTranslation(), penWidth)));
-            }
-            if (filling) 
-                fillAccum.points.push_back(transform.getTranslation());
-            transformStack.push_back(transform);
-            transform = transformStack.back();
-        }
+        void pushCurrent();
         
         /**Performs an interpolation, with animation,
-         * between the current transform and the specified one.*/
-        inline void travelTo(const AffineTransform dest){
-            if(screen != nullptr){
-                const float duration = getAnimMS();
-                const unsigned long startTime = epochTime();
-                const unsigned long endTime = duration + startTime;
-
-                AffineTransform start;
-                start.assign(transform);
-                float progress = duration == 0 ? 1 : 0;
-                while(progress < 1.0f){
-                    transform.assign(start.lerp(dest, progress));
-                    redrawParent();
-                    progress = (epochTime() - startTime) / duration;
-                }
-            }
-            transform.assign(dest);
-            pushCurrent();
-            redrawParent();
-        }
-        
-        //Pen Attributes
-        float moveSpeed = TS_NORMAL;
-        bool angleMode = false;//Using Radians = true, degrees = false
-        bool tracing = true;
-        int penWidth = 1;
-        bool filling = false;
-        Color penColor = Color::black;
-        
-        //Accumulors
-        Polygon fillAccum;
-        Color fillColor = Color::black;
-        
-        //Cursor (shape)
-        /**The shape of the turtle. Named cursor for obvious reasons.*/
-        Polygon cursor = cturtle::shape("indented triangle");
-        /**The current unique stamp ID. Incremented with every call to the stamp function.*/
-        int curStamp = 0;
-        /**A boolean indicating if the cursor is visible or not.*/
-        bool cursorVisible = true;
-        /**Cursor tilt (rotation applied to cursor).*/
-        float cursorTilt = 0.0f;
-        
-        /*Screen pointer. Assign before calling any other function!*/
-        TurtleScreen* screen = nullptr;
+         * between the current transform and the specified one.
+         * Pushes a new fill vertex if filling, and applies appropriate
+         * lines if the pen is down.*/
+        void travelTo(const AffineTransform dest);
         
         /**Inheritors must assign screen pointer!*/
         RawTurtle(){}
@@ -479,7 +489,7 @@ namespace cturtle{
         TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
             swapDisplay(2);
-            canvas.fill(255,255,255);
+            initEventThread();
         }
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
@@ -489,6 +499,7 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
+            initEventThread();
         }
         /**Width, height, and title constructor.
          * Assigns the display with the specified dimensions, in pixels, and
@@ -496,11 +507,16 @@ namespace cturtle{
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        TurtleScreen(int width, int height, const std::string& title) : display(width, height){
+        TurtleScreen(int width, int height, const std::string& title = "CTurtle") : display(width, height){
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
             swapDisplay(2);
+            initEventThread();
+        }
+        
+        ~TurtleScreen() {
+            bye();
         }
         
         /**Sets the background color of the screen.
@@ -508,43 +524,28 @@ namespace cturtle{
          * applied until it is removed.
          *\param color The background color.
          *\sa bgpic(image)*/
-        void bgcolor(const Color& color){
-            backgroundColor = color;
-            redraw();
-        }
+        void bgcolor(const Color& color);
         
         /**Returns the background color of the screen.
          *\return The background color of the screen.*/
-        Color bgcolor(){
-            return backgroundColor;
-        }
+        Color bgcolor();
         
         /**\brief Sets the background image of the display.
          * Sets the background image. Please note that the background image
          * takes precedence over background color.
          *\param img The background image.*/
-        void bgpic(const Image& img){
-            backgroundImage.assign(img);
-            backgroundImage.resize(window_width(), window_height());
-            redraw();
-        }
+        void bgpic(const Image& img);
         
         /**Returns a const reference to the background image.*/
-        const Image& bgpic(){
-            return backgroundImage;
-        }
+        const Image& bgpic();
 
         /**Sets the screen mode of this screen.
          *\param mode The screen mode.
          *\todo Refine this documentation.*/
-        void mode(ScreenMode mode){
-            curMode = mode;
-        }
+        void mode(ScreenMode mode);
         
         /**Returns the screen mode of this screen.*/
-        ScreenMode mode(){
-            return curMode;
-        }
+        ScreenMode mode(){return curMode;}
         
         /**\brief Clears this screen.
          * Deletes all drawings and turtles,
@@ -579,31 +580,39 @@ namespace cturtle{
         //might just leave this function out
         
         /*TODO: Document Me*/
-        void update();
+        void update(bool doRedraw = true, bool processInput = true);
         
-        /*Sets the delay set between turtle commands.*/
+        /**Sets the delay set between turtle commands.*/
         void delay(unsigned int ms);
         
-        //TODO: Document me more
-        /*Returns the delay set between turtle commands in MS.*/
+        /**Returns the delay set between screen swaps in milliseconds.*/
         unsigned int delay();
         
-        /*Returns the width of the window, in pixels.*/
+        /**Returns the width of the window, in pixels.*/
         int window_width(){
             return display.window_width();
         }
         
-        /*Returns the height of the window, in pixels.*/
+        /**Returns the height of the window, in pixels.*/
         int window_height(){
             return display.window_height();
         }
         
-        /*Saves the display as a file, the format of which is dependent
+        /**Saves the display as a file, the format of which is dependent
           on the file extension given in the specified file path string.*/
         void save(const std::string& file){
             Image screenshotImg;
             display.screenshot(screenshotImg);
             screenshotImg.save(file.c_str());
+        }
+        
+        /**Enters a loop, lasting until the display has been closed,
+         * which updates the screen. This is useful for programs which
+         * rely heavily on user input, as events are still called like normal.*/
+        void mainloop(){
+            while(!display.is_closed()){
+                update(false);
+            }
         }
         
         /**Resets and closes this display.*/
@@ -642,6 +651,50 @@ namespace cturtle{
             return t;
         }
         
+        /**TODO: Document Me*/
+        void onkey(KeyFunc func, KeyboardKey key){
+            cacheMutex.lock();
+            //determine if key list exists
+            if(keyBindings.find(key) == keyBindings.end()){
+                keyBindings[key] = std::list<KeyFunc>();
+            }
+            //then push it to the end of the list
+            keyBindings[key].push_back(func);
+            cacheMutex.unlock();
+        }
+        
+        /**TODO: Document Me*/
+        void presskey(KeyboardKey key){
+            if(keyBindings.find(key) == keyBindings.end())
+                return;
+            for(KeyFunc& func : keyBindings[key]){
+                func();
+            }
+        }
+        
+        /**TODO: Document Me*/
+        void onclick(MouseFunc func, MouseButton button = MOUSEB_LEFT){
+            cacheMutex.lock();
+            mouseBindings[button].push_back(func);
+            cacheMutex.unlock();
+        }
+        
+        /**Calls all previously added mouse button call-backs.*/
+        void pressmouse(int x, int y, MouseButton button){
+            for(MouseFunc& func : mouseBindings[button]){
+                func(x, y);
+            }
+        }
+        
+        /**Binds the "bye" function to the onclick event for the left
+         * mouse button.*/
+        void exitonclick(){
+            while(!this->display.is_closed() && !this->display.button()){
+                std::this_thread::yield();
+                //We don't update or anything here.
+            }
+        }
+        
         /**Adds the specified turtle to this screen.*/
         void add(RawTurtle& turtle){
             turtles.push_back(&turtle);
@@ -653,30 +706,24 @@ namespace cturtle{
         Color backgroundColor   = Color::white;
         Image backgroundImage;
         ScreenMode curMode      = SM_STANDARD;
-//        int colorCap            = 255; TODO: Maybe implement this?
         
         /**Redraw delay, in milliseconds.*/
-        unsigned int delayMS = 10;
+        long int delayMS = 10;
         
-        /**Swaps the front and back buffers, then displays the front buffer.*/
-        inline void swapDisplay(int times = 1){
-            for(int i = 0; i < times; i++){
-                display.display(canvas);
-                display.flush();
-                /*Reset the display to just have background image or color.*/
-                if(!backgroundImage.is_empty()){
-                    canvas.assign(backgroundImage);
-                }else{
-                    canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
-                }
-            }
-        }
+        /**Swaps the front and back display
+          pixel buffers, then displays the front buffer.*/
+        void swapDisplay(int times = 1);
+        
+        void initEventThread();
         
         std::list<RawTurtle*> turtles;
         
-        //TODO: Map to individual buttons (e.g, key is button, val is callback)
-//        KeyFunc     keyFunc     = [](char){};
-//        MouseFunc   clickFunc   = [](vec2){};
-        TimerFunc   timerFunc   = [](void){};
+        std::unique_ptr<std::thread> eventThread;
+        std::list<InputEvent> cachedEvents;
+        bool killEventThread = false;
+        std::mutex cacheMutex;
+        
+        std::map<KeyboardKey, std::list<KeyFunc>> keyBindings;
+        std::list<MouseFunc> mouseBindings[3] = {{},{},{}};
     };
 }
