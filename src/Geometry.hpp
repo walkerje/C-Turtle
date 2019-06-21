@@ -538,31 +538,76 @@ namespace cturtle {
          *\param c The color to draw the outline in.*/
         void drawOutline(const AffineTransform& t, Image& imgRef, Color c = Color::black);
     };
+        
+    class Sprite : public IDrawableGeometry{
+    public:
+        int srcX, srcY, srcW, srcH;
+        
+        int drawWidth = 0;
+        int drawHeight = 0;
+        
+        Sprite(Image& img) : spriteImg(img){
+            srcX = srcY = 0;
+            srcW = img.width();
+            srcH = img.height();
+        }
+        
+        Sprite(Image& img, int srcX, int srcY, int srcW, int srcH) : spriteImg(img){
+            this->srcX = srcX;
+            this->srcY = srcY;
+            this->srcW = srcW;
+            this->srcH = srcH;
+        }
+        
+        Sprite(const Sprite& copy) : spriteImg(copy.spriteImg){
+            this->srcX = copy.srcX;
+            this->srcY = copy.srcY;
+            this->srcW = copy.srcW;
+            this->srcH = copy.srcH;
+            this->drawWidth = copy.drawWidth;
+            this->drawHeight = copy.drawHeight;
+        }
+        
+        ~Sprite(){}
+        
+        /**Draws this Sprite.
+         * Disregards the Color attribute in favor of sprites' colors.*/
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+    protected:
+        Image& spriteImg;
+    };
     
     class CompoundPolygon : public IDrawableGeometry{
+        typedef std::unique_ptr<IDrawableGeometry> unique_geom_t; 
     public:
-        //Polygon, Fill, Outline
-        typedef std::tuple<std::unique_ptr<Polygon>, Color, bool, Color> component_t;
+        CompoundPolygon(){}
         
-        /**Adds a component to this Compound Polygon.*/
-        void addcomponent(const Polygon& p, Color fill);
-        /**Adds a component to this Compound Polygon, with the specified outline.*/
-        void addcomponent(const Polygon& p, Color fill, Color outline);
+        //Polygon, Fill, Outline
+        typedef std::tuple<std::unique_ptr<IDrawableGeometry>, Color, bool, Color> component_t;
+
+        template<typename T>
+        void addcomponent(const T& t, Color fill, Color outline){
+            components.push_back(std::make_tuple(unique_geom_t(new T(t)), fill, true, outline));
+        }
+        
+        template<typename T>
+        void addcomponent(const T& t, Color fill){
+            components.push_back(std::make_tuple(unique_geom_t(new T(t)), fill, false, Color()));
+        }
+        
+        void addpoly(const Polygon& p, Color fill){
+            addcomponent(p, fill);
+        }
+        
+        void addpoly(const Polygon& p, Color fill, Color outline){
+            addcomponent(p, fill, outline);
+        }
         
         /**Draws this CompoundPolygon.
          * Disregards the Color attribute in favor of the components' colors*/
         void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
     protected:
         std::list<component_t> components;
-    };
-    
-    class Sprite : public IDrawableGeometry{
-    public:
-        Sprite(Image& img) : spriteImg(img){}
-        
-        
-    protected:
-        Image& spriteImg;
     };
 }
 
@@ -660,25 +705,53 @@ namespace cturtle {
         Point b = t(points.back());
         imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
     }
-            
-    void CompoundPolygon::addcomponent(const Polygon& p, Color fill){
-        components.push_back(std::make_tuple(std::unique_ptr<Polygon>(new Polygon(p)), fill, false, Color::black));
-    }
     
-    void CompoundPolygon::addcomponent(const Polygon& p, Color fill, Color outline){
-        components.push_back(std::make_tuple(std::unique_ptr<Polygon>(new Polygon(p)), fill, true, outline));
+    void Sprite::draw(const AffineTransform& t, Image& imgRef, Color c){
+        //Vertex order is as follows for the constructed quad.
+        // 0--3        3
+        // | /        /|
+        // |/        / |
+        // 1        1--2
+        
+        const int halfW = drawWidth / 2;
+        const int halfH = drawHeight / 2;
+        
+        Point destPoints[4] = {
+            {-halfW, halfH},   //0
+            {-halfW, -halfH},    //1
+            {halfW, -halfH},     //2
+            {halfW, halfH}     //3
+        };
+        
+        Point texturePoints[4] = {
+            {srcX, srcY},
+            {srcX, srcY+srcH},
+            {srcX+srcW, srcY},
+            {srcX+srcW, srcY+srcH}
+        };
+        
+        /**Transforms the set of points.*/
+        for(int i = 0; i < 4; i++){
+            destPoints[i] = t(destPoints[i]);
+        }
+        
+        imgRef.draw_triangle(destPoints[0][0], destPoints[0][1], destPoints[1][0], destPoints[1][1], destPoints[3][0], destPoints[3][1],
+                  spriteImg, texturePoints[0][0], texturePoints[0][1], texturePoints[1][0], texturePoints[1][1], texturePoints[3][0], texturePoints[3][1]);
+        imgRef.draw_triangle(destPoints[1][0], destPoints[1][1], destPoints[2][0], destPoints[2][1], destPoints[3][0], destPoints[3][1],
+                  spriteImg, texturePoints[1][0], texturePoints[1][1], texturePoints[2][0], texturePoints[2][1], texturePoints[3][0], texturePoints[3][1]);
     }
     
     void CompoundPolygon::draw(const AffineTransform& t, Image& imgRef, Color c){
         for(component_t& comp : components){
-            Polygon* p = std::get<0>(comp).get();
+            IDrawableGeometry* p = std::get<0>(comp).get();
             Color fill = std::get<1>(comp);
             bool doOutline = std::get<2>(comp);
             Color outline = std::get<3>(comp);
             
             p->draw(t, imgRef, fill);
-            if(doOutline)
-                p->drawOutline(t, imgRef, outline);
+            //TODO: Fix Outlines for Generic drawables
+//            if(doOutline)
+//                p->drawOutline(t, imgRef, outline);
         }
     }
 }

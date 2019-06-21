@@ -96,11 +96,11 @@ Collaboration diagram for cturtle::RawTurtle:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcturtle_1_1RawTurtle__coll__graph.png" border="0" usemap="#cturtle_1_1RawTurtle_coll__map" alt="Collaboration graph"/></div>
 <map name="cturtle_1_1RawTurtle_coll__map" id="cturtle_1_1RawTurtle_coll__map">
-<area shape="rect" id="node2" href="classcturtle_1_1AffineTransform.html" title="The AffineTransform class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link: http://www.opengl&#45;tutorial.org/beginners&#45;tutorials/tutorial&#45;3&#45;matrices/. " alt="" coords="5,231,164,257"/>
-<area shape="rect" id="node3" href="classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image..." alt="" coords="188,231,301,257"/>
-<area shape="rect" id="node4" href="classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. " alt="" coords="153,73,336,99"/>
-<area shape="rect" id="node5" href="classcturtle_1_1TurtleScreen.html" title="cturtle::TurtleScreen" alt="" coords="428,231,568,257"/>
-<area shape="rect" id="node6" href="structcturtle_1_1Color.html" title="Color: Unsigned 8&#45;bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in..." alt="" coords="404,73,501,99"/>
+<area shape="rect" id="node2" href="classcturtle_1_1AffineTransform.html" title="The AffineTransform class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link: http://www.opengl&#45;tutorial.org/beginners&#45;tutorials/tutorial&#45;3&#45;matrices/. " alt="" coords="339,5,497,32"/>
+<area shape="rect" id="node3" href="classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image..." alt="" coords="361,119,475,145"/>
+<area shape="rect" id="node4" href="classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. " alt="" coords="5,53,188,80"/>
+<area shape="rect" id="node5" href="classcturtle_1_1TurtleScreen.html" title="cturtle::TurtleScreen" alt="" coords="348,255,488,281"/>
+<area shape="rect" id="node6" href="structcturtle_1_1Color.html" title="Color: Unsigned 8&#45;bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in..." alt="" coords="48,289,145,316"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -193,15 +193,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a214c6670ab230dbc929c9a7128b33ebc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a214c6670ab230dbc929c9a7128b33ebc">clearstamps</a> (int stampid=-1)</td></tr>
 <tr class="memdesc:a214c6670ab230dbc929c9a7128b33ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all stamps with an ID less than that which is specified. If the specified stampid is less than 0, it removes ALL stamps.  <a href="#a214c6670ab230dbc929c9a7128b33ebc">More...</a><br /></td></tr>
 <tr class="separator:a214c6670ab230dbc929c9a7128b33ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3478b1df59c538b0d1ff8878e03289cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a3478b1df59c538b0d1ff8878e03289cf">shape</a> (const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp;p)</td></tr>
+<tr class="memdesc:a3478b1df59c538b0d1ff8878e03289cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the shape of this turtle.  <a href="#a3478b1df59c538b0d1ff8878e03289cf">More...</a><br /></td></tr>
+<tr class="separator:a3478b1df59c538b0d1ff8878e03289cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61ec6e066dfdd307d64bc7061aede18a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a61ec6e066dfdd307d64bc7061aede18a">shape</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a61ec6e066dfdd307d64bc7061aede18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the shape of this turtle from the specified shape name.  <a href="#a61ec6e066dfdd307d64bc7061aede18a">More...</a><br /></td></tr>
 <tr class="separator:a61ec6e066dfdd307d64bc7061aede18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3c000fa6cdebb21f6addafbd682c6e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#ab3c000fa6cdebb21f6addafbd682c6e8">shape</a> (const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;p)</td></tr>
-<tr class="memdesc:ab3c000fa6cdebb21f6addafbd682c6e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the shape of this turtle.  <a href="#ab3c000fa6cdebb21f6addafbd682c6e8">More...</a><br /></td></tr>
-<tr class="separator:ab3c000fa6cdebb21f6addafbd682c6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43023731548bcedd7d855b8f9ffbcc9b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a43023731548bcedd7d855b8f9ffbcc9b">shape</a> ()</td></tr>
-<tr class="memdesc:a43023731548bcedd7d855b8f9ffbcc9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shape of this turtle.  <a href="#a43023731548bcedd7d855b8f9ffbcc9b">More...</a><br /></td></tr>
-<tr class="separator:a43023731548bcedd7d855b8f9ffbcc9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42447a4aa38e7adc908ce1b910f8dce7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a42447a4aa38e7adc908ce1b910f8dce7">shape</a> ()</td></tr>
+<tr class="memdesc:a42447a4aa38e7adc908ce1b910f8dce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shape of this turtle.  <a href="#a42447a4aa38e7adc908ce1b910f8dce7">More...</a><br /></td></tr>
+<tr class="separator:a42447a4aa38e7adc908ce1b910f8dce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac705257ce7cd7296df3df510180aec34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#ac705257ce7cd7296df3df510180aec34">undo</a> ()</td></tr>
 <tr class="memdesc:ac705257ce7cd7296df3df510180aec34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Undoes the previous action of this turtle.  <a href="#ac705257ce7cd7296df3df510180aec34">More...</a><br /></td></tr>
 <tr class="separator:ac705257ce7cd7296df3df510180aec34"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,6 +226,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a82e898948a59c526c45a94d6e172e53c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a82e898948a59c526c45a94d6e172e53c">hideturtle</a> ()</td></tr>
 <tr class="memdesc:a82e898948a59c526c45a94d6e172e53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hides the turtle.  <a href="#a82e898948a59c526c45a94d6e172e53c">More...</a><br /></td></tr>
 <tr class="separator:a82e898948a59c526c45a94d6e172e53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba3b37978956e861d7a78b76ef24bd10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#aba3b37978956e861d7a78b76ef24bd10">setpenstate</a> (bool down)</td></tr>
+<tr class="memdesc:aba3b37978956e861d7a78b76ef24bd10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether or not the pen is down.  <a href="#aba3b37978956e861d7a78b76ef24bd10">More...</a><br /></td></tr>
+<tr class="separator:aba3b37978956e861d7a78b76ef24bd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3a6c4cf76585e73dc9966b6c10345b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#ad3a6c4cf76585e73dc9966b6c10345b3">penup</a> ()</td></tr>
 <tr class="memdesc:ad3a6c4cf76585e73dc9966b6c10345b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brings the pen up.  <a href="#ad3a6c4cf76585e73dc9966b6c10345b3">More...</a><br /></td></tr>
 <tr class="separator:ad3a6c4cf76585e73dc9966b6c10345b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -268,10 +271,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a0c0ee5fe5abb8c5bd07bcbadb34fdbca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a0c0ee5fe5abb8c5bd07bcbadb34fdbca">pushText</a> (const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> &amp;t, <a class="el" href="structcturtle_1_1Color.html">Color</a> color, const std::string text)</td></tr>
 <tr class="memdesc:a0c0ee5fe5abb8c5bd07bcbadb34fdbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal function used to add a text object to the turtle screen.  <a href="#a0c0ee5fe5abb8c5bd07bcbadb34fdbca">More...</a><br /></td></tr>
 <tr class="separator:a0c0ee5fe5abb8c5bd07bcbadb34fdbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a080fd58e02ca54c7e725a8d3e745bfb9"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a080fd58e02ca54c7e725a8d3e745bfb9">getAnimMS</a> ()</td></tr>
-<tr class="separator:a080fd58e02ca54c7e725a8d3e745bfb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066fbbebc58e9714abeb7377f2fbf16d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a066fbbebc58e9714abeb7377f2fbf16d">redrawParent</a> ()</td></tr>
-<tr class="separator:a066fbbebc58e9714abeb7377f2fbf16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaebb127ba0f052fe6948683cd394a38"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#acaebb127ba0f052fe6948683cd394a38">getAnimMS</a> ()</td></tr>
+<tr class="separator:acaebb127ba0f052fe6948683cd394a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b2677475eb24e5f7cd4946acc38625"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a25b2677475eb24e5f7cd4946acc38625">updateParent</a> (bool redraw=true, bool processInput=true)</td></tr>
+<tr class="separator:a25b2677475eb24e5f7cd4946acc38625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ff99d0c95cff25969b5a6f680356d20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a5ff99d0c95cff25969b5a6f680356d20">pushCurrent</a> ()</td></tr>
 <tr class="separator:a5ff99d0c95cff25969b5a6f680356d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a789695a432d56b04f13e3372034cb3dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a789695a432d56b04f13e3372034cb3dd">travelTo</a> (const <a class="el" href="classcturtle_1_1AffineTransform.html">AffineTransform</a> dest)</td></tr>
@@ -305,8 +308,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a0175e6c02717d8f15d2667973f5a5efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc7c5ff82050d7999ff7fb00150daa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcturtle_1_1Color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a4fc7c5ff82050d7999ff7fb00150daa5">fillColor</a> = <a class="el" href="structcturtle_1_1Color.html#a99dd9adf77ec01f440ba84e7b081a8ef">Color::black</a></td></tr>
 <tr class="separator:a4fc7c5ff82050d7999ff7fb00150daa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f13423026e5cd2bd3e1f5c4e6229541"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1Polygon.html">Polygon</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a2f13423026e5cd2bd3e1f5c4e6229541">cursor</a> = <a class="el" href="namespacecturtle.html#ae2e349a76f705f92b327c4e0ace314b0">cturtle::shape</a>(&quot;indented triangle&quot;)</td></tr>
-<tr class="separator:a2f13423026e5cd2bd3e1f5c4e6229541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad068c9253ccaaa156264e3e9b495ac1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#ad068c9253ccaaa156264e3e9b495ac1e">cursor</a> = const_cast&lt;<a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a>&amp;&gt;(<a class="el" href="namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35">cturtle::shape</a>(&quot;triangle&quot;))</td></tr>
+<tr class="separator:ad068c9253ccaaa156264e3e9b495ac1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab007dc20614b8a30f8a991ae5666612c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#ab007dc20614b8a30f8a991ae5666612c">curStamp</a> = 0</td></tr>
 <tr class="separator:ab007dc20614b8a30f8a991ae5666612c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a91b136d0aa9ee6ba96aca79b265d72"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1RawTurtle.html#a0a91b136d0aa9ee6ba96aca79b265d72">cursorVisible</a> = true</td></tr>
@@ -318,7 +321,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00132">132</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00164">164</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a57d46c586408b442467b0728912ce612"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57d46c586408b442467b0728912ce612">&#9670;&nbsp;</a></span>RawTurtle() <span class="overload">[1/2]</span></h2>
@@ -336,7 +339,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00103">103</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00290">290</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -365,7 +368,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00357">357</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00392">392</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +396,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Inheritors must assign screen pointer! </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00458">458</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00468">468</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -424,7 +427,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Moves the turtle backward the specified number of pixels. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00149">149</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00181">181</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +449,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Moves the turtle backward the specified number of pixels. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00163">163</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00353">353</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -476,7 +479,7 @@ Protected Attributes</h2></td></tr>
 <p>Begins filling a polygon. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#a081db4bfc7fa22530c82155329b402d7" title="Sets the &quot;filling&quot; state. If the input is false but the prior state is true, a SceneObject is put on ...">fill(bool)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00233">233</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00265">265</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -506,7 +509,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Moves the turtle backward the specified number of pixels. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00147">147</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00179">179</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -552,7 +555,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00248">248</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00432">432</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -588,7 +591,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00214">214</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00246">246</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -610,7 +613,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Removes the stamp with the specified ID. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00121">121</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00311">311</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -632,7 +635,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Removes all stamps with an ID less than that which is specified. If the specified stampid is less than 0, it removes ALL stamps. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00136">136</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00326">326</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -660,7 +663,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets this turtle to use angles measured in degrees. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#a073b580ccc078015263bfb9b7b790dd7">radians()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00341">341</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00376">376</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -707,7 +710,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00222">222</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00254">254</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -746,7 +749,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00262">262</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00446">446</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -776,7 +779,7 @@ Protected Attributes</h2></td></tr>
 <p>Stops filling a polygon. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#a081db4bfc7fa22530c82155329b402d7" title="Sets the &quot;filling&quot; state. If the input is false but the prior state is true, a SceneObject is put on ...">fill(bool)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00236">236</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00268">268</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -806,7 +809,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Moves the turtle forward the specified number of pixels. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00142">142</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00174">174</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -834,7 +837,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00253">253</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00437">437</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -870,7 +873,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00240">240</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00272">272</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -900,7 +903,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the fill color of this turtle. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current fill color. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00243">243</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00275">275</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -922,12 +925,12 @@ Protected Attributes</h2></td></tr>
 
 <p>Moves the turtle forward the specified number of pixels. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00157">157</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00347">347</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a080fd58e02ca54c7e725a8d3e745bfb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a080fd58e02ca54c7e725a8d3e745bfb9">&#9670;&nbsp;</a></span>getAnimMS()</h2>
+<a id="acaebb127ba0f052fe6948683cd394a38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaebb127ba0f052fe6948683cd394a38">&#9670;&nbsp;</a></span>getAnimMS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -936,7 +939,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long cturtle::RawTurtle::getAnimMS </td>
+          <td class="memname">long int cturtle::RawTurtle::getAnimMS </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -950,7 +953,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the speed, of any applicable animation in milliseconds, based off of this turtle's speed setting. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00391">391</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00451">451</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -982,7 +985,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Sets the tranform location of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00192">192</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00381">381</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1012,7 +1015,7 @@ Protected Attributes</h2></td></tr>
 <p>Hides the turtle. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#aff9f457d603e5c0f55cde4585876d3fc" title="Set whether or not the turtle is being shown. ">setshowturtle(bool)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00311">311</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00343">343</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1032,7 +1035,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>the turtle back to its origin. Depends on the current screen mode. If the screen mode is set to "world", The turtle is turned to the right and positive angles are counterclockwise. Otherwise, if it is set to "logo", The turtle face upwards and positive angles are clockwise. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00210">210</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00393">393</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1059,7 +1062,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00176">176</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00366">366</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1094,7 +1097,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00171">171</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00203">203</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1133,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00322">322</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00357">357</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1163,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the pen color; the color of the lines between movements. </p>
 <dl class="section return"><dt>Returns</dt><dd>The color of the pen. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00325">325</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00360">360</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1189,7 +1192,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Brings the pen down. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00318">318</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00353">353</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1218,7 +1221,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Brings the pen up. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00316">316</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00351">351</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1240,12 +1243,10 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00399">399</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1289,7 +1290,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00369">369</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00429">429</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1343,7 +1344,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00377">377</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00437">437</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1397,7 +1398,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00385">385</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00445">445</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1425,35 +1426,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets this turtle to use angles measured in radians. </p><dl class="section see"><dt>See also</dt><dd>degress() </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00344">344</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a066fbbebc58e9714abeb7377f2fbf16d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a066fbbebc58e9714abeb7377f2fbf16d">&#9670;&nbsp;</a></span>redrawParent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cturtle::RawTurtle::redrawParent </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Redraws the parent screen. </p>
-
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00243">243</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00379">379</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1474,7 +1447,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Resets this turtle. Moves this turtle home, resets all pen attributes, and removes all previously added scene objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00219">219</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00399">399</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1501,7 +1474,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00169">169</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00359">359</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1536,7 +1509,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00160">160</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00192">192</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1544,7 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00194">194</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00226">226</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1598,7 +1571,29 @@ Protected Attributes</h2></td></tr>
 <dd>
 <a class="el" href="classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa">TurtleScreen::mode()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00183">183</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00373">373</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aba3b37978956e861d7a78b76ef24bd10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba3b37978956e861d7a78b76ef24bd10">&#9670;&nbsp;</a></span>setpenstate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cturtle::RawTurtle::setpenstate </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>down</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets whether or not the pen is down. </p>
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00501">501</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1638,7 +1633,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Sets the tranform location of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00176">176</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00208">208</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1678,7 +1673,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Sets the tranform location of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00178">178</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00210">210</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1707,7 +1702,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets this turtles screen. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00352">352</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00387">387</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1735,7 +1730,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00327">327</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00496">496</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1757,7 +1752,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Sets the X-axis transform location of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00198">198</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00385">385</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -1779,12 +1774,48 @@ Protected Attributes</h2></td></tr>
 
 <p>Sets the Y-axis transform location of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00204">204</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00389">389</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3478b1df59c538b0d1ff8878e03289cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3478b1df59c538b0d1ff8878e03289cf">&#9670;&nbsp;</a></span>shape() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cturtle::RawTurtle::shape </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the shape of this turtle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The polygon to derive shape geometry from. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00292">292</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a61ec6e066dfdd307d64bc7061aede18a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61ec6e066dfdd307d64bc7061aede18a">&#9670;&nbsp;</a></span>shape() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ec6e066dfdd307d64bc7061aede18a">&#9670;&nbsp;</a></span>shape() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1815,12 +1846,12 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00260">260</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00298">298</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab3c000fa6cdebb21f6addafbd682c6e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3c000fa6cdebb21f6addafbd682c6e8">&#9670;&nbsp;</a></span>shape() <span class="overload">[2/3]</span></h2>
+<a id="a42447a4aa38e7adc908ce1b910f8dce7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42447a4aa38e7adc908ce1b910f8dce7">&#9670;&nbsp;</a></span>shape() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1829,43 +1860,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cturtle::RawTurtle::shape </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets the shape of this turtle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The polygon to derive shape geometry from. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00266">266</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a43023731548bcedd7d855b8f9ffbcc9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43023731548bcedd7d855b8f9ffbcc9b">&#9670;&nbsp;</a></span>shape() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a>&amp; cturtle::RawTurtle::shape </td>
+          <td class="memname">const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a>&amp; cturtle::RawTurtle::shape </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1880,7 +1875,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns the shape of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00271">271</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00303">303</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1910,7 +1905,7 @@ Protected Attributes</h2></td></tr>
 <p>Shows the turtle. Equivalent to calling setshowturtle(true). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#aff9f457d603e5c0f55cde4585876d3fc" title="Set whether or not the turtle is being shown. ">setshowturtle(bool)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00305">305</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00337">337</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1947,7 +1942,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacecturtle.html#ace32adb2690310f5eb9ace55fe0ffc98" title="Describes the speed at which a Turtle moves and rotates. ">cturtle::TurtleSpeed</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00282">282</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00314">314</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1976,7 +1971,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns the speed of this turtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00287">287</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00319">319</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -1998,7 +1993,7 @@ Protected Attributes</h2></td></tr>
 <p>Puts the current shape of this turtle on the screen with the current fill color and the outline of the shape. </p>
 <dl class="section return"><dt>Returns</dt><dd>The stamp ID of the put stamp. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00115">115</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00305">305</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -2020,7 +2015,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Applies a rotation to the. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00319">319</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00488">488</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -2049,7 +2044,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Returns the rotation of the cursor. Not the heading, or the angle at which the forward function will move. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00296">296</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00328">328</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2072,13 +2067,13 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Performs an interpolation, with animation, between the current transform and the specified one. </p>
+<p>Performs an interpolation, with animation, between the current transform and the specified one. Pushes a new fill vertex if filling, and applies appropriate lines if the pen is down. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00412">412</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00505">505</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -2100,7 +2095,46 @@ Protected Attributes</h2></td></tr>
 <p>Undoes the previous action of this turtle. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>: Currently undoes geometry regardless of previous action. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00309">309</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00478">478</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a25b2677475eb24e5f7cd4946acc38625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b2677475eb24e5f7cd4946acc38625">&#9670;&nbsp;</a></span>updateParent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cturtle::RawTurtle::updateParent </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>redraw</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>processInput</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Redraws the parent screen. </p>
+
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00427">427</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -2134,7 +2168,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00329">329</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00364">364</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2162,7 +2196,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the width of the pen line. </p><dl class="section return"><dt>Returns</dt><dd>The width of the line, in pixels. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00332">332</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00367">367</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2182,7 +2216,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00109">109</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00298">298</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -2207,12 +2241,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00434">434</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00401">401</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2f13423026e5cd2bd3e1f5c4e6229541"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f13423026e5cd2bd3e1f5c4e6229541">&#9670;&nbsp;</a></span>cursor</h2>
+<a id="ad068c9253ccaaa156264e3e9b495ac1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad068c9253ccaaa156264e3e9b495ac1e">&#9670;&nbsp;</a></span>cursor</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2221,7 +2255,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> cturtle::RawTurtle::cursor = <a class="el" href="namespacecturtle.html#ae2e349a76f705f92b327c4e0ace314b0">cturtle::shape</a>(&quot;indented triangle&quot;)</td>
+          <td class="memname"><a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a>&amp; cturtle::RawTurtle::cursor = const_cast&lt;<a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a>&amp;&gt;(<a class="el" href="namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35">cturtle::shape</a>(&quot;triangle&quot;))</td>
         </tr>
       </table>
   </td>
@@ -2232,7 +2266,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The shape of the turtle. Named cursor for obvious reasons. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00446">446</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00413">413</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2257,7 +2291,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Cursor tilt (rotation applied to cursor). </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00452">452</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00419">419</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2282,7 +2316,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>A boolean indicating if the cursor is visible or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00450">450</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00417">417</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2307,7 +2341,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>The current unique stamp ID. Incremented with every call to the stamp function. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00448">448</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00415">415</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2331,7 +2365,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00441">441</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00408">408</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2355,7 +2389,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00442">442</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00409">409</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2379,7 +2413,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00437">437</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00404">404</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2403,7 +2437,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00433">433</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00400">400</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2427,7 +2461,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00359">359</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00394">394</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2451,7 +2485,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00438">438</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00405">405</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2475,7 +2509,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00436">436</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00403">403</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2499,7 +2533,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00455">455</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00422">422</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2523,7 +2557,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00360">360</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00395">395</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2547,7 +2581,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00435">435</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00402">402</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2571,7 +2605,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00362">362</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00397">397</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -2595,7 +2629,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00361">361</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00396">396</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>

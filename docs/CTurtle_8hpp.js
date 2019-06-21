@@ -3,8 +3,8 @@ var CTurtle_8hpp =
     [ "SceneObject", "structcturtle_1_1SceneObject.html", "structcturtle_1_1SceneObject" ],
     [ "RawTurtle", "classcturtle_1_1RawTurtle.html", "classcturtle_1_1RawTurtle" ],
     [ "TurtleScreen", "classcturtle_1_1TurtleScreen.html", "classcturtle_1_1TurtleScreen" ],
-    [ "KeyFunc", "CTurtle_8hpp.html#a4e95ed766d90adb82b55d4bd9486e2cb", null ],
-    [ "MouseFunc", "CTurtle_8hpp.html#a7e3b167a8b98eca9ef263fd4852bc89d", null ],
+    [ "KeyFunc", "CTurtle_8hpp.html#ae7de124c8f14a3a7ad5c666e36ccf8b4", null ],
+    [ "MouseFunc", "CTurtle_8hpp.html#aec9ca5612868c6afc7ec1d90ebe415c8", null ],
     [ "TimerFunc", "CTurtle_8hpp.html#a037218bb03bd0ee36b582e7793214b67", null ],
     [ "ScreenMode", "CTurtle_8hpp.html#a8df9113d6867f86881e2b96f629f50ab", [
       [ "SM_STANDARD", "CTurtle_8hpp.html#a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a", null ],
@@ -17,7 +17,7 @@ var CTurtle_8hpp =
       [ "TS_SLOW", "CTurtle_8hpp.html#ace32adb2690310f5eb9ace55fe0ffc98a900029ed0503aeba3f0259479240d7e8", null ],
       [ "TS_SLOWEST", "CTurtle_8hpp.html#ace32adb2690310f5eb9ace55fe0ffc98a12834c53e62436e6d58d36d2454074cc", null ]
     ] ],
-    [ "addShape", "CTurtle_8hpp.html#a146018d2a39dba0f26ab01680e89d6c5", null ],
-    [ "registerShape", "CTurtle_8hpp.html#afaa54f821226d88adfcf791861acd7c6", null ],
-    [ "shape", "CTurtle_8hpp.html#ae2e349a76f705f92b327c4e0ace314b0", null ]
+    [ "__registerShapeImpl", "CTurtle_8hpp.html#ac5143073e39cfc47a550a8ab1e6c7e3f", null ],
+    [ "registerShape", "CTurtle_8hpp.html#a46d1874ddd95f56336a4855caee3b1e6", null ],
+    [ "shape", "CTurtle_8hpp.html#aed07068b464330a992d2f5bea8e5aa35", null ]
 ];

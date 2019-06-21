@@ -94,9 +94,13 @@ $(document).ready(function(){initNavTree('CTurtle_8hpp.html','');});
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
 <code>#include &lt;list&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="Common_8hpp_source.html">Common.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Color_8hpp_source.html">Color.hpp</a>&quot;</code><br />
@@ -106,10 +110,10 @@ Include dependency graph for CTurtle.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="CTurtle_8hpp__incl.png" border="0" usemap="#CTurtle_8hpp" alt=""/></div>
 <map name="CTurtle_8hpp" id="CTurtle_8hpp">
-<area shape="rect" id="node9" href="Common_8hpp.html" title="Common.hpp" alt="" coords="200,229,300,256"/>
-<area shape="rect" id="node12" href="Geometry_8hpp.html" title="Geometry.hpp" alt="" coords="426,80,530,107"/>
-<area shape="rect" id="node16" href="Color_8hpp.html" title="Color.hpp" alt="" coords="531,155,610,181"/>
-<area shape="rect" id="node19" href="UserIO_8hpp.html" title="UserIO.hpp" alt="" coords="694,80,783,107"/>
+<area shape="rect" id="node13" href="Common_8hpp.html" title="Common.hpp" alt="" coords="78,229,178,256"/>
+<area shape="rect" id="node16" href="Geometry_8hpp.html" title="Geometry.hpp" alt="" coords="339,80,443,107"/>
+<area shape="rect" id="node21" href="Color_8hpp.html" title="Color.hpp" alt="" coords="566,155,645,181"/>
+<area shape="rect" id="node23" href="UserIO_8hpp.html" title="UserIO.hpp" alt="" coords="721,80,810,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -141,10 +145,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a7e3b167a8b98eca9ef263fd4852bc89d"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(ivec2)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a7e3b167a8b98eca9ef263fd4852bc89d">cturtle::MouseFunc</a></td></tr>
-<tr class="separator:a7e3b167a8b98eca9ef263fd4852bc89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e95ed766d90adb82b55d4bd9486e2cb"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(KeyboardKey)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a4e95ed766d90adb82b55d4bd9486e2cb">cturtle::KeyFunc</a></td></tr>
-<tr class="separator:a4e95ed766d90adb82b55d4bd9486e2cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9ca5612868c6afc7ec1d90ebe415c8"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(int, int)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#aec9ca5612868c6afc7ec1d90ebe415c8">cturtle::MouseFunc</a></td></tr>
+<tr class="separator:aec9ca5612868c6afc7ec1d90ebe415c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7de124c8f14a3a7ad5c666e36ccf8b4"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ae7de124c8f14a3a7ad5c666e36ccf8b4">cturtle::KeyFunc</a></td></tr>
+<tr class="separator:ae7de124c8f14a3a7ad5c666e36ccf8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a037218bb03bd0ee36b582e7793214b67"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a037218bb03bd0ee36b582e7793214b67">cturtle::TimerFunc</a></td></tr>
 <tr class="separator:a037218bb03bd0ee36b582e7793214b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -169,12 +173,13 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afaa54f821226d88adfcf791861acd7c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#afaa54f821226d88adfcf791861acd7c6">cturtle::registerShape</a> (const std::string &amp;name, const Polygon &amp;p)</td></tr>
-<tr class="separator:afaa54f821226d88adfcf791861acd7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a146018d2a39dba0f26ab01680e89d6c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a146018d2a39dba0f26ab01680e89d6c5">cturtle::addShape</a> (const std::string &amp;name, const Polygon &amp;p)</td></tr>
-<tr class="separator:a146018d2a39dba0f26ab01680e89d6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2e349a76f705f92b327c4e0ace314b0"><td class="memItemLeft" align="right" valign="top">const Polygon &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ae2e349a76f705f92b327c4e0ace314b0">cturtle::shape</a> (const std::string name)</td></tr>
-<tr class="separator:ae2e349a76f705f92b327c4e0ace314b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ac5143073e39cfc47a550a8ab1e6c7e3f">cturtle::__registerShapeImpl</a> (const std::string &amp;name, std::shared_ptr&lt; IDrawableGeometry &gt; geom)</td></tr>
+<tr class="separator:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d1874ddd95f56336a4855caee3b1e6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a46d1874ddd95f56336a4855caee3b1e6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a46d1874ddd95f56336a4855caee3b1e6">cturtle::registerShape</a> (const std::string &amp;name, const T &amp;geom)</td></tr>
+<tr class="separator:a46d1874ddd95f56336a4855caee3b1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed07068b464330a992d2f5bea8e5aa35"><td class="memItemLeft" align="right" valign="top">const IDrawableGeometry &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35">cturtle::shape</a> (const std::string name)</td></tr>
+<tr class="separator:aed07068b464330a992d2f5bea8e5aa35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

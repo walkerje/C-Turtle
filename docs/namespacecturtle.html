@@ -104,8 +104,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1Color.html">Color</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structcturtle_1_1Color.html" title="Color: Unsigned 8-bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in...">Color</a>: Unsigned 8-bit RGB <a class="el" href="structcturtle_1_1Color.html" title="Color: Unsigned 8-bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in...">Color</a> Implementation Just contains R, G and B elements. <a class="el" href="structcturtle_1_1Color.html" title="Color: Unsigned 8-bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in...">Color</a> Defines an interface for RGB Colors. Also provides a way to retrieve color by name strings in the form of a static function. <a class="el" href="structcturtle_1_1Color.html" title="Color: Unsigned 8-bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in...">Color</a> documentation from the specified link: <a href="https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm">https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm</a>.  <a href="structcturtle_1_1Color.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1CompoundPolygon.html">CompoundPolygon</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. ">IDrawableGeometry</a> is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion.  <a href="classcturtle_1_1IDrawableGeometry.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1InputEvent.html">InputEvent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html">ivec2</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low-precision point, because this data type tends to be most easily drawn to a simple canvas.  <a href="structcturtle_1_1ivec2.html#details">More...</a><br /></td></tr>
@@ -121,6 +125,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1SceneObject.html">SceneObject</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turtles append Scene Objects to a list to keep track of what it has drawn (a history). <a class="el" href="structcturtle_1_1SceneObject.html" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. ">SceneObject</a> holds a description of something that needs to be on the screen. It's a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings.  <a href="structcturtle_1_1SceneObject.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1Sprite.html">Sprite</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1TurtleScreen.html">TurtleScreen</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -128,10 +134,10 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:abbe4fca095b8a8668b17053e8551aae9"><td class="memItemLeft" align="right" valign="top">typedef cimg::CImg&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#abbe4fca095b8a8668b17053e8551aae9">Image</a></td></tr>
 <tr class="separator:abbe4fca095b8a8668b17053e8551aae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e3b167a8b98eca9ef263fd4852bc89d"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(<a class="el" href="structcturtle_1_1ivec2.html">ivec2</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a7e3b167a8b98eca9ef263fd4852bc89d">MouseFunc</a></td></tr>
-<tr class="separator:a7e3b167a8b98eca9ef263fd4852bc89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e95ed766d90adb82b55d4bd9486e2cb"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(<a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4">KeyboardKey</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a4e95ed766d90adb82b55d4bd9486e2cb">KeyFunc</a></td></tr>
-<tr class="separator:a4e95ed766d90adb82b55d4bd9486e2cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9ca5612868c6afc7ec1d90ebe415c8"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(int, int)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#aec9ca5612868c6afc7ec1d90ebe415c8">MouseFunc</a></td></tr>
+<tr class="separator:aec9ca5612868c6afc7ec1d90ebe415c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7de124c8f14a3a7ad5c666e36ccf8b4"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ae7de124c8f14a3a7ad5c666e36ccf8b4">KeyFunc</a></td></tr>
+<tr class="separator:ae7de124c8f14a3a7ad5c666e36ccf8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a037218bb03bd0ee36b582e7793214b67"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a037218bb03bd0ee36b582e7793214b67">TimerFunc</a></td></tr>
 <tr class="separator:a037218bb03bd0ee36b582e7793214b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a268a7e565c0f47760e56a0a2e2518ffa"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structcturtle_1_1ivec2.html">ivec2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a268a7e565c0f47760e56a0a2e2518ffa">Point</a></td></tr>
@@ -270,9 +276,9 @@ Enumerations</h2></td></tr>
  }<tr class="memdesc:a9a17f5630364a76196a683e1565217e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The KeyboardKey Enumeration contains declarations for all accepted keyboard input keys.  <a href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a9a17f5630364a76196a683e1565217e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab76f177cf6e9d1ce6a228dde1ba60047"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047">MouseButton</a> { <a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a921214ecf3a7a8f3bba8c8ab61e5681e">MOUSEB_LEFT</a> = 0x1, 
-<a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a60794cd2259300879f837d0555e47b5a">MOUSEB_RIGHT</a> = 0x2, 
-<a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a328dd703869b3314fc97e47242ceb808">MOUSEB_MIDDLE</a> = 0x4
+<tr class="memitem:ab76f177cf6e9d1ce6a228dde1ba60047"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047">MouseButton</a> { <a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a921214ecf3a7a8f3bba8c8ab61e5681e">MOUSEB_LEFT</a>, 
+<a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a60794cd2259300879f837d0555e47b5a">MOUSEB_RIGHT</a>, 
+<a class="el" href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047a328dd703869b3314fc97e47242ceb808">MOUSEB_MIDDLE</a>
  }<tr class="memdesc:ab76f177cf6e9d1ce6a228dde1ba60047"><td class="mdescLeft">&#160;</td><td class="mdescRight">The MouseButton Enumeration holds all accepted mouse input buttons. These button enumerations are represented as bitwise flags.  <a href="namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:ab76f177cf6e9d1ce6a228dde1ba60047"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -288,12 +294,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a76b52278ec9e3142ae4e57525ea94498"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a76b52278ec9e3142ae4e57525ea94498">epochTime</a> ()</td></tr>
 <tr class="memdesc:a76b52278ec9e3142ae4e57525ea94498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of time, in milliseconds, since the UNIX epoch.  <a href="#a76b52278ec9e3142ae4e57525ea94498">More...</a><br /></td></tr>
 <tr class="separator:a76b52278ec9e3142ae4e57525ea94498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaa54f821226d88adfcf791861acd7c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#afaa54f821226d88adfcf791861acd7c6">registerShape</a> (const std::string &amp;name, const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;p)</td></tr>
-<tr class="separator:afaa54f821226d88adfcf791861acd7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2e349a76f705f92b327c4e0ace314b0"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ae2e349a76f705f92b327c4e0ace314b0">shape</a> (const std::string name)</td></tr>
-<tr class="separator:ae2e349a76f705f92b327c4e0ace314b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a146018d2a39dba0f26ab01680e89d6c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a146018d2a39dba0f26ab01680e89d6c5">addShape</a> (const std::string &amp;name, const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;p)</td></tr>
-<tr class="separator:a146018d2a39dba0f26ab01680e89d6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ac5143073e39cfc47a550a8ab1e6c7e3f">__registerShapeImpl</a> (const std::string &amp;name, std::shared_ptr&lt; <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &gt; geom)</td></tr>
+<tr class="separator:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed07068b464330a992d2f5bea8e5aa35"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35">shape</a> (const std::string name)</td></tr>
+<tr class="separator:aed07068b464330a992d2f5bea8e5aa35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d1874ddd95f56336a4855caee3b1e6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a46d1874ddd95f56336a4855caee3b1e6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a46d1874ddd95f56336a4855caee3b1e6">registerShape</a> (const std::string &amp;name, const T &amp;geom)</td></tr>
+<tr class="separator:a46d1874ddd95f56336a4855caee3b1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#a97aa30ca8e1f170600e4a6b79c37fb96">drawLine</a> (<a class="el" href="namespacecturtle.html#abbe4fca095b8a8668b17053e8551aae9">Image</a> &amp;imgRef, int x1, int y1, int x2, int y2, <a class="el" href="structcturtle_1_1Color.html">Color</a> c, unsigned int width=1)</td></tr>
 <tr class="memdesc:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a line of variable thickness on the specified image. This needed to be implemented because the CImg display backend has no facility to draw lines with a width greater than a single pixel!  <a href="#a97aa30ca8e1f170600e4a6b79c37fb96">More...</a><br /></td></tr>
 <tr class="separator:a97aa30ca8e1f170600e4a6b79c37fb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,39 +332,39 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>The CImg library namespace alias used by the CTurtle library. The common Image type used by CTurtle. </p>
 
-<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00025">25</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00048">48</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4e95ed766d90adb82b55d4bd9486e2cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e95ed766d90adb82b55d4bd9486e2cb">&#9670;&nbsp;</a></span>KeyFunc</h2>
+<a id="ae7de124c8f14a3a7ad5c666e36ccf8b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7de124c8f14a3a7ad5c666e36ccf8b4">&#9670;&nbsp;</a></span>KeyFunc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::function&lt;void(<a class="el" href="namespacecturtle.html#a9a17f5630364a76196a683e1565217e4">KeyboardKey</a>)&gt; <a class="el" href="namespacecturtle.html#a4e95ed766d90adb82b55d4bd9486e2cb">cturtle::KeyFunc</a></td>
+          <td class="memname">typedef std::function&lt;void()&gt; <a class="el" href="namespacecturtle.html#ae7de124c8f14a3a7ad5c666e36ccf8b4">cturtle::KeyFunc</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00048">48</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00071">71</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7e3b167a8b98eca9ef263fd4852bc89d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e3b167a8b98eca9ef263fd4852bc89d">&#9670;&nbsp;</a></span>MouseFunc</h2>
+<a id="aec9ca5612868c6afc7ec1d90ebe415c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9ca5612868c6afc7ec1d90ebe415c8">&#9670;&nbsp;</a></span>MouseFunc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::function&lt;void(<a class="el" href="structcturtle_1_1ivec2.html">ivec2</a>)&gt; <a class="el" href="namespacecturtle.html#a7e3b167a8b98eca9ef263fd4852bc89d">cturtle::MouseFunc</a></td>
+          <td class="memname">typedef std::function&lt;void(int, int)&gt; <a class="el" href="namespacecturtle.html#aec9ca5612868c6afc7ec1d90ebe415c8">cturtle::MouseFunc</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00045">45</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00068">68</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -375,7 +382,7 @@ Functions</h2></td></tr>
 
 <p>An alias for <a class="el" href="structcturtle_1_1ivec2.html" title="Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low-precision point...">ivec2</a>. Strictly for convenience and clarity. </p>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00034">34</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00051">51</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +398,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00051">51</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00074">74</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,7 +508,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a9a17f5630364a76196a683e1565217e4afda2c28a0277f17fd5f9d29a4504d9b0"></a>KEY_PADDIV&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="UserIO_8hpp_source.html#l00021">21</a> of file <a class="el" href="UserIO_8hpp_source.html">UserIO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UserIO_8hpp_source.html#l00037">37</a> of file <a class="el" href="UserIO_8hpp_source.html">UserIO.hpp</a>.</p>
 
 </div>
 </div>
@@ -524,7 +531,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="ab76f177cf6e9d1ce6a228dde1ba60047a328dd703869b3314fc97e47242ceb808"></a>MOUSEB_MIDDLE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="UserIO_8hpp_source.html#l00115">115</a> of file <a class="el" href="UserIO_8hpp_source.html">UserIO.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UserIO_8hpp_source.html#l00131">131</a> of file <a class="el" href="UserIO_8hpp_source.html">UserIO.hpp</a>.</p>
 
 </div>
 </div>
@@ -547,7 +554,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d"></a>SM_LOGO&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00464">464</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00474">474</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
@@ -564,7 +571,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Describes the speed at which a Turtle moves and rotates. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#a080fd58e02ca54c7e725a8d3e745bfb9">RawTurtle::getAnimMS()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcturtle_1_1RawTurtle.html#acaebb127ba0f052fe6948683cd394a38">RawTurtle::getAnimMS()</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ace32adb2690310f5eb9ace55fe0ffc98abdb09efd5a09feaa08b942a3b8ee3968"></a>TS_FASTEST&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ace32adb2690310f5eb9ace55fe0ffc98a46650c967e05b355abacb990f60e435c"></a>TS_FAST&#160;</td><td class="fielddoc"></td></tr>
@@ -573,22 +580,19 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="ace32adb2690310f5eb9ace55fe0ffc98a12834c53e62436e6d58d36d2454074cc"></a>TS_SLOWEST&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00072">72</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00100">100</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a146018d2a39dba0f26ab01680e89d6c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a146018d2a39dba0f26ab01680e89d6c5">&#9670;&nbsp;</a></span>addShape()</h2>
+<a id="ac5143073e39cfc47a550a8ab1e6c7e3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5143073e39cfc47a550a8ab1e6c7e3f">&#9670;&nbsp;</a></span>__registerShapeImpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cturtle::addShape </td>
+          <td class="memname">void cturtle::__registerShapeImpl </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -596,8 +600,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &gt;&#160;</td>
+          <td class="paramname"><em>geom</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -605,14 +609,9 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00064">64</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00079">79</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -713,7 +712,7 @@ Functions</h2></td></tr>
 
 <p>Returns the amount of time, in milliseconds, since the UNIX epoch. </p>
 
-<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00062">62</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00087">87</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
 
 </div>
 </div>
@@ -763,15 +762,17 @@ Functions</h2></td></tr>
 
 <p>Returns a color, generated randomly. </p>
 
-<p class="definition">Definition at line <a class="el" href="Color_8hpp_source.html#l00813">813</a> of file <a class="el" href="Color_8hpp_source.html">Color.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Color_8hpp_source.html#l00835">835</a> of file <a class="el" href="Color_8hpp_source.html">Color.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afaa54f821226d88adfcf791861acd7c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afaa54f821226d88adfcf791861acd7c6">&#9670;&nbsp;</a></span>registerShape()</h2>
+<a id="a46d1874ddd95f56336a4855caee3b1e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46d1874ddd95f56336a4855caee3b1e6">&#9670;&nbsp;</a></span>registerShape()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void cturtle::registerShape </td>
@@ -782,8 +783,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp;&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>geom</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -792,19 +793,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Registers the specified drawable geometry as a shape. Please note that type T must inherit from <a class="el" href="classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. ">IDrawableGeometry</a> and specify a copy constructor, default or otherwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00032">32</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8hpp_source.html#l00091">91</a> of file <a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae2e349a76f705f92b327c4e0ace314b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2e349a76f705f92b327c4e0ace314b0">&#9670;&nbsp;</a></span>shape()</h2>
+<a id="aed07068b464330a992d2f5bea8e5aa35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed07068b464330a992d2f5bea8e5aa35">&#9670;&nbsp;</a></span>shape()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classcturtle_1_1Polygon.html">Polygon</a> &amp; cturtle::shape </td>
+          <td class="memname">const <a class="el" href="classcturtle_1_1IDrawableGeometry.html">IDrawableGeometry</a> &amp; cturtle::shape </td>
           <td>(</td>
           <td class="paramtype">const std::string&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -812,8 +814,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns the shape with the specified name. </p>
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00036">36</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00083">83</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>
@@ -849,7 +852,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00057">57</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8hpp_source.html#l00080">80</a> of file <a class="el" href="Common_8hpp_source.html">Common.hpp</a>.</p>
 
 </div>
 </div>
@@ -888,7 +891,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to degrees. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00383">383</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00401">401</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>
@@ -927,7 +930,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A value of the same type as val, converted to radians. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00373">373</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Geometry_8hpp_source.html#l00391">391</a> of file <a class="el" href="Geometry_8hpp_source.html">Geometry.hpp</a>.</p>
 
 </div>
 </div>

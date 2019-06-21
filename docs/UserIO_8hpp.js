@@ -1,5 +1,6 @@
 var UserIO_8hpp =
 [
+    [ "InputEvent", "structcturtle_1_1InputEvent.html", "structcturtle_1_1InputEvent" ],
     [ "KeyboardKey", "UserIO_8hpp.html#a9a17f5630364a76196a683e1565217e4", [
       [ "KEY_ESC", "UserIO_8hpp.html#a9a17f5630364a76196a683e1565217e4a1f882e7e88fb60c83ab1e543f12c12b5", null ],
       [ "KEY_F1", "UserIO_8hpp.html#a9a17f5630364a76196a683e1565217e4a9c86095641214478c98d767a0f28186e", null ],

@@ -90,16 +90,20 @@ $(document).ready(function(){initNavTree('CTurtle_8cpp.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="CTurtle_8hpp_source.html">CTurtle.hpp</a>&quot;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;locale&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for CTurtle.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="CTurtle_8cpp__incl.png" border="0" usemap="#CTurtle_8cpp" alt=""/></div>
 <map name="CTurtle_8cpp" id="CTurtle_8cpp">
-<area shape="rect" id="node2" href="CTurtle_8hpp.html" title="CTurtle.hpp" alt="" coords="266,80,357,107"/>
-<area shape="rect" id="node10" href="Common_8hpp.html" title="Common.hpp" alt="" coords="200,304,300,331"/>
-<area shape="rect" id="node13" href="Geometry_8hpp.html" title="Geometry.hpp" alt="" coords="426,155,530,181"/>
-<area shape="rect" id="node17" href="Color_8hpp.html" title="Color.hpp" alt="" coords="531,229,610,256"/>
-<area shape="rect" id="node20" href="UserIO_8hpp.html" title="UserIO.hpp" alt="" coords="694,155,783,181"/>
+<area shape="rect" id="node2" href="CTurtle_8hpp.html" title="CTurtle.hpp" alt="" coords="565,80,655,107"/>
+<area shape="rect" id="node14" href="Common_8hpp.html" title="Common.hpp" alt="" coords="599,304,699,331"/>
+<area shape="rect" id="node17" href="Geometry_8hpp.html" title="Geometry.hpp" alt="" coords="431,155,535,181"/>
+<area shape="rect" id="node22" href="Color_8hpp.html" title="Color.hpp" alt="" coords="297,229,376,256"/>
+<area shape="rect" id="node24" href="UserIO_8hpp.html" title="UserIO.hpp" alt="" coords="5,155,95,181"/>
 </map>
 </div>
 </div>
@@ -118,10 +122,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afaa54f821226d88adfcf791861acd7c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#afaa54f821226d88adfcf791861acd7c6">cturtle::registerShape</a> (const std::string &amp;name, const Polygon &amp;p)</td></tr>
-<tr class="separator:afaa54f821226d88adfcf791861acd7c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2e349a76f705f92b327c4e0ace314b0"><td class="memItemLeft" align="right" valign="top">const Polygon &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ae2e349a76f705f92b327c4e0ace314b0">cturtle::shape</a> (const std::string name)</td></tr>
-<tr class="separator:ae2e349a76f705f92b327c4e0ace314b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#ac5143073e39cfc47a550a8ab1e6c7e3f">cturtle::__registerShapeImpl</a> (const std::string &amp;name, std::shared_ptr&lt; IDrawableGeometry &gt; geom)</td></tr>
+<tr class="separator:ac5143073e39cfc47a550a8ab1e6c7e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed07068b464330a992d2f5bea8e5aa35"><td class="memItemLeft" align="right" valign="top">const IDrawableGeometry &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35">cturtle::shape</a> (const std::string name)</td></tr>
+<tr class="separator:aed07068b464330a992d2f5bea8e5aa35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ae2d6a1760f57dbe985bc42ddcda025cb"></a>
@@ -136,7 +140,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00001">1</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CTurtle_8cpp_source.html#l00023">23</a> of file <a class="el" href="CTurtle_8cpp_source.html">CTurtle.cpp</a>.</p>
 
 </div>
 </div>

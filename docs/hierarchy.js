@@ -4,9 +4,12 @@ var hierarchy =
     [ "cturtle::Color", "structcturtle_1_1Color.html", null ],
     [ "cturtle::IDrawableGeometry", "classcturtle_1_1IDrawableGeometry.html", [
       [ "cturtle::Circle", "classcturtle_1_1Circle.html", null ],
+      [ "cturtle::CompoundPolygon", "classcturtle_1_1CompoundPolygon.html", null ],
       [ "cturtle::Line", "classcturtle_1_1Line.html", null ],
-      [ "cturtle::Polygon", "classcturtle_1_1Polygon.html", null ]
+      [ "cturtle::Polygon", "classcturtle_1_1Polygon.html", null ],
+      [ "cturtle::Sprite", "classcturtle_1_1Sprite.html", null ]
     ] ],
+    [ "cturtle::InputEvent", "structcturtle_1_1InputEvent.html", null ],
     [ "cturtle::ivec2", "structcturtle_1_1ivec2.html", null ],
     [ "cturtle::RawTurtle", "classcturtle_1_1RawTurtle.html", null ],
     [ "cturtle::SceneObject", "structcturtle_1_1SceneObject.html", null ],

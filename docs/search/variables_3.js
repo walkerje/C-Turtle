@@ -74,7 +74,7 @@ var searchData=
   ['deepskyblue2',['DeepSkyBlue2',['../structcturtle_1_1Color.html#ade7f13990aa1015c9cb75a185686fafc',1,'cturtle::Color']]],
   ['deepskyblue3',['DeepSkyBlue3',['../structcturtle_1_1Color.html#a384e358e0f4b2c12cb4ce63c1fca0268',1,'cturtle::Color']]],
   ['deepskyblue4',['DeepSkyBlue4',['../structcturtle_1_1Color.html#a21059c930fafb6851731334493471968',1,'cturtle::Color']]],
-  ['delayms',['delayMS',['../classcturtle_1_1TurtleScreen.html#affa310db6feceaa87d59eed61404e868',1,'cturtle::TurtleScreen']]],
+  ['delayms',['delayMS',['../classcturtle_1_1TurtleScreen.html#a0341014fd10917565c071594d2184e66',1,'cturtle::TurtleScreen']]],
   ['dim_5fgray',['dim_gray',['../structcturtle_1_1Color.html#a625ac3fd41eee5a8c885b7ed70f8a99e',1,'cturtle::Color']]],
   ['dim_5fgrey',['dim_grey',['../structcturtle_1_1Color.html#ab03f962472f617d070cc69f38ec58c8f',1,'cturtle::Color']]],
   ['dimgray',['DimGray',['../structcturtle_1_1Color.html#a17fe65c493f24d921828ea4ddd2cdb90',1,'cturtle::Color']]],
