@@ -1,7 +1,6 @@
 /* 
  * File:   show_recursive_sierpinski_triangle.cpp
  * Author: Jesse W. Walker
- * Created on May 13, 2019, 1:30 PM
  */
 
 #include "CTurtle.hpp"
