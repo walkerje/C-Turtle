@@ -506,7 +506,7 @@ namespace cturtle {
         AffineTransform begin;
         begin.assign(transform);
         
-        if (screen != nullptr) {
+        if (screen != nullptr) {//no point in animating with no screen
             const float duration = getAnimMS();
             const unsigned long startTime = epochTime();
             const unsigned long endTime = duration + startTime;
