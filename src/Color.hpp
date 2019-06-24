@@ -828,15 +828,11 @@ namespace cturtle{
         }
         
         /*TODO: Document Me*/
-        static const Color& fromName(const std::string& name);
+        static Color fromName(const std::string& name);
     };
     
-    /**\brief Returns a color, generated randomly.*/
-    inline Color randomColor(){
-        std::default_random_engine rng(epochTime());
-        std::uniform_int_distribution<int> rng_dist(0, 255);
-        return Color((uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng));
-    }
+    /**Returns a randomly generated color.*/
+    Color randomColor();
 }
     
 #ifdef CTURTLE_IMPLEMENTATION
@@ -2354,12 +2350,21 @@ namespace cturtle{
         };
     }
     
+    Color randomColor(){
+        static std::default_random_engine rng(epochTime());
+        static std::uniform_int_distribution<int> rng_dist(0, 255);
+        return Color((uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng));
+    }
+    
     /**\brief Retrieves a read-only reference to a color
     *         associated with the specified input name string.
     * Default colors have an associated name string you can use to retrieve
     * their values. All of the names can be found here:
     * https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm */
-    const Color& Color::fromName(const std::string& name){
+    Color Color::fromName(const std::string& name){
+        if(name == "random"){
+            return randomColor();
+        }
         return NAMEDCOLORS.at(name);
     }
 }

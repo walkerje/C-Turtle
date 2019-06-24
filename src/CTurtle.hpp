@@ -114,6 +114,10 @@ namespace cturtle{
         /**The unique pointer to the geometry of this object.
          *Can be null if the text string is not empty.*/
         std::unique_ptr<IDrawableGeometry> geom;
+        
+        //In the case where unownedGeom is 
+        IDrawableGeometry* unownedGeom = nullptr;
+        
         /**The color with which to draw this SceneObject.*/
         Color color;
         /**The transform at which to draw this SceneObject.
@@ -143,13 +147,15 @@ namespace cturtle{
             geom(geom), color(color), transform(t){}
         
         /**Stamp constructor which takes an ID.
+         * Please note that, when it comes to stamps, this object DOES NOT OWN
+         * the drawable data.
          *\param geom The geometry of the stamp. Follows the 
          *            same rules as the Geometry constructor.
          *\param color The color with which to draw the stamp.
          *\param t The transform at which to draw the stamp.
          *\param stampid The ID of the stamp this object is related to..*/
         SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t, int stampid) :
-            geom(geom), color(color), transform(t), stamp(true), stampid(stampid){}
+            unownedGeom(geom), color(color), transform(t), stamp(true), stampid(stampid){}
         
         /**String constructor.
          * Please note that strings are not subject to rotation, scaling, or shear!
@@ -287,21 +293,22 @@ namespace cturtle{
          *        If the specified stampid is less than 0, it removes ALL stamps.*/
         void clearstamps(int stampid = -1);
         
+        /**\brief Sets the shape of this turtle.
+         *\param p The polygon to derive shape geometry from.*/
+        void shape(const IDrawableGeometry& p){
+            cursor = &const_cast<IDrawableGeometry&>(p);
+            updateParent(true, false);
+        }
+        
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
-            cursor = (const Polygon&)cturtle::shape(name);
-        }
-        
-        /**\brief Sets the shape of this turtle.
-         *\param p The polygon to derive shape geometry from.*/
-        void shape(const Polygon& p){
-            cursor = p;
+            cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
         }
         
         /**\brief Returns the shape of this turtle.*/
         const IDrawableGeometry& shape(){
-            return cursor;
+            return *cursor;
         }
         
         /**\brief Undoes the previous action of this turtle.
@@ -410,7 +417,7 @@ namespace cturtle{
         
         //Cursor (shape)
         /**The shape of the turtle. Named cursor for obvious reasons.*/
-        IDrawableGeometry& cursor = const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
+        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
         /**The current unique stamp ID. Incremented with every call to the stamp function.*/
         int curStamp = 0;
         /**A boolean indicating if the cursor is visible or not.*/

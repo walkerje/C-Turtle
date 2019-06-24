@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['end_5ffill',['end_fill',['../classcturtle_1_1RawTurtle.html#a587d1934148548cacb41fcd9075619e6',1,'cturtle::RawTurtle']]],
-  ['epochtime',['epochTime',['../namespacecturtle.html#a76b52278ec9e3142ae4e57525ea94498',1,'cturtle']]]
+  ['degrees',['degrees',['../classcturtle_1_1RawTurtle.html#aadbf833dde9a9563d90dfba3d6dcdf42',1,'cturtle::RawTurtle']]],
+  ['delay',['delay',['../classcturtle_1_1TurtleScreen.html#ad52b4d5b710bd7bb3652f6da8ca1ade5',1,'cturtle::TurtleScreen::delay(unsigned int ms)'],['../classcturtle_1_1TurtleScreen.html#a11ddeea648c87b034562045b7272a1fd',1,'cturtle::TurtleScreen::delay()']]],
+  ['dot',['dot',['../classcturtle_1_1RawTurtle.html#a877c587b6ff5b5a9514f50480e48af3b',1,'cturtle::RawTurtle']]],
+  ['draw',['draw',['../classcturtle_1_1RawTurtle.html#a8cc375080efc12524920e1df9f991093',1,'cturtle::RawTurtle::draw()'],['../classcturtle_1_1IDrawableGeometry.html#a59570807e086cf39cddac7311f5f5593',1,'cturtle::IDrawableGeometry::draw()'],['../classcturtle_1_1Line.html#a5c5b4211f2d111b32d557efb3d79f968',1,'cturtle::Line::draw()'],['../classcturtle_1_1Circle.html#adc759e75e7a91a9bedc27dab1cd7e82c',1,'cturtle::Circle::draw()'],['../classcturtle_1_1Polygon.html#abd146aec909eaf27481efd6f279c012f',1,'cturtle::Polygon::draw()'],['../classcturtle_1_1CompoundPolygon.html#aff8b6e7ede5e690f43a48da95f782987',1,'cturtle::CompoundPolygon::draw()']]],
+  ['drawline',['drawLine',['../namespacecturtle.html#a97aa30ca8e1f170600e4a6b79c37fb96',1,'cturtle']]],
+  ['drawoutline',['drawOutline',['../classcturtle_1_1Polygon.html#a3069ceae412eb4adba8f5c29b919ae96',1,'cturtle::Polygon']]]
 ];

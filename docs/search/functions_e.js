@@ -1,16 +1,13 @@
 var searchData=
 [
-  ['radians',['radians',['../classcturtle_1_1RawTurtle.html#a073b580ccc078015263bfb9b7b790dd7',1,'cturtle::RawTurtle']]],
-  ['randomcolor',['randomColor',['../namespacecturtle.html#a168a12774c831b2996a42ade553b6871',1,'cturtle']]],
-  ['rawturtle',['RawTurtle',['../classcturtle_1_1RawTurtle.html#a57d46c586408b442467b0728912ce612',1,'cturtle::RawTurtle::RawTurtle(TurtleScreen &amp;scr)'],['../classcturtle_1_1RawTurtle.html#ad2b8751ccc6498082304fb3fa4232e6e',1,'cturtle::RawTurtle::RawTurtle()']]],
-  ['redraw',['redraw',['../classcturtle_1_1TurtleScreen.html#a974271a60cb64413b8646b2c41525b2a',1,'cturtle::TurtleScreen']]],
-  ['redrawparent',['redrawParent',['../classcturtle_1_1RawTurtle.html#a066fbbebc58e9714abeb7377f2fbf16d',1,'cturtle::RawTurtle']]],
-  ['registershape',['registerShape',['../namespacecturtle.html#afaa54f821226d88adfcf791861acd7c6',1,'cturtle']]],
-  ['reset',['reset',['../classcturtle_1_1RawTurtle.html#a48568c580752e0aa10140c89d480c333',1,'cturtle::RawTurtle::reset()'],['../classcturtle_1_1TurtleScreen.html#abffd80e103751190440d66ce558d4da1',1,'cturtle::TurtleScreen::reset()']]],
-  ['resetscreen',['resetscreen',['../classcturtle_1_1TurtleScreen.html#aaf47f670af1a2b48b0a691d150acac68',1,'cturtle::TurtleScreen']]],
-  ['rgbptr',['rgbPtr',['../structcturtle_1_1Color.html#adecef34180b8bebd7d5f0e9d4327a586',1,'cturtle::Color']]],
-  ['right',['right',['../classcturtle_1_1RawTurtle.html#a89cb02c6fd057a691d6a5f5c8255da87',1,'cturtle::RawTurtle']]],
-  ['rotate',['rotate',['../classcturtle_1_1AffineTransform.html#a9143968aba5f1527c897161bed3c1316',1,'cturtle::AffineTransform']]],
-  ['rotatearound',['rotateAround',['../classcturtle_1_1AffineTransform.html#a927c5319d02b95df7e573d8eba418e3d',1,'cturtle::AffineTransform']]],
-  ['rt',['rt',['../classcturtle_1_1RawTurtle.html#a8e1bfd8d7fbbe0c121c6322c3688d0ca',1,'cturtle::RawTurtle']]]
+  ['pencolor',['pencolor',['../classcturtle_1_1RawTurtle.html#a740cf97fde653e87dcb015a41079f7e9',1,'cturtle::RawTurtle::pencolor(Color c)'],['../classcturtle_1_1RawTurtle.html#a88f288f88beddd8e7af5da347574c671',1,'cturtle::RawTurtle::pencolor()']]],
+  ['pendown',['pendown',['../classcturtle_1_1RawTurtle.html#a1d487a26ff7463c8c451118f5a4feaac',1,'cturtle::RawTurtle']]],
+  ['penup',['penup',['../classcturtle_1_1RawTurtle.html#ad3a6c4cf76585e73dc9966b6c10345b3',1,'cturtle::RawTurtle']]],
+  ['polygon',['Polygon',['../classcturtle_1_1Polygon.html#a082dfb4e86877ccef9f20e1b1410fdde',1,'cturtle::Polygon::Polygon()'],['../classcturtle_1_1Polygon.html#a035f78fca7139d12bc9626105bc326e3',1,'cturtle::Polygon::Polygon(const std::initializer_list&lt; Point &gt; &amp;init)'],['../classcturtle_1_1Polygon.html#aac42358217c2b31a811a4c824f509c4b',1,'cturtle::Polygon::Polygon(const std::vector&lt; Point &gt; &amp;copy)'],['../classcturtle_1_1Polygon.html#a2f87d81daf3a02a53d2db818b74b6006',1,'cturtle::Polygon::Polygon(const Polygon &amp;other)']]],
+  ['presskey',['presskey',['../classcturtle_1_1TurtleScreen.html#ae2a63ab403fab57ff97b3a37438c2bb2',1,'cturtle::TurtleScreen']]],
+  ['pressmouse',['pressmouse',['../classcturtle_1_1TurtleScreen.html#a1b8c19a971acff239d3112856166bbe4',1,'cturtle::TurtleScreen']]],
+  ['pushcurrent',['pushCurrent',['../classcturtle_1_1RawTurtle.html#a5ff99d0c95cff25969b5a6f680356d20',1,'cturtle::RawTurtle']]],
+  ['pushgeom',['pushGeom',['../classcturtle_1_1RawTurtle.html#a442357b702bcab185c94ff6e493eab45',1,'cturtle::RawTurtle']]],
+  ['pushstamp',['pushStamp',['../classcturtle_1_1RawTurtle.html#a50705b8adb7efd38c7ad3bdf3be73867',1,'cturtle::RawTurtle']]],
+  ['pushtext',['pushText',['../classcturtle_1_1RawTurtle.html#a0c0ee5fe5abb8c5bd07bcbadb34fdbca',1,'cturtle::RawTurtle']]]
 ];

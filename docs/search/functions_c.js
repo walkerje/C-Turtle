@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['operator_28_29',['operator()',['../classcturtle_1_1AffineTransform.html#a26aa5f73bd8fe55e27622eb11959ff9c',1,'cturtle::AffineTransform']]],
-  ['operator_5b_5d',['operator[]',['../structcturtle_1_1ivec2.html#adc88a30605f0f71ea7844956a9473fd9',1,'cturtle::ivec2']]]
+  ['mainloop',['mainloop',['../classcturtle_1_1TurtleScreen.html#a34d663004955a369aff362c52c7dad5a',1,'cturtle::TurtleScreen']]],
+  ['mode',['mode',['../classcturtle_1_1TurtleScreen.html#add6a659f016bc3ee1ea859c7abe4da4b',1,'cturtle::TurtleScreen::mode(ScreenMode mode)'],['../classcturtle_1_1TurtleScreen.html#a2e9e27ecce7237fd8bc98c198b920cfa',1,'cturtle::TurtleScreen::mode()']]]
 ];

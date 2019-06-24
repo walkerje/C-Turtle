@@ -75,6 +75,15 @@ namespace cturtle{
         }
     };
     
+    /**\brief Returns the distance between the two specified points.*/
+    inline int distance(const ivec2& a, const ivec2& b){
+        return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+    }
+    
+    inline ivec2 middle(const ivec2& a, const ivec2& b){
+       return ivec2((a.x + b.x) / 2, (a.y + b.y) / 2); 
+    }
+    
     /**\brief Sleeps the calling thread the specified amount of milliseconds.
      *\param ms The total number of milliseconds to sleep.*/
     inline void sleep(long ms){

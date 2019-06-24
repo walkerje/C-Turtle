@@ -303,8 +303,9 @@ namespace cturtle {
     //Stamps
 
     int RawTurtle::stamp() {
-        Polygon* p = new Polygon((Polygon&)cursor);
-        pushStamp(transform, fillColor, p);
+        //shift to generic IDrawableGeometry broke stamp
+        //TODO: Fixme
+        pushStamp(AffineTransform(transform).rotate(cursorTilt), fillColor, cursor);
         return curStamp;
     }
 
@@ -391,6 +392,7 @@ namespace cturtle {
     }
 
     void RawTurtle::home() {
+        //TODO: SetHome?
         travelTo(AffineTransform());
     }
 
@@ -416,7 +418,7 @@ namespace cturtle {
         penColor = Color::black;
         fillAccum.points.clear();
         fillColor = Color::black;
-        cursor = (const Polygon&)cturtle::shape("triangle");
+        cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
         curStamp = 0;
         cursorVisible = true;
         cursorTilt = 0.0f;
@@ -453,10 +455,8 @@ namespace cturtle {
             if (!object.text.empty()) {
                 Point trans = t.getTranslation();
                 canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
-            } else if (object.stamp) {
-                Polygon* p = static_cast<Polygon*> (geom);
-                p->draw(t, canvas, color);
-                p->drawOutline(t, canvas);
+            } else if (object.stamp && object.unownedGeom != nullptr) {
+                object.unownedGeom->draw(screen.copyConcatenate(object.transform), canvas, fillColor);
             } else geom->draw(t, canvas, color);
         }
 
@@ -470,7 +470,7 @@ namespace cturtle {
             //Add the extra rotate to start cursor facing right :)
             const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
             AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
-            cursor.draw(cursorTransform, canvas, fillColor);
+            cursor->draw(cursorTransform, canvas, fillColor);
 //            cursor.drawOutline(cursorTransform, canvas);
         }
     }
@@ -506,7 +506,7 @@ namespace cturtle {
         AffineTransform begin;
         begin.assign(transform);
         
-        if (screen != nullptr) {
+        if (screen != nullptr) {//no point in animating with no screen
             const float duration = getAnimMS();
             const unsigned long startTime = epochTime();
             const unsigned long endTime = duration + startTime;
