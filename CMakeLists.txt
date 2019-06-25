@@ -68,6 +68,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 
     if(BUILD_SANDBOX)
         add_executable(CTurtle-Sandbox "${PROJECT_SOURCE_DIR}/sandbox.cpp" "${CTURTLE_CPP_FILE}")
+        set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT CTurtle-Sandbox)
     endif(BUILD_SANDBOX)
 else()
     message("Assuming Unix-Esque Environment, linking pthread and X11")
