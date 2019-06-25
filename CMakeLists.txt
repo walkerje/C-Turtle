@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(CTurtle)
-option(BUILD_STATIC "Build a static CTurtle library." ON)
+option(BUILD_STATIC "Build a static CTurtle library." OFF)
 option(BUILD_DYNAMIC "Build a dynamic CTurtle library." OFF)
 option(BUILD_EXAMPLES "Build Example Executables." OFF)
-option(MSVC_GEN_ED "Build an education-oriented MSVC project with a hello-world \"main\" function." OFF)
+option(BUILD_SANDBOX "Build an education-oriented \"Sandbox\" project with a mostly empty \"main\" function." OFF)
 
 set(CTURTLE_CPP_FILE "${PROJECT_SOURCE_DIR}/src/CTurtle.cpp")
 set(CTURTLE_INCL_DIR "${PROJECT_SOURCE_DIR}/src")
@@ -53,6 +53,9 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     #Disable overly-verbose compiler warnings.
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /w")
 
+    #Suppress ZERO_CHECK in MSVC Project
+    set(CMAKE_SUPPRESS_REGENERATION true)
+
     # We don't need to do anything special for linking because
     # linking against GDI32 and kernel32 is handled automatically.
     if(BUILD_STATIC)
@@ -63,27 +66,27 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
         add_library(CTurtle-Static SHARED ${CTURTLE_CPP_FILE})
     endif(BUILD_DYNAMIC)
 
-    if(MSVC_GEN_ED)
+    if(BUILD_SANDBOX)
         add_executable(CTurtle-Sandbox "${PROJECT_SOURCE_DIR}/sandbox.cpp" "${CTURTLE_CPP_FILE}")
-    endif(MSVC_GEN_ED)
+    endif(BUILD_SANDBOX)
 else()
     message("Assuming Unix-Esque Environment, linking pthread and X11")
-    if(MSVC_GEN_ED)
-        message("Ignoring MSVC_GEN_ED option; Generating under Non-MSVC.")
-    endif(MSVC_GEN_ED)
 
     if(BUILD_STATIC)
-        message("Building Static Library")
         add_library(CTurtle-Static STATIC ${CTURTLE_CPP_FILE})
         target_link_libraries(CTurtle-Static ${X11_LIBRARIES})
         target_link_libraries(CTurtle-Static Threads::Threads)
     endif()
 
     if(BUILD_DYNAMIC)
-        message("Building Dynamic Library")
         add_library(CTurtle-Dynamic SHARED ${CTURTLE_CPP_FILE})
         target_link_libraries(CTurtle-Dynamic ${X11_LIBRARIES})
         target_link_libraries(CTurtle-Dynamic Threads::Threads)
     endif()
-
+    
+    if(BUILD_SANDBOX)
+        add_executable(CTurtle-Sandbox "${PROJECT_SOURCE_DIR}/sandbox.cpp" "${CTURTLE_CPP_FILE}")
+        target_link_libraries(CTurtle-Sandbox ${X11_LIBRARIES})
+        target_link_libraries(CTurtle-Sandbox Threads::Threads)
+    endif(BUILD_SANDBOX)
 endif()
