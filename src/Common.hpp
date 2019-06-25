@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <thread>
 
+//Use OpenMP for multi-threading
 #ifndef _MSC_VER
     #ifndef cimg_use_openmp
         #define cimg_use_openmp 1
@@ -75,11 +76,18 @@ namespace cturtle{
         }
     };
     
-    /**\brief Returns the distance between the two specified points.*/
+    /**\brief Returns the distance between the two specified points.
+     *\param a The first point.
+     *\param b The second point.
+     *\return The distance, in nondescript units, between the first and second points.*/
     inline int distance(const ivec2& a, const ivec2& b){
         return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
     }
     
+    /**\brief Finds the point that lies in the middle of the two specified.
+     *\param a The first point.
+     *\param b The second point.
+     *\return The point between the first and second points.*/
     inline ivec2 middle(const ivec2& a, const ivec2& b){
        return ivec2((a.x + b.x) / 2, (a.y + b.y) / 2); 
     }

@@ -51,14 +51,13 @@ namespace cturtle {
                     {5, -5}
                 }))},
             {"indented triangle",
-                    
                 std::shared_ptr<IDrawableGeometry>(
                 new Polygon(
                 {
-                    {0, 7},
-                    {-7, 7},
-                    {0, 0},
-                    {7, 7}
+                    {0,0},
+                    {-10, 10},
+                    {0, 10},
+                    {10, 10},
                 }))},
             {"arrow",
                 std::shared_ptr<IDrawableGeometry>(
@@ -143,8 +142,7 @@ namespace cturtle {
 
     void TurtleScreen::update(bool doRedraw, bool input) {
         /*Resize canvas.*/
-        bool resized = display.is_resized();
-        if(resized){
+        if(display.is_resized()){
             display.resize();
             redraw();
         }else if ((doRedraw && delayMS > -1))
@@ -197,6 +195,19 @@ namespace cturtle {
         //Moved to initialization of the event thread.
         //        update();//TODO: Move this to somewhere more appropriate.
         AffineTransform screen = screentransform();
+        
+        for (SceneObject& object : objects) {
+            AffineTransform t(screen.copyConcatenate(object.transform));
+            Color& color = object.color;
+            IDrawableGeometry* geom = object.geom.get();
+            if (!object.text.empty()) {
+                Point trans = t.getTranslation();
+                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
+            } else if (object.stamp && object.unownedGeom != nullptr) {
+                object.unownedGeom->draw(screen.copyConcatenate(object.transform), canvas, object.color);
+            } else geom->draw(t, canvas, color);
+        }
+        
         for (RawTurtle* turtle : turtles) {
             turtle->draw(screen, canvas);
         }
@@ -209,7 +220,8 @@ namespace cturtle {
             bool mButtons[3] = {false, false, false};
             while (!display.is_closed() && !killEventThread) {
                 //Updates all input.
-
+                
+                display.paint();
                 if(!cacheMutex.try_lock()){
                     std::this_thread::yield();
                     continue;
@@ -270,7 +282,7 @@ namespace cturtle {
     
     void TurtleScreen::swapDisplay(int times) {
         for (int i = 0; i < times; i++) {
-            display.display(canvas);
+            display.render(canvas);
 
             if (canvas.width() != display.width() || canvas.height() != display.height()) {
                 canvas.resize(display.width(), display.height());
@@ -310,18 +322,23 @@ namespace cturtle {
     }
 
     void RawTurtle::clearstamp(int stampid) {
-        auto iter = objects.begin();
+        auto iter = objects.begin();//iterator which holds an iterator to the screen's scene list.
 
         while (iter != objects.end()) {
-            SceneObject& obj = *iter;
-            if (obj.stamp && obj.stampid == stampid) {
+            auto& objIter = *iter;
+            if (objIter->stamp && objIter->stampid == stampid) {
                 break;
             }
             iter++;
         }
 
-        if (iter != objects.end())
+        if (iter != objects.end()){
             objects.erase(iter);
+            
+            if(screen != nullptr){
+                screen->getScene().erase(*iter);
+            }
+        }
     }
 
     void RawTurtle::clearstamps(int stampid) {
@@ -331,14 +348,15 @@ namespace cturtle {
 
         iter_t iter = objects.begin();
         while (iter != objects.end()) {
-            SceneObject& obj = *iter;
-            if (stampid < 0 ? obj.stamp : (obj.stamp && obj.stampid <= stampid)) {
+            auto& objIter = *iter;
+            if (stampid < 0 ? objIter->stamp : (objIter->stamp && objIter->stampid <= stampid)) {
                 removals.push_back(iter);
             }
             iter++;
         }
 
         for (iter_t& iter : removals) {
+            screen->getScene().erase(*iter);
             objects.erase(iter);
         }
     }
@@ -448,17 +466,6 @@ namespace cturtle {
     void RawTurtle::draw(const AffineTransform& screen, Image& canvas) {
         if (this->screen == nullptr)
             return;
-        for (SceneObject& object : objects) {
-            AffineTransform t(screen.copyConcatenate(object.transform));
-            Color& color = object.color;
-            IDrawableGeometry* geom = object.geom.get();
-            if (!object.text.empty()) {
-                Point trans = t.getTranslation();
-                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
-            } else if (object.stamp && object.unownedGeom != nullptr) {
-                object.unownedGeom->draw(screen.copyConcatenate(object.transform), canvas, fillColor);
-            } else geom->draw(t, canvas, color);
-        }
 
         for (auto& pair : traceLines) {
             Color& color = pair.first;
@@ -502,19 +509,28 @@ namespace cturtle {
         tracing = down;
     }
     
-    void RawTurtle::travelTo(const AffineTransform dest) {
+    void RawTurtle::travelTo(const AffineTransform& dest) {
         AffineTransform begin;
         begin.assign(transform);
         
-        if (screen != nullptr) {//no point in animating with no screen
+        if (screen != nullptr ? !screen->getIsClosed() : false) {//no point in animating with no screen
             const float duration = getAnimMS();
             const unsigned long startTime = epochTime();
             const unsigned long endTime = duration + startTime;
 
             AffineTransform start;
             start.assign(transform);
+            
             float progress = duration == 0 ? 1 : 0;
+            unsigned long lastTime = startTime;
+            
             while (progress < 1.0f) {
+                //We use the time between animation frames to smooth out
+                //our animations, making them take the same amount of time
+                //regardless of how it's performance.
+                unsigned long curTime = epochTime();
+                unsigned long delta = curTime - lastTime;
+                
                 if(tracing){
                     //Push up a temporary line if we're tracing
                     //This is to draw a pen line from where we were to where we
@@ -528,7 +544,8 @@ namespace cturtle {
                     updateParent(true, false);
                 }
                 
-                progress = (epochTime() - startTime) / duration;
+                progress += ((curTime - startTime) / duration) * (delta / 1000.0);
+                lastTime = curTime;
             }
         }
         
@@ -547,4 +564,33 @@ namespace cturtle {
         
         updateParent();
     }
+    
+    
+    bool RawTurtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
+        if (screen != nullptr) {
+            screen->getScene().emplace_back(geom, color, t);
+            objects.push_back(std::prev(screen->getScene().end()));
+            return true;
+        }
+        return false;
+    }
+
+    bool RawTurtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
+        if (screen != nullptr) {
+            screen->getScene().emplace_back(geom, color, t, curStamp++);
+            objects.push_back(std::prev(screen->getScene().end()));
+            return true;
+        }
+        return false;
+    }
+    
+    bool RawTurtle::pushText(const AffineTransform& t, Color color, const std::string& text) {
+        if (screen != nullptr) {
+            screen->getScene().emplace_back(text, color, t);
+            objects.push_back(std::prev(screen->getScene().end()));
+            return true;
+        }
+        return false;
+    }
+    
 }
