@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "C-Turtle", "index.html", [
-    [ "Todo List", "todo.html", null ],
+    [ "Setup", "md__home_jesse_Development_Work_C-Turtle-Doxy_setup.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -36,7 +36,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CTurtle_8cpp.html",
-"classcturtle_1_1RawTurtle.html#a877c587b6ff5b5a9514f50480e48af3b"
+"classcturtle_1_1RawTurtle.html#a82df741ee4f51fca290796a4e2fc55c9"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

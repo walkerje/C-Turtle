@@ -18,6 +18,7 @@ var classcturtle_1_1TurtleScreen =
     [ "getcanvas", "classcturtle_1_1TurtleScreen.html#a8105c3ca6a12200c26a43f2a2714218c", null ],
     [ "getInternalDisplay", "classcturtle_1_1TurtleScreen.html#aec840c1b05e1e347e31bbebc6e935cad", null ],
     [ "getIsClosed", "classcturtle_1_1TurtleScreen.html#a2db244ae69237df355384d4787b19e17", null ],
+    [ "getScene", "classcturtle_1_1TurtleScreen.html#a13628b6b8fd0ecb54b4244edead3a1c1", null ],
     [ "initEventThread", "classcturtle_1_1TurtleScreen.html#a39cd4a5e3a9701298ac9be08c81418a1", null ],
     [ "mainloop", "classcturtle_1_1TurtleScreen.html#a34d663004955a369aff362c52c7dad5a", null ],
     [ "mode", "classcturtle_1_1TurtleScreen.html#add6a659f016bc3ee1ea859c7abe4da4b", null ],
@@ -50,5 +51,6 @@ var classcturtle_1_1TurtleScreen =
     [ "keyBindings", "classcturtle_1_1TurtleScreen.html#aa423fce5a8e64c3a513c39c90e63ab15", null ],
     [ "killEventThread", "classcturtle_1_1TurtleScreen.html#a814a8d1df6d5fa8906c68d241ea018a3", null ],
     [ "mouseBindings", "classcturtle_1_1TurtleScreen.html#a3c7d791fe51290db23b745ac9e7eb868", null ],
+    [ "objects", "classcturtle_1_1TurtleScreen.html#a72fa34b717700cb68b7e1990b907ef4a", null ],
     [ "turtles", "classcturtle_1_1TurtleScreen.html#a8cb6d87906df57f36205a7dc49e4c6f7", null ]
 ];

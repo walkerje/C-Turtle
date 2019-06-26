@@ -82,6 +82,7 @@ var searchData=
   ['dimgray',['DimGray',['../structcturtle_1_1Color.html#a17fe65c493f24d921828ea4ddd2cdb90',1,'cturtle::Color']]],
   ['dimgrey',['DimGrey',['../structcturtle_1_1Color.html#a709526861f32a2e2827dcf9ec7be0bab',1,'cturtle::Color']]],
   ['display',['display',['../classcturtle_1_1TurtleScreen.html#ac3bed088df2bc88838ca1870bd593717',1,'cturtle::TurtleScreen']]],
+  ['distance',['distance',['../namespacecturtle.html#a7e83d87d98e2b281ec6f80f68402a5e2',1,'cturtle']]],
   ['dodger_5fblue',['dodger_blue',['../structcturtle_1_1Color.html#ab730ec646ac913ea85f7f3893e88dd4f',1,'cturtle::Color']]],
   ['dodgerblue',['DodgerBlue',['../structcturtle_1_1Color.html#a2c5718f2d3d3d7e0cb4817f3b8533b0c',1,'cturtle::Color']]],
   ['dodgerblue1',['DodgerBlue1',['../structcturtle_1_1Color.html#ac45a97f9875564f263ab23fc5f6b433f',1,'cturtle::Color']]],
@@ -89,7 +90,9 @@ var searchData=
   ['dodgerblue3',['DodgerBlue3',['../structcturtle_1_1Color.html#a04d2f3ca8bf80552459bd8be0ecb67d9',1,'cturtle::Color']]],
   ['dodgerblue4',['DodgerBlue4',['../structcturtle_1_1Color.html#a539845b02d7e6ab610fd56b2e490cb2e',1,'cturtle::Color']]],
   ['dot',['dot',['../classcturtle_1_1RawTurtle.html#a877c587b6ff5b5a9514f50480e48af3b',1,'cturtle::RawTurtle']]],
-  ['draw',['draw',['../classcturtle_1_1RawTurtle.html#a8cc375080efc12524920e1df9f991093',1,'cturtle::RawTurtle::draw()'],['../classcturtle_1_1IDrawableGeometry.html#a59570807e086cf39cddac7311f5f5593',1,'cturtle::IDrawableGeometry::draw()'],['../classcturtle_1_1Line.html#a5c5b4211f2d111b32d557efb3d79f968',1,'cturtle::Line::draw()'],['../classcturtle_1_1Circle.html#adc759e75e7a91a9bedc27dab1cd7e82c',1,'cturtle::Circle::draw()'],['../classcturtle_1_1Polygon.html#abd146aec909eaf27481efd6f279c012f',1,'cturtle::Polygon::draw()'],['../classcturtle_1_1CompoundPolygon.html#aff8b6e7ede5e690f43a48da95f782987',1,'cturtle::CompoundPolygon::draw()']]],
+  ['draw',['draw',['../classcturtle_1_1RawTurtle.html#a8cc375080efc12524920e1df9f991093',1,'cturtle::RawTurtle::draw()'],['../classcturtle_1_1IDrawableGeometry.html#a59570807e086cf39cddac7311f5f5593',1,'cturtle::IDrawableGeometry::draw()'],['../classcturtle_1_1Line.html#a5c5b4211f2d111b32d557efb3d79f968',1,'cturtle::Line::draw()'],['../classcturtle_1_1Circle.html#adc759e75e7a91a9bedc27dab1cd7e82c',1,'cturtle::Circle::draw()'],['../classcturtle_1_1Polygon.html#abd146aec909eaf27481efd6f279c012f',1,'cturtle::Polygon::draw()'],['../classcturtle_1_1Sprite.html#a915709442878b3c2f4888f673c21c60f',1,'cturtle::Sprite::draw()'],['../classcturtle_1_1CompoundPolygon.html#aff8b6e7ede5e690f43a48da95f782987',1,'cturtle::CompoundPolygon::draw()']]],
+  ['drawheight',['drawHeight',['../classcturtle_1_1Sprite.html#a5138e4802c2d4cc73f43100de2cba412',1,'cturtle::Sprite']]],
   ['drawline',['drawLine',['../namespacecturtle.html#a97aa30ca8e1f170600e4a6b79c37fb96',1,'cturtle']]],
-  ['drawoutline',['drawOutline',['../classcturtle_1_1Polygon.html#a3069ceae412eb4adba8f5c29b919ae96',1,'cturtle::Polygon']]]
+  ['drawoutline',['drawOutline',['../classcturtle_1_1Polygon.html#a3069ceae412eb4adba8f5c29b919ae96',1,'cturtle::Polygon']]],
+  ['drawwidth',['drawWidth',['../classcturtle_1_1Sprite.html#ae913b2e7e5a63b5aa435b34d21178ef8',1,'cturtle::Sprite']]]
 ];

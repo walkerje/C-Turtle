@@ -398,7 +398,7 @@ namespace cturtle{
         /**\brief Empty virtual destructor.*/
         virtual ~RawTurtle(){}
     protected:
-        std::list<SceneObject> objects;
+        std::list<std::list<SceneObject>::iterator> objects;
         std::vector<std::pair<Color, Line>> traceLines;
         std::list<AffineTransform> transformStack = {AffineTransform()};
         AffineTransform& transform = transformStack.back();
@@ -428,30 +428,26 @@ namespace cturtle{
         /*Screen pointer. Assign before calling any other function!*/
         TurtleScreen* screen = nullptr;
         
-        /*Pushes the specified object attibutes as an object to this turtle's
-         *"drawing" list.
-         *\param t The transform at which to draw the geometry.
-         *\param color The color with which to draw the geometry.
-         *\param geom The geometry.*/
-        inline void pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom){
-            objects.emplace_back(geom, color, t);
-        }
+        /**
+         * \brief Internal function used to add geometry to the turtle screen.
+         * \param t The transform of the geometry.
+         * \param color The color of the geometry.
+         * \param geom The geometry to add.
+         * \return A boolean indicating if the geometry was added to the scene.
+         */
+        bool pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom);
         
         /**\brief Internal function used to add a stamp object to the turtle screen.
          *\param t The transform at which to draw the stamp.
          *\param color The color with which to draw the stamp.
          *\param geom The geometry of the stamp.*/
-        inline void pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom){
-            objects.emplace_back(geom, color, t, curStamp++);
-        }
+        bool pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom);
         
         /**\brief Internal function used to add a text object to the turtle screen.
          *\param t The transform at which to draw the text.
          *\param color The color with which to draw the text.
          *\param text The string to draw.*/
-        inline void pushText(const AffineTransform& t, Color color, const std::string text){
-            objects.emplace_back(text, color, t);
-        }
+        bool pushText(const AffineTransform& t, Color color, const std::string& text);
         
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
@@ -469,7 +465,7 @@ namespace cturtle{
          * between the current transform and the specified one.
          * Pushes a new fill vertex if filling, and applies appropriate
          * lines if the pen is down.*/
-        void travelTo(const AffineTransform dest);
+        void travelTo(const AffineTransform& dest);
         
         /**Inheritors must assign screen pointer!*/
         RawTurtle(){}
@@ -609,7 +605,7 @@ namespace cturtle{
           on the file extension given in the specified file path string.*/
         void save(const std::string& file){
             Image screenshotImg;
-            display.screenshot(screenshotImg);
+            display.snapshot(screenshotImg);
             screenshotImg.save(file.c_str());
         }
         
@@ -706,6 +702,10 @@ namespace cturtle{
         void add(RawTurtle& turtle){
             turtles.push_back(&turtle);
         }
+        
+        std::list<SceneObject>& getScene(){
+            return objects;
+        }
     protected:
         cimg::CImgDisplay   display;
         Image               canvas;
@@ -723,6 +723,7 @@ namespace cturtle{
         
         void initEventThread();
         
+        std::list<SceneObject> objects;
         std::list<RawTurtle*> turtles;
         
         std::unique_ptr<std::thread> eventThread;

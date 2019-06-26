@@ -15,5 +15,5 @@ var searchData=
   ['forest_5fgreen',['forest_green',['../structcturtle_1_1Color.html#a83335019bcee3340214a9b507459a03e',1,'cturtle::Color']]],
   ['forestgreen',['ForestGreen',['../structcturtle_1_1Color.html#a8c277a0cb6c7c3147eb7657d934052e8',1,'cturtle::Color']]],
   ['forward',['forward',['../classcturtle_1_1RawTurtle.html#a16a72d4b0078f4686190fc3f0c2a9101',1,'cturtle::RawTurtle::forward()'],['../classcturtle_1_1AffineTransform.html#aaaa73a96a267dd146a242cda3602ea37',1,'cturtle::AffineTransform::forward()']]],
-  ['fromname',['fromName',['../structcturtle_1_1Color.html#a56157d692c13b4592b355a95cce4f2c7',1,'cturtle::Color']]]
+  ['fromname',['fromName',['../structcturtle_1_1Color.html#a612e5960f8077e4f87d49213e4001c3f',1,'cturtle::Color']]]
 ];

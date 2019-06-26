@@ -35,7 +35,7 @@ var searchData=
   ['cornsilk3',['cornsilk3',['../structcturtle_1_1Color.html#a8d2c1b18a5921527c183753ea39e1a44',1,'cturtle::Color']]],
   ['cornsilk4',['cornsilk4',['../structcturtle_1_1Color.html#a773de9fc061ac6fb53f8ad0df79fdbea',1,'cturtle::Color']]],
   ['curmode',['curMode',['../classcturtle_1_1TurtleScreen.html#a853ac931317fe9d4cf91be353ca08c5d',1,'cturtle::TurtleScreen']]],
-  ['cursor',['cursor',['../classcturtle_1_1RawTurtle.html#ad068c9253ccaaa156264e3e9b495ac1e',1,'cturtle::RawTurtle']]],
+  ['cursor',['cursor',['../classcturtle_1_1RawTurtle.html#a0c6eb26a89160500518d00b48106ad8a',1,'cturtle::RawTurtle']]],
   ['cursortilt',['cursorTilt',['../classcturtle_1_1RawTurtle.html#a8f4a5008078e12a370c8c0421ebdc9d0',1,'cturtle::RawTurtle']]],
   ['cursorvisible',['cursorVisible',['../classcturtle_1_1RawTurtle.html#a0a91b136d0aa9ee6ba96aca79b265d72',1,'cturtle::RawTurtle']]],
   ['curstamp',['curStamp',['../classcturtle_1_1RawTurtle.html#ab007dc20614b8a30f8a991ae5666612c',1,'cturtle::RawTurtle']]],

@@ -333,8 +333,9 @@ namespace cturtle {
         Point transform(Point in, Point* dst = nullptr) const{
             Point temp;
             Point* dstPtr = (dst == nullptr) ? &temp : dst;
-            dstPtr->x = (constAt(0, 0) * (in.x) + constAt(0, 1) * (in.y) + constAt(0, 2));
-            dstPtr->y = (constAt(1, 0) * (in.x) + constAt(1, 1) * (in.y) + constAt(1, 2));
+            //Rounding seems to fix off-by-one issues in regards to rotation.
+            dstPtr->x = std::round(constAt(0, 0) * (in.x) + constAt(0, 1) * (in.y) + constAt(0, 2));
+            dstPtr->y = std::round(constAt(1, 0) * (in.x) + constAt(1, 1) * (in.y) + constAt(1, 2));
             return *dstPtr;
         }
         
@@ -342,7 +343,7 @@ namespace cturtle {
          *\param cur The beginning iterator of a set.
          *\param end The ending iterator of a set.*/
         template<typename ITER_T>
-        void transformSet(ITER_T cur, ITER_T end){
+        void transformSet(ITER_T cur, ITER_T end) const{
             while(cur != end){
                 transform(&(*cur), &(*cur));
                 cur++;
