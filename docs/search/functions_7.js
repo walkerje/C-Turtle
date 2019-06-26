@@ -7,6 +7,7 @@ var searchData=
   ['getrotation',['getRotation',['../classcturtle_1_1AffineTransform.html#a8d6ab408b6877b135720eb6f46ebf8ad',1,'cturtle::AffineTransform']]],
   ['getscalex',['getScaleX',['../classcturtle_1_1AffineTransform.html#a50b3dcd70929fd59325cb90dfd482e16',1,'cturtle::AffineTransform']]],
   ['getscaley',['getScaleY',['../classcturtle_1_1AffineTransform.html#a4466007b4bf269cf047268a9820f9040',1,'cturtle::AffineTransform']]],
+  ['getscene',['getScene',['../classcturtle_1_1TurtleScreen.html#a13628b6b8fd0ecb54b4244edead3a1c1',1,'cturtle::TurtleScreen']]],
   ['getshearx',['getShearX',['../classcturtle_1_1AffineTransform.html#a6af4d48160b2b765d32d33dbd2ae9377',1,'cturtle::AffineTransform']]],
   ['getsheary',['getShearY',['../classcturtle_1_1AffineTransform.html#ad58888b71cab16b2a283c7b0e00460a1',1,'cturtle::AffineTransform']]],
   ['gettranslatex',['getTranslateX',['../classcturtle_1_1AffineTransform.html#abc126884cf645950a1ee91107a620cd0',1,'cturtle::AffineTransform']]],

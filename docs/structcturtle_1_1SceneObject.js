@@ -9,5 +9,6 @@ var structcturtle_1_1SceneObject =
     [ "stamp", "structcturtle_1_1SceneObject.html#a014644aee0792d77bd84a0b98464f39b", null ],
     [ "stampid", "structcturtle_1_1SceneObject.html#ae6094918613e5d4d284805cd5afb2e65", null ],
     [ "text", "structcturtle_1_1SceneObject.html#a2975529755ea2c36696e39ed7ec3baa0", null ],
-    [ "transform", "structcturtle_1_1SceneObject.html#aa5919cbb53a52c62833015e7ee192bdf", null ]
+    [ "transform", "structcturtle_1_1SceneObject.html#aa5919cbb53a52c62833015e7ee192bdf", null ],
+    [ "unownedGeom", "structcturtle_1_1SceneObject.html#ae6aac3eccc76d0812f94f64521bc7b44", null ]
 ];

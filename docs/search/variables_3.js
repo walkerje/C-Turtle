@@ -85,5 +85,7 @@ var searchData=
   ['dodgerblue1',['DodgerBlue1',['../structcturtle_1_1Color.html#ac45a97f9875564f263ab23fc5f6b433f',1,'cturtle::Color']]],
   ['dodgerblue2',['DodgerBlue2',['../structcturtle_1_1Color.html#a35447b83131ab625bf493651f2c5f151',1,'cturtle::Color']]],
   ['dodgerblue3',['DodgerBlue3',['../structcturtle_1_1Color.html#a04d2f3ca8bf80552459bd8be0ecb67d9',1,'cturtle::Color']]],
-  ['dodgerblue4',['DodgerBlue4',['../structcturtle_1_1Color.html#a539845b02d7e6ab610fd56b2e490cb2e',1,'cturtle::Color']]]
+  ['dodgerblue4',['DodgerBlue4',['../structcturtle_1_1Color.html#a539845b02d7e6ab610fd56b2e490cb2e',1,'cturtle::Color']]],
+  ['drawheight',['drawHeight',['../classcturtle_1_1Sprite.html#a5138e4802c2d4cc73f43100de2cba412',1,'cturtle::Sprite']]],
+  ['drawwidth',['drawWidth',['../classcturtle_1_1Sprite.html#ae913b2e7e5a63b5aa435b34d21178ef8',1,'cturtle::Sprite']]]
 ];

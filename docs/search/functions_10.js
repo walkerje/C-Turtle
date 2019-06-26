@@ -23,7 +23,7 @@ var searchData=
   ['showturtle',['showturtle',['../classcturtle_1_1RawTurtle.html#aef773f04e0509ab277db7c19a6bb5021',1,'cturtle::RawTurtle']]],
   ['sleep',['sleep',['../namespacecturtle.html#a4983d682ebfb9a5623b35013b8f2bde7',1,'cturtle']]],
   ['speed',['speed',['../classcturtle_1_1RawTurtle.html#afb06a37a42920a816018a7e0a8820c62',1,'cturtle::RawTurtle::speed(float val)'],['../classcturtle_1_1RawTurtle.html#add7242f7a544f9281e9fe6b04c5bcbb3',1,'cturtle::RawTurtle::speed()']]],
-  ['sprite',['Sprite',['../classcturtle_1_1Sprite.html#aab33e551784ad6010ecbb296cb2d5173',1,'cturtle::Sprite']]],
+  ['sprite',['Sprite',['../classcturtle_1_1Sprite.html#aab33e551784ad6010ecbb296cb2d5173',1,'cturtle::Sprite::Sprite(Image &amp;img)'],['../classcturtle_1_1Sprite.html#a9df8ca14c2cbf585d8d423a76516d526',1,'cturtle::Sprite::Sprite(Image &amp;img, int srcX, int srcY, int srcW, int srcH)'],['../classcturtle_1_1Sprite.html#a818e253f4d3cbb268e753f5ceee12d1d',1,'cturtle::Sprite::Sprite(const Sprite &amp;copy)']]],
   ['stamp',['stamp',['../classcturtle_1_1RawTurtle.html#a629f1a8b0898bec27238a3e20595379c',1,'cturtle::RawTurtle']]],
   ['swap',['swap',['../classcturtle_1_1TurtleScreen.html#aa0c741c74400269bc5818967b16a4492',1,'cturtle::TurtleScreen']]],
   ['swapdisplay',['swapDisplay',['../classcturtle_1_1TurtleScreen.html#a5a4a5b80c36a46716df495ca09320ba4',1,'cturtle::TurtleScreen']]]

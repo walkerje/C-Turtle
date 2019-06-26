@@ -39,6 +39,7 @@ var searchData=
   ['mediumspringgreen',['MediumSpringGreen',['../structcturtle_1_1Color.html#a060dbf5a7c13afb78238aa5d7d9a4642',1,'cturtle::Color']]],
   ['mediumturquoise',['MediumTurquoise',['../structcturtle_1_1Color.html#a85dda3917401cc49fb57b56a9fedd0b5',1,'cturtle::Color']]],
   ['mediumvioletred',['MediumVioletRed',['../structcturtle_1_1Color.html#ae51c68ccc05f6eb01a5f0c1437cb3763',1,'cturtle::Color']]],
+  ['middle',['middle',['../namespacecturtle.html#a376f3a16359de2dc3be3b076a2377e6c',1,'cturtle']]],
   ['midnight_5fblue',['midnight_blue',['../structcturtle_1_1Color.html#a6ab02997b37223b3685ec9fba5bf9cdf',1,'cturtle::Color']]],
   ['midnightblue',['MidnightBlue',['../structcturtle_1_1Color.html#ae770c5d951ff0b6423f4d0d5459db0e1',1,'cturtle::Color']]],
   ['mint_5fcream',['mint_cream',['../structcturtle_1_1Color.html#a2dcf6d7649bf323d697df642f03e3f3c',1,'cturtle::Color']]],

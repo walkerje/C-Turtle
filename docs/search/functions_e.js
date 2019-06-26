@@ -7,7 +7,7 @@ var searchData=
   ['presskey',['presskey',['../classcturtle_1_1TurtleScreen.html#ae2a63ab403fab57ff97b3a37438c2bb2',1,'cturtle::TurtleScreen']]],
   ['pressmouse',['pressmouse',['../classcturtle_1_1TurtleScreen.html#a1b8c19a971acff239d3112856166bbe4',1,'cturtle::TurtleScreen']]],
   ['pushcurrent',['pushCurrent',['../classcturtle_1_1RawTurtle.html#a5ff99d0c95cff25969b5a6f680356d20',1,'cturtle::RawTurtle']]],
-  ['pushgeom',['pushGeom',['../classcturtle_1_1RawTurtle.html#a442357b702bcab185c94ff6e493eab45',1,'cturtle::RawTurtle']]],
-  ['pushstamp',['pushStamp',['../classcturtle_1_1RawTurtle.html#a50705b8adb7efd38c7ad3bdf3be73867',1,'cturtle::RawTurtle']]],
-  ['pushtext',['pushText',['../classcturtle_1_1RawTurtle.html#a0c0ee5fe5abb8c5bd07bcbadb34fdbca',1,'cturtle::RawTurtle']]]
+  ['pushgeom',['pushGeom',['../classcturtle_1_1RawTurtle.html#adb5b02b256c915a2a05f31575fa1db95',1,'cturtle::RawTurtle']]],
+  ['pushstamp',['pushStamp',['../classcturtle_1_1RawTurtle.html#ae9367bdf6ed001e218926bf083f54a8b',1,'cturtle::RawTurtle']]],
+  ['pushtext',['pushText',['../classcturtle_1_1RawTurtle.html#afd757f4ed6dd2a028045e4e546e5d60b',1,'cturtle::RawTurtle']]]
 ];

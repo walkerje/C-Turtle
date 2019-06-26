@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['setup',['Setup',['../md__home_jesse_Development_Work_C-Turtle-Doxy_setup.html',1,'']]],
   ['saddle_5fbrown',['saddle_brown',['../structcturtle_1_1Color.html#a940849675c19af2b96f7b414143c9363',1,'cturtle::Color']]],
   ['saddlebrown',['SaddleBrown',['../structcturtle_1_1Color.html#a67c6d44b51183f3f2a1329179cc130de',1,'cturtle::Color']]],
   ['salmon',['salmon',['../structcturtle_1_1Color.html#a230b4d938532a45480f3b9afc794df2d',1,'cturtle::Color']]],
@@ -38,6 +39,7 @@ var searchData=
   ['settranslation',['setTranslation',['../classcturtle_1_1AffineTransform.html#ac8a0bc3f9bee1eb1fec7404bfc184c02',1,'cturtle::AffineTransform']]],
   ['settranslationx',['setTranslationX',['../classcturtle_1_1AffineTransform.html#a9b6b7e55c7ee526b058a061b1387afec',1,'cturtle::AffineTransform']]],
   ['settranslationy',['setTranslationY',['../classcturtle_1_1AffineTransform.html#aa5d111e31f207e1d7cfea623279c9d87',1,'cturtle::AffineTransform']]],
+  ['setup_2emd',['setup.md',['../setup_8md.html',1,'']]],
   ['setx',['setx',['../classcturtle_1_1RawTurtle.html#ab51b0ce18bb22ea94198b6f73b68518d',1,'cturtle::RawTurtle']]],
   ['sety',['sety',['../classcturtle_1_1RawTurtle.html#a7c6514d19ff0d72a103f774fc9ce0c63',1,'cturtle::RawTurtle']]],
   ['shape',['shape',['../classcturtle_1_1RawTurtle.html#a3478b1df59c538b0d1ff8878e03289cf',1,'cturtle::RawTurtle::shape(const IDrawableGeometry &amp;p)'],['../classcturtle_1_1RawTurtle.html#a61ec6e066dfdd307d64bc7061aede18a',1,'cturtle::RawTurtle::shape(const std::string &amp;name)'],['../classcturtle_1_1RawTurtle.html#a42447a4aa38e7adc908ce1b910f8dce7',1,'cturtle::RawTurtle::shape()'],['../namespacecturtle.html#aed07068b464330a992d2f5bea8e5aa35',1,'cturtle::shape()']]],
@@ -83,8 +85,12 @@ var searchData=
   ['springgreen2',['SpringGreen2',['../structcturtle_1_1Color.html#a4997adf4119d64cc50196e214ee4f911',1,'cturtle::Color']]],
   ['springgreen3',['SpringGreen3',['../structcturtle_1_1Color.html#a88ae518f1b8f73d454f7143ad3e08c6c',1,'cturtle::Color']]],
   ['springgreen4',['SpringGreen4',['../structcturtle_1_1Color.html#ad1dda9fef074ac5feae74ff406097316',1,'cturtle::Color']]],
-  ['sprite',['Sprite',['../classcturtle_1_1Sprite.html',1,'cturtle::Sprite'],['../classcturtle_1_1Sprite.html#aab33e551784ad6010ecbb296cb2d5173',1,'cturtle::Sprite::Sprite()']]],
+  ['sprite',['Sprite',['../classcturtle_1_1Sprite.html',1,'cturtle::Sprite'],['../classcturtle_1_1Sprite.html#aab33e551784ad6010ecbb296cb2d5173',1,'cturtle::Sprite::Sprite(Image &amp;img)'],['../classcturtle_1_1Sprite.html#a9df8ca14c2cbf585d8d423a76516d526',1,'cturtle::Sprite::Sprite(Image &amp;img, int srcX, int srcY, int srcW, int srcH)'],['../classcturtle_1_1Sprite.html#a818e253f4d3cbb268e753f5ceee12d1d',1,'cturtle::Sprite::Sprite(const Sprite &amp;copy)']]],
   ['spriteimg',['spriteImg',['../classcturtle_1_1Sprite.html#a7aff22fa5844b2cb6c6cf95467df2421',1,'cturtle::Sprite']]],
+  ['srch',['srcH',['../classcturtle_1_1Sprite.html#ac971ad3971d5a17c480e211c4393e85d',1,'cturtle::Sprite']]],
+  ['srcw',['srcW',['../classcturtle_1_1Sprite.html#a07c26c8940ff747d59932da16046b8df',1,'cturtle::Sprite']]],
+  ['srcx',['srcX',['../classcturtle_1_1Sprite.html#a14ee0caf7711b2bf11095ddaac069c74',1,'cturtle::Sprite']]],
+  ['srcy',['srcY',['../classcturtle_1_1Sprite.html#adc6670708305b93417b816d5461ff8f6',1,'cturtle::Sprite']]],
   ['stamp',['stamp',['../structcturtle_1_1SceneObject.html#a014644aee0792d77bd84a0b98464f39b',1,'cturtle::SceneObject::stamp()'],['../classcturtle_1_1RawTurtle.html#a629f1a8b0898bec27238a3e20595379c',1,'cturtle::RawTurtle::stamp()']]],
   ['stampid',['stampid',['../structcturtle_1_1SceneObject.html#ae6094918613e5d4d284805cd5afb2e65',1,'cturtle::SceneObject']]],
   ['steel_5fblue',['steel_blue',['../structcturtle_1_1Color.html#a22bfb9a9115d652faa5f277c64bc8f54',1,'cturtle::Color']]],

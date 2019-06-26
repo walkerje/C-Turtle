@@ -24,7 +24,6 @@ endif()
 if(BUILD_EXAMPLES)
     set(EXAMPLE_SOURCE_DIR "${PROJECT_SOURCE_DIR}/examples")
     message("Adding example executables from \"${EXAMPLE_SOURCE_DIR}\".")
-    #TODO: set output dir
 
     file(GLOB files "${EXAMPLE_SOURCE_DIR}/*.cpp")
     
@@ -63,7 +62,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     endif(BUILD_STATIC)
 
     if(BUILD_DYNAMIC)
-        add_library(CTurtle-Static SHARED ${CTURTLE_CPP_FILE})
+        add_library(CTurtle-Dynamic SHARED ${CTURTLE_CPP_FILE})
     endif(BUILD_DYNAMIC)
 
     if(BUILD_SANDBOX)
