@@ -820,11 +820,19 @@ namespace cturtle{
                  Initializes this color to white. (all components 255)*/
         Color(){r = g = b = 255;}
         
-        /*\brief Returns a pointer to the first component of this color.
+        /**\brief Returns a pointer to the first component of this color.
                  This is useful for functions which require color as an input array.
           Returns a read-only pointer to the elements, in sequential order.*/
         const component_t* const rgbPtr() const{
             return &r;
+        }
+        
+        /**\brief Assigns R, G, and B values to the specified pointer.
+         * Must contain enough valid space at dest to hold 3 bytes.*/
+        void assignAt(component_t* dest) const{
+            dest[0] = r;
+            dest[1] = g;
+            dest[2] = b;
         }
         
         /*TODO: Document Me*/
