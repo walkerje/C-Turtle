@@ -98,8 +98,8 @@ namespace cturtle{
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa RawTurtle::getAnimMS()*/
     enum TurtleSpeed{
-        TS_FASTEST  = 10,
-        TS_FAST     = 9,
+        TS_FASTEST  = 0,
+        TS_FAST     = 10,
         TS_NORMAL   = 6,
         TS_SLOW     = 3,
         TS_SLOWEST  = 1
@@ -399,9 +399,13 @@ namespace cturtle{
         virtual ~RawTurtle(){}
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
-        std::vector<std::pair<Color, Line>> traceLines;
         std::list<AffineTransform> transformStack = {AffineTransform()};
         AffineTransform& transform = transformStack.back();
+        
+        /**These variables are used to draw the "travel" line when
+         * the turtle is traveling. (e.g, the line between where it's going*/
+        Point travelPoints[2];
+        bool    traveling = false;
         
         //Pen Attributes
         float moveSpeed = TS_NORMAL;
@@ -412,6 +416,7 @@ namespace cturtle{
         Color penColor = Color::black;
         
         //Accumulators
+        std::list<SceneObject>::iterator fillInsert;
         Polygon fillAccum;
         Color fillColor = Color::black;
         
@@ -449,17 +454,22 @@ namespace cturtle{
          *\param text The string to draw.*/
         bool pushText(const AffineTransform& t, Color color, const std::string& text);
         
+        /**\brief Internal function used to add a trace line object to the turtle screen.
+         *\param a Point A
+         *\param b Point B*/
+        bool pushTraceLine(Point a, Point b);
+        
+        /**\brief Pops the previously pushed item (through any of the preceeding push functions).*/
+        bool popSceneItem();
+        
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
         inline long int getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((10.0f - moveSpeed)/10.0f) * 1000);
+            return moveSpeed <= 0 ? 0 : long(((11.0f - moveSpeed)/10.0f) * 300);
         }
         
         /**Redraws the parent screen.*/
-        void updateParent(bool redraw = true, bool processInput = true);
-        
-        /*Pushes the current transformed point.*/
-        void pushCurrent();
+        void updateParent(bool invalidate = false, bool input = true);
         
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.
@@ -491,7 +501,6 @@ namespace cturtle{
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
         TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
-            swapDisplay(2);
             initEventThread();
         }
         /**Title constructor.
@@ -501,7 +510,6 @@ namespace cturtle{
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
-            swapDisplay(2);
             initEventThread();
         }
         /**Width, height, and title constructor.
@@ -514,7 +522,6 @@ namespace cturtle{
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
-            swapDisplay(2);
             initEventThread();
         }
         
@@ -583,7 +590,7 @@ namespace cturtle{
         //might just leave this function out
         
         /*TODO: Document Me*/
-        void update(bool doRedraw = true, bool processInput = true);
+        void update(bool invalidateDraw = false, bool processInput = true);
         
         /**Sets the delay set between turtle commands.*/
         void delay(unsigned int ms);
@@ -638,10 +645,7 @@ namespace cturtle{
         }
         
         /**Draws all geometry from all child turtles and swaps this display.*/
-        void redraw();
-        
-        /**Swaps the display.*/
-        inline void swap(){swapDisplay();}
+        void redraw(bool invalidate = false);
         
         /**Returns the screen-level AffineTransform
           of this screen. This is what puts the origin
@@ -710,16 +714,18 @@ namespace cturtle{
         cimg::CImgDisplay   display;
         Image               canvas;
         
+        //The turtle composite image.
+        //This image copies the canvas and has
+        //turtles drawn to it to avoid redrawing a "busy" canvas
+        Image turtleComposite;
+        int lastTotalObjects = 0;
+        
         Color backgroundColor   = Color::white;
         Image backgroundImage;
         ScreenMode curMode      = SM_STANDARD;
         
         /**Redraw delay, in milliseconds.*/
         long int delayMS = 10;
-        
-        /**Swaps the front and back display
-          pixel buffers, then displays the front buffer.*/
-        void swapDisplay(int times = 1);
         
         void initEventThread();
         

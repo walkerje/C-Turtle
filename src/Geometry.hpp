@@ -617,6 +617,9 @@ namespace cturtle {
     void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width){
         if (x1 == x2 && y1 == y2) {
             return;
+        }else if(width == 1){
+            imgRef.draw_line(x1,y1,x2,y2,c.rgbPtr());
+            return;
         }
         const double xoffs = std::abs(x1 - x2);
         const double yoffs = std::abs(y1 - y2);
