@@ -28,6 +28,7 @@
 
 #pragma once
 #include "CImg.h"
+#include <list>
 #include <functional>
 
 namespace cturtle{
@@ -125,6 +126,10 @@ namespace cturtle{
         KEY_PADDIV = cimg_library::cimg::keyPADDIV
     };
     
+    /**Returns a read-only reference to a list of all
+     * possible input keys.*/
+    const std::map<std::string, KeyboardKey>& listKeys();
+    
     /**\brief The MouseButton Enumeration holds all accepted mouse
      *        input buttons.
      *  These button enumerations are represented as bitwise flags.*/
@@ -137,6 +142,8 @@ namespace cturtle{
     struct InputEvent{
         //True for keyboard, false for mouse
         bool type = false;
+        //For keyboard; true if key down, false if key up.
+        bool isDown = false;
         //mouseX, mouseY
         int mX = 0;
         int mY = 0;
@@ -246,6 +253,10 @@ namespace cturtle{
             {"PADMUL", KEY_PADMUL},
             {"PADDIV", KEY_PADDIV}
         };
+    }
+    
+    const std::map<std::string, KeyboardKey>& getKeys(){
+        return NAMEDKEYS;
     }
     
     KeyboardKey keyFromName(const std::string& name){

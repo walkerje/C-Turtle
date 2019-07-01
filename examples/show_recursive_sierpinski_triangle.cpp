@@ -7,7 +7,7 @@
 
 namespace ct = cturtle;
 
-void draw_triangle(ct::Point a, ct::Point b, ct::Point c, ct::Color color, ct::RawTurtle& myTurtle){
+void draw_triangle(ct::Point a, ct::Point b, ct::Point c, ct::Color color, ct::Turtle& myTurtle){
     myTurtle.fillcolor(color);
     myTurtle.penup();
     myTurtle.goTo(a.x, a.y);
@@ -21,7 +21,7 @@ void draw_triangle(ct::Point a, ct::Point b, ct::Point c, ct::Color color, ct::R
 
 //getMid already defined as "middle" function in C-Turtle namespace :)
 
-void sierpinski(ct::Point a, ct::Point b, ct::Point c, int degree, ct::RawTurtle& myTurtle){
+void sierpinski(ct::Point a, ct::Point b, ct::Point c, int degree, ct::Turtle& myTurtle){
     const std::string colormap[] = {"blue", "red", "green", "white", "yellow", "violet", "orange"};
     draw_triangle(a,b,c, {colormap[degree]}, myTurtle);
     if(degree > 0){
@@ -33,12 +33,9 @@ void sierpinski(ct::Point a, ct::Point b, ct::Point c, int degree, ct::RawTurtle
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    scr.delay(0);
-    ct::RawTurtle rt(scr);
-    rt.speed(ct::TS_FAST);
+    ct::Turtle rt(scr);
     
-    ct::Point myPoints[] = {{-200, 100}, {0, -200}, {200, 100}};
-
+    ct::Point myPoints[] = {{-200, -100}, {0, 200}, {200, -100}};
     sierpinski(myPoints[0], myPoints[1], myPoints[2], 3, rt);
     
     scr.exitonclick();

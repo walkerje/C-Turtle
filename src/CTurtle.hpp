@@ -73,8 +73,8 @@ namespace cturtle{
     /*Timer event callback type.*/
     typedef std::function<void(void)> TimerFunc;
     
-    //RawTurtle prototype definition
-    class RawTurtle;
+    //Turtle prototype definition
+    class Turtle;
     //TurtleScreen prototype definition
     class TurtleScreen;
     
@@ -96,7 +96,7 @@ namespace cturtle{
     const IDrawableGeometry& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
-     * \sa RawTurtle::getAnimMS()*/
+     * \sa Turtle::getAnimMS()*/
     enum TurtleSpeed{
         TS_FASTEST  = 0,
         TS_FAST     = 10,
@@ -167,10 +167,10 @@ namespace cturtle{
     };
 
     //TODO: Finish and document
-    class RawTurtle{
+    class Turtle{
     public:
         /*Implemented in source impl. file*/
-        RawTurtle(TurtleScreen& scr);
+        Turtle(TurtleScreen& scr);
         
         //Motion
         
@@ -297,13 +297,14 @@ namespace cturtle{
          *\param p The polygon to derive shape geometry from.*/
         void shape(const IDrawableGeometry& p){
             cursor = &const_cast<IDrawableGeometry&>(p);
-            updateParent(true, false);
+            updateParent(false, false);
         }
         
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
             cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
+            updateParent(false, false);
         }
         
         /**\brief Returns the shape of this turtle.*/
@@ -396,7 +397,7 @@ namespace cturtle{
         }
         
         /**\brief Empty virtual destructor.*/
-        virtual ~RawTurtle(){}
+        virtual ~Turtle(){}
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
         std::list<AffineTransform> transformStack = {AffineTransform()};
@@ -422,7 +423,7 @@ namespace cturtle{
         
         //Cursor (shape)
         /**The shape of the turtle. Named cursor for obvious reasons.*/
-        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
+        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("indented triangle"));
         /**The current unique stamp ID. Incremented with every call to the stamp function.*/
         int curStamp = 0;
         /**A boolean indicating if the cursor is visible or not.*/
@@ -459,9 +460,6 @@ namespace cturtle{
          *\param b Point B*/
         bool pushTraceLine(Point a, Point b);
         
-        /**\brief Pops the previously pushed item (through any of the preceeding push functions).*/
-        bool popSceneItem();
-        
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
         inline long int getAnimMS(){
@@ -478,7 +476,7 @@ namespace cturtle{
         void travelTo(const AffineTransform& dest);
         
         /**Inheritors must assign screen pointer!*/
-        RawTurtle(){}
+        Turtle(){}
     };
     
     /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
@@ -488,7 +486,6 @@ namespace cturtle{
         SM_STANDARD,
         SM_LOGO//,
 //        SM_WORLD
-                
     };
     
     /** TurtleScreen
@@ -502,6 +499,7 @@ namespace cturtle{
         TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
@@ -511,6 +509,7 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         /**Width, height, and title constructor.
          * Assigns the display with the specified dimensions, in pixels, and
@@ -523,10 +522,22 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         
         ~TurtleScreen() {
             bye();
+        }
+        
+        /**Sets an internal variable that dictates how many frames
+         * are skipped between screen updates; higher numbers will
+         * speed up complex turtle drawings.
+         *\param countmax The value of the aforementioned variable.
+         *\param delayMS This value is sent to function "delay".*/
+        void tracer(int countmax, unsigned int delayMS = 10){
+            redrawCounterMax = countmax;
+            delay(delayMS);
+            redraw();
         }
         
         /**Sets the background color of the screen.
@@ -621,7 +632,8 @@ namespace cturtle{
          * rely heavily on user input, as events are still called like normal.*/
         void mainloop(){
             while(!display.is_closed()){
-                update(false);
+                update(false, true);
+                std::this_thread::yield();
             }
         }
         
@@ -655,26 +667,50 @@ namespace cturtle{
             //TODO: Change with the screen modes.
             AffineTransform t;
             t.translate(canvas.width() / 2, canvas.height() / 2);
+            t.scale(1,-1.0f);
             return t;
         }
         
         /**TODO: Document Me*/
-        void onkey(KeyFunc func, KeyboardKey key){
+        void onkeypress(KeyFunc func, KeyboardKey key){
             cacheMutex.lock();
             //determine if key list exists
-            if(keyBindings.find(key) == keyBindings.end()){
-                keyBindings[key] = std::list<KeyFunc>();
+            if(keyBindings[0].find(key) == keyBindings[0].end()){
+                keyBindings[0][key] = std::list<KeyFunc>();
             }
             //then push it to the end of the list
-            keyBindings[key].push_back(func);
+            keyBindings[0][key].push_back(func);
+            cacheMutex.unlock();
+        }
+        
+        /**TODO: Document Me*/
+        //TODO: Make this actually work.
+        //See initEventThread to implement.
+        virtual void onkeyrelease(KeyFunc func, KeyboardKey key){
+            cacheMutex.lock();
+            //determine if key list exists
+            if(keyBindings[1].find(key) == keyBindings[1].end()){
+                keyBindings[1][key] = std::list<KeyFunc>();
+            }
+            //then push it to the end of the list
+            keyBindings[1][key].push_back(func);
             cacheMutex.unlock();
         }
         
         /**TODO: Document Me*/
         void presskey(KeyboardKey key){
-            if(keyBindings.find(key) == keyBindings.end())
+            if(keyBindings[0].find(key) == keyBindings[0].end())
                 return;
-            for(KeyFunc& func : keyBindings[key]){
+            for(KeyFunc& func : keyBindings[0][key]){
+                func();
+            }
+        }
+        
+        /**TODO: Document Me*/
+        void releasekey(KeyboardKey key){
+            if(keyBindings[1].find(key) == keyBindings[1].end())
+                return;
+            for(KeyFunc& func : keyBindings[1][key]){
                 func();
             }
         }
@@ -693,17 +729,24 @@ namespace cturtle{
             }
         }
         
+        void ontimer(TimerFunc func, unsigned int time){
+            timerBindings.push_back(std::make_tuple(func, time, epochTime()));
+        }
+        
         /**Binds the "bye" function to the onclick event for the left
          * mouse button.*/
         void exitonclick(){
-            while(!this->display.is_closed() && !this->display.button()){
-                std::this_thread::yield();
-                //We don't update or anything here.
-            }
+            onclick([&](int x, int y) {
+                display.close();
+                //bye() was having issues in a callback
+                //TODO: figure out why
+                //(this solution works just as well)
+            });
+            mainloop();
         }
         
         /**Adds the specified turtle to this screen.*/
-        void add(RawTurtle& turtle){
+        void add(Turtle& turtle){
             turtles.push_back(&turtle);
         }
         
@@ -727,17 +770,23 @@ namespace cturtle{
         /**Redraw delay, in milliseconds.*/
         long int delayMS = 10;
         
+        /**Redraw Counter.*/
+        int redrawCounter = 0;
+        int redrawCounterMax = 0;
+        
         void initEventThread();
         
         std::list<SceneObject> objects;
-        std::list<RawTurtle*> turtles;
+        std::list<Turtle*> turtles;
         
         std::unique_ptr<std::thread> eventThread;
         std::list<InputEvent> cachedEvents;
         bool killEventThread = false;
         std::mutex cacheMutex;
         
-        std::map<KeyboardKey, std::list<KeyFunc>> keyBindings;
+        //this is an array. 0 for keyDown bindings, 1 for keyUp bindings.
+        std::map<KeyboardKey, std::list<KeyFunc>> keyBindings[2] = {{},{}};
         std::list<MouseFunc> mouseBindings[3] = {{},{},{}};
+        std::list<std::tuple<TimerFunc, uint64_t, uint64_t>> timerBindings;
     };
 }

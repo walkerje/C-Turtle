@@ -7,7 +7,7 @@
 
 namespace ct = cturtle;
 
-void tree(ct::RawTurtle& rt, int len) {
+void tree(ct::Turtle& rt, int len) {
     if(len > 5){
         rt.forward(len);
         rt.right(20);
@@ -21,11 +21,10 @@ void tree(ct::RawTurtle& rt, int len) {
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    scr.delay(0);
-    ct::RawTurtle rt(scr);
+    ct::Turtle rt(scr);
+    //Make the trees "grow" upwards
     rt.left(90);
     rt.pencolor({"green"});
-    rt.speed(ct::TS_FAST);
     
     scr.onclick([&](int x, int y) {
         rt.penup();
