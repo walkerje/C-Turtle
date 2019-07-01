@@ -1,7 +1,8 @@
 var CTurtle_8hpp =
 [
     [ "SceneObject", "structcturtle_1_1SceneObject.html", "structcturtle_1_1SceneObject" ],
-    [ "RawTurtle", "classcturtle_1_1RawTurtle.html", "classcturtle_1_1RawTurtle" ],
+    [ "PenState", "structcturtle_1_1PenState.html", "structcturtle_1_1PenState" ],
+    [ "Turtle", "classcturtle_1_1Turtle.html", "classcturtle_1_1Turtle" ],
     [ "TurtleScreen", "classcturtle_1_1TurtleScreen.html", "classcturtle_1_1TurtleScreen" ],
     [ "KeyFunc", "CTurtle_8hpp.html#ae7de124c8f14a3a7ad5c666e36ccf8b4", null ],
     [ "MouseFunc", "CTurtle_8hpp.html#aec9ca5612868c6afc7ec1d90ebe415c8", null ],

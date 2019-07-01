@@ -88,7 +88,7 @@ var searchData=
   ['key_5fx',['KEY_X',['../namespacecturtle.html#a9a17f5630364a76196a683e1565217e4a054bd93ae6709ba62f5b5220e4d6475f',1,'cturtle']]],
   ['key_5fy',['KEY_Y',['../namespacecturtle.html#a9a17f5630364a76196a683e1565217e4aaed28bfbe9c8011561872f6ee539c956',1,'cturtle']]],
   ['key_5fz',['KEY_Z',['../namespacecturtle.html#a9a17f5630364a76196a683e1565217e4ab4dc1e581bbd508b52d791b3281b5e7f',1,'cturtle']]],
-  ['keybindings',['keyBindings',['../classcturtle_1_1TurtleScreen.html#aa423fce5a8e64c3a513c39c90e63ab15',1,'cturtle::TurtleScreen']]],
+  ['keybindings',['keyBindings',['../classcturtle_1_1TurtleScreen.html#a51892fb380a6922fb06e041e0fd692d2',1,'cturtle::TurtleScreen']]],
   ['keyboardkey',['KeyboardKey',['../namespacecturtle.html#a9a17f5630364a76196a683e1565217e4',1,'cturtle']]],
   ['keyfromname',['keyFromName',['../namespacecturtle.html#af1dad4b20c8e9b66df0bbbfd00dc1083',1,'cturtle']]],
   ['keyfunc',['KeyFunc',['../namespacecturtle.html#ae7de124c8f14a3a7ad5c666e36ccf8b4',1,'cturtle']]],

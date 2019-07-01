@@ -96,5 +96,6 @@ var UserIO_8hpp =
       [ "MOUSEB_RIGHT", "UserIO_8hpp.html#ab76f177cf6e9d1ce6a228dde1ba60047a60794cd2259300879f837d0555e47b5a", null ],
       [ "MOUSEB_MIDDLE", "UserIO_8hpp.html#ab76f177cf6e9d1ce6a228dde1ba60047a328dd703869b3314fc97e47242ceb808", null ]
     ] ],
-    [ "keyFromName", "UserIO_8hpp.html#af1dad4b20c8e9b66df0bbbfd00dc1083", null ]
+    [ "keyFromName", "UserIO_8hpp.html#af1dad4b20c8e9b66df0bbbfd00dc1083", null ],
+    [ "listKeys", "UserIO_8hpp.html#a6c086090a4fc90133d3aaac2606adca9", null ]
 ];

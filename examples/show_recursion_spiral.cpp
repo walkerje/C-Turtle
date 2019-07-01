@@ -7,7 +7,7 @@
 
 namespace ct = cturtle;
 
-void spiral(ct::RawTurtle& rt, int len) {
+void spiral(ct::Turtle& rt, int len) {
     if (len > 0) {
         rt.forward(len);
         rt.right(90);
@@ -17,8 +17,7 @@ void spiral(ct::RawTurtle& rt, int len) {
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    scr.delay(0);
-    ct::RawTurtle rt(scr);
+    ct::Turtle rt(scr);
 
     scr.onclick([&](int x, int y) {
         rt.penup();

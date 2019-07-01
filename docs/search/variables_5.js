@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['fillaccum',['fillAccum',['../classcturtle_1_1RawTurtle.html#a0175e6c02717d8f15d2667973f5a5efa',1,'cturtle::RawTurtle']]],
-  ['fillcolor',['fillColor',['../classcturtle_1_1RawTurtle.html#a4fc7c5ff82050d7999ff7fb00150daa5',1,'cturtle::RawTurtle']]],
-  ['filling',['filling',['../classcturtle_1_1RawTurtle.html#a137ef7329e8eb6665b73bc9a9b2c5534',1,'cturtle::RawTurtle']]],
+  ['fillaccum',['fillAccum',['../classcturtle_1_1Turtle.html#a45a496e0b21f8484fb84b250426b85f1',1,'cturtle::Turtle']]],
+  ['fillcolor',['fillColor',['../structcturtle_1_1PenState.html#a787b9819a36fe8b87d7ce60574df19df',1,'cturtle::PenState']]],
+  ['filling',['filling',['../structcturtle_1_1PenState.html#aa74bc9fbcc2f4eba76d8b8856ba30eff',1,'cturtle::PenState']]],
+  ['fillinsert',['fillInsert',['../classcturtle_1_1Turtle.html#a026d1a7b900edbe75bc074326c3b9671',1,'cturtle::Turtle']]],
   ['firebrick',['firebrick',['../structcturtle_1_1Color.html#a6289fcdea71c0b96cf01eba78c66d25c',1,'cturtle::Color']]],
   ['firebrick1',['firebrick1',['../structcturtle_1_1Color.html#a90d06bd94b663c6138b67050633ee473',1,'cturtle::Color']]],
   ['firebrick2',['firebrick2',['../structcturtle_1_1Color.html#a933266e72edc31c2152322fea95ac0f7',1,'cturtle::Color']]],

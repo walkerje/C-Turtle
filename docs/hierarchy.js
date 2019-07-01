@@ -11,7 +11,8 @@ var hierarchy =
     ] ],
     [ "cturtle::InputEvent", "structcturtle_1_1InputEvent.html", null ],
     [ "cturtle::ivec2", "structcturtle_1_1ivec2.html", null ],
-    [ "cturtle::RawTurtle", "classcturtle_1_1RawTurtle.html", null ],
+    [ "cturtle::PenState", "structcturtle_1_1PenState.html", null ],
     [ "cturtle::SceneObject", "structcturtle_1_1SceneObject.html", null ],
+    [ "cturtle::Turtle", "classcturtle_1_1Turtle.html", null ],
     [ "cturtle::TurtleScreen", "classcturtle_1_1TurtleScreen.html", null ]
 ];

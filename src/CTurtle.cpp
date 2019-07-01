@@ -54,10 +54,11 @@ namespace cturtle {
                 std::shared_ptr<IDrawableGeometry>(
                 new Polygon(
                 {
+                    //CCW
                     {0,0},
-                    {-10, 10},
-                    {0, 10},
-                    {10, 10},
+                    {-5, 10},
+                    {0, 8},
+                    {5, 10}
                 }))},
             {"arrow",
                 std::shared_ptr<IDrawableGeometry>(
@@ -90,7 +91,7 @@ namespace cturtle {
         //3) No background image
         //4) No event bindings
 
-        for (RawTurtle* turtle : turtles) {
+        for (Turtle* turtle : turtles) {
             turtle->setScreen(nullptr);
         }
         
@@ -98,8 +99,11 @@ namespace cturtle {
         backgroundColor = Color::white;
         backgroundImage.assign();
         curMode = SM_STANDARD;
+        
         cacheMutex.lock();
-        keyBindings.clear();
+        timerBindings.clear();
+        keyBindings[0].clear();
+        keyBindings[1].clear();
         for(int i = 0; i < 3; i++)
             mouseBindings[i].clear();
         cacheMutex.unlock();
@@ -129,7 +133,7 @@ namespace cturtle {
     }
 
     void TurtleScreen::resetscreen() {
-        for (RawTurtle* turtle : turtles) {
+        for (Turtle* turtle : turtles) {
             turtle->reset();
         }
     }
@@ -146,6 +150,21 @@ namespace cturtle {
             invalidateDraw = true;
         }
         redraw(invalidateDraw);
+        
+        if(input && !timerBindings.empty()){
+            //Call timer bindings first.
+            uint64_t curTime = epochTime();
+            for(auto& timer : timerBindings){
+                auto& func = std::get<0>(timer);
+                uint64_t reqTime = std::get<1>(timer);
+                uint64_t& lastCalled = std::get<2>(timer);
+
+                if(curTime >= lastCalled + reqTime){
+                    lastCalled = curTime;
+                    func();
+                }
+            }
+        }
         
         /**No events to process in the cache, or we're not processing it right now.*/
         if(cachedEvents.empty() || !input)
@@ -176,14 +195,17 @@ namespace cturtle {
     }
 
     void TurtleScreen::bye() {
-        clearscreen();
         if(eventThread.get() != nullptr){  
             killEventThread = true;
             eventThread->join();
             eventThread.reset(nullptr);
         }
+        
+        clearscreen();
+        
         if(!display.is_closed())
             display.close();
+        
     }
 
     void TurtleScreen::redraw(bool invalidate) {
@@ -191,31 +213,38 @@ namespace cturtle {
             return;
         int fromBack = 0;
         bool hasInvalidated = invalidate;
-        if(invalidate){
-            lastTotalObjects = 0;
-            fromBack = -1;
-        }else{
-            if(lastTotalObjects != objects.size()){
-                if(lastTotalObjects > objects.size()){
-                    //invalidate; size of objects has changed.. 
-                    //it can check this case automatically.
-                    //all other cases which cause invalidation
-                    //must call this function with the first param
-                    //set to true to force invalidation.
-                    lastTotalObjects = 0;
-                    hasInvalidated = true;
-                }else{
-                    fromBack = objects.size() - lastTotalObjects;
-                    lastTotalObjects = objects.size();
-                }
-            };
+        
+        //Handle resizes.
+        if (display.window_width() != canvas.width() || display.window_height() != canvas.height()) {
+            canvas.resize(display);
+            hasInvalidated = true;
         }
+            
+        if (lastTotalObjects != objects.size()) {
+            if (lastTotalObjects > objects.size()) {
+                //invalidate; size of objects has changed.. 
+                //it can check this case automatically.
+                //all other cases which cause invalidation
+                //must call this function with the first param
+                //set to true to force invalidation.
+                hasInvalidated = true;
+            } else {
+                fromBack = objects.size() - lastTotalObjects;
+            }
+        };
         
         if(hasInvalidated){
             if (!backgroundImage.is_empty()) {
                 canvas.assign(backgroundImage);
             } else {
                 canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
+            }
+        }else{
+            if (redrawCounter >= redrawCounterMax) {
+                redrawCounter = 0;
+            } else {
+                redrawCounter++;
+                return;
             }
         }
         
@@ -235,34 +264,51 @@ namespace cturtle {
             } else geom->draw(t, canvas, color);
             latestIter++;
         }
-        
-        turtleComposite.assign(canvas);
-        for(RawTurtle* turt : turtles){
+
+        if(canvas.width() != turtleComposite.width() || canvas.height() || turtleComposite.height()){
+            turtleComposite.assign(canvas);
+        }else{
+            //Let's see if the draw_image is accellerated in some way
+            turtleComposite.draw_image(0,0,canvas);
+        }
+        for (Turtle* turt : turtles) {
             turt->draw(screen, turtleComposite);
         }
-        
+
+        lastTotalObjects = objects.size();
         display.display(turtleComposite);
         sleep(delayMS);
     }
 
     void TurtleScreen::initEventThread() {
         eventThread.reset(new std::thread([&]() {
+            //Mouse button states, between updates.
+            //Keeps track of release/press etc
+            //states for all three mouse buttons for isDown.
             bool mButtons[3] = {false, false, false};
+            //Same thing for keys here.
+            //(this is a list of keys marked as being in a "down" state)
+            std::list<KeyboardKey> mKeys;
+            
             while (!display.is_closed() && !killEventThread) {
                 //Updates all input.
-                if(!cacheMutex.try_lock()){
+                if(!display.is_event()){
                     std::this_thread::yield();
                     continue;
                 }
-
+                
+                cacheMutex.lock();
+                
                 AffineTransform mouseOffset = screentransform();
-
+                Point mousePos = {int((display.mouse_x() - mouseOffset.getTranslateX()) * mouseOffset.getScaleX()),
+                               int((display.mouse_y() - mouseOffset.getTranslateY()) * mouseOffset.getScaleY())};
+                
                 //Update mouse button input.
                 const unsigned int button = display.button();
                 bool buttons[3] = {
                     button & 1, //left
                     button & 2, //right
-                    button & 4//middle
+                    button & 4  //middle
                 };
 
                 for (int i = 0; i < 3; i++) {
@@ -273,30 +319,42 @@ namespace cturtle {
                         //append to the event cache.
                         InputEvent e;
                         e.type = false;
-                        e.mX = display.mouse_x() - mouseOffset.getTranslateX();
-                        e.mY = display.mouse_y() - mouseOffset.getTranslateY();
+                        //perform an inverse translation, then apply scaling.
+                        e.mX = mousePos.x;
+                        e.mY = mousePos.y;
                         e.cbPointer = reinterpret_cast<void*> (&func);
                         cachedEvents.push_back(e);
                     }
                 }
-
                 
-                if(display.is_key()){
-                    //Update keyboard key input.
-                    for (auto& kbPair : keyBindings) {
-                        KeyboardKey key = kbPair.first;
-                        //is key for assigned pair being called?
-                        //if not, skip its processing loop.
-                        if (!display.is_key((unsigned int) key))
-                            continue;
-                        auto& callbackList = kbPair.second;
-                        for (KeyFunc& func : callbackList) {
-                            InputEvent e;
-                            e.type = true;
-                            e.cbPointer = reinterpret_cast<void*> (&func);
-                            cachedEvents.push_back(e);
+                const auto& keys = getKeys();
+                
+                //iterate through every key to determine its state,
+                //then call the appropriate callbacks.
+                for(const auto& keyPair : keys){
+                    KeyboardKey key = keyPair.second;
+                    const bool lastDown = std::find(mKeys.begin(), mKeys.end(), key) != mKeys.end();
+                    const bool curDown = display.is_key((unsigned int) key);
+                    
+                    int state = -1;
+                    if (!lastDown && curDown) {
+                        //Key down.
+                        state = 0;
+                        mKeys.push_back(key);
+                    } else if (lastDown && !curDown) {
+                        //Key up.
+                        state = 1;
+                        mKeys.remove(key);
+                    }else continue; //skip on case where it was down and is down
+                    
+                    try {
+                        //will throw if no bindings available for key,
+                        //and that's perfectly fine, so we just silently catch
+                        auto& bindingList = keyBindings[state][key];
+                        for (auto& cb : bindingList) {
+                            cb();
                         }
-                    }
+                    } catch (...) {}
                 }
 
                 mButtons[0] = buttons[0];
@@ -310,29 +368,28 @@ namespace cturtle {
 
     /*Raw Turtle========================================*/
 
-    RawTurtle::RawTurtle(TurtleScreen& scr) {
+    Turtle::Turtle(TurtleScreen& scr) {
         screen = &scr;
         screen->add(*this);
         screen->redraw(true);
+        state.objectsBefore = 0;
     }
 
     //write
 
-    void RawTurtle::write(const std::string& text) {
-        pushText(transform, fillColor, text);
-        updateParent();
+    void Turtle::write(const std::string& text) {
+        pushText(transform, state.fillColor, text);
+        updateParent(false, false);
     }
 
     //Stamps
 
-    int RawTurtle::stamp() {
-        //shift to generic IDrawableGeometry broke stamp
-        //TODO: Fixme
-        pushStamp(AffineTransform(transform).rotate(cursorTilt), fillColor, cursor);
-        return curStamp;
+    int Turtle::stamp() {
+        pushStamp(AffineTransform(transform).rotate(state.cursorTilt), state.fillColor, state.cursor);
+        return state.curStamp;
     }
 
-    void RawTurtle::clearstamp(int stampid) {
+    void Turtle::clearstamp(int stampid) {
         auto iter = objects.begin();//iterator which holds an iterator to the screen's scene list.
 
         while (iter != objects.end()) {
@@ -352,7 +409,7 @@ namespace cturtle {
         }
     }
 
-    void RawTurtle::clearstamps(int stampid) {
+    void Turtle::clearstamps(int stampid) {
         typedef decltype(objects.begin()) iter_t;
 
         std::list<iter_t> removals;
@@ -374,162 +431,169 @@ namespace cturtle {
 
     //Movement
 
-    void RawTurtle::forward(int pixels) {
+    void Turtle::forward(int pixels) {
         if (screen == nullptr)
             return;
         travelTo(AffineTransform(transform).forward(pixels));
     }
 
-    void RawTurtle::backward(int pixels) {
+    void Turtle::backward(int pixels) {
         if (screen == nullptr)
             return;
         travelTo(AffineTransform(transform).backward(pixels));
     }
 
-    void RawTurtle::right(float amt) {
-        amt = angleMode ? amt : toRadians(amt);
+    void Turtle::right(float amt) {
+        amt = state.angleMode ? -amt : -toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
     }
 
-    void RawTurtle::left(float amt) {
-        amt = angleMode ? -amt : -toRadians(amt);
+    void Turtle::left(float amt) {
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
     }
 
-    void RawTurtle::setheading(float amt) {
+    void Turtle::setheading(float amt) {
         //Swap to correct unit if necessary.
-        amt = angleMode ? amt : toRadians(amt);
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).setRotation(amt));
     }
 
-    void RawTurtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
+    void Turtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
         travelTo(AffineTransform(transform).setTranslation(x, y));
     };
 
-    void RawTurtle::setx(int x) {
+    void Turtle::setx(int x) {
         travelTo(AffineTransform(transform).setTranslationX(x));
     }
 
-    void RawTurtle::sety(int y) {
+    void Turtle::sety(int y) {
         travelTo(AffineTransform(transform).setTranslationY(y));
     }
 
-    void RawTurtle::home() {
+    void Turtle::home() {
         //TODO: SetHome?
         travelTo(AffineTransform());
     }
 
     //Drawing & Misc.
 
-    void RawTurtle::reset() {
+    void Turtle::reset() {
         //Reset objects, transforms, and trace lines
-        for(auto& iter : objects)
-            screen->getScene().erase(iter);
-        objects.clear();
         
-//        traceLines.clear();
+        if(screen != nullptr){
+            while(!objects.empty()){
+                screen->getScene().erase(objects.front());
+                objects.pop_front();
+            }
+        }
+        
         //Note to self, clearing the list, appending a new transform,
         //then reassigning the transform reference just didn't want to work.
         //I have no idea why. Therefore, we're resetting it in the same
         //manner we initially construct it.
-        transformStack = {AffineTransform()};
-        transform = transformStack.back();
-
-        //reset values pulled from initial.
-        moveSpeed = TS_NORMAL;
-        angleMode = false;
-        tracing = true;
-        penWidth = 1;
-        filling = false;
-        penColor = Color::black;
-        fillAccum.points.clear();
-        fillColor = Color::black;
-        cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
-        curStamp = 0;
-        cursorVisible = true;
-        cursorTilt = 0.0f;
-
-        updateParent();
+        stateStack = {PenState()};
+        state = stateStack.back();
+        transform = state.transform;
+        
+        updateParent(true, false);
     }
 
-    void RawTurtle::updateParent(bool invalidate, bool input) {
+    void Turtle::updateParent(bool invalidate, bool input) {
         if (screen != nullptr)
             screen->update(invalidate, input);
     }
 
-    void RawTurtle::circle(int radius, int steps, Color color) {
+    void Turtle::circle(int radius, int steps, Color color) {
         pushGeom(transform, color, new Circle(radius, steps));
         updateParent();
     }
 
-    void RawTurtle::fill(bool state) {
-        if (filling && !state) {
-            screen->getScene().emplace(std::next(fillInsert), new Polygon(fillAccum.points), fillColor, AffineTransform());
-            objects.push_back(std::prev(screen->getScene().end()));
+    void Turtle::fill(bool val) {
+        if (state.filling && !val) {
+            //excuse long line, but this fixes a particularly hard to find bug
+            objects.push_back(screen->getScene().emplace(std::next(fillInsert),
+                    new Polygon(fillAccum.points), state.fillColor, AffineTransform()));
             fillAccum.points.clear();
             updateParent(true, false);
-            //must invalidate because fill geometry sits behind 
             //trace line geometry in the screen's scene list.
-        }else if(!filling && state){
+        }else if(!state.filling && val){
             fillInsert = std::prev(screen->getScene().end());
         }
-        filling = state;
+        state.filling = val;
     }
 
-    void RawTurtle::draw(const AffineTransform& screen, Image& canvas) {
-        if (this->screen == nullptr)
+    void Turtle::draw(const AffineTransform& screen, Image& canvas) {
+        if (this->screen == nullptr || (!state.visible && !state.tracing))
             return;
 
-        if (cursorVisible) {
-            if(traveling && tracing){
+        if (state.visible) {
+            if(traveling && state.tracing){
                 //Draw the "Travel-Line" when in the middle of the travelTo func
                 travelPoints[0] = screen(travelPoints[0]);
                 travelPoints[1] = screen(travelPoints[1]);
                 
-                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, penColor, penWidth);
+                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state.penColor, state.penWidth);
             }
             //Add the extra rotate to start cursor facing right :)
-            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
+            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + state.cursorTilt;
             AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
-            cursor->draw(cursorTransform, canvas, fillColor);
-//            cursor.drawOutline(cursorTransform, canvas);
+            state.cursor->draw(cursorTransform, canvas, state.fillColor, 1, state.penColor);
         }
     }
 
-    void RawTurtle::undo() {
-        if (transformStack.size() <= 1)
-            return; //Cannot undo anymore.
-        objects.pop_back(); //TODO: Will pop regardless of previous action
-//        traceLines.pop_back();
-        transformStack.pop_back();
-        transform = transformStack.back();
-        updateParent();
+    bool Turtle::undo() {
+        const unsigned long int totalBefore = state.objectsBefore;
+        
+        if(stateStack.size() >= 2)
+            travelBack();//Travel back if stack size >= 2
+        
+        if(!popState()){
+            return false;
+        }
+        
+        auto begin = std::prev(objects.end(), (totalBefore - state.objectsBefore));
+        auto iter = begin;
+        
+        while(iter != objects.end()){
+            screen->getScene().erase(*iter);
+            iter++;
+        }
+        
+        objects.erase(begin, objects.end());
+        
+        //Will invalidate.
+        updateParent(true, false);
+        return true;
     }
 
-    void RawTurtle::tilt(float amt) {
-        amt = angleMode ? amt : toRadians(amt);
+    void Turtle::tilt(float amt) {
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = screen->mode() == SM_STANDARD ? amt : -amt;
-        cursorTilt += amt;
-        updateParent();
+        pushState();
+        state.cursorTilt += amt;
+        updateParent(false, false);
     }
 
-    void RawTurtle::setshowturtle(bool state) {
-        cursorVisible = state;
-        updateParent();
+    void Turtle::setshowturtle(bool val) {
+        pushState();
+        state.visible = val;
+        updateParent(false, false);
     }
 
-    void RawTurtle::setpenstate(bool down) {
-        tracing = down;
+    void Turtle::setpenstate(bool down) {
+        pushState();
+        state.tracing = down;
     }
     
-    void RawTurtle::travelTo(const AffineTransform& dest) {
+    void Turtle::travelTo(const AffineTransform& dest) {
         traveling = true;
         
         AffineTransform begin;
@@ -563,63 +627,116 @@ namespace cturtle {
         
         //Contents of PushCurrent moved here because every function
         //that called this one called PushCurrent immediately after it.
-        if(tracing){
+        if(state.tracing){
             pushTraceLine(begin.getTranslation(), dest.getTranslation());
         }
-        
-        transform.assign(dest);
-        
-        if (filling)
+        if (state.filling)
             fillAccum.points.push_back(transform.getTranslation());
         
-        transformStack.push_back(transform);
-        transform = transformStack.back();
-        traveling = false;
+        transform.assign(begin);
+        pushState();
+        transform.assign(dest);
         
-        updateParent(false, true);
+        traveling = false;
+        updateParent(false, false);
     }
     
+    void Turtle::travelBack(){
+        const AffineTransform a = state.transform;
+        const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
+        
+        if(a == b)
+            return;//no interpolation or animation needed.
+        
+        traveling = true;
+        
+        if (screen != nullptr ? !screen->getIsClosed() : false) {//no point in animating with no screen
+            auto& scene = this->screen->getScene();
+            const float duration = getAnimMS();
+            const unsigned long startTime = epochTime();
+            const unsigned long endTime = duration + startTime;
+
+            AffineTransform start;
+            start.assign(a);
+            
+            float progress = duration == 0 ? 1 : 0;
+            while (progress < 1.0f) {
+                //We use the time between animation frames to smooth out
+                //our animations, making them take the same amount of time
+                //regardless of how it's performance.
+                unsigned long curTime = epochTime();
+
+                transform.assign(start.lerp(b, progress));
+                travelPoints[0] = b.getTranslation();
+                travelPoints[1] = transform.getTranslation();
+                screen->redraw();
+                
+                progress = ((curTime - startTime) / duration);
+                std::this_thread::yield();
+            }
+        }
+        
+        state.transform.assign(b);
+        
+        traveling = false;
+        updateParent(false, false);
+    }
     
-    bool RawTurtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
+    void Turtle::pushState(){
+        if(stateStack.size() + 1 > undoStackSize)
+            stateStack.pop_front();
+        stateStack.push_back(PenState(state));
+        state = stateStack.back();
+        transform = state.transform;
+        state.objectsBefore = objects.size();
+    }
+    
+    bool Turtle::popState(){
+        if(stateStack.size() == 1)
+            return false;
+        stateStack.pop_back();
+        state = stateStack.back();
+        transform = state.transform;
+        return true;
+    }
+    
+    bool Turtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
             screen->getScene().emplace_back(geom, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
     }
 
-    bool RawTurtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
+    bool Turtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
-            screen->getScene().emplace_back(geom, color, t, curStamp++);
+            screen->getScene().emplace_back(geom, color, t, state.curStamp++);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
     }
     
-    bool RawTurtle::pushText(const AffineTransform& t, Color color, const std::string& text) {
+    bool Turtle::pushText(const AffineTransform& t, Color color, const std::string& text) {
         if (screen != nullptr) {
             screen->getScene().emplace_back(text, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
     }
     
-    bool RawTurtle::pushTraceLine(Point a, Point b){
+    bool Turtle::pushTraceLine(Point a, Point b){
         if(screen != nullptr){
-            screen->getScene().emplace_back(new Line(a, b, penWidth), penColor, AffineTransform());
+            screen->getScene().emplace_back(new Line(a, b, state.penWidth), state.penColor, AffineTransform());
             objects.push_back(std::prev(screen->getScene().end()));
-            return true;
-        }
-        return false;
-    }
-    
-    bool RawTurtle::popSceneItem(){
-        if(screen != nullptr){
-            screen->getScene().pop_back();
-            objects.pop_back();
+            //Trace lines do NOT push a state.
+            //Their state is encompassed by movement,
+            //and these lines are only added when moving anyway.
             return true;
         }
         return false;

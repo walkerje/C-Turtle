@@ -7,6 +7,8 @@ var searchData=
   ['red2',['red2',['../structcturtle_1_1Color.html#a05b61b065fa5927995b3eb31e54baf3f',1,'cturtle::Color']]],
   ['red3',['red3',['../structcturtle_1_1Color.html#ac1b69860551911e400753a026a112a1e',1,'cturtle::Color']]],
   ['red4',['red4',['../structcturtle_1_1Color.html#a9bc491dba121ec0a572fb953fe6f65c7',1,'cturtle::Color']]],
+  ['redrawcounter',['redrawCounter',['../classcturtle_1_1TurtleScreen.html#ae95844d33fb8accebc8cf6a8cb2791ac',1,'cturtle::TurtleScreen']]],
+  ['redrawcountermax',['redrawCounterMax',['../classcturtle_1_1TurtleScreen.html#a4df74d0e18d91a8c713cb17eb7214d95',1,'cturtle::TurtleScreen']]],
   ['rosy_5fbrown',['rosy_brown',['../structcturtle_1_1Color.html#a903af92a976f611218eaab92855d8e72',1,'cturtle::Color']]],
   ['rosybrown',['RosyBrown',['../structcturtle_1_1Color.html#ae146464d8c11d5dd068907eeadc80c12',1,'cturtle::Color']]],
   ['rosybrown1',['RosyBrown1',['../structcturtle_1_1Color.html#a20c4a04800f4acc47d9e2bf645b8469c',1,'cturtle::Color']]],

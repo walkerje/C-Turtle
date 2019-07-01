@@ -7,5 +7,6 @@ var searchData=
   ['violetred1',['VioletRed1',['../structcturtle_1_1Color.html#ade3f6592c2cc9f040c25343483176a6e',1,'cturtle::Color']]],
   ['violetred2',['VioletRed2',['../structcturtle_1_1Color.html#a0a3934036f3cc1f40f64ddfbb7e881c0',1,'cturtle::Color']]],
   ['violetred3',['VioletRed3',['../structcturtle_1_1Color.html#a7d0517b5544f4c42d7e109a828ee94fe',1,'cturtle::Color']]],
-  ['violetred4',['VioletRed4',['../structcturtle_1_1Color.html#a1c236e56572eb4a18f5a946bccb9cafc',1,'cturtle::Color']]]
+  ['violetred4',['VioletRed4',['../structcturtle_1_1Color.html#a1c236e56572eb4a18f5a946bccb9cafc',1,'cturtle::Color']]],
+  ['visible',['visible',['../structcturtle_1_1PenState.html#a7c1380e85858e04607427fcddeb1cba7',1,'cturtle::PenState']]]
 ];

@@ -36,11 +36,11 @@
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
 #ifndef _MSC_VER
-#include <cmath>//for M_PI
+    #include <cmath>//for M_PI
 #else
-#ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288
-#endif
+    #ifndef M_PI
+        #define M_PI 3.14159265358979323846264338327950288
+    #endif
 #endif
 
 #include "Common.hpp"
@@ -92,6 +92,19 @@ namespace cturtle {
             at(0, 0) = at(1, 1) = 1.0f;
             rotation = 0;
             return *this;
+        }
+        
+        /**\brief Returns a boolean indicating if this transform
+         *        is equivalent in value to the one specified.*/
+        bool operator==(const AffineTransform& other) const{
+            bool eq = true;
+            for(int i = 0; i < 9; i++){
+                if(value[i] != other.value[i]){
+                    eq = false;
+                    break;
+                }
+            }
+            return eq;
         }
 
         /**\brief Returns the X scale of this transform.
@@ -426,7 +439,7 @@ namespace cturtle {
          * \param t The transform at which to draw the geometry.
          * \param imgRef The canvas on which to draw.
          * \param c The color with to draw the geometry.*/
-        virtual void draw(const AffineTransform& t, Image& imgRef, Color c = Color::white) = 0;
+        virtual void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) = 0;
     };
     
     /**\brief The Line class holds two points and the functionality to draw a line
@@ -461,9 +474,8 @@ namespace cturtle {
         /**\brief Empty de-constructor.*/
         ~Line() {
         }
-        
-        
-        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+                
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
     };
 
     /**\brief The Circle class holds a radius and total number of steps, used
@@ -489,7 +501,8 @@ namespace cturtle {
          *\param other Another instance of a circle from which to derive value.*/
         Circle(const Circle& other) : radius(other.radius), steps(steps){}
         
-        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
+
     };
 
     /**\brief The polygon class merely holds a vector of points and a function
@@ -531,13 +544,7 @@ namespace cturtle {
          *\param t The specified transform.*/
         void transform(const AffineTransform& t);
 
-        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
-        
-        /**\brief   Draws the outline of this polygon using a series of lines.
-         *\param t The affine transform to draw the outline at.
-         *\param imgRef The canvas to draw on.
-         *\param c The color to draw the outline in.*/
-        void drawOutline(const AffineTransform& t, Image& imgRef, Color c = Color::black);
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
     };
         
     class Sprite : public IDrawableGeometry{
@@ -573,7 +580,8 @@ namespace cturtle {
         
         /**Draws this Sprite.
          * Disregards the Color attribute in favor of sprites' colors.*/
-        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
+
     protected:
         Image& spriteImg;
     };
@@ -584,29 +592,16 @@ namespace cturtle {
         CompoundPolygon(){}
         
         //Polygon, Fill, Outline
-        typedef std::tuple<std::unique_ptr<IDrawableGeometry>, Color, bool, Color> component_t;
+        typedef std::tuple<std::unique_ptr<IDrawableGeometry>, Color, int, Color> component_t;
 
         template<typename T>
-        void addcomponent(const T& t, Color fill, Color outline){
+        void addcomponent(const T& t, Color fill, int outlineWidth = 0, Color outline = Color::black){
             components.push_back(std::make_tuple(unique_geom_t(new T(t)), fill, true, outline));
-        }
-        
-        template<typename T>
-        void addcomponent(const T& t, Color fill){
-            components.push_back(std::make_tuple(unique_geom_t(new T(t)), fill, false, Color()));
-        }
-        
-        void addpoly(const Polygon& p, Color fill){
-            addcomponent(p, fill);
-        }
-        
-        void addpoly(const Polygon& p, Color fill, Color outline){
-            addcomponent(p, fill, outline);
         }
         
         /**Draws this CompoundPolygon.
          * Disregards the Color attribute in favor of the components' colors*/
-        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black) override;
+        void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
     protected:
         std::list<component_t> components;
     };
@@ -618,37 +613,64 @@ namespace cturtle {
         if (x1 == x2 && y1 == y2) {
             return;
         }else if(width == 1){
+            //Just use the built-in bresenham line function
+            //to draw line with widths of 1.
             imgRef.draw_line(x1,y1,x2,y2,c.rgbPtr());
             return;
         }
-        const double xoffs = std::abs(x1 - x2);
-        const double yoffs = std::abs(y1 - y2);
-        const double woffs = width / 2.0;
-        const int xadjacent = yoffs * woffs / std::sqrt(std::pow(xoffs, 2) + std::pow(yoffs, 2));
-        const int yadjacent = xoffs * woffs / std::sqrt(std::pow(xoffs, 2) + std::pow(yoffs, 2));
-
-        //Clockwise
-        cimg_library::CImg<int> points(4, 2);
-        points(0, 0) = x1 - xadjacent;
-        points(0, 1) = y1 + yadjacent;
-        points(1, 0) = x1 + xadjacent;
-        points(1, 1) = y1 - yadjacent;
-        points(2, 0) = x2 + xadjacent;
-        points(2, 1) = y2 - yadjacent;
-        points(3, 0) = x2 - xadjacent;
-        points(3, 1) = y2 + yadjacent;
-        imgRef.draw_polygon(points, c.rgbPtr());
+        //We pretty much re-implement Bresenham's Line Algorithm here,
+        //however instead of blitting pixels at each spot we put circles,
+        //which matches the rounded thick lines present in the Python implementation.
+        //This also allows for variable width.
+        
+        const bool isSteep = (std::abs(y2 - y1) > std::abs(x2 - x1));
+        if(isSteep){
+            std::swap(x1, y1);
+            std::swap(x2, y2);
+        }
+        
+        if(x1 > x2){
+            std::swap(x1, x2);
+            std::swap(y1, y2);
+        }
+        
+        const int dx = x2 - x1;
+        const int dy = std::abs(y2 - y1);
+        
+        int err = dx / 2;
+        const int ystep = (y1 < y2) ? 1 : -1;
+        int y = y1;
+        
+        const int maxX = x2;
+        
+        const int radius = std::ceil(float(width) / 2.0f);
+        
+        for(int x = x1; x < maxX; x++){
+            if(isSteep)
+                imgRef.draw_circle(y, x, radius, c.rgbPtr());
+            else
+                imgRef.draw_circle(x, y, radius, c.rgbPtr());
+            err -= dy;
+            if(err < 0){
+                y += ystep;
+                err += dx;
+            }
+        }
     }
     
-    void Line::draw(const AffineTransform& t, Image& imgRef, Color c) {
+    void Line::draw(const AffineTransform& t, Image& imgRef, Color c, int outlineWidth, Color outlineColor) {
         const Point a = t(pointA);
         const Point b = t(pointB);
         if(a.x == b.x && a.y == b.y)
             return;//no point in drawing a line between like points
         drawLine(imgRef, a.x, a.y, b.x, b.y, c, width);
+        //not even going to bother implementing an outline for this
+        //how would that even look?
     }
 
-    void Circle::draw(const AffineTransform& t, Image& imgRef, Color c) {
+    void Circle::draw(const AffineTransform& t, Image& imgRef, Color c, int outlineWidth, Color outlineColor) {
+        if(steps <= 0)
+            return;//no step check
         cimg::CImg<int> passPts(steps, 2);
         
         for(int i = 0; i < steps; i++){
@@ -661,6 +683,15 @@ namespace cturtle {
         }
         
         imgRef.draw_polygon(passPts, c.rgbPtr());
+        
+        if(outlineWidth > 0){//draw outline using previously generated points.
+            //LineLoop impl
+            for(int i = 1; i < steps; i++){
+                drawLine(imgRef, passPts(i-1, 0), passPts(i-1, 1), passPts(i, 0), passPts(i, 1), outlineColor, outlineWidth);
+            }
+            //draw last line between first and last
+            drawLine(imgRef, passPts(steps-1, 0), passPts(steps-1, 1), passPts(0, 0), passPts(0, 1), outlineColor, outlineWidth);
+        }
     }
 
     void Polygon::transform(const AffineTransform& t) {
@@ -669,7 +700,7 @@ namespace cturtle {
         }
     }
 
-    void Polygon::draw(const AffineTransform& t, Image& imgRef, Color c) {
+    void Polygon::draw(const AffineTransform& t, Image& imgRef, Color c, int outlineWidth, Color outlineColor) {
         if (points.empty())
             return;
         /*CImg is a pain in the butt and requires all polygons to be
@@ -685,32 +716,18 @@ namespace cturtle {
         }
         
         imgRef.draw_polygon(passPts, c.rgbPtr());
-    }
-    
-    void Polygon::drawOutline(const AffineTransform& t, Image& imgRef, Color c){
-        if(points.size() < 2)
-            return;
         
-        typedef decltype(points.begin()) iter_t;
-        
-        iter_t cur = points.begin()++;
-        iter_t last = points.begin();
-        
-        while(cur != points.end()){
-            Point a = t(*cur);
-            Point b = t(*last);
-            imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
-            last = cur;
-            cur++;
+        if(outlineWidth > 0){//draw outline using previously generated points.
+            //LineLoop impl
+            for(int i = 1; i < points.size(); i++){
+                drawLine(imgRef, passPts(i-1, 0), passPts(i-1, 1), passPts(i, 0), passPts(i, 1), outlineColor, outlineWidth);
+            }
+            //draw last line between first and last
+            drawLine(imgRef, passPts(points.size()-1, 0), passPts(points.size()-1, 1), passPts(0, 0), passPts(0, 1), outlineColor, outlineWidth);
         }
-        
-        /*Draw a line between the first and last points.*/
-        Point a = t(points.front());
-        Point b = t(points.back());
-        imgRef.draw_line(a.x, a.y, b.x, b.y, c.rgbPtr());
     }
     
-    void Sprite::draw(const AffineTransform& t, Image& imgRef, Color c){
+    void Sprite::draw(const AffineTransform& t, Image& imgRef, Color c, int outlineWidth, Color outlineColor){
         //Vertex order is as follows for the constructed quad.
         // 0--3        3
         // | /        /|
@@ -734,7 +751,7 @@ namespace cturtle {
             {srcX+srcW, srcY+srcH}
         };
         
-        /**Transforms the set of points.*/
+        /**Transforms the set of destination points.*/
         for(int i = 0; i < 4; i++){
             destPoints[i] = t(destPoints[i]);
         }
@@ -743,19 +760,24 @@ namespace cturtle {
                   spriteImg, texturePoints[0][0], texturePoints[0][1], texturePoints[1][0], texturePoints[1][1], texturePoints[3][0], texturePoints[3][1]);
         imgRef.draw_triangle(destPoints[1][0], destPoints[1][1], destPoints[2][0], destPoints[2][1], destPoints[3][0], destPoints[3][1],
                   spriteImg, texturePoints[1][0], texturePoints[1][1], texturePoints[2][0], texturePoints[2][1], texturePoints[3][0], texturePoints[3][1]);
+        
+        if(outlineWidth > 0){//draw outline using previously generated points.
+            //LineLoop impl
+            for(int i = 1; i < 4; i++){
+                drawLine(imgRef, destPoints[i-1][0], destPoints[i-1][1], destPoints[i][0], destPoints[i][1], outlineColor, outlineWidth);
+            }
+            //draw last line between first and last
+            drawLine(imgRef, destPoints[3][0], destPoints[3][1], destPoints[0][0], destPoints[0][1], outlineColor, outlineWidth);
+        }
     }
     
-    void CompoundPolygon::draw(const AffineTransform& t, Image& imgRef, Color c){
+    void CompoundPolygon::draw(const AffineTransform& t, Image& imgRef, Color c, int outline, Color outColor){
         for(component_t& comp : components){
             IDrawableGeometry* p = std::get<0>(comp).get();
             Color fill = std::get<1>(comp);
-            bool doOutline = std::get<2>(comp);
-            Color outline = std::get<3>(comp);
-            
-            p->draw(t, imgRef, fill);
-            //TODO: Fix Outlines for Generic drawables
-//            if(doOutline)
-//                p->drawOutline(t, imgRef, outline);
+            int outlineWidth = std::get<2>(comp);
+            Color outlineColor = std::get<3>(comp);
+            p->draw(t, imgRef, fill, outlineWidth, outlineColor);
         }
     }
 }

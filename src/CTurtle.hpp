@@ -73,8 +73,8 @@ namespace cturtle{
     /*Timer event callback type.*/
     typedef std::function<void(void)> TimerFunc;
     
-    //RawTurtle prototype definition
-    class RawTurtle;
+    //Turtle prototype definition
+    class Turtle;
     //TurtleScreen prototype definition
     class TurtleScreen;
     
@@ -96,7 +96,7 @@ namespace cturtle{
     const IDrawableGeometry& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
-     * \sa RawTurtle::getAnimMS()*/
+     * \sa Turtle::getAnimMS()*/
     enum TurtleSpeed{
         TS_FASTEST  = 0,
         TS_FAST     = 10,
@@ -166,11 +166,48 @@ namespace cturtle{
             text(text), color(color), transform(t){}
     };
 
+    /**Pen State structure.
+     * Holds all pen attributes.*/
+    struct PenState {
+        AffineTransform transform;
+        float moveSpeed = TS_NORMAL;
+        bool tracing = true;
+        bool angleMode = false;
+        int penWidth = 1;
+        bool filling = false;
+        Color penColor = Color::black;
+        Color fillColor = Color::black;
+        unsigned long int objectsBefore = 0;
+        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&> (cturtle::shape("indented triangle"));
+        int curStamp = 0;
+        bool visible = true;
+        float cursorTilt = 0;
+        
+        //May need stateBegin iterator for scene objects
+        
+        PenState(){}
+        PenState(const PenState& copy){
+            transform = copy.transform;
+            moveSpeed = copy.moveSpeed;
+            tracing = copy.tracing;
+            angleMode = copy.angleMode;
+            penWidth = copy.penWidth;
+            filling = copy.filling;
+            penColor = copy.penColor;
+            fillColor = copy.fillColor;
+            cursor = copy.cursor;
+            curStamp = copy.curStamp;
+            visible = copy.visible;
+            cursorTilt = copy.cursorTilt;
+            objectsBefore = copy.objectsBefore;
+        }
+    };
+
     //TODO: Finish and document
-    class RawTurtle{
+    class Turtle{
     public:
         /*Implemented in source impl. file*/
-        RawTurtle(TurtleScreen& scr);
+        Turtle(TurtleScreen& scr);
         
         //Motion
         
@@ -275,10 +312,15 @@ namespace cturtle{
         
         /**\brief Sets the fill color of this turtle.
          *\param c The color with which to fill polygons.*/
-        void fillcolor(Color c){fillColor = c;}
+        void fillcolor(Color c){
+            pushState();
+            state.fillColor = c;
+        }
         /**\brief Returns the fill color of this turtle.
          *\return The current fill color.*/
-        Color fillcolor(){return fillColor;}
+        Color fillcolor(){
+            return state.fillColor;
+        }
         
         /**/
         void write(const std::string& text);
@@ -296,35 +338,56 @@ namespace cturtle{
         /**\brief Sets the shape of this turtle.
          *\param p The polygon to derive shape geometry from.*/
         void shape(const IDrawableGeometry& p){
-            cursor = &const_cast<IDrawableGeometry&>(p);
-            updateParent(true, false);
+            pushState();
+            state.cursor = &const_cast<IDrawableGeometry&>(p);
+            updateParent(false, false);
         }
         
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
-            cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
+            pushState();
+            state.cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
+            updateParent(false, false);
         }
         
         /**\brief Returns the shape of this turtle.*/
         const IDrawableGeometry& shape(){
-            return *cursor;
+            return *state.cursor;
         }
         
         /**\brief Undoes the previous action of this turtle.
          *\todo: Currently undoes geometry regardless of previous action.*/
-        void undo();
+        bool undo();
+        
+        /**\brief Set, or disable, the undo buffer.
+         *\param size The size of the undo buffer.*/
+        void setundobuffer(unsigned int size){
+            if(size < 1)//clamp lower bound to 1
+                size = 1;
+            
+            undoStackSize = size;
+            while(stateStack.size() > size){
+                stateStack.pop_front();
+            }
+        }
+        
+        /**\brief Returns the size of the undo stack.*/
+        unsigned int undobufferentries(){
+            return stateStack.size();
+        }
         
         /**\brief Sets the speed of this turtle in range of 0 to 10.
          *\param The speed of the turtle, in range of 0 to 10.
          *\sa cturtle::TurtleSpeed*/
         void speed(float val){
-            moveSpeed = val;
+            pushState();
+            state.moveSpeed = val;
         }
         
         /**\brief Returns the speed of this turtle.*/
         float speed(){
-            return moveSpeed;
+            return state.moveSpeed;
         }
         
         /**\brief Applies a rotation to the */
@@ -332,7 +395,7 @@ namespace cturtle{
         
         /**\brief Returns the rotation of the cursor. Not the heading,
          *        or the angle at which the forward function will move.*/
-        float tilt(){return angleMode ? cursorTilt : toDegrees(cursorTilt);}
+        float tilt(){return state.angleMode ? state.cursorTilt : toDegrees(state.cursorTilt);}
         
         /**\brief Set whether or not the turtle is being shown.
          *\param state True when showing, false othewise.*/
@@ -361,17 +424,24 @@ namespace cturtle{
         
         /**\brief Sets the pen color.
          *\param c The color used by the pen; the color of lines between movements.*/
-        void pencolor(Color c){penColor = c;}
+        void pencolor(Color c){
+            pushState();
+            state.penColor = c;
+        }
+        
         /**\brief Returns the pen color; the color of the lines between movements.
          *\return The color of the pen.*/
-        Color pencolor(){return penColor;}
+        Color pencolor(){return state.penColor;}
         
         /**Sets the width of the pen line.
          *\param pixels The total width, in pixels, of the pen line.*/
-        void width(int pixels){penWidth = pixels;}
+        void width(int pixels){
+            pushState();
+            state.penWidth = pixels;
+        }
         /**Returns the width of the pen line.
          *\return The width of the line, in pixels.*/
-        int width(){return penWidth;}
+        int width(){return state.penWidth;}
         
         /**\brief Draws this turtle on the specified canvas with the specified transform.
          *\param screenTransform The transform at which to draw the turtle objects.
@@ -380,10 +450,16 @@ namespace cturtle{
         
         /**Sets this turtle to use angles measured in degrees.
          *\sa radians()*/
-        void degrees(){angleMode = false;}
+        void degrees(){
+            pushState();
+            state.angleMode = false;
+        }
         /**Sets this turtle to use angles measured in radians.
          *\sa degress()*/
-        inline void radians(){angleMode = true;}
+        inline void radians(){
+            pushState();
+            state.angleMode = true;
+        }
         
         /**\brief Resets this turtle.
          * Moves this turtle home, resets all pen attributes,
@@ -396,42 +472,31 @@ namespace cturtle{
         }
         
         /**\brief Empty virtual destructor.*/
-        virtual ~RawTurtle(){}
+        virtual ~Turtle(){}
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
-        std::list<AffineTransform> transformStack = {AffineTransform()};
-        AffineTransform& transform = transformStack.back();
+        std::list<PenState> stateStack = {PenState()};
+        AffineTransform& transform = stateStack.front().transform;
+        PenState& state = stateStack.front();
         
         /**These variables are used to draw the "travel" line when
          * the turtle is traveling. (e.g, the line between where it's going*/
         Point travelPoints[2];
         bool    traveling = false;
         
-        //Pen Attributes
-        float moveSpeed = TS_NORMAL;
-        bool angleMode = false;//Using Radians = true, degrees = false
-        bool tracing = true;
-        int penWidth = 1;
-        bool filling = false;
-        Color penColor = Color::black;
-        
-        //Accumulators
+        /*Fill insert iterator*/
         std::list<SceneObject>::iterator fillInsert;
-        Polygon fillAccum;
-        Color fillColor = Color::black;
         
-        //Cursor (shape)
-        /**The shape of the turtle. Named cursor for obvious reasons.*/
-        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("triangle"));
-        /**The current unique stamp ID. Incremented with every call to the stamp function.*/
-        int curStamp = 0;
-        /**A boolean indicating if the cursor is visible or not.*/
-        bool cursorVisible = true;
-        /**Cursor tilt (rotation applied to cursor).*/
-        float cursorTilt = 0.0f;
+        unsigned int undoStackSize = 100;
+        
+        /*Accumulator*/
+        Polygon fillAccum;
         
         /*Screen pointer. Assign before calling any other function!*/
         TurtleScreen* screen = nullptr;
+        
+        void pushState();
+        bool popState();
         
         /**
          * \brief Internal function used to add geometry to the turtle screen.
@@ -459,13 +524,10 @@ namespace cturtle{
          *\param b Point B*/
         bool pushTraceLine(Point a, Point b);
         
-        /**\brief Pops the previously pushed item (through any of the preceeding push functions).*/
-        bool popSceneItem();
-        
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
         inline long int getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((11.0f - moveSpeed)/10.0f) * 300);
+            return state.moveSpeed <= 0 ? 0 : long(((11.0f - state.moveSpeed)/10.0f) * 300);
         }
         
         /**Redraws the parent screen.*/
@@ -477,8 +539,13 @@ namespace cturtle{
          * lines if the pen is down.*/
         void travelTo(const AffineTransform& dest);
         
+        /**Performs an interpolation, with animation,
+         * between the current transformation and the previous one.
+         * Will *not* pop state.*/
+        void travelBack();
+        
         /**Inheritors must assign screen pointer!*/
-        RawTurtle(){}
+        Turtle(){}
     };
     
     /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
@@ -488,7 +555,6 @@ namespace cturtle{
         SM_STANDARD,
         SM_LOGO//,
 //        SM_WORLD
-                
     };
     
     /** TurtleScreen
@@ -502,6 +568,7 @@ namespace cturtle{
         TurtleScreen() : display(800, 600, "CTurtle", 0){
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
@@ -511,6 +578,7 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         /**Width, height, and title constructor.
          * Assigns the display with the specified dimensions, in pixels, and
@@ -523,10 +591,22 @@ namespace cturtle{
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
+            redraw(true);
         }
         
         ~TurtleScreen() {
             bye();
+        }
+        
+        /**Sets an internal variable that dictates how many frames
+         * are skipped between screen updates; higher numbers will
+         * speed up complex turtle drawings.
+         *\param countmax The value of the aforementioned variable.
+         *\param delayMS This value is sent to function "delay".*/
+        void tracer(int countmax, unsigned int delayMS = 10){
+            redrawCounterMax = countmax;
+            delay(delayMS);
+            redraw();
         }
         
         /**Sets the background color of the screen.
@@ -621,7 +701,8 @@ namespace cturtle{
          * rely heavily on user input, as events are still called like normal.*/
         void mainloop(){
             while(!display.is_closed()){
-                update(false);
+                update(false, true);
+                std::this_thread::yield();
             }
         }
         
@@ -655,26 +736,50 @@ namespace cturtle{
             //TODO: Change with the screen modes.
             AffineTransform t;
             t.translate(canvas.width() / 2, canvas.height() / 2);
+            t.scale(1,-1.0f);
             return t;
         }
         
         /**TODO: Document Me*/
-        void onkey(KeyFunc func, KeyboardKey key){
+        void onkeypress(KeyFunc func, KeyboardKey key){
             cacheMutex.lock();
             //determine if key list exists
-            if(keyBindings.find(key) == keyBindings.end()){
-                keyBindings[key] = std::list<KeyFunc>();
+            if(keyBindings[0].find(key) == keyBindings[0].end()){
+                keyBindings[0][key] = std::list<KeyFunc>();
             }
             //then push it to the end of the list
-            keyBindings[key].push_back(func);
+            keyBindings[0][key].push_back(func);
+            cacheMutex.unlock();
+        }
+        
+        /**TODO: Document Me*/
+        //TODO: Make this actually work.
+        //See initEventThread to implement.
+        virtual void onkeyrelease(KeyFunc func, KeyboardKey key){
+            cacheMutex.lock();
+            //determine if key list exists
+            if(keyBindings[1].find(key) == keyBindings[1].end()){
+                keyBindings[1][key] = std::list<KeyFunc>();
+            }
+            //then push it to the end of the list
+            keyBindings[1][key].push_back(func);
             cacheMutex.unlock();
         }
         
         /**TODO: Document Me*/
         void presskey(KeyboardKey key){
-            if(keyBindings.find(key) == keyBindings.end())
+            if(keyBindings[0].find(key) == keyBindings[0].end())
                 return;
-            for(KeyFunc& func : keyBindings[key]){
+            for(KeyFunc& func : keyBindings[0][key]){
+                func();
+            }
+        }
+        
+        /**TODO: Document Me*/
+        void releasekey(KeyboardKey key){
+            if(keyBindings[1].find(key) == keyBindings[1].end())
+                return;
+            for(KeyFunc& func : keyBindings[1][key]){
                 func();
             }
         }
@@ -693,17 +798,24 @@ namespace cturtle{
             }
         }
         
+        void ontimer(TimerFunc func, unsigned int time){
+            timerBindings.push_back(std::make_tuple(func, time, epochTime()));
+        }
+        
         /**Binds the "bye" function to the onclick event for the left
          * mouse button.*/
         void exitonclick(){
-            while(!this->display.is_closed() && !this->display.button()){
-                std::this_thread::yield();
-                //We don't update or anything here.
-            }
+            onclick([&](int x, int y) {
+                display.close();
+                //bye() was having issues in a callback
+                //TODO: figure out why
+                //(this solution works just as well)
+            });
+            mainloop();
         }
         
         /**Adds the specified turtle to this screen.*/
-        void add(RawTurtle& turtle){
+        void add(Turtle& turtle){
             turtles.push_back(&turtle);
         }
         
@@ -727,17 +839,23 @@ namespace cturtle{
         /**Redraw delay, in milliseconds.*/
         long int delayMS = 10;
         
+        /**Redraw Counter.*/
+        int redrawCounter = 0;
+        int redrawCounterMax = 0;
+        
         void initEventThread();
         
         std::list<SceneObject> objects;
-        std::list<RawTurtle*> turtles;
+        std::list<Turtle*> turtles;
         
         std::unique_ptr<std::thread> eventThread;
         std::list<InputEvent> cachedEvents;
         bool killEventThread = false;
         std::mutex cacheMutex;
         
-        std::map<KeyboardKey, std::list<KeyFunc>> keyBindings;
+        //this is an array. 0 for keyDown bindings, 1 for keyUp bindings.
+        std::map<KeyboardKey, std::list<KeyFunc>> keyBindings[2] = {{},{}};
         std::list<MouseFunc> mouseBindings[3] = {{},{},{}};
+        std::list<std::tuple<TimerFunc, uint64_t, uint64_t>> timerBindings;
     };
 }
