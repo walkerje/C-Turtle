@@ -36,7 +36,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CTurtle_8cpp.html",
-"classcturtle_1_1RawTurtle.html#a82df741ee4f51fca290796a4e2fc55c9"
+"classcturtle_1_1Turtle.html#a5416304d65c9bbebe0fabd9914123a79"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

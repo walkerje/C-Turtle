@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['add',['add',['../classcturtle_1_1TurtleScreen.html#afc9244fbd2baac7a75ca3c685e829e19',1,'cturtle::TurtleScreen']]],
-  ['addcomponent',['addcomponent',['../classcturtle_1_1CompoundPolygon.html#aff874237c658aeaa96e7dbb2724b5ad8',1,'cturtle::CompoundPolygon::addcomponent(const T &amp;t, Color fill, Color outline)'],['../classcturtle_1_1CompoundPolygon.html#a56416e7acfb3071027482f501ab2efdb',1,'cturtle::CompoundPolygon::addcomponent(const T &amp;t, Color fill)']]],
-  ['addpoly',['addpoly',['../classcturtle_1_1CompoundPolygon.html#ac6d79ba4ae3fe8734e4a5b7339d1fd3b',1,'cturtle::CompoundPolygon::addpoly(const Polygon &amp;p, Color fill)'],['../classcturtle_1_1CompoundPolygon.html#ad3efcba844828b6e015666be091f06a4',1,'cturtle::CompoundPolygon::addpoly(const Polygon &amp;p, Color fill, Color outline)']]],
+  ['add',['add',['../classcturtle_1_1TurtleScreen.html#a74f78fcea9a602e7f53deb2e3a34ea61',1,'cturtle::TurtleScreen']]],
+  ['addcomponent',['addcomponent',['../classcturtle_1_1CompoundPolygon.html#a9e3797e0aefde3a79bbb7c5f52c8abbe',1,'cturtle::CompoundPolygon']]],
   ['affinetransform',['AffineTransform',['../classcturtle_1_1AffineTransform.html',1,'cturtle::AffineTransform'],['../classcturtle_1_1AffineTransform.html#a9403969841455e7c58e549b1e392acfa',1,'cturtle::AffineTransform::AffineTransform()'],['../classcturtle_1_1AffineTransform.html#ae07e66ebf7b3be15c00a1e5547462731',1,'cturtle::AffineTransform::AffineTransform(const AffineTransform &amp;other)']]],
   ['alice_5fblue',['alice_blue',['../structcturtle_1_1Color.html#af8f5f7276a5d35dd5b2d3bba1d6e8913',1,'cturtle::Color']]],
   ['aliceblue',['AliceBlue',['../structcturtle_1_1Color.html#a47896e90ad10890be53ed1fbb761639a',1,'cturtle::Color']]],
-  ['anglemode',['angleMode',['../classcturtle_1_1RawTurtle.html#a962de3c816a0d82415a88868227d3175',1,'cturtle::RawTurtle']]],
+  ['anglemode',['angleMode',['../structcturtle_1_1PenState.html#ae860bb135dc50937453694b8331a014d',1,'cturtle::PenState']]],
   ['antique_5fwhite',['antique_white',['../structcturtle_1_1Color.html#a49505446d8131b844598aeaee37b6211',1,'cturtle::Color']]],
   ['antiquewhite',['AntiqueWhite',['../structcturtle_1_1Color.html#aa130ec5179167411e0a81e38db356309',1,'cturtle::Color']]],
   ['antiquewhite1',['AntiqueWhite1',['../structcturtle_1_1Color.html#a904ed0a77a6adc54ef987c9a952a2df3',1,'cturtle::Color']]],
@@ -19,6 +18,7 @@ var searchData=
   ['aquamarine3',['aquamarine3',['../structcturtle_1_1Color.html#a6af252917df3046d112fb6f6f3af5cf7',1,'cturtle::Color']]],
   ['aquamarine4',['aquamarine4',['../structcturtle_1_1Color.html#a6558412b54beb07043f4e75636bea860',1,'cturtle::Color']]],
   ['assign',['assign',['../classcturtle_1_1AffineTransform.html#a110a3dd04f6182fe2d0e3dc439cf1018',1,'cturtle::AffineTransform']]],
+  ['assignat',['assignAt',['../structcturtle_1_1Color.html#ae285f2470e145a4bc34e22bc2f23dc5b',1,'cturtle::Color']]],
   ['at',['at',['../classcturtle_1_1AffineTransform.html#aff533cbef2c4b00adee8aef92ff3db88',1,'cturtle::AffineTransform']]],
   ['azure',['azure',['../structcturtle_1_1Color.html#a69f2a5808af05e0c0f688eb9d4a53382',1,'cturtle::Color']]],
   ['azure1',['azure1',['../structcturtle_1_1Color.html#af9f98153dbcad96af4277e1188033a81',1,'cturtle::Color']]],

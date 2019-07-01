@@ -8,9 +8,10 @@ var namespacecturtle =
     [ "InputEvent", "structcturtle_1_1InputEvent.html", "structcturtle_1_1InputEvent" ],
     [ "ivec2", "structcturtle_1_1ivec2.html", "structcturtle_1_1ivec2" ],
     [ "Line", "classcturtle_1_1Line.html", "classcturtle_1_1Line" ],
+    [ "PenState", "structcturtle_1_1PenState.html", "structcturtle_1_1PenState" ],
     [ "Polygon", "classcturtle_1_1Polygon.html", "classcturtle_1_1Polygon" ],
-    [ "RawTurtle", "classcturtle_1_1RawTurtle.html", "classcturtle_1_1RawTurtle" ],
     [ "SceneObject", "structcturtle_1_1SceneObject.html", "structcturtle_1_1SceneObject" ],
     [ "Sprite", "classcturtle_1_1Sprite.html", "classcturtle_1_1Sprite" ],
+    [ "Turtle", "classcturtle_1_1Turtle.html", "classcturtle_1_1Turtle" ],
     [ "TurtleScreen", "classcturtle_1_1TurtleScreen.html", "classcturtle_1_1TurtleScreen" ]
 ];

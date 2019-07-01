@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['objects',['objects',['../classcturtle_1_1RawTurtle.html#a14f04b5d207b93514772e1d80bbd85c8',1,'cturtle::RawTurtle::objects()'],['../classcturtle_1_1TurtleScreen.html#a72fa34b717700cb68b7e1990b907ef4a',1,'cturtle::TurtleScreen::objects()']]],
+  ['objects',['objects',['../classcturtle_1_1Turtle.html#af8e77a6dc96ceda700f48ca73a3b79eb',1,'cturtle::Turtle::objects()'],['../classcturtle_1_1TurtleScreen.html#a72fa34b717700cb68b7e1990b907ef4a',1,'cturtle::TurtleScreen::objects()']]],
+  ['objectsbefore',['objectsBefore',['../structcturtle_1_1PenState.html#a2b6db6f40d4572652a1c34af82dc4ff4',1,'cturtle::PenState']]],
   ['old_5flace',['old_lace',['../structcturtle_1_1Color.html#a3107ebcecdd04f3a6830cafdb128d580',1,'cturtle::Color']]],
   ['oldlace',['OldLace',['../structcturtle_1_1Color.html#a3866c19812b6c66a466c413eb53960fd',1,'cturtle::Color']]],
   ['olive_5fdrab',['olive_drab',['../structcturtle_1_1Color.html#aa51342b8c6020043ed6dfdb11e62babc',1,'cturtle::Color']]],
@@ -10,8 +11,11 @@ var searchData=
   ['olivedrab3',['OliveDrab3',['../structcturtle_1_1Color.html#ab7a529692909f9f09315f30659292a7e',1,'cturtle::Color']]],
   ['olivedrab4',['OliveDrab4',['../structcturtle_1_1Color.html#afa2c563a36f0a2bcd59259ec7709c7d0',1,'cturtle::Color']]],
   ['onclick',['onclick',['../classcturtle_1_1TurtleScreen.html#a06c634560a8bcb41f5e29fb8551e20a2',1,'cturtle::TurtleScreen']]],
-  ['onkey',['onkey',['../classcturtle_1_1TurtleScreen.html#a206fe2aa4c5a267327317204c87f7c93',1,'cturtle::TurtleScreen']]],
+  ['onkeypress',['onkeypress',['../classcturtle_1_1TurtleScreen.html#a44758d3f6f306c9ae61c516b28c14b07',1,'cturtle::TurtleScreen']]],
+  ['onkeyrelease',['onkeyrelease',['../classcturtle_1_1TurtleScreen.html#a6dfd30676aed95fb394c54c93f942b2a',1,'cturtle::TurtleScreen']]],
+  ['ontimer',['ontimer',['../classcturtle_1_1TurtleScreen.html#aa1dc8a0c6f50c04561048545609d745a',1,'cturtle::TurtleScreen']]],
   ['operator_28_29',['operator()',['../classcturtle_1_1AffineTransform.html#a26aa5f73bd8fe55e27622eb11959ff9c',1,'cturtle::AffineTransform']]],
+  ['operator_3d_3d',['operator==',['../classcturtle_1_1AffineTransform.html#a7a38d680afc12f8885a71a5bdd13257c',1,'cturtle::AffineTransform']]],
   ['operator_5b_5d',['operator[]',['../structcturtle_1_1ivec2.html#adc88a30605f0f71ea7844956a9473fd9',1,'cturtle::ivec2']]],
   ['orange',['orange',['../structcturtle_1_1Color.html#a200abf022ad4722e449e5fa1aad82bb0',1,'cturtle::Color']]],
   ['orange1',['orange1',['../structcturtle_1_1Color.html#ad9b48eb4bd07f3a90b7ec4fbec67f77e',1,'cturtle::Color']]],

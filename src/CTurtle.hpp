@@ -166,6 +166,43 @@ namespace cturtle{
             text(text), color(color), transform(t){}
     };
 
+    /**Pen State structure.
+     * Holds all pen attributes.*/
+    struct PenState {
+        AffineTransform transform;
+        float moveSpeed = TS_NORMAL;
+        bool tracing = true;
+        bool angleMode = false;
+        int penWidth = 1;
+        bool filling = false;
+        Color penColor = Color::black;
+        Color fillColor = Color::black;
+        unsigned long int objectsBefore = 0;
+        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&> (cturtle::shape("indented triangle"));
+        int curStamp = 0;
+        bool visible = true;
+        float cursorTilt = 0;
+        
+        //May need stateBegin iterator for scene objects
+        
+        PenState(){}
+        PenState(const PenState& copy){
+            transform = copy.transform;
+            moveSpeed = copy.moveSpeed;
+            tracing = copy.tracing;
+            angleMode = copy.angleMode;
+            penWidth = copy.penWidth;
+            filling = copy.filling;
+            penColor = copy.penColor;
+            fillColor = copy.fillColor;
+            cursor = copy.cursor;
+            curStamp = copy.curStamp;
+            visible = copy.visible;
+            cursorTilt = copy.cursorTilt;
+            objectsBefore = copy.objectsBefore;
+        }
+    };
+
     //TODO: Finish and document
     class Turtle{
     public:
@@ -275,10 +312,15 @@ namespace cturtle{
         
         /**\brief Sets the fill color of this turtle.
          *\param c The color with which to fill polygons.*/
-        void fillcolor(Color c){fillColor = c;}
+        void fillcolor(Color c){
+            pushState();
+            state.fillColor = c;
+        }
         /**\brief Returns the fill color of this turtle.
          *\return The current fill color.*/
-        Color fillcolor(){return fillColor;}
+        Color fillcolor(){
+            return state.fillColor;
+        }
         
         /**/
         void write(const std::string& text);
@@ -296,36 +338,56 @@ namespace cturtle{
         /**\brief Sets the shape of this turtle.
          *\param p The polygon to derive shape geometry from.*/
         void shape(const IDrawableGeometry& p){
-            cursor = &const_cast<IDrawableGeometry&>(p);
+            pushState();
+            state.cursor = &const_cast<IDrawableGeometry&>(p);
             updateParent(false, false);
         }
         
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
         void shape(const std::string& name){
-            cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
+            pushState();
+            state.cursor = &const_cast<IDrawableGeometry&>(cturtle::shape(name));
             updateParent(false, false);
         }
         
         /**\brief Returns the shape of this turtle.*/
         const IDrawableGeometry& shape(){
-            return *cursor;
+            return *state.cursor;
         }
         
         /**\brief Undoes the previous action of this turtle.
          *\todo: Currently undoes geometry regardless of previous action.*/
-        void undo();
+        bool undo();
+        
+        /**\brief Set, or disable, the undo buffer.
+         *\param size The size of the undo buffer.*/
+        void setundobuffer(unsigned int size){
+            if(size < 1)//clamp lower bound to 1
+                size = 1;
+            
+            undoStackSize = size;
+            while(stateStack.size() > size){
+                stateStack.pop_front();
+            }
+        }
+        
+        /**\brief Returns the size of the undo stack.*/
+        unsigned int undobufferentries(){
+            return stateStack.size();
+        }
         
         /**\brief Sets the speed of this turtle in range of 0 to 10.
          *\param The speed of the turtle, in range of 0 to 10.
          *\sa cturtle::TurtleSpeed*/
         void speed(float val){
-            moveSpeed = val;
+            pushState();
+            state.moveSpeed = val;
         }
         
         /**\brief Returns the speed of this turtle.*/
         float speed(){
-            return moveSpeed;
+            return state.moveSpeed;
         }
         
         /**\brief Applies a rotation to the */
@@ -333,7 +395,7 @@ namespace cturtle{
         
         /**\brief Returns the rotation of the cursor. Not the heading,
          *        or the angle at which the forward function will move.*/
-        float tilt(){return angleMode ? cursorTilt : toDegrees(cursorTilt);}
+        float tilt(){return state.angleMode ? state.cursorTilt : toDegrees(state.cursorTilt);}
         
         /**\brief Set whether or not the turtle is being shown.
          *\param state True when showing, false othewise.*/
@@ -362,17 +424,24 @@ namespace cturtle{
         
         /**\brief Sets the pen color.
          *\param c The color used by the pen; the color of lines between movements.*/
-        void pencolor(Color c){penColor = c;}
+        void pencolor(Color c){
+            pushState();
+            state.penColor = c;
+        }
+        
         /**\brief Returns the pen color; the color of the lines between movements.
          *\return The color of the pen.*/
-        Color pencolor(){return penColor;}
+        Color pencolor(){return state.penColor;}
         
         /**Sets the width of the pen line.
          *\param pixels The total width, in pixels, of the pen line.*/
-        void width(int pixels){penWidth = pixels;}
+        void width(int pixels){
+            pushState();
+            state.penWidth = pixels;
+        }
         /**Returns the width of the pen line.
          *\return The width of the line, in pixels.*/
-        int width(){return penWidth;}
+        int width(){return state.penWidth;}
         
         /**\brief Draws this turtle on the specified canvas with the specified transform.
          *\param screenTransform The transform at which to draw the turtle objects.
@@ -381,10 +450,16 @@ namespace cturtle{
         
         /**Sets this turtle to use angles measured in degrees.
          *\sa radians()*/
-        void degrees(){angleMode = false;}
+        void degrees(){
+            pushState();
+            state.angleMode = false;
+        }
         /**Sets this turtle to use angles measured in radians.
          *\sa degress()*/
-        inline void radians(){angleMode = true;}
+        inline void radians(){
+            pushState();
+            state.angleMode = true;
+        }
         
         /**\brief Resets this turtle.
          * Moves this turtle home, resets all pen attributes,
@@ -400,39 +475,28 @@ namespace cturtle{
         virtual ~Turtle(){}
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
-        std::list<AffineTransform> transformStack = {AffineTransform()};
-        AffineTransform& transform = transformStack.back();
+        std::list<PenState> stateStack = {PenState()};
+        AffineTransform& transform = stateStack.front().transform;
+        PenState& state = stateStack.front();
         
         /**These variables are used to draw the "travel" line when
          * the turtle is traveling. (e.g, the line between where it's going*/
         Point travelPoints[2];
         bool    traveling = false;
         
-        //Pen Attributes
-        float moveSpeed = TS_NORMAL;
-        bool angleMode = false;//Using Radians = true, degrees = false
-        bool tracing = true;
-        int penWidth = 1;
-        bool filling = false;
-        Color penColor = Color::black;
-        
-        //Accumulators
+        /*Fill insert iterator*/
         std::list<SceneObject>::iterator fillInsert;
-        Polygon fillAccum;
-        Color fillColor = Color::black;
         
-        //Cursor (shape)
-        /**The shape of the turtle. Named cursor for obvious reasons.*/
-        IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("indented triangle"));
-        /**The current unique stamp ID. Incremented with every call to the stamp function.*/
-        int curStamp = 0;
-        /**A boolean indicating if the cursor is visible or not.*/
-        bool cursorVisible = true;
-        /**Cursor tilt (rotation applied to cursor).*/
-        float cursorTilt = 0.0f;
+        unsigned int undoStackSize = 100;
+        
+        /*Accumulator*/
+        Polygon fillAccum;
         
         /*Screen pointer. Assign before calling any other function!*/
         TurtleScreen* screen = nullptr;
+        
+        void pushState();
+        bool popState();
         
         /**
          * \brief Internal function used to add geometry to the turtle screen.
@@ -463,7 +527,7 @@ namespace cturtle{
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
         inline long int getAnimMS(){
-            return moveSpeed <= 0 ? 0 : long(((11.0f - moveSpeed)/10.0f) * 300);
+            return state.moveSpeed <= 0 ? 0 : long(((11.0f - state.moveSpeed)/10.0f) * 300);
         }
         
         /**Redraws the parent screen.*/
@@ -474,6 +538,11 @@ namespace cturtle{
          * Pushes a new fill vertex if filling, and applies appropriate
          * lines if the pen is down.*/
         void travelTo(const AffineTransform& dest);
+        
+        /**Performs an interpolation, with animation,
+         * between the current transformation and the previous one.
+         * Will *not* pop state.*/
+        void travelBack();
         
         /**Inheritors must assign screen pointer!*/
         Turtle(){}

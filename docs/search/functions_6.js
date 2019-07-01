@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['fd',['fd',['../classcturtle_1_1RawTurtle.html#a678aa6592ada466fac973d838c248d7a',1,'cturtle::RawTurtle']]],
-  ['fill',['fill',['../classcturtle_1_1RawTurtle.html#a081db4bfc7fa22530c82155329b402d7',1,'cturtle::RawTurtle']]],
-  ['fillcolor',['fillcolor',['../classcturtle_1_1RawTurtle.html#ab41bd25d2b625f5f3da0d7d07475eddb',1,'cturtle::RawTurtle::fillcolor(Color c)'],['../classcturtle_1_1RawTurtle.html#af241af861224d73f3722da2a19b4b2fa',1,'cturtle::RawTurtle::fillcolor()']]],
-  ['forward',['forward',['../classcturtle_1_1RawTurtle.html#a16a72d4b0078f4686190fc3f0c2a9101',1,'cturtle::RawTurtle::forward()'],['../classcturtle_1_1AffineTransform.html#aaaa73a96a267dd146a242cda3602ea37',1,'cturtle::AffineTransform::forward()']]],
+  ['fd',['fd',['../classcturtle_1_1Turtle.html#a2a9fa6b316c96af547eb90b44fbacdc0',1,'cturtle::Turtle']]],
+  ['fill',['fill',['../classcturtle_1_1Turtle.html#a7026fc9ad563b91b5a7a168718e91d6f',1,'cturtle::Turtle']]],
+  ['fillcolor',['fillcolor',['../classcturtle_1_1Turtle.html#a222a95d61c5cfee661f5244e51d57539',1,'cturtle::Turtle::fillcolor(Color c)'],['../classcturtle_1_1Turtle.html#aa35fb43f969187b513d5a1f443e98569',1,'cturtle::Turtle::fillcolor()']]],
+  ['forward',['forward',['../classcturtle_1_1Turtle.html#a472d13726408a2c4f0820a9365d7822b',1,'cturtle::Turtle::forward()'],['../classcturtle_1_1AffineTransform.html#aaaa73a96a267dd146a242cda3602ea37',1,'cturtle::AffineTransform::forward()']]],
   ['fromname',['fromName',['../structcturtle_1_1Color.html#a612e5960f8077e4f87d49213e4001c3f',1,'cturtle::Color']]]
 ];

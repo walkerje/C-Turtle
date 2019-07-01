@@ -1,11 +1,11 @@
 var searchData=
 [
   ['b',['b',['../structcturtle_1_1Color.html#a6a79faa7f6cf2cbc3c46179ec0aaee0b',1,'cturtle::Color']]],
-  ['back',['back',['../classcturtle_1_1RawTurtle.html#a49bd4dc050654fb3a3550e7743c20924',1,'cturtle::RawTurtle']]],
+  ['back',['back',['../classcturtle_1_1Turtle.html#a3df431a36f6b1efa56c6b885ae22fde9',1,'cturtle::Turtle']]],
   ['backgroundcolor',['backgroundColor',['../classcturtle_1_1TurtleScreen.html#a7865adfa136df2bacb861f66a7853e64',1,'cturtle::TurtleScreen']]],
   ['backgroundimage',['backgroundImage',['../classcturtle_1_1TurtleScreen.html#ae687fcf6bb50288e1b0c2eb26fe57569',1,'cturtle::TurtleScreen']]],
-  ['backward',['backward',['../classcturtle_1_1RawTurtle.html#a1e999eac6563a926156f7e3a66dcd88c',1,'cturtle::RawTurtle::backward()'],['../classcturtle_1_1AffineTransform.html#aee37a1c8977ef5848e2ff18176f11fbe',1,'cturtle::AffineTransform::backward()']]],
-  ['begin_5ffill',['begin_fill',['../classcturtle_1_1RawTurtle.html#afa8dbaf7871e97a7811b49c38bb1d540',1,'cturtle::RawTurtle']]],
+  ['backward',['backward',['../classcturtle_1_1Turtle.html#a2fd24ae80f39ed0598e1d3b2458b6b7b',1,'cturtle::Turtle::backward()'],['../classcturtle_1_1AffineTransform.html#aee37a1c8977ef5848e2ff18176f11fbe',1,'cturtle::AffineTransform::backward()']]],
+  ['begin_5ffill',['begin_fill',['../classcturtle_1_1Turtle.html#a5d441494084c38e8947205a19f70ce73',1,'cturtle::Turtle']]],
   ['beige',['beige',['../structcturtle_1_1Color.html#a03f97fcfd0537846badc45eabd0e0ba2',1,'cturtle::Color']]],
   ['bgcolor',['bgcolor',['../classcturtle_1_1TurtleScreen.html#aa9476339d77c495effca400e83584403',1,'cturtle::TurtleScreen::bgcolor(const Color &amp;color)'],['../classcturtle_1_1TurtleScreen.html#a5f0adf190817fa5afc8249f9b0905121',1,'cturtle::TurtleScreen::bgcolor()']]],
   ['bgpic',['bgpic',['../classcturtle_1_1TurtleScreen.html#af1b18dc6a60818187cd0260d2985a5f6',1,'cturtle::TurtleScreen::bgpic(const Image &amp;img)'],['../classcturtle_1_1TurtleScreen.html#a7448a0233f87f16bb9ae8c935ac2e8fa',1,'cturtle::TurtleScreen::bgpic()']]],
@@ -14,7 +14,7 @@ var searchData=
   ['bisque2',['bisque2',['../structcturtle_1_1Color.html#ae2d5f71de3ebb177000d027c8463200a',1,'cturtle::Color']]],
   ['bisque3',['bisque3',['../structcturtle_1_1Color.html#ac9a10c0be7b11bb6c3fe9d5f06dddf53',1,'cturtle::Color']]],
   ['bisque4',['bisque4',['../structcturtle_1_1Color.html#a8aafb6f1b43b0ce3bb75a0222c37c170',1,'cturtle::Color']]],
-  ['bk',['bk',['../classcturtle_1_1RawTurtle.html#a746573cbfb918bf4f66c66833833458e',1,'cturtle::RawTurtle']]],
+  ['bk',['bk',['../classcturtle_1_1Turtle.html#a3f1ce4b0c550d890f8bfc7e6a02ea1ef',1,'cturtle::Turtle']]],
   ['black',['black',['../structcturtle_1_1Color.html#a99dd9adf77ec01f440ba84e7b081a8ef',1,'cturtle::Color']]],
   ['blanched_5falmond',['blanched_almond',['../structcturtle_1_1Color.html#a8ee3f5e60d3c409fb7bfbb0cf086277c',1,'cturtle::Color']]],
   ['blanchedalmond',['BlanchedAlmond',['../structcturtle_1_1Color.html#a7d543b32e97db2b28030269dca5a59f3',1,'cturtle::Color']]],

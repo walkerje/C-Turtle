@@ -6,6 +6,7 @@ var searchData=
   ['indianred2',['IndianRed2',['../structcturtle_1_1Color.html#a8e5591082e6dc4458e9e41a66a807b8b',1,'cturtle::Color']]],
   ['indianred3',['IndianRed3',['../structcturtle_1_1Color.html#adc2f659fb844af46e9f70e7a481a4320',1,'cturtle::Color']]],
   ['indianred4',['IndianRed4',['../structcturtle_1_1Color.html#afabf505fa52e49864c65b02b9e7ffd62',1,'cturtle::Color']]],
+  ['isdown',['isDown',['../structcturtle_1_1InputEvent.html#a03b38e4d7c525a0202fab84cc128356d',1,'cturtle::InputEvent']]],
   ['ivory',['ivory',['../structcturtle_1_1Color.html#a1b2ce5fdd1bfec57d70f59d233d41d80',1,'cturtle::Color']]],
   ['ivory1',['ivory1',['../structcturtle_1_1Color.html#ad4595aeec64757fb3ea38caecf0d5b79',1,'cturtle::Color']]],
   ['ivory2',['ivory2',['../structcturtle_1_1Color.html#a400e908c4f52e1420e4d24c9b537aadc',1,'cturtle::Color']]],

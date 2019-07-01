@@ -2,7 +2,7 @@ var searchData=
 [
   ['alice_5fblue',['alice_blue',['../structcturtle_1_1Color.html#af8f5f7276a5d35dd5b2d3bba1d6e8913',1,'cturtle::Color']]],
   ['aliceblue',['AliceBlue',['../structcturtle_1_1Color.html#a47896e90ad10890be53ed1fbb761639a',1,'cturtle::Color']]],
-  ['anglemode',['angleMode',['../classcturtle_1_1RawTurtle.html#a962de3c816a0d82415a88868227d3175',1,'cturtle::RawTurtle']]],
+  ['anglemode',['angleMode',['../structcturtle_1_1PenState.html#ae860bb135dc50937453694b8331a014d',1,'cturtle::PenState']]],
   ['antique_5fwhite',['antique_white',['../structcturtle_1_1Color.html#a49505446d8131b844598aeaee37b6211',1,'cturtle::Color']]],
   ['antiquewhite',['AntiqueWhite',['../structcturtle_1_1Color.html#aa130ec5179167411e0a81e38db356309',1,'cturtle::Color']]],
   ['antiquewhite1',['AntiqueWhite1',['../structcturtle_1_1Color.html#a904ed0a77a6adc54ef987c9a952a2df3',1,'cturtle::Color']]],

@@ -58,7 +58,7 @@ var searchData=
   ['mousebindings',['mouseBindings',['../classcturtle_1_1TurtleScreen.html#a3c7d791fe51290db23b745ac9e7eb868',1,'cturtle::TurtleScreen']]],
   ['mousebutton',['MouseButton',['../namespacecturtle.html#ab76f177cf6e9d1ce6a228dde1ba60047',1,'cturtle']]],
   ['mousefunc',['MouseFunc',['../namespacecturtle.html#aec9ca5612868c6afc7ec1d90ebe415c8',1,'cturtle']]],
-  ['movespeed',['moveSpeed',['../classcturtle_1_1RawTurtle.html#abee07c056d57dbf192475fd581ae8793',1,'cturtle::RawTurtle']]],
+  ['movespeed',['moveSpeed',['../structcturtle_1_1PenState.html#af5432bc75dcc374e6269a28a656a6c49',1,'cturtle::PenState']]],
   ['mx',['mX',['../structcturtle_1_1InputEvent.html#ad8ba7f1120fa5337edca37fd96d2d0ab',1,'cturtle::InputEvent']]],
   ['my',['mY',['../structcturtle_1_1InputEvent.html#a2862371531d61ed35e86930a46e5df62',1,'cturtle::InputEvent']]]
 ];

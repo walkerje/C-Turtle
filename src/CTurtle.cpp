@@ -91,7 +91,6 @@ namespace cturtle {
         //3) No background image
         //4) No event bindings
 
-        
         for (Turtle* turtle : turtles) {
             turtle->setScreen(nullptr);
         }
@@ -301,8 +300,8 @@ namespace cturtle {
                 cacheMutex.lock();
                 
                 AffineTransform mouseOffset = screentransform();
-                Point mousePos = {(display.mouse_x() - mouseOffset.getTranslateX()) * mouseOffset.getScaleX(),
-                               (display.mouse_y() - mouseOffset.getTranslateY()) * mouseOffset.getScaleY()};
+                Point mousePos = {int((display.mouse_x() - mouseOffset.getTranslateX()) * mouseOffset.getScaleX()),
+                               int((display.mouse_y() - mouseOffset.getTranslateY()) * mouseOffset.getScaleY())};
                 
                 //Update mouse button input.
                 const unsigned int button = display.button();
@@ -373,20 +372,21 @@ namespace cturtle {
         screen = &scr;
         screen->add(*this);
         screen->redraw(true);
+        state.objectsBefore = 0;
     }
 
     //write
 
     void Turtle::write(const std::string& text) {
-        pushText(transform, fillColor, text);
+        pushText(transform, state.fillColor, text);
         updateParent(false, false);
     }
 
     //Stamps
 
     int Turtle::stamp() {
-        pushStamp(AffineTransform(transform).rotate(cursorTilt), fillColor, cursor);
-        return curStamp;
+        pushStamp(AffineTransform(transform).rotate(state.cursorTilt), state.fillColor, state.cursor);
+        return state.curStamp;
     }
 
     void Turtle::clearstamp(int stampid) {
@@ -444,14 +444,14 @@ namespace cturtle {
     }
 
     void Turtle::right(float amt) {
-        amt = angleMode ? -amt : -toRadians(amt);
+        amt = state.angleMode ? -amt : -toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
     }
 
     void Turtle::left(float amt) {
-        amt = angleMode ? amt : toRadians(amt);
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
@@ -459,7 +459,7 @@ namespace cturtle {
 
     void Turtle::setheading(float amt) {
         //Swap to correct unit if necessary.
-        amt = angleMode ? amt : toRadians(amt);
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).setRotation(amt));
@@ -492,31 +492,17 @@ namespace cturtle {
                 screen->getScene().erase(objects.front());
                 objects.pop_front();
             }
-            screen->redraw(true);
         }
         
         //Note to self, clearing the list, appending a new transform,
         //then reassigning the transform reference just didn't want to work.
         //I have no idea why. Therefore, we're resetting it in the same
         //manner we initially construct it.
-        transformStack = {AffineTransform()};
-        transform = transformStack.back();
-
-        //reset values pulled from their initial values.
-        moveSpeed = TS_NORMAL;
-        angleMode = false;
-        tracing = true;
-        penWidth = 1;
-        filling = false;
-        penColor = Color::black;
-        fillAccum.points.clear();
-        fillColor = Color::black;
-        cursor = &const_cast<IDrawableGeometry&>(cturtle::shape("indented triangle"));
-        curStamp = 0;
-        cursorVisible = true;
-        cursorTilt = 0.0f;
-
-        updateParent(true);
+        stateStack = {PenState()};
+        state = stateStack.back();
+        transform = state.transform;
+        
+        updateParent(true, false);
     }
 
     void Turtle::updateParent(bool invalidate, bool input) {
@@ -529,59 +515,82 @@ namespace cturtle {
         updateParent();
     }
 
-    void Turtle::fill(bool state) {
-        if (filling && !state) {
+    void Turtle::fill(bool val) {
+        if (state.filling && !val) {
             //excuse long line, but this fixes a particularly hard to find bug
             objects.push_back(screen->getScene().emplace(std::next(fillInsert),
-                    new Polygon(fillAccum.points), fillColor, AffineTransform()));
+                    new Polygon(fillAccum.points), state.fillColor, AffineTransform()));
             fillAccum.points.clear();
             updateParent(true, false);
             //trace line geometry in the screen's scene list.
-        }else if(!filling && state){
+        }else if(!state.filling && val){
             fillInsert = std::prev(screen->getScene().end());
         }
-        filling = state;
+        state.filling = val;
     }
 
     void Turtle::draw(const AffineTransform& screen, Image& canvas) {
-        if (this->screen == nullptr || (!cursorVisible && !tracing))
+        if (this->screen == nullptr || (!state.visible && !state.tracing))
             return;
 
-        if (cursorVisible) {
-            if(traveling && tracing){
+        if (state.visible) {
+            if(traveling && state.tracing){
                 //Draw the "Travel-Line" when in the middle of the travelTo func
                 travelPoints[0] = screen(travelPoints[0]);
                 travelPoints[1] = screen(travelPoints[1]);
                 
-                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, penColor, penWidth);
+                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state.penColor, state.penWidth);
             }
             //Add the extra rotate to start cursor facing right :)
-            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + cursorTilt;
+            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + state.cursorTilt;
             AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
-            cursor->draw(cursorTransform, canvas, fillColor, 1, penColor);
+            state.cursor->draw(cursorTransform, canvas, state.fillColor, 1, state.penColor);
         }
     }
 
-    void Turtle::undo() {
-        //\TODO: Need to implement.
-        updateParent();
+    bool Turtle::undo() {
+        const unsigned long int totalBefore = state.objectsBefore;
+        
+        if(stateStack.size() >= 2)
+            travelBack();//Travel back if stack size >= 2
+        
+        if(!popState()){
+            return false;
+        }
+        
+        auto begin = std::prev(objects.end(), (totalBefore - state.objectsBefore));
+        auto iter = begin;
+        
+        while(iter != objects.end()){
+            screen->getScene().erase(*iter);
+            iter++;
+        }
+        
+        objects.erase(begin, objects.end());
+        
+        //Will invalidate.
+        updateParent(true, false);
+        return true;
     }
 
     void Turtle::tilt(float amt) {
-        amt = angleMode ? amt : toRadians(amt);
+        amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
         amt = screen->mode() == SM_STANDARD ? amt : -amt;
-        cursorTilt += amt;
-        updateParent();
+        pushState();
+        state.cursorTilt += amt;
+        updateParent(false, false);
     }
 
-    void Turtle::setshowturtle(bool state) {
-        cursorVisible = state;
-        updateParent();
+    void Turtle::setshowturtle(bool val) {
+        pushState();
+        state.visible = val;
+        updateParent(false, false);
     }
 
     void Turtle::setpenstate(bool down) {
-        tracing = down;
+        pushState();
+        state.tracing = down;
     }
     
     void Turtle::travelTo(const AffineTransform& dest) {
@@ -618,26 +627,84 @@ namespace cturtle {
         
         //Contents of PushCurrent moved here because every function
         //that called this one called PushCurrent immediately after it.
-        if(tracing){
+        if(state.tracing){
             pushTraceLine(begin.getTranslation(), dest.getTranslation());
         }
-        
-        transform.assign(dest);
-        
-        if (filling)
+        if (state.filling)
             fillAccum.points.push_back(transform.getTranslation());
         
-        transformStack.push_back(transform);
-        transform = transformStack.back();
-        traveling = false;
+        transform.assign(begin);
+        pushState();
+        transform.assign(dest);
         
+        traveling = false;
         updateParent(false, false);
+    }
+    
+    void Turtle::travelBack(){
+        const AffineTransform a = state.transform;
+        const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
+        
+        if(a == b)
+            return;//no interpolation or animation needed.
+        
+        traveling = true;
+        
+        if (screen != nullptr ? !screen->getIsClosed() : false) {//no point in animating with no screen
+            auto& scene = this->screen->getScene();
+            const float duration = getAnimMS();
+            const unsigned long startTime = epochTime();
+            const unsigned long endTime = duration + startTime;
+
+            AffineTransform start;
+            start.assign(a);
+            
+            float progress = duration == 0 ? 1 : 0;
+            while (progress < 1.0f) {
+                //We use the time between animation frames to smooth out
+                //our animations, making them take the same amount of time
+                //regardless of how it's performance.
+                unsigned long curTime = epochTime();
+
+                transform.assign(start.lerp(b, progress));
+                travelPoints[0] = b.getTranslation();
+                travelPoints[1] = transform.getTranslation();
+                screen->redraw();
+                
+                progress = ((curTime - startTime) / duration);
+                std::this_thread::yield();
+            }
+        }
+        
+        state.transform.assign(b);
+        
+        traveling = false;
+        updateParent(false, false);
+    }
+    
+    void Turtle::pushState(){
+        if(stateStack.size() + 1 > undoStackSize)
+            stateStack.pop_front();
+        stateStack.push_back(PenState(state));
+        state = stateStack.back();
+        transform = state.transform;
+        state.objectsBefore = objects.size();
+    }
+    
+    bool Turtle::popState(){
+        if(stateStack.size() == 1)
+            return false;
+        stateStack.pop_back();
+        state = stateStack.back();
+        transform = state.transform;
+        return true;
     }
     
     bool Turtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
             screen->getScene().emplace_back(geom, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
@@ -645,8 +712,9 @@ namespace cturtle {
 
     bool Turtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
-            screen->getScene().emplace_back(geom, color, t, curStamp++);
+            screen->getScene().emplace_back(geom, color, t, state.curStamp++);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
@@ -656,6 +724,7 @@ namespace cturtle {
         if (screen != nullptr) {
             screen->getScene().emplace_back(text, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
+            pushState();
             return true;
         }
         return false;
@@ -663,8 +732,11 @@ namespace cturtle {
     
     bool Turtle::pushTraceLine(Point a, Point b){
         if(screen != nullptr){
-            screen->getScene().emplace_back(new Line(a, b, penWidth), penColor, AffineTransform());
+            screen->getScene().emplace_back(new Line(a, b, state.penWidth), state.penColor, AffineTransform());
             objects.push_back(std::prev(screen->getScene().end()));
+            //Trace lines do NOT push a state.
+            //Their state is encompassed by movement,
+            //and these lines are only added when moving anyway.
             return true;
         }
         return false;

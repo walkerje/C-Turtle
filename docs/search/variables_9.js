@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['keybindings',['keyBindings',['../classcturtle_1_1TurtleScreen.html#aa423fce5a8e64c3a513c39c90e63ab15',1,'cturtle::TurtleScreen']]],
+  ['keybindings',['keyBindings',['../classcturtle_1_1TurtleScreen.html#a51892fb380a6922fb06e041e0fd692d2',1,'cturtle::TurtleScreen']]],
   ['khaki',['khaki',['../structcturtle_1_1Color.html#a0c9f4f7bc43f178b75879acd76174709',1,'cturtle::Color']]],
   ['khaki1',['khaki1',['../structcturtle_1_1Color.html#ac5f666f7b2f9224424fcc98b6b68872a',1,'cturtle::Color']]],
   ['khaki2',['khaki2',['../structcturtle_1_1Color.html#a6a351a777a8e25221f5fff96b91c2025',1,'cturtle::Color']]],

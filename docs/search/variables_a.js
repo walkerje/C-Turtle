@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['lasttotalobjects',['lastTotalObjects',['../classcturtle_1_1TurtleScreen.html#a3be08986f5c2e308d3fa0c9bac909fde',1,'cturtle::TurtleScreen']]],
   ['lavender',['lavender',['../structcturtle_1_1Color.html#a980792d2401391dc97fdda0153664e9c',1,'cturtle::Color']]],
   ['lavender_5fblush',['lavender_blush',['../structcturtle_1_1Color.html#a0ef8760592842b4f7669acded29da962',1,'cturtle::Color']]],
   ['lavenderblush',['LavenderBlush',['../structcturtle_1_1Color.html#a73e33b66cb104f88e946ebc735c4448a',1,'cturtle::Color']]],

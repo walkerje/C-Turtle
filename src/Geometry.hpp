@@ -36,11 +36,11 @@
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
 #ifndef _MSC_VER
-#include <cmath>//for M_PI
+    #include <cmath>//for M_PI
 #else
-#ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288
-#endif
+    #ifndef M_PI
+        #define M_PI 3.14159265358979323846264338327950288
+    #endif
 #endif
 
 #include "Common.hpp"
@@ -92,6 +92,19 @@ namespace cturtle {
             at(0, 0) = at(1, 1) = 1.0f;
             rotation = 0;
             return *this;
+        }
+        
+        /**\brief Returns a boolean indicating if this transform
+         *        is equivalent in value to the one specified.*/
+        bool operator==(const AffineTransform& other) const{
+            bool eq = true;
+            for(int i = 0; i < 9; i++){
+                if(value[i] != other.value[i]){
+                    eq = false;
+                    break;
+                }
+            }
+            return eq;
         }
 
         /**\brief Returns the X scale of this transform.

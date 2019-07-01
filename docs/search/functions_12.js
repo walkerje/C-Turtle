@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['undo',['undo',['../classcturtle_1_1RawTurtle.html#ac705257ce7cd7296df3df510180aec34',1,'cturtle::RawTurtle']]],
-  ['update',['update',['../classcturtle_1_1TurtleScreen.html#adda7174f0b666d1ae6e6d5a9e13de0e4',1,'cturtle::TurtleScreen']]],
-  ['updateparent',['updateParent',['../classcturtle_1_1RawTurtle.html#a25b2677475eb24e5f7cd4946acc38625',1,'cturtle::RawTurtle']]]
+  ['undo',['undo',['../classcturtle_1_1Turtle.html#a4f81d27b09b8644bcec06a604f9a42b0',1,'cturtle::Turtle']]],
+  ['undobufferentries',['undobufferentries',['../classcturtle_1_1Turtle.html#ae7fd2fb0ac04dea930d6411f87229dfa',1,'cturtle::Turtle']]],
+  ['update',['update',['../classcturtle_1_1TurtleScreen.html#a38abe864ede9d264d77092a6726b9fcb',1,'cturtle::TurtleScreen']]],
+  ['updateparent',['updateParent',['../classcturtle_1_1Turtle.html#ada9ddbc87c2c9baaf2f1a1051acc3851',1,'cturtle::Turtle']]]
 ];
