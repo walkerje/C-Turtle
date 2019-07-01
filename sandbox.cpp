@@ -4,7 +4,7 @@ namespace ct = cturtle;
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    ct::RawTurtle rt(scr);
+    ct::Turtle rt(scr);
     
     //Put Fun Turtle Code Here!
 
