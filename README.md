@@ -17,10 +17,10 @@ namespace ct = cturtle;
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    scr.bgcolor(ct::Color::white);
-    ct::RawTurtle rt(scr);
+    scr.bgcolor({"white});
+    ct::Turtle rt(scr);
     rt.speed(ct::TS_SLOWEST);    
-    rt.fillcolor(ct::Color::purple);
+    rt.fillcolor({"purple});
 
     rt.begin_fill();
     for(int i = 0; i < 4; i++){
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     }
     rt.end_fill();
     
-    scr.bye();
+    scr.exitonclick();
     return 0;
 }
 ```
