@@ -9,12 +9,12 @@ namespace ct = cturtle;
 
 int main(int argc, char** argv) {
     ct::TurtleScreen scr;
-    scr.delay(0);
     scr.bgcolor({"black"});
-    ct::RawTurtle brad(scr);
-    ct::RawTurtle angie(scr);
+    
+    ct::Turtle brad(scr);
+    ct::Turtle angie(scr);
+    
     brad.pencolor({"yellow"});
-    brad.width(1);
     brad.speed(ct::TS_FASTEST);
     
     for(int i = 0; i < 36; i++){
@@ -26,7 +26,6 @@ int main(int argc, char** argv) {
     }
     
     angie.pencolor({"blue"});
-    angie.width(1);
     angie.speed(ct::TS_FASTEST);
     
     int size = 1;
