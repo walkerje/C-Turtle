@@ -631,7 +631,7 @@ namespace cturtle {
             pushTraceLine(begin.getTranslation(), dest.getTranslation());
         }
         if (state.filling)
-            fillAccum.points.push_back(transform.getTranslation());
+            fillAccum.points.push_back(dest.getTranslation());
         
         transform.assign(begin);
         pushState();
