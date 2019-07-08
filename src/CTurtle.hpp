@@ -356,8 +356,7 @@ namespace cturtle{
             return *state.cursor;
         }
         
-        /**\brief Undoes the previous action of this turtle.
-         *\todo: Currently undoes geometry regardless of previous action.*/
+        /**\brief Undoes the previous action of this turtle.*/
         bool undo();
         
         /**\brief Set, or disable, the undo buffer.
@@ -481,12 +480,13 @@ namespace cturtle{
         
         /**These variables are used to draw the "travel" line when
          * the turtle is traveling. (e.g, the line between where it's going*/
-        Point travelPoints[2];
+        Point   travelPoints[2];
         bool    traveling = false;
         
         /*Fill insert iterator*/
         std::list<SceneObject>::iterator fillInsert;
         
+        /*Undo stack size.*/
         unsigned int undoStackSize = 100;
         
         /*Accumulator*/
@@ -733,10 +733,13 @@ namespace cturtle{
           at the center of the screen rather than at
           at the top left, for example.*/
         AffineTransform screentransform(){
-            //TODO: Change with the screen modes.
             AffineTransform t;
             t.translate(canvas.width() / 2, canvas.height() / 2);
             t.scale(1,-1.0f);
+            //Scale negatively on Y axis to match
+            //Python's coordinate system.
+            //without this scaling, top left is 0,0
+            //instead of the bottom left (which is 0,Y without the scaling)
             return t;
         }
         
@@ -753,8 +756,6 @@ namespace cturtle{
         }
         
         /**TODO: Document Me*/
-        //TODO: Make this actually work.
-        //See initEventThread to implement.
         virtual void onkeyrelease(KeyFunc func, KeyboardKey key){
             cacheMutex.lock();
             //determine if key list exists
@@ -809,7 +810,6 @@ namespace cturtle{
                 display.close();
                 //bye() was having issues in a callback
                 //TODO: figure out why
-                //(this solution works just as well)
             });
             mainloop();
         }

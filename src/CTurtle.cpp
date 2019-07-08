@@ -100,6 +100,7 @@ namespace cturtle {
         backgroundImage.assign();
         curMode = SM_STANDARD;
         
+        //Gotta do binding alterations under the cache's mutex lock.
         cacheMutex.lock();
         timerBindings.clear();
         keyBindings[0].clear();
@@ -128,8 +129,13 @@ namespace cturtle {
         return backgroundImage;
     }
     
-    void TurtleScreen::mode(ScreenMode mode){
+    void TurtleScreen::mode(ScreenMode mode) {
+        //Resets & re-orients all turtles.
+        
         curMode = mode;
+        for (Turtle* t : turtles) {
+            t->reset();
+        }
     }
 
     void TurtleScreen::resetscreen() {
@@ -372,7 +378,7 @@ namespace cturtle {
         screen = &scr;
         screen->add(*this);
         screen->redraw(true);
-        state.objectsBefore = 0;
+        reset();
     }
 
     //write
@@ -446,14 +452,12 @@ namespace cturtle {
     void Turtle::right(float amt) {
         amt = state.angleMode ? -amt : -toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
     }
 
     void Turtle::left(float amt) {
         amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
         travelTo(AffineTransform(transform).rotate(amt));
     }
 
@@ -461,7 +465,7 @@ namespace cturtle {
         //Swap to correct unit if necessary.
         amt = state.angleMode ? amt : toRadians(amt);
         //Flip angle orientation based on screen mode.
-        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : SM_STANDARD;
+        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : amt;
         travelTo(AffineTransform(transform).setRotation(amt));
     }
 
@@ -478,21 +482,13 @@ namespace cturtle {
     }
 
     void Turtle::home() {
-        //TODO: SetHome?
         travelTo(AffineTransform());
     }
 
     //Drawing & Misc.
 
     void Turtle::reset() {
-        //Reset objects, transforms, and trace lines
-        
-        if(screen != nullptr){
-            while(!objects.empty()){
-                screen->getScene().erase(objects.front());
-                objects.pop_front();
-            }
-        }
+        //Reset objects, transforms, trace lines, state, etc.
         
         //Note to self, clearing the list, appending a new transform,
         //then reassigning the transform reference just didn't want to work.
@@ -501,6 +497,25 @@ namespace cturtle {
         stateStack = {PenState()};
         state = stateStack.back();
         transform = state.transform;
+        
+        if(screen != nullptr){
+            //Erase all objects
+            while(!objects.empty()){
+                screen->getScene().erase(objects.front());
+                objects.pop_front();
+            }
+            
+            //Alter cursor tilt and default transform
+            //when operating under SM_LOGO mode.
+            //This is to bring it up-to-par with Python's
+            //implementation of screen modes.
+            //I can't decide if this solution is too "hacky" or not;
+            //it solves the problem, but I could have done it differently.
+            if(screen->mode() == SM_LOGO){
+                state.cursorTilt = (-1.5708);
+                transform.rotate(1.5708);
+            }
+        }
         
         updateParent(true, false);
     }
@@ -542,8 +557,8 @@ namespace cturtle {
                 drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state.penColor, state.penWidth);
             }
             //Add the extra rotate to start cursor facing right :)
-            const float cursorRot = (this->screen->mode() == SM_STANDARD ? 1.5708f : 0.0f) + state.cursorTilt;
-            AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot);
+            float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416; 
+            AffineTransform cursorTransform = screen.copyConcatenate(transform).rotate(cursorRot + state.cursorTilt);
             state.cursor->draw(cursorTransform, canvas, state.fillColor, 1, state.penColor);
         }
     }
