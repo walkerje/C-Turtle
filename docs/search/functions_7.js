@@ -2,8 +2,6 @@ var searchData=
 [
   ['getanimms',['getAnimMS',['../classcturtle_1_1Turtle.html#af567c8c2491fb8dca54d4725f2a6a7a8',1,'cturtle::Turtle']]],
   ['getcanvas',['getcanvas',['../classcturtle_1_1TurtleScreen.html#a8105c3ca6a12200c26a43f2a2714218c',1,'cturtle::TurtleScreen']]],
-  ['getinternaldisplay',['getInternalDisplay',['../classcturtle_1_1TurtleScreen.html#aec840c1b05e1e347e31bbebc6e935cad',1,'cturtle::TurtleScreen']]],
-  ['getisclosed',['getIsClosed',['../classcturtle_1_1TurtleScreen.html#a2db244ae69237df355384d4787b19e17',1,'cturtle::TurtleScreen']]],
   ['getrotation',['getRotation',['../classcturtle_1_1AffineTransform.html#a8d6ab408b6877b135720eb6f46ebf8ad',1,'cturtle::AffineTransform']]],
   ['getscalex',['getScaleX',['../classcturtle_1_1AffineTransform.html#a50b3dcd70929fd59325cb90dfd482e16',1,'cturtle::AffineTransform']]],
   ['getscaley',['getScaleY',['../classcturtle_1_1AffineTransform.html#a4466007b4bf269cf047268a9820f9040',1,'cturtle::AffineTransform']]],

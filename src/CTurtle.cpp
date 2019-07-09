@@ -215,7 +215,7 @@ namespace cturtle {
     }
 
     void TurtleScreen::redraw(bool invalidate) {
-        if(getIsClosed())
+        if(isclosed())
             return;
         int fromBack = 0;
         bool hasInvalidated = invalidate;
@@ -519,6 +519,8 @@ namespace cturtle {
         
         updateParent(true, false);
     }
+    
+    //Conditional parent update.
 
     void Turtle::updateParent(bool invalidate, bool input) {
         if (screen != nullptr)
@@ -583,7 +585,7 @@ namespace cturtle {
         
         objects.erase(begin, objects.end());
         
-        //Will invalidate.
+        //Will invalidate due to object removal.
         updateParent(true, false);
         return true;
     }
@@ -609,12 +611,15 @@ namespace cturtle {
     }
     
     void Turtle::travelTo(const AffineTransform& dest) {
+        if(dest == transform)
+            return;//No traveling needs to take place.
+        
         traveling = true;
         
         AffineTransform begin;
         begin.assign(transform);
         
-        if (screen != nullptr ? !screen->getIsClosed() : false) {//no point in animating with no screen
+        if (screen != nullptr ? !screen->isclosed(): false) {//no point in animating with no screen
             auto& scene = this->screen->getScene();
             const float duration = getAnimMS();
             const unsigned long startTime = epochTime();
@@ -656,16 +661,15 @@ namespace cturtle {
         updateParent(false, false);
     }
     
-    void Turtle::travelBack(){
+    void Turtle::travelBack(const AffineTransform& b){
         const AffineTransform a = state.transform;
-        const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
         
         if(a == b)
             return;//no interpolation or animation needed.
         
         traveling = true;
         
-        if (screen != nullptr ? !screen->getIsClosed() : false) {//no point in animating with no screen
+        if (screen != nullptr ? !screen->isclosed() : false) {//no point in animating with no screen
             auto& scene = this->screen->getScene();
             const float duration = getAnimMS();
             const unsigned long startTime = epochTime();

@@ -32,6 +32,15 @@
 #include <functional>
 
 namespace cturtle{
+    /*Mouse event callback type.*/
+    typedef std::function<void(int, int)> MouseFunc;
+    
+    /*Keyboard event callback type.*/
+    typedef std::function<void()> KeyFunc;
+    
+    /*Timer event callback type.*/
+    typedef std::function<void(void)> TimerFunc;
+    
     /**\brief The KeyboardKey Enumeration contains declarations for all
      *        accepted keyboard input keys.
      * \see keyFromName()*/

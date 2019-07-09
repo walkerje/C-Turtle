@@ -53,7 +53,6 @@ var searchData=
   ['powder_5fblue',['powder_blue',['../structcturtle_1_1Color.html#a50d6cb3bba9e25d7c9a199a59fee1bc5',1,'cturtle::Color']]],
   ['powderblue',['PowderBlue',['../structcturtle_1_1Color.html#a4f62851aad1f1f38226338fc0a51ec1f',1,'cturtle::Color']]],
   ['presskey',['presskey',['../classcturtle_1_1TurtleScreen.html#ae2a63ab403fab57ff97b3a37438c2bb2',1,'cturtle::TurtleScreen']]],
-  ['pressmouse',['pressmouse',['../classcturtle_1_1TurtleScreen.html#a1b8c19a971acff239d3112856166bbe4',1,'cturtle::TurtleScreen']]],
   ['purple',['purple',['../structcturtle_1_1Color.html#a8325ae6385f210cf7346b0efce0f866f',1,'cturtle::Color']]],
   ['purple1',['purple1',['../structcturtle_1_1Color.html#ab53232ab24344ecb26355ba0a8aeb818',1,'cturtle::Color']]],
   ['purple2',['purple2',['../structcturtle_1_1Color.html#a746b04ffc25347fa2fc0b2d9c7c7b8a1',1,'cturtle::Color']]],

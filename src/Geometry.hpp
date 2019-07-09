@@ -28,10 +28,11 @@
 
 #pragma once
 
-#include <tuple>
-#include <cstring>//memcpy
-#include <vector>//for polygon points
-#include <array>//For AffineTransform storage.
+#include <tuple>    //Used for CompoundShapes
+#include <cstring>  //memcpy
+#include <vector>   //For Polygon point storage
+#include <cmath>    //For rounding, etc
+#include <array>    //For AffineTransform storage.
 
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
@@ -43,8 +44,8 @@
     #endif
 #endif
 
-#include "Common.hpp"
-#include "Color.hpp"
+#include "Common.hpp"   //For ivec2/etc
+#include "Color.hpp"    //For Color
 
 namespace cturtle {
     /**\brief An alias for ivec2. Strictly for convenience and clarity.*/
@@ -594,6 +595,7 @@ namespace cturtle {
         //Polygon, Fill, Outline
         typedef std::tuple<std::unique_ptr<IDrawableGeometry>, Color, int, Color> component_t;
 
+        /**Adds a generic component to this CompoundPolygon.*/
         template<typename T>
         void addcomponent(const T& t, Color fill, int outlineWidth = 0, Color outline = Color::black){
             components.push_back(std::make_tuple(unique_geom_t(new T(t)), fill, true, outline));

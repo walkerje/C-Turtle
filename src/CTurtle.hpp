@@ -30,56 +30,41 @@
 
 #ifndef CTURTLE_MSVC_NO_AUTOLINK
     #ifdef _MSC_VER
-    /*Automatically link to the necessary windows libraries while under MSVC.*/
-    #pragma comment(lib, "kernel32.lib")
-    #pragma comment(lib, "gdi32.lib")
+        /*Automatically link to the necessary windows libraries while under MSVC.*/
+        #pragma comment(lib, "kernel32.lib")
+        #pragma comment(lib, "gdi32.lib")
     #endif
 #endif
 
 //Under UNIX, link X11 and PThread.
 
 /*Standard Includes*/
-#include <cstdint>
-#include <cmath>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <list>
-#include <functional>
-#include <utility>
-#include <memory>
-#include <mutex>
-#include <iostream>
+#include <algorithm>    //Algorithms for misc.
+#include <string>       //String for misc.
+#include <map>          //Map for key bindings
+#include <list>         //List for scene objects & bindings.
+#include <functional>   //Functional for callback objects.
+#include <utility>      //For pairs/etc
+#include <memory>       //For smart pointers.
+#include <mutex>        //Mutex object for event synch.
 
 /*Local Includes*/
-#include "Common.hpp"
-#include "Geometry.hpp"
-#include "Color.hpp"
-#include "UserIO.hpp"
+#include "Common.hpp"   //Misc.
+#include "Geometry.hpp" //For IDrawableGeometry.
+#include "Color.hpp"    //For Color
+#include "UserIO.hpp"   //For User input/output.
 
-/**
- * \brief Only namespace which contains functions and classes for this project.
- * 
- */
+////////////////////////////////////
+/**The C-Turtle Project Namespace**/
+////////////////////////////////////
 namespace cturtle{
-    /*Callback function typedefs for event listeners.*/
-    
-    /*Mouse event callback type.*/
-    typedef std::function<void(int, int)> MouseFunc;
-    
-    /*Keyboard event callback type.*/
-    typedef std::function<void()> KeyFunc;
-    
-    /*Timer event callback type.*/
-    typedef std::function<void(void)> TimerFunc;
+    //Alias for the CImg library, for convenience.
+    namespace cimg = cimg_library;
     
     //Turtle prototype definition
     class Turtle;
     //TurtleScreen prototype definition
     class TurtleScreen;
-    
-    //Alias for the CImg library, for convenience.
-    namespace cimg = cimg_library;
     
     /*Shape Registration.*/
     void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom);
@@ -169,21 +154,34 @@ namespace cturtle{
     /**Pen State structure.
      * Holds all pen attributes.*/
     struct PenState {
+        /**The transform of the pen.
+         * holds position, rotation, and scale of the turtle.*/
         AffineTransform transform;
+        /**The movement speed of the turtle, in range of 0...10*/
         float moveSpeed = TS_NORMAL;
+        /**Whether or not the turtle's "tail" (or pen) is down.*/
         bool tracing = true;
+        /**The angle mode. False for degrees, true for radians.*/
         bool angleMode = false;
+        /**The width of the pen, in pixels.*/
         int penWidth = 1;
+        /**A boolean indicating if we're trying to fill a shape.*/
         bool filling = false;
+        /**The color of the pen.*/
         Color penColor = Color::black;
+        /**The intended fill color.*/
         Color fillColor = Color::black;
+        /**The total number of objects in the screen's object stack
+         * prior to the addition of this state.*/
         unsigned long int objectsBefore = 0;
+        /**The turtle's cursor geometry.*/
         IDrawableGeometry* cursor = &const_cast<IDrawableGeometry&> (cturtle::shape("indented triangle"));
+        /**The current stamp ID.*/
         int curStamp = 0;
+        /**A boolean indicating if this turtle is visible.*/
         bool visible = true;
+        /**A float for cursor tilt (e.g, rotation appleid to the cursor itself)*/
         float cursorTilt = 0;
-        
-        //May need stateBegin iterator for scene objects
         
         PenState(){}
         PenState(const PenState& copy){
@@ -203,7 +201,16 @@ namespace cturtle{
         }
     };
 
-    //TODO: Finish and document
+    /**
+     *  The Turtle Class
+     * Symbolically represents a turtle that runs around a screen that has a
+     * paint brush attached to its tail. The tail can be in two states; up and down.
+     * As the turtle moves forwards, backwards, left, and right, it can draw
+     * shapes and outlines, write text, and stamp itself onto whatever surface
+     * it's walking/crawling on (In this case, it's walking on a TurtleScreen).
+     * 
+     * \sa TurtleScreen
+     */
     class Turtle{
     public:
         /*Implemented in source impl. file*/
@@ -322,7 +329,10 @@ namespace cturtle{
             return state.fillColor;
         }
         
-        /**/
+        /**Writes the specified string to the screen.
+         * Uses the current filling color.
+         *\param text The text to write.
+         *\sa fillcolor(color)*/
         void write(const std::string& text);
         
         /**\brief Puts the current shape of this turtle on the screen
@@ -495,7 +505,9 @@ namespace cturtle{
         /*Screen pointer. Assign before calling any other function!*/
         TurtleScreen* screen = nullptr;
         
+        /**Pushes a copy of the pen's state on the stack.*/
         void pushState();
+        /**Pops the top of the pen's state stack.*/
         bool popState();
         
         /**
@@ -530,7 +542,7 @@ namespace cturtle{
             return state.moveSpeed <= 0 ? 0 : long(((11.0f - state.moveSpeed)/10.0f) * 300);
         }
         
-        /**Redraws the parent screen.*/
+        /**Conditionally calls the parent screen's update function.*/
         void updateParent(bool invalidate = false, bool input = true);
         
         /**Performs an interpolation, with animation,
@@ -557,15 +569,22 @@ namespace cturtle{
 //        SM_WORLD
     };
     
-    /** TurtleScreen
-     *      Holds and maintains all facilities in relation to displaying
-     *      turtles and consuming input events from users through callbacks.
+    /** 
+     *  TurtleScreen
+     * Holds and maintains all facilities in relation to displaying
+     * turtles and consuming input events from users through callbacks.
+     * This includes holding the actual data for a given scene after being
+     * populated by Turtle. It layers draw calls in the order they are called,
+     * independent of whatever Turtle object creates it.
+     * 
+     * \sa Turtle
      */
     class TurtleScreen{
     public:
         /**Empty constructor.
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
         TurtleScreen() : display(800, 600, "CTurtle", 0){
+            display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
             redraw(true);
@@ -580,13 +599,15 @@ namespace cturtle{
             initEventThread();
             redraw(true);
         }
+        
         /**Width, height, and title constructor.
          * Assigns the display with the specified dimensions, in pixels, and
          * assigns the display the specified title.
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        TurtleScreen(int width, int height, const std::string& title = "CTurtle") : display(width, height){
+        TurtleScreen(int width, int height, const std::string& title = "CTurtle") 
+                : display(width, height){
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
@@ -594,6 +615,7 @@ namespace cturtle{
             redraw(true);
         }
         
+        /**Destructor. Calls "bye" function.*/
         ~TurtleScreen() {
             bye();
         }
@@ -669,7 +691,10 @@ namespace cturtle{
 //        void setworldcoordinates(vec2 lowerLeft, vec2 upperRight);
         //might just leave this function out
         
-        /*TODO: Document Me*/
+        /**Updates the screen's graphics and input.
+         *\param invalidateDraw Completely redraws the scene if true.
+         *                      If false, only draws the newest geometry.
+         *\param processInput A boolean indicating to process input.*/
         void update(bool invalidateDraw = false, bool processInput = true);
         
         /**Sets the delay set between turtle commands.*/
@@ -715,14 +740,14 @@ namespace cturtle{
         }
         
         /**Returns the internal CImg display.*/
-        cimg::CImgDisplay& getInternalDisplay(){
+        cimg::CImgDisplay& internaldisplay(){
             return display;
         }
         
         /**Returns a boolean indicating if the
           screen has been closed.*/
-        inline bool getIsClosed(){
-            return getInternalDisplay().is_closed();
+        inline bool isclosed(){
+            return internaldisplay().is_closed();
         }
         
         /**Draws all geometry from all child turtles and swaps this display.*/
@@ -743,7 +768,9 @@ namespace cturtle{
             return t;
         }
         
-        /**TODO: Document Me*/
+        /**\brief Adds an additional "on press" key binding for the specified key.
+         *\param func The function to call when the specified key is pressed.
+         *\param key The specified key.*/
         void onkeypress(KeyFunc func, KeyboardKey key){
             cacheMutex.lock();
             //determine if key list exists
@@ -755,7 +782,9 @@ namespace cturtle{
             cacheMutex.unlock();
         }
         
-        /**TODO: Document Me*/
+        /**\brief Adds an additional "on press" key binding for the specified key.
+         *\param func The function to call when the specified key is released.
+         *\param key The specified key.*/
         virtual void onkeyrelease(KeyFunc func, KeyboardKey key){
             cacheMutex.lock();
             //determine if key list exists
@@ -767,7 +796,8 @@ namespace cturtle{
             cacheMutex.unlock();
         }
         
-        /**TODO: Document Me*/
+        /**\brief Simulates a key "on press" event.
+         *\param key The key to call "on press" bindings for.*/
         void presskey(KeyboardKey key){
             if(keyBindings[0].find(key) == keyBindings[0].end())
                 return;
@@ -776,7 +806,8 @@ namespace cturtle{
             }
         }
         
-        /**TODO: Document Me*/
+        /**\brief Simulates a key "on release" event.
+         *\param key The key to call "on release" bindings for.*/
         void releasekey(KeyboardKey key){
             if(keyBindings[1].find(key) == keyBindings[1].end())
                 return;
@@ -785,20 +816,28 @@ namespace cturtle{
             }
         }
         
-        /**TODO: Document Me*/
+        /**\brief Adds an additional "on click" mouse binding for the specified button.
+         *\param func The function to call when the specified button is clicked.
+         *\param button The specified button.*/
         void onclick(MouseFunc func, MouseButton button = MOUSEB_LEFT){
             cacheMutex.lock();
             mouseBindings[button].push_back(func);
             cacheMutex.unlock();
         }
         
-        /**Calls all previously added mouse button call-backs.*/
-        void pressmouse(int x, int y, MouseButton button){
+        /**Calls all previously added mouse button call-backs.
+         *\param x The X coordinate at which to press.
+         *\param y The Y coordinate at which to press.
+         *\param button The button to simulate being pressed.*/
+        void click(int x, int y, MouseButton button){
             for(MouseFunc& func : mouseBindings[button]){
                 func(x, y);
             }
         }
         
+        /**\brief Adds a timer function to be called every N milliseconds.
+         *\param func The function to call when the timer has finished.
+         *\param time The total number of milliseconds between calls.*/
         void ontimer(TimerFunc func, unsigned int time){
             timerBindings.push_back(std::make_tuple(func, time, epochTime()));
         }
@@ -819,33 +858,56 @@ namespace cturtle{
             turtles.push_back(&turtle);
         }
         
+        /**Returns a reference to the list of scene objects.
+         * This list is used to redraw the screen.*/
         std::list<SceneObject>& getScene(){
             return objects;
         }
     protected:
+        /**The underlying display mechanism for a TurtleScreen.*/
         cimg::CImgDisplay   display;
+        
+        /**The canvas onto which scene objects are drawn to.*/
         Image               canvas;
         
         //The turtle composite image.
         //This image copies the canvas and has
         //turtles drawn to it to avoid redrawing a "busy" canvas
         Image turtleComposite;
+        
+        /**The total objects on screen the last time this screen was drawn.
+         * Used to keep track of newer scene objects for a speed improvement.*/
         int lastTotalObjects = 0;
         
+        /**The background color of this TurtleScreen.*/
         Color backgroundColor   = Color::white;
+        /**The background image of this TurtleScreen.
+         * When not empty, this image takes precedence over
+         * the background color when drawing.**/
         Image backgroundImage;
+        /**The current screen mode.
+         *\sa mode(m)*/
         ScreenMode curMode      = SM_STANDARD;
         
         /**Redraw delay, in milliseconds.*/
         long int delayMS = 10;
         
+        /** These variables are used specifically in tracer settings.**/
         /**Redraw Counter.*/
         int redrawCounter = 0;
+        /**Redraw counter max.*/
         int redrawCounterMax = 0;
         
+        /**Initializes the underlying event thread.
+         * This thread is cleanly managed and destroyed
+         * when its owning object is destroyed.
+         * The thread just populates the cachedEvents list,
+         * so that events may be processed in the main thread.*/
         void initEventThread();
         
+        /**The scene list.*/
         std::list<SceneObject> objects;
+        /**The list of attached turtles.*/
         std::list<Turtle*> turtles;
         
         std::unique_ptr<std::thread> eventThread;
