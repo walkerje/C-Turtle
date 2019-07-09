@@ -661,8 +661,9 @@ namespace cturtle {
         updateParent(false, false);
     }
     
-    void Turtle::travelBack(const AffineTransform& b){
+    void Turtle::travelBack(){
         const AffineTransform a = state.transform;
+        const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
         
         if(a == b)
             return;//no interpolation or animation needed.
