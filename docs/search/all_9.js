@@ -11,6 +11,8 @@ var searchData=
   ['indianred4',['IndianRed4',['../structcturtle_1_1Color.html#afabf505fa52e49864c65b02b9e7ffd62',1,'cturtle::Color']]],
   ['initeventthread',['initEventThread',['../classcturtle_1_1TurtleScreen.html#a39cd4a5e3a9701298ac9be08c81418a1',1,'cturtle::TurtleScreen']]],
   ['inputevent',['InputEvent',['../structcturtle_1_1InputEvent.html',1,'cturtle']]],
+  ['internaldisplay',['internaldisplay',['../classcturtle_1_1TurtleScreen.html#a0b9da4cb7b761184defde2b751aeb480',1,'cturtle::TurtleScreen']]],
+  ['isclosed',['isclosed',['../classcturtle_1_1TurtleScreen.html#af9af24466aa95afeda505a949b219e10',1,'cturtle::TurtleScreen']]],
   ['isdown',['isDown',['../structcturtle_1_1InputEvent.html#a03b38e4d7c525a0202fab84cc128356d',1,'cturtle::InputEvent']]],
   ['ivec2',['ivec2',['../structcturtle_1_1ivec2.html',1,'cturtle::ivec2'],['../structcturtle_1_1ivec2.html#a98b74bd6df906a25ef700397d6190103',1,'cturtle::ivec2::ivec2()'],['../structcturtle_1_1ivec2.html#a7069d9f7c5ef7505c7c00c55958e0982',1,'cturtle::ivec2::ivec2(int x, int y)'],['../structcturtle_1_1ivec2.html#a36ae44be1a1531b6ae799abfa1f8f85b',1,'cturtle::ivec2::ivec2(const ivec2 &amp;other)']]],
   ['ivory',['ivory',['../structcturtle_1_1Color.html#a1b2ce5fdd1bfec57d70f59d233d41d80',1,'cturtle::Color']]],

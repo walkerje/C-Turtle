@@ -26,6 +26,7 @@ var searchData=
   ['clearscreen',['clearscreen',['../classcturtle_1_1TurtleScreen.html#a9a592b0a204ce4e316b648c35c415072',1,'cturtle::TurtleScreen']]],
   ['clearstamp',['clearstamp',['../classcturtle_1_1Turtle.html#a9e1dea0d65c8cc1e4627e28b20390eb2',1,'cturtle::Turtle']]],
   ['clearstamps',['clearstamps',['../classcturtle_1_1Turtle.html#a92d143232f35dd3ff64af3236182442d',1,'cturtle::Turtle']]],
+  ['click',['click',['../classcturtle_1_1TurtleScreen.html#a8ce541b56c222a2c8501b577c4dc6e90',1,'cturtle::TurtleScreen']]],
   ['color',['Color',['../structcturtle_1_1Color.html',1,'cturtle::Color'],['../structcturtle_1_1SceneObject.html#a9fe53b4970c61a8f86cb57d31880eb99',1,'cturtle::SceneObject::color()'],['../structcturtle_1_1Color.html#a759c7ab4973583164f86c9371d637fe6',1,'cturtle::Color::Color(component_t r, component_t g, component_t b)'],['../structcturtle_1_1Color.html#afcd035af137a24bef76c3699f1470b6f',1,'cturtle::Color::Color(const Color &amp;other)'],['../structcturtle_1_1Color.html#a3a3acf7d28bd8259ce7c43666f403447',1,'cturtle::Color::Color(const std::string &amp;name)'],['../structcturtle_1_1Color.html#ad6077cd64444220f6f1993c9288c35f0',1,'cturtle::Color::Color()']]],
   ['color_2ehpp',['Color.hpp',['../Color_8hpp.html',1,'']]],
   ['common_2ehpp',['Common.hpp',['../Common_8hpp.html',1,'']]],

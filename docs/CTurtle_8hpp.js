@@ -4,9 +4,6 @@ var CTurtle_8hpp =
     [ "PenState", "structcturtle_1_1PenState.html", "structcturtle_1_1PenState" ],
     [ "Turtle", "classcturtle_1_1Turtle.html", "classcturtle_1_1Turtle" ],
     [ "TurtleScreen", "classcturtle_1_1TurtleScreen.html", "classcturtle_1_1TurtleScreen" ],
-    [ "KeyFunc", "CTurtle_8hpp.html#ae7de124c8f14a3a7ad5c666e36ccf8b4", null ],
-    [ "MouseFunc", "CTurtle_8hpp.html#aec9ca5612868c6afc7ec1d90ebe415c8", null ],
-    [ "TimerFunc", "CTurtle_8hpp.html#a037218bb03bd0ee36b582e7793214b67", null ],
     [ "ScreenMode", "CTurtle_8hpp.html#a8df9113d6867f86881e2b96f629f50ab", [
       [ "SM_STANDARD", "CTurtle_8hpp.html#a8df9113d6867f86881e2b96f629f50abacdc76bd225a9410b41e5b08476110b7a", null ],
       [ "SM_LOGO", "CTurtle_8hpp.html#a8df9113d6867f86881e2b96f629f50abaece66fda3befae412318616acc05212d", null ]
