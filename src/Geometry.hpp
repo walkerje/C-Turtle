@@ -33,6 +33,7 @@
 #include <vector>   //For Polygon point storage
 #include <cmath>    //For rounding, etc
 #include <array>    //For AffineTransform storage.
+#include <iostream>
 
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
@@ -153,8 +154,8 @@ namespace cturtle {
         
         /**Moves this transform "forward" according to its rotation.*/
         AffineTransform& forward(float distance){
-            at(0,2) += int(std::cos(rotation) * distance);//x component
-            at(1,2) += int(std::sin(rotation) * distance);//y component
+            at(0,2) += std::round(std::cos(rotation) * distance);//x component
+            at(1,2) += std::round(std::sin(rotation) * distance);//y component
             return *this;
         }
         
@@ -211,11 +212,20 @@ namespace cturtle {
          *\param theta The angle at which to rotate, in radians
          *\return A reference to this transform. (e.g, *this)*/
         AffineTransform& rotate(float theta) {
-            //6.28319 is a full circle in radians.
-            if(rotation + theta > 6.28319){//Loop back around. Avoid overflow.
-                theta = (rotation + theta) - 6.28319;
+            //6.28319 is a full rotation in radians.
+            
+            // Loop rotations around in range of a full circle to avoid
+            // rounding errors with rotation when it gets real big.
+            // this just spins recursively until it gets a 
+            // manageable theta that yields the same result visually
+            const float origResult = rotation + theta;
+            const float fullcircle = 6.28319;
+            
+            if(origResult > fullcircle || origResult < 0){
                 setRotation(0);
+                return rotate(origResult > fullcircle ? origResult - fullcircle : fullcircle + origResult);
             }
+            
             const float c = std::cos(theta);
             const float s = std::sin(theta);
 
@@ -238,6 +248,8 @@ namespace cturtle {
          *\param val The angle at which to rotate, in radians.
          *\return A reference to this transform. (e.g, *this)*/
         AffineTransform& setRotation(float val){
+            if(val == rotation)
+                return *this;
             if(rotation != 0.0f)
                 rotate(-rotation);
             rotate(val);
@@ -414,7 +426,7 @@ namespace cturtle {
      * \return A value of the same type as val, converted to degrees.*/
     template<typename T>
     inline T toDegrees(T val) {
-        return T(val * (180.0/M_PI));
+        return std::round(T(val * (180.0/M_PI)));
     }
 
     /**\brief IDrawableGeometry is a base class, intended to be

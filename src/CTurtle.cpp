@@ -190,6 +190,7 @@ namespace cturtle {
 
         cachedEvents.clear();
         cacheMutex.unlock();
+        std::this_thread::yield();
     }
 
     void TurtleScreen::delay(unsigned int ms) {
@@ -260,23 +261,26 @@ namespace cturtle {
         while (latestIter != objects.end()) {
             SceneObject& object = *latestIter;
             AffineTransform t(screen.copyConcatenate(object.transform));
-            Color& color = object.color;
-            IDrawableGeometry* geom = object.geom.get();
-            if (!object.text.empty()) {
+            IDrawableGeometry* geom = object.geom.get() ? object.geom.get() : object.unownedGeom;
+            
+            if(geom != nullptr){
+                geom->draw(t, canvas, object.fillColor, object.outlineWidth, object.outlineColor);
+            }else if(!object.text.empty()){
+                //Draw text
                 Point trans = t.getTranslation();
-                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
-            } else if (object.stamp && object.unownedGeom != nullptr) {
-                object.unownedGeom->draw(screen.copyConcatenate(object.transform), canvas, object.color);
-            } else geom->draw(t, canvas, color);
+                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.fillColor.rgbPtr());
+            }
+            
             latestIter++;
         }
 
         if(canvas.width() != turtleComposite.width() || canvas.height() || turtleComposite.height()){
             turtleComposite.assign(canvas);
         }else{
-            //Let's see if the draw_image is accellerated in some way
+            //Let's see if the draw_image is acellerated in some way
             turtleComposite.draw_image(0,0,canvas);
         }
+        
         for (Turtle* turt : turtles) {
             turt->draw(screen, turtleComposite);
         }
@@ -391,7 +395,7 @@ namespace cturtle {
     //Stamps
 
     int Turtle::stamp() {
-        pushStamp(AffineTransform(transform).rotate(state.cursorTilt), state.fillColor, state.cursor);
+        pushStamp(transform, state.fillColor, state.cursor);
         return state.curStamp;
     }
 
@@ -538,7 +542,7 @@ namespace cturtle {
             objects.push_back(screen->getScene().emplace(std::next(fillInsert),
                     new Polygon(fillAccum.points), state.fillColor, AffineTransform()));
             fillAccum.points.clear();
-            updateParent(true, false);
+            updateParent(false, false);
             //trace line geometry in the screen's scene list.
         }else if(!state.filling && val){
             fillInsert = std::prev(screen->getScene().end());
@@ -647,11 +651,14 @@ namespace cturtle {
         
         //Contents of PushCurrent moved here because every function
         //that called this one called PushCurrent immediately after it.
-        if(state.tracing){
+        if(state.tracing && !state.filling){
             pushTraceLine(begin.getTranslation(), dest.getTranslation());
-        }
-        if (state.filling)
+        } else if (state.filling){
             fillAccum.points.push_back(dest.getTranslation());
+            if(state.tracing){
+                
+            }
+        }
         
         transform.assign(begin);
         pushState();
@@ -722,9 +729,9 @@ namespace cturtle {
     
     bool Turtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
+            pushState();
             screen->getScene().emplace_back(geom, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
-            pushState();
             return true;
         }
         return false;
@@ -732,9 +739,18 @@ namespace cturtle {
 
     bool Turtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
-            screen->getScene().emplace_back(geom, color, t, state.curStamp++);
-            objects.push_back(std::prev(screen->getScene().end()));
             pushState();
+            const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416; 
+            
+            AffineTransform trans(t);
+            trans.rotate(cursorRot + state.cursorTilt);
+            
+            screen->getScene().emplace_back(geom, color, trans, state.curStamp++);
+            SceneObject& obj = screen->getScene().back();
+            obj.outlineWidth = 1;
+            obj.outlineColor = state.penColor;
+            
+            objects.push_back(std::prev(screen->getScene().end()));
             return true;
         }
         return false;
@@ -742,9 +758,9 @@ namespace cturtle {
     
     bool Turtle::pushText(const AffineTransform& t, Color color, const std::string& text) {
         if (screen != nullptr) {
+            pushState();
             screen->getScene().emplace_back(text, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
-            pushState();
             return true;
         }
         return false;
