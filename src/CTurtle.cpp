@@ -21,9 +21,9 @@
 //SOFTWARE.
 
 #define CTURTLE_IMPLEMENTATION
+
 #include "CTurtle.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <vector>
 #include <locale>
 #include <memory>
@@ -41,7 +41,6 @@ namespace cturtle {
                     {5, 5}
                 }))},
             {"square",
-                    
                 std::shared_ptr<IDrawableGeometry>(
                 new Polygon(
                 {
@@ -277,7 +276,7 @@ namespace cturtle {
         if(canvas.width() != turtleComposite.width() || canvas.height() || turtleComposite.height()){
             turtleComposite.assign(canvas);
         }else{
-            //Let's see if the draw_image is acellerated in some way
+            //Let's see if the draw_image is accelerated in some way
             turtleComposite.draw_image(0,0,canvas);
         }
         
@@ -538,14 +537,22 @@ namespace cturtle {
 
     void Turtle::fill(bool val) {
         if (state.filling && !val) {
-            //excuse long line, but this fixes a particularly hard to find bug
-            objects.push_back(screen->getScene().emplace(std::next(fillInsert),
-                    new Polygon(fillAccum.points), state.fillColor, AffineTransform()));
+            //Add the fill polygon
+            screen->getScene().emplace_back(new Polygon(fillAccum.points), state.fillColor, AffineTransform());
+            objects.push_back(std::prev(screen->getScene().end(), 1));
+            
+            //Add all trace lines created when tracing out the fill polygon.
+            if(state.filling && !fillLines.empty()){
+                for(const auto& lineInfo : fillLines){
+                    screen->getScene().emplace_back(new Line(lineInfo.first), lineInfo.second, AffineTransform());
+                    objects.push_back(std::prev(screen->getScene().end(), 1));
+                }
+                fillLines.clear();
+            }
+            
             fillAccum.points.clear();
             updateParent(false, false);
             //trace line geometry in the screen's scene list.
-        }else if(!state.filling && val){
-            fillInsert = std::prev(screen->getScene().end());
         }
         state.filling = val;
     }
@@ -555,6 +562,15 @@ namespace cturtle {
             return;
 
         if (state.visible) {
+            //Draw all lines queued during filling a shape.
+            //This is only populated when the turtle moves between a beginfill
+            //and endfill while the pen is down.
+            for(auto& lineVal : fillLines){
+                Line& line = lineVal.first;
+                Color& color = lineVal.second;
+                line.draw(screen, canvas, color);
+            }
+            
             if(traveling && state.tracing){
                 //Draw the "Travel-Line" when in the middle of the travelTo func
                 travelPoints[0] = screen(travelPoints[0]);
@@ -656,7 +672,7 @@ namespace cturtle {
         } else if (state.filling){
             fillAccum.points.push_back(dest.getTranslation());
             if(state.tracing){
-                
+                fillLines.push_back({{begin.getTranslation(), dest.getTranslation(), state.penWidth}, state.penColor});
             }
         }
         
@@ -669,6 +685,8 @@ namespace cturtle {
     }
     
     void Turtle::travelBack(){
+        //This function is redundant and should be removed.
+        //Alternatively, make travelTo function handle this case more efficiently.
         const AffineTransform a = state.transform;
         const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
         

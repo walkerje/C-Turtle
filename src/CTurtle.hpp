@@ -289,6 +289,10 @@ namespace cturtle{
         /**\copydoc setheading(float)*/
         inline void seth(float angle){setheading(angle);}
         
+        /**
+         * Returns the heading of the Turtle (e.g, its current rotation).
+         * @return 
+         */
         inline float heading(){
             return state.angleMode ? transform.getRotation() : toDegrees(transform.getRotation());
         }
@@ -504,7 +508,7 @@ namespace cturtle{
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
         std::list<PenState> stateStack = {PenState()};
-        std::list<Line>     fillLines;
+        std::list<std::pair<Line, Color>> fillLines;
         //lines to be drawn to temp screen when filling to avoid invalidating screen
         AffineTransform& transform = stateStack.front().transform;
         PenState& state = stateStack.front();
@@ -514,13 +518,10 @@ namespace cturtle{
         Point   travelPoints[2];
         bool    traveling = false;
         
-        /*Fill insert iterator*/
-        std::list<SceneObject>::iterator fillInsert;
-        
         /*Undo stack size.*/
         unsigned int undoStackSize = 100;
         
-        /*Accumulator*/
+        /*Accumulator for fill state*/
         Polygon fillAccum;
         
         /*Screen pointer. Assign before calling any other function!*/
@@ -569,7 +570,8 @@ namespace cturtle{
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.
          * Pushes a new fill vertex if filling, and applies appropriate
-         * lines if the pen is down.*/
+         * lines if the pen is down. Generally manages all state related
+         * to movement as a side effect.*/
         void travelTo(const AffineTransform& dest);
         
         /**Performs an interpolation, with animation,
