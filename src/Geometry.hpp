@@ -33,6 +33,7 @@
 #include <vector>   //For Polygon point storage
 #include <cmath>    //For rounding, etc
 #include <array>    //For AffineTransform storage.
+#include <iostream>
 
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
@@ -153,8 +154,8 @@ namespace cturtle {
         
         /**Moves this transform "forward" according to its rotation.*/
         AffineTransform& forward(float distance){
-            at(0,2) += int(std::cos(rotation) * distance);//x component
-            at(1,2) += int(std::sin(rotation) * distance);//y component
+            at(0,2) += std::round(std::cos(rotation) * distance);//x component
+            at(1,2) += std::round(std::sin(rotation) * distance);//y component
             return *this;
         }
         
@@ -211,11 +212,20 @@ namespace cturtle {
          *\param theta The angle at which to rotate, in radians
          *\return A reference to this transform. (e.g, *this)*/
         AffineTransform& rotate(float theta) {
-            //6.28319 is a full circle in radians.
-            if(rotation + theta > 6.28319){//Loop back around. Avoid overflow.
-                theta = (rotation + theta) - 6.28319;
+            //6.28319 is a full rotation in radians.
+            
+            // Loop rotations around in range of a full circle to avoid
+            // rounding errors with rotation when it gets real big.
+            // this just spins recursively until it gets a 
+            // manageable theta that yields the same result visually
+            const float origResult = rotation + theta;
+            const float fullcircle = 6.28319;
+            
+            if(origResult > fullcircle || origResult < 0){
                 setRotation(0);
+                return rotate(origResult > fullcircle ? origResult - fullcircle : fullcircle + origResult);
             }
+            
             const float c = std::cos(theta);
             const float s = std::sin(theta);
 
@@ -238,6 +248,8 @@ namespace cturtle {
          *\param val The angle at which to rotate, in radians.
          *\return A reference to this transform. (e.g, *this)*/
         AffineTransform& setRotation(float val){
+            if(val == rotation)
+                return *this;
             if(rotation != 0.0f)
                 rotate(-rotation);
             rotate(val);
@@ -414,7 +426,7 @@ namespace cturtle {
      * \return A value of the same type as val, converted to degrees.*/
     template<typename T>
     inline T toDegrees(T val) {
-        return T(val * (180.0/M_PI));
+        return std::round(T(val * (180.0/M_PI)));
     }
 
     /**\brief IDrawableGeometry is a base class, intended to be
@@ -425,12 +437,10 @@ namespace cturtle {
     class IDrawableGeometry {
     public:
         /**\brief Empty default constructor.*/
-        IDrawableGeometry() {
-        }
+        IDrawableGeometry() {}
 
         /**\brief Empty-- virtual-- default de-constructor.*/
-        virtual ~IDrawableGeometry() {
-        }
+        virtual ~IDrawableGeometry() {}
 
         /**\brief This function is intended to draw all applicable geometry
          *        in this object to the specified image, with the specified transform,
@@ -490,8 +500,7 @@ namespace cturtle {
         int steps = 10;
         
         /**\brief Empty constructor.*/
-        Circle() {
-        }
+        Circle() {}
 
         /**\brief Radius and step assignment constructor.
          *\param radius The radius, in pixels, of this circle.
@@ -503,7 +512,6 @@ namespace cturtle {
         Circle(const Circle& other) : radius(other.radius), steps(steps){}
         
         void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
-
     };
 
     /**\brief The polygon class merely holds a vector of points and a function
@@ -547,7 +555,9 @@ namespace cturtle {
 
         void draw(const AffineTransform& t, Image& imgRef, Color c = Color::black, int outlineWidth = 0, Color outlineColor = Color::black) override;
     };
-        
+    
+    /**
+     * Sprites represent a selection of an image.*/
     class Sprite : public IDrawableGeometry{
     public:
         int srcX, srcY, srcW, srcH;
@@ -587,12 +597,15 @@ namespace cturtle {
         Image& spriteImg;
     };
     
+    /**
+     * Compound Polygons can have a variety of attachments.
+     * */
     class CompoundPolygon : public IDrawableGeometry{
         typedef std::unique_ptr<IDrawableGeometry> unique_geom_t; 
     public:
         CompoundPolygon(){}
         
-        //Polygon, Fill, Outline
+        //Polygon, Fill, Outline Width, Outline Color
         typedef std::tuple<std::unique_ptr<IDrawableGeometry>, Color, int, Color> component_t;
 
         /**Adds a generic component to this CompoundPolygon.*/
@@ -611,6 +624,7 @@ namespace cturtle {
 
 #ifdef CTURTLE_IMPLEMENTATION
 namespace cturtle {
+    
     void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width){
         if (x1 == x2 && y1 == y2) {
             return;
@@ -624,6 +638,8 @@ namespace cturtle {
         //however instead of blitting pixels at each spot we put circles,
         //which matches the rounded thick lines present in the Python implementation.
         //This also allows for variable width.
+        //Regrettably, this can be rather slow, but the invalidation
+        //algorithm lessens how many times this has to be done for a given scene.
         
         const bool isSteep = (std::abs(y2 - y1) > std::abs(x2 - x1));
         if(isSteep){
@@ -644,7 +660,6 @@ namespace cturtle {
         int y = y1;
         
         const int maxX = x2;
-        
         const int radius = std::ceil(float(width) / 2.0f);
         
         for(int x = x1; x < maxX; x++){
@@ -731,10 +746,10 @@ namespace cturtle {
     
     void Sprite::draw(const AffineTransform& t, Image& imgRef, Color c, int outlineWidth, Color outlineColor){
         //Vertex order is as follows for the constructed quad.
-        // 0--3        3
-        // | /        /|
-        // |/        / |
-        // 1        1--2
+        // 0--3   3
+        // | /   /|
+        // |/   / |
+        // 1   1--2
         
         const int halfW = drawWidth / 2;
         const int halfH = drawHeight / 2;
@@ -758,6 +773,8 @@ namespace cturtle {
             destPoints[i] = t(destPoints[i]);
         }
         
+        //Yes, I know this isn't particularly readable.
+        //But its purpose is described in an above commented illustration.
         imgRef.draw_triangle(destPoints[0][0], destPoints[0][1], destPoints[1][0], destPoints[1][1], destPoints[3][0], destPoints[3][1],
                   spriteImg, texturePoints[0][0], texturePoints[0][1], texturePoints[1][0], texturePoints[1][1], texturePoints[3][0], texturePoints[3][1]);
         imgRef.draw_triangle(destPoints[1][0], destPoints[1][1], destPoints[2][0], destPoints[2][1], destPoints[3][0], destPoints[3][1],

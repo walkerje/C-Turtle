@@ -2359,6 +2359,7 @@ namespace cturtle{
     }
     
     Color randomColor(){
+        //Static to maintain consistency
         static std::default_random_engine rng(epochTime());
         static std::uniform_int_distribution<int> rng_dist(0, 255);
         return Color((uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng), (uint8_t)rng_dist(rng));
@@ -2370,10 +2371,7 @@ namespace cturtle{
     * their values. All of the names can be found here:
     * https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm */
     Color Color::fromName(const std::string& name){
-        if(name == "random"){
-            return randomColor();
-        }
-        return NAMEDCOLORS.at(name);
+        return name == "random" ? randomColor() : NAMEDCOLORS.at(name);
     }
 }
 #endif

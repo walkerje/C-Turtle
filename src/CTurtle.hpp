@@ -39,12 +39,11 @@
 //Under UNIX, link X11 and PThread.
 
 /*Standard Includes*/
-#include <algorithm>    //Algorithms for misc.
-#include <string>       //String for misc.
+//Containers
 #include <map>          //Map for key bindings
-#include <list>         //List for scene objects & bindings.
-#include <functional>   //Functional for callback objects.
-#include <utility>      //For pairs/etc
+#include <list>         //List for scene objects & bindings
+#include <string>       //String naming/etc
+//Memory & Mutex
 #include <memory>       //For smart pointers.
 #include <mutex>        //Mutex object for event synch.
 
@@ -83,10 +82,15 @@ namespace cturtle{
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa Turtle::getAnimMS()*/
     enum TurtleSpeed{
+        /**So fast, it disables animation.*/
         TS_FASTEST  = 0,
+        /**The fastest the turtle can go without disabling animations.*/
         TS_FAST     = 10,
+        /**The default, normal speed of a turtle.*/
         TS_NORMAL   = 6,
+        /**A slow speed.*/
         TS_SLOW     = 3,
+        /**The slowest a turtle can go.*/
         TS_SLOWEST  = 1
     };
     
@@ -100,11 +104,21 @@ namespace cturtle{
          *Can be null if the text string is not empty.*/
         std::unique_ptr<IDrawableGeometry> geom;
         
-        //In the case where unownedGeom is 
+        //In the case where unownedGeom is non-null,
+        //it uses this pointer over the geom pointer.
+        //Some geometry, notably stamps, are not owned by a scene object.
         IDrawableGeometry* unownedGeom = nullptr;
         
         /**The color with which to draw this SceneObject.*/
-        Color color;
+        Color fillColor;
+        
+        /**The width, in pixels, of this scene object.
+         * When less-or-equal-to 0, does not draw the outline.*/
+        unsigned int outlineWidth = 0;
+        
+        /**The color with which to draw the outline of this SceneObject.*/
+        Color outlineColor;
+        
         /**The transform at which to draw this SceneObject.
          * Note that this is concatenated onto the ScreenTransform of
          * the drawing turtle's screen.*/
@@ -129,7 +143,7 @@ namespace cturtle{
          *\param color The color to draw the geometry in.
          *\param t The transform at which to draw the geometry.*/
         SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t) :
-            geom(geom), color(color), transform(t){}
+            geom(geom), fillColor(color), transform(t){}
         
         /**Stamp constructor which takes an ID.
          * Please note that, when it comes to stamps, this object DOES NOT OWN
@@ -140,7 +154,7 @@ namespace cturtle{
          *\param t The transform at which to draw the stamp.
          *\param stampid The ID of the stamp this object is related to..*/
         SceneObject(IDrawableGeometry* geom, Color color, const AffineTransform& t, int stampid) :
-            unownedGeom(geom), color(color), transform(t), stamp(true), stampid(stampid){}
+            unownedGeom(geom), fillColor(color), transform(t), stamp(true), stampid(stampid){}
         
         /**String constructor.
          * Please note that strings are not subject to rotation, scaling, or shear!
@@ -148,7 +162,7 @@ namespace cturtle{
          *\param color The color with which to daraw this string.
          *\param t The transform at which to draw this string.*/
         SceneObject(const std::string& text, Color color, const AffineTransform& t) : 
-            text(text), color(color), transform(t){}
+            text(text), fillColor(color), transform(t){}
     };
 
     /**Pen State structure.
@@ -274,6 +288,14 @@ namespace cturtle{
         void setheading(float angle);
         /**\copydoc setheading(float)*/
         inline void seth(float angle){setheading(angle);}
+        
+        /**
+         * Returns the heading of the Turtle (e.g, its current rotation).
+         * @return 
+         */
+        inline float heading(){
+            return state.angleMode ? transform.getRotation() : toDegrees(transform.getRotation());
+        }
         
         /**\Brings the turtle back to its origin.
          * Depends on the current screen mode. 
@@ -448,6 +470,7 @@ namespace cturtle{
             pushState();
             state.penWidth = pixels;
         }
+        
         /**Returns the width of the pen line.
          *\return The width of the line, in pixels.*/
         int width(){return state.penWidth;}
@@ -485,6 +508,8 @@ namespace cturtle{
     protected:
         std::list<std::list<SceneObject>::iterator> objects;
         std::list<PenState> stateStack = {PenState()};
+        std::list<std::pair<Line, Color>> fillLines;
+        //lines to be drawn to temp screen when filling to avoid invalidating screen
         AffineTransform& transform = stateStack.front().transform;
         PenState& state = stateStack.front();
         
@@ -493,13 +518,10 @@ namespace cturtle{
         Point   travelPoints[2];
         bool    traveling = false;
         
-        /*Fill insert iterator*/
-        std::list<SceneObject>::iterator fillInsert;
-        
         /*Undo stack size.*/
         unsigned int undoStackSize = 100;
         
-        /*Accumulator*/
+        /*Accumulator for fill state*/
         Polygon fillAccum;
         
         /*Screen pointer. Assign before calling any other function!*/
@@ -548,7 +570,8 @@ namespace cturtle{
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.
          * Pushes a new fill vertex if filling, and applies appropriate
-         * lines if the pen is down.*/
+         * lines if the pen is down. Generally manages all state related
+         * to movement as a side effect.*/
         void travelTo(const AffineTransform& dest);
         
         /**Performs an interpolation, with animation,
@@ -907,12 +930,20 @@ namespace cturtle{
         
         /**The scene list.*/
         std::list<SceneObject> objects;
+        
         /**The list of attached turtles.*/
         std::list<Turtle*> turtles;
         
+        /**A unique pointer to the event thread.
+         *\sa initEventThread()*/
         std::unique_ptr<std::thread> eventThread;
+        /**A list of cached events. Filled by event thread,
+         * processed and emptied by main thread.*/
         std::list<InputEvent> cachedEvents;
+        /**A boolean indicating whether or not to kill the event thread.*/
         bool killEventThread = false;
+        /**The mutex which controls synchronization between the main
+         * thread and the event thread.*/
         std::mutex cacheMutex;
         
         //this is an array. 0 for keyDown bindings, 1 for keyUp bindings.

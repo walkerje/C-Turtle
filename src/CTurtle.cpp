@@ -21,9 +21,9 @@
 //SOFTWARE.
 
 #define CTURTLE_IMPLEMENTATION
+
 #include "CTurtle.hpp"
 #include <cstdlib>
-#include <iostream>
 #include <vector>
 #include <locale>
 #include <memory>
@@ -41,7 +41,6 @@ namespace cturtle {
                     {5, 5}
                 }))},
             {"square",
-                    
                 std::shared_ptr<IDrawableGeometry>(
                 new Polygon(
                 {
@@ -190,6 +189,7 @@ namespace cturtle {
 
         cachedEvents.clear();
         cacheMutex.unlock();
+        std::this_thread::yield();
     }
 
     void TurtleScreen::delay(unsigned int ms) {
@@ -260,23 +260,26 @@ namespace cturtle {
         while (latestIter != objects.end()) {
             SceneObject& object = *latestIter;
             AffineTransform t(screen.copyConcatenate(object.transform));
-            Color& color = object.color;
-            IDrawableGeometry* geom = object.geom.get();
-            if (!object.text.empty()) {
+            IDrawableGeometry* geom = object.geom.get() ? object.geom.get() : object.unownedGeom;
+            
+            if(geom != nullptr){
+                geom->draw(t, canvas, object.fillColor, object.outlineWidth, object.outlineColor);
+            }else if(!object.text.empty()){
+                //Draw text
                 Point trans = t.getTranslation();
-                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.color.rgbPtr());
-            } else if (object.stamp && object.unownedGeom != nullptr) {
-                object.unownedGeom->draw(screen.copyConcatenate(object.transform), canvas, object.color);
-            } else geom->draw(t, canvas, color);
+                canvas.draw_text(trans.x, trans.y, object.text.c_str(), object.fillColor.rgbPtr());
+            }
+            
             latestIter++;
         }
 
         if(canvas.width() != turtleComposite.width() || canvas.height() || turtleComposite.height()){
             turtleComposite.assign(canvas);
         }else{
-            //Let's see if the draw_image is accellerated in some way
+            //Let's see if the draw_image is accelerated in some way
             turtleComposite.draw_image(0,0,canvas);
         }
+        
         for (Turtle* turt : turtles) {
             turt->draw(screen, turtleComposite);
         }
@@ -391,7 +394,7 @@ namespace cturtle {
     //Stamps
 
     int Turtle::stamp() {
-        pushStamp(AffineTransform(transform).rotate(state.cursorTilt), state.fillColor, state.cursor);
+        pushStamp(transform, state.fillColor, state.cursor);
         return state.curStamp;
     }
 
@@ -534,14 +537,22 @@ namespace cturtle {
 
     void Turtle::fill(bool val) {
         if (state.filling && !val) {
-            //excuse long line, but this fixes a particularly hard to find bug
-            objects.push_back(screen->getScene().emplace(std::next(fillInsert),
-                    new Polygon(fillAccum.points), state.fillColor, AffineTransform()));
+            //Add the fill polygon
+            screen->getScene().emplace_back(new Polygon(fillAccum.points), state.fillColor, AffineTransform());
+            objects.push_back(std::prev(screen->getScene().end(), 1));
+            
+            //Add all trace lines created when tracing out the fill polygon.
+            if(state.filling && !fillLines.empty()){
+                for(const auto& lineInfo : fillLines){
+                    screen->getScene().emplace_back(new Line(lineInfo.first), lineInfo.second, AffineTransform());
+                    objects.push_back(std::prev(screen->getScene().end(), 1));
+                }
+                fillLines.clear();
+            }
+            
             fillAccum.points.clear();
-            updateParent(true, false);
+            updateParent(false, false);
             //trace line geometry in the screen's scene list.
-        }else if(!state.filling && val){
-            fillInsert = std::prev(screen->getScene().end());
         }
         state.filling = val;
     }
@@ -551,6 +562,15 @@ namespace cturtle {
             return;
 
         if (state.visible) {
+            //Draw all lines queued during filling a shape.
+            //This is only populated when the turtle moves between a beginfill
+            //and endfill while the pen is down.
+            for(auto& lineVal : fillLines){
+                Line& line = lineVal.first;
+                Color& color = lineVal.second;
+                line.draw(screen, canvas, color);
+            }
+            
             if(traveling && state.tracing){
                 //Draw the "Travel-Line" when in the middle of the travelTo func
                 travelPoints[0] = screen(travelPoints[0]);
@@ -647,11 +667,14 @@ namespace cturtle {
         
         //Contents of PushCurrent moved here because every function
         //that called this one called PushCurrent immediately after it.
-        if(state.tracing){
+        if(state.tracing && !state.filling){
             pushTraceLine(begin.getTranslation(), dest.getTranslation());
-        }
-        if (state.filling)
+        } else if (state.filling){
             fillAccum.points.push_back(dest.getTranslation());
+            if(state.tracing){
+                fillLines.push_back({{begin.getTranslation(), dest.getTranslation(), state.penWidth}, state.penColor});
+            }
+        }
         
         transform.assign(begin);
         pushState();
@@ -662,6 +685,8 @@ namespace cturtle {
     }
     
     void Turtle::travelBack(){
+        //This function is redundant and should be removed.
+        //Alternatively, make travelTo function handle this case more efficiently.
         const AffineTransform a = state.transform;
         const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
         
@@ -722,9 +747,9 @@ namespace cturtle {
     
     bool Turtle::pushGeom(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
+            pushState();
             screen->getScene().emplace_back(geom, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
-            pushState();
             return true;
         }
         return false;
@@ -732,9 +757,18 @@ namespace cturtle {
 
     bool Turtle::pushStamp(const AffineTransform& t, Color color, IDrawableGeometry* geom) {
         if (screen != nullptr) {
-            screen->getScene().emplace_back(geom, color, t, state.curStamp++);
-            objects.push_back(std::prev(screen->getScene().end()));
             pushState();
+            const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416; 
+            
+            AffineTransform trans(t);
+            trans.rotate(cursorRot + state.cursorTilt);
+            
+            screen->getScene().emplace_back(geom, color, trans, state.curStamp++);
+            SceneObject& obj = screen->getScene().back();
+            obj.outlineWidth = 1;
+            obj.outlineColor = state.penColor;
+            
+            objects.push_back(std::prev(screen->getScene().end()));
             return true;
         }
         return false;
@@ -742,9 +776,9 @@ namespace cturtle {
     
     bool Turtle::pushText(const AffineTransform& t, Color color, const std::string& text) {
         if (screen != nullptr) {
+            pushState();
             screen->getScene().emplace_back(text, color, t);
             objects.push_back(std::prev(screen->getScene().end()));
-            pushState();
             return true;
         }
         return false;
