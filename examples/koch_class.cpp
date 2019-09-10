@@ -1,6 +1,7 @@
 /* 
- * File:   show_two_turtle.cpp
+ * File:   koch_class.cpp
  * Author: Jesse W. Walker
+ * Derived from http://cs.berea.edu/courses/csc226/tasks/koch.py
  */
 
 #include "CTurtle.hpp"
