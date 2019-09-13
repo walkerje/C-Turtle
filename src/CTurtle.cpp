@@ -31,38 +31,30 @@
 namespace cturtle {
     /*Shape Registration =================================*/
     namespace {
-        std::map<std::string, std::shared_ptr<IDrawableGeometry>> shapes = {
+        std::map<std::string, Polygon> shapes = {
             {"triangle",
-                std::shared_ptr<IDrawableGeometry>(
-                new Polygon(
-                {
+                Polygon{
                     {0, 0},
                     {-5, 5},
                     {5, 5}
-                }))},
+                }},
             {"square",
-                std::shared_ptr<IDrawableGeometry>(
-                new Polygon(
-                {
+                Polygon{
                     {-5, -5},
                     {-5, 5},
                     {5, 5},
                     {5, -5}
-                }))},
+                }},
             {"indented triangle",
-                std::shared_ptr<IDrawableGeometry>(
-                new Polygon(
-                {
+                Polygon{
                     //CCW
                     {0,0},
                     {-5, 10},
                     {0, 8},
                     {5, 10}
-                }))},
+                }},
             {"arrow",
-                std::shared_ptr<IDrawableGeometry>(
-                new Polygon(
-                {
+                Polygon{
                     {0, 0},
                     {-5, 5},
                     {-3, 5},
@@ -70,17 +62,12 @@ namespace cturtle {
                     {3, 10},
                     {3, 5},
                     {5, 5}
-                }
-            ))}
+            }}
         };
     }
     
-    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom){
-        shapes[name] = geom;
-    }
-
-    const IDrawableGeometry& shape(const std::string name) {
-        return *shapes[name].get();
+    IDrawableGeometry& shape(const std::string name) {
+        return shapes[name];
     }
 
     /*TurtleScreen =======================================*/
@@ -730,7 +717,10 @@ namespace cturtle {
     void Turtle::pushState(){
         if(stateStack.size() + 1 > undoStackSize)
             stateStack.pop_front();
-        stateStack.push_back(PenState(state));
+//        stateStack.push_back(PenState(state));
+        //This fixes an odd issue in MSVC where the cursor's shape pointer
+        //gets deleted for no obvious reason.
+        stateStack.push_back(stateStack.back());
         state = stateStack.back();
         transform = state.transform;
         state.objectsBefore = objects.size();

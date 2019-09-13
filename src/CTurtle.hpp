@@ -65,19 +65,20 @@ namespace cturtle{
     //TurtleScreen prototype definition
     class TurtleScreen;
     
-    /*Shape Registration.*/
-    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom);
-    
-    /**Registers the specified drawable geometry as a shape.
-     * Please note that type T must inherit from IDrawableGeometry and
-     * specify a copy constructor, default or otherwise.*/
-    template<typename T>
-    void registerShape(const std::string& name, const T& geom){
-        __registerShapeImpl(name, std::shared_ptr<IDrawableGeometry>(new T(geom)));
-    }
+    //TODO: Refix shape registration and default shape storage.
+//    /*Shape Registration.*/
+//    void __registerShapeImpl(const std::string& name, std::shared_ptr<IDrawableGeometry> geom);
+//    
+//    /**Registers the specified drawable geometry as a shape.
+//     * Please note that type T must inherit from IDrawableGeometry and
+//     * specify a copy constructor, default or otherwise.*/
+//    template<typename T>
+//    void registerShape(const std::string& name, const T& geom){
+//        __registerShapeImpl(name, std::shared_ptr<IDrawableGeometry>(new T(geom)));
+//    }
     
     /**Returns the shape with the specified name.*/
-    const IDrawableGeometry& shape(const std::string name);
+    IDrawableGeometry& shape(const std::string name);
     
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa Turtle::getAnimMS()*/
