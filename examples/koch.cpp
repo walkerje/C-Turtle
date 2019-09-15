@@ -1,6 +1,7 @@
 /* 
  * File:   show_koch.cpp
  * Author: Jesse W. Walker
+ * Derived from http://cs.berea.edu/courses/csc226/tasks/koch-curve.py
  */
 
 #include "CTurtle.hpp"
