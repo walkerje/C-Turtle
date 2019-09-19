@@ -1675,15 +1675,6 @@ namespace cturtle {
 			{"YellowGreen", detail::col::YellowGreen}
 	};
 
-	//Define named color constructor after the definition of the named color map.
-		/*\brief Name constructor.
-				 Takes a literal color name as an input.
-		  \param name The name of the color from which to derive value.
-		  \sa fromName()*/
-	Color::Color(const std::string& name) {
-		detail::resolveColorComp(NAMED_COLORS.at(name), r, g, b);
-	}
-
 	/**
 	 * Generates and returns a random color.
 	 * @return
@@ -1700,7 +1691,19 @@ namespace cturtle {
 	* their values. All of the names can be found here:
 	* https://www.tcl.tk/man/tcl8.4/TkCmd/colors.htm */
 	inline Color fromName(const std::string& name) {
-		return name == "random" ? randomColor() : Color(name);
+		return name == "random" ? randomColor() : Color(NAMED_COLORS.at(name));
+	}
+
+	//Define named color constructor after the definition of the named color map.
+		/*\brief Name constructor.
+				 Takes a literal color name as an input.
+		  \param name The name of the color from which to derive value.
+		  \sa fromName()*/
+	Color::Color(const std::string& name) {
+		const Color c = fromName(name);
+		r = c.r;
+		g = c.g;
+		b = c.b;
 	}
 
 	//SECTION: USER IO
