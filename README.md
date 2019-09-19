@@ -5,12 +5,11 @@
 
 # C-Turtle
 #### [Documentation](https://walkerje.github.io/C-Turtle/docs/index.html)
-#### [Setup / Installation](https://walkerje.github.io/C-Turtle/docs/md__home_jesse_Development_Work_C-Turtle-Doxy_setup.html)
 
-C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible"™. This package has been released under the MIT license accordingly.
-Given that this is intended to be an education-oriented package, there is a comprehensive and guided setup process available [here](https://walkerje.github.io/C-Turtle/docs/md__home_jesse_Development_Work_C-Turtle-Doxy_setup.html) to ease the process. CMake 3.1 is or greater is required for the setup process.
+C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible". This package has been released under the MIT license accordingly.
+Given that this is intended to be an education-oriented package, to ease the setup process it has been created to be Header-Only. Simply copy CTurtle.hpp (alongside CImg.hpp) into your include path or project and you're ready to go.
 
-This package heavily uses [CImg](http://cimg.eu/) for its display and drawing functions.
+This package heavily uses [CImg](http://cimg.eu/) for its display and drawing functions. As such, it must be available in the include path alongside CTurtle itself.
 
 ## Direct Comparison between C++ and Python
 The following table contains examples, which do the exact same thing, between C-Turtle and Python's Turtle.
@@ -30,15 +29,15 @@ The following table contains examples, which do the exact same thing, between C-
       int main(int argc, char** argv) {
           ct::TurtleScreen scr;
           scr.bgcolor({"white"});
-          ct::Turtle rt(scr);
-          rt.speed(ct::TS_SLOWEST);
-          rt.fillcolor({"purple"});
-          rt.begin_fill();
+          ct::Turtle turtle(scr);
+          turtle.speed(ct::TS_SLOWEST);
+          turtle.fillcolor({"purple"});
+          turtle.begin_fill();
           for (int i = 0; i < 4; i++) {
-              rt.forward(50);
-              rt.right(90);
+              turtle.forward(50);
+              turtle.right(90);
           }
-          rt.end_fill();
+          turtle.end_fill();
           scr.bye();
           return 0;
       }
