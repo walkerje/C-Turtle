@@ -2131,8 +2131,8 @@ namespace cturtle {
 
 		/**Moves this transform "forward" according to its rotation.*/
 		AffineTransform& forward(float distance) {
-			at(0, 2) += std::round(std::cos(rotation) * distance);//x component
-			at(1, 2) += std::round(std::sin(rotation) * distance);//y component
+			at(0, 2) += (std::cos(rotation) * distance);//x component
+			at(1, 2) += (std::sin(rotation) * distance);//y component
 			return *this;
 		}
 
@@ -2915,7 +2915,9 @@ namespace cturtle {
 		void setx(int x);
 		/**\brief Sets the Y-axis transform location of this turtle.*/
 		void sety(int y);
-
+                
+                void shift(int x, int y);
+                
 		/**\brief Sets the rotation of this turtle.
 		 * The unit by which the input is specified is determined by the current
 		 * angle mode. The difference between Clockwise and Counterclockwise
@@ -4047,6 +4049,10 @@ namespace cturtle {
 	void Turtle::sety(int y) {
 		travelTo(AffineTransform(*transform).setTranslationY(y));
 	}
+        
+        void Turtle::shift(int x, int y){
+                travelTo(AffineTransform(*transform).translate(x,y));
+        }
 
 	void Turtle::home() {
 		travelTo(AffineTransform());
