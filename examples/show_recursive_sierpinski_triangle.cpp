@@ -1,6 +1,7 @@
 /* 
  * File:   show_recursive_sierpinski_triangle.cpp
  * Author: Jesse W. Walker
+ * Derived from the work of Dr. Jan Pearce of Berea College (see https://github.com/pearcej)
  */
 
 #include "CTurtle.hpp"
