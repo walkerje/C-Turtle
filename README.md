@@ -68,5 +68,6 @@ The following table contains examples, which do the exact same thing, between C-
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
 
-An example of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion:
+An example of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
+Azis Toktobaev - Berea College
 ![Mondrian Art Example](https://i.imgur.com/PoMCwXn.png)
