@@ -1685,6 +1685,7 @@ namespace cturtle {
      * @return
      */
     inline Color randomColor() {
+        //TODO: This could be handled better.
         std::default_random_engine rng(detail::epochTime());
         std::uniform_int_distribution<int> rng_dist(0, 255);
         return Color((uint8_t) rng_dist(rng), (uint8_t) rng_dist(rng), (uint8_t) rng_dist(rng));
@@ -1945,24 +1946,21 @@ namespace cturtle {
      * this data type tends to be most easily drawn to a simple canvas.*/
     struct ivec2 {
         /**The X component.*/
-        int x = 0;
+        int x;
         /**The Y component.*/
-        int y = 0;
+        int y;
 
-        /**\brief Empty constructor.*/
-        ivec2() {
-        }
+        /**\brief Empty constructor. Initializes X and Y to both equal 0.*/
+        ivec2() : x(0), y(0){}
 
         /**\brief Assignment constructor.
          *\param x The X value of this ivec2.
          *\param y The Y value of this ivec2.*/
-        ivec2(int x, int y) : x(x), y(y) {
-        }
+        ivec2(int x, int y) : x(x), y(y) {}
 
         /**\brief Copy constructor.
          *\param other Another instance of ivec2 from which to derive value.*/
-        ivec2(const ivec2& other) : x(other.x), y(other.y) {
-        }
+        ivec2(const ivec2& other) : x(other.x), y(other.y) {}
 
         /*Array access operator overload.*/
 
@@ -1971,6 +1969,11 @@ namespace cturtle {
          *\return A reference to the index */
         inline int& operator[](int index) {
             return ((int*) this)[index];
+        }
+        
+        /**\brief Comparison operator between this vector and the other specified.*/
+        bool operator==(const ivec2& other){
+            return x == other.x && y == other.y;
         }
     };
 
@@ -2950,17 +2953,32 @@ namespace cturtle {
             left(angle);
         }
 
-        /**\brief Sets the tranform location of this turtle.*/
+        /**\brief Sets the transform location of this turtle.*/
         void goTo(int x, int y);
 
+        /**\brief Sets the transform location of this turtle.*/
+        inline void goTo(const Point& pt){
+            goTo(pt.x, pt.y);
+        }
+        
         /**\copydoc goTo(int,int)*/
         inline void setpos(int x, int y) {
             goTo(x, y);
+        }
+        
+        /**\copydoc goTo(int,int)*/
+        inline void setpos(const Point& pt){
+            goTo(pt.x, pt.y);
         }
 
         /**\copydoc goTo(int,int)*/
         inline void setposition(int x, int y) {
             goTo(x, y);
+        }
+        
+        /**\copydoc goTo(int,int)*/
+        inline void setposition(const Point& pt){
+            goTo(pt.x, pt.y);
         }
 
         /**\brief Sets the X-axis transform location of this turtle.*/
@@ -2995,6 +3013,16 @@ namespace cturtle {
             return cturtle::distance(transform->getTranslation(), {x,y});
         }
         
+        /**
+         * Returns the distance between this turtle and the given point.
+         * @param pt
+         * @return
+         * \sa distance(int, int)
+         */
+        int distance(const Point& pt){
+            return cturtle::distance(transform->getTranslation(), pt);
+        }
+        
         /**\copydoc setheading(float)*/
         inline void seth(float angle) {
             setheading(angle);
@@ -3008,6 +3036,15 @@ namespace cturtle {
          */
         float towards(int x, int y);
 
+        /**
+         * \brief Returns the angle between the line of the current turtle transform to the given point.
+         * @param pt
+         * @return 
+         */
+        inline float towards(const Point& pt){
+            return towards(pt.x, pt.y);
+        }
+        
         /**
          * Returns the heading of the Turtle (e.g, its current rotation).
          * @return
@@ -3303,20 +3340,30 @@ namespace cturtle {
         void updateParent(bool invalidate = false, bool input = true);
 
         /**Performs an interpolation, with animation,
-         * between the current transform and the specified one.
-         * Pushes a new fill vertex if filling, and applies appropriate
+         * between the source transform and the destination transform.
+         * May push a new fill vertex if filling and pushing state, and applies appropriate
          * lines if the pen is down. Generally manages all state related
          * to movement as a side effect.*/
-        void travelTo(const AffineTransform& dest);
+        void travelBetween(const AffineTransform& from, const AffineTransform& to, bool pushState);
+        
+        /**Performs an interpolation, with animation,
+         * between the current transform and the specified one.
+         * Pushes a new fill vertex if filling, and applies appropriate
+         * lines if the pen is down.*/
+        void travelTo(const AffineTransform& dest){
+            travelBetween(*transform, dest, true);
+        }
 
         /**Performs an interpolation, with animation,
          * between the current transformation and the previous one.
-         * Will *not* pop state->*/
-        void travelBack();
+         * Will *not* pop state.
+         * ENSURE STACK IS BIG ENOUGH TO DO THIS BEFORE CALLING.*/
+        void travelBack(){
+            travelBetween(*transform, std::prev(stateStack.end(), 2)->transform, false);
+        }
 
         /**Inheritors must assign screen pointer!*/
-        Turtle() {
-        }
+        Turtle() {}
     };
 
     /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
@@ -3600,6 +3647,11 @@ namespace cturtle {
             for (MouseFunc& func : mouseBindings[button]) {
                 func(x, y);
             }
+        }
+        
+        /**\copydoc click(int, int, MouseButton)*/
+        inline void click(const Point& pt, MouseButton button){
+            click(pt.x, pt.y, button);
         }
 
         /**\brief Adds a timer function to be called every N milliseconds.
@@ -3933,7 +3985,7 @@ namespace cturtle {
             latestIter++;
         }
 
-        if (canvas.width() != turtleComposite.width() || canvas.height() || turtleComposite.height()) {
+        if (canvas.width() != turtleComposite.width() || canvas.height() != canvas.height()) {
             turtleComposite.assign(canvas);
         } else {
             //This works off the assumption that drawImage is accelerated.
@@ -4272,6 +4324,8 @@ namespace cturtle {
         if (stateStack.size() >= 2)
             travelBack(); //Travel back if stack size >= 2
 
+        //If we can't pop the state, break early.
+        //TODO: Remove features as they're undone, rather than at the end of the traveling animation.
         if (!popState()) {
             return false;
         }
@@ -4310,16 +4364,16 @@ namespace cturtle {
         pushState();
         state->tracing = down;
     }
-
-    void Turtle::travelTo(const AffineTransform& dest) {
-        if (dest == *transform)
-            return; //No traveling needs to take place.
-
+    
+    void Turtle::travelBetween(const AffineTransform& src, const AffineTransform& dest, bool doPushState){
+        if(dest == src)
+            return;
+        
         traveling = true;
-
+        
         AffineTransform begin;
-        begin.assign(*transform);
-
+        begin.assign(src);
+        
         if (screen != nullptr ? !screen->isclosed() : false) {//no point in animating with no screen
             auto& scene = this->screen->getScene();
             const float duration = static_cast<float>(getAnimMS());
@@ -4334,7 +4388,7 @@ namespace cturtle {
                 //our animations, making them take the same amount of time
                 //regardless of how it's performance.
                 unsigned long curTime = detail::epochTime();
-
+                
                 transform->assign(start.lerp(dest, progress));
                 travelPoints[0] = begin.getTranslation();
                 travelPoints[1] = transform->getTranslation();
@@ -4343,65 +4397,28 @@ namespace cturtle {
                 progress = (static_cast<float>(curTime - startTime) / duration);
             }
         }
-
-        //Contents of PushCurrent moved here because every function
-        //that called this one called PushCurrent immediately after it.
-        if (state->tracing && !state->filling) {
-            pushTraceLine(begin.getTranslation(), dest.getTranslation());
-        } else if (state->filling) {
-            fillAccum.points.push_back(dest.getTranslation());
-            if (state->tracing) {
-                fillLines.push_back({
-                    {begin.getTranslation(), dest.getTranslation(), state->penWidth}, state->penColor
-                });
+        
+        if(doPushState){
+            //Contents of PushCurrent moved here because every function
+            //that called this one called PushCurrent immediately after it.
+            if (state->tracing && !state->filling) {
+                pushTraceLine(begin.getTranslation(), dest.getTranslation());
+            } else if (state->filling) {
+                fillAccum.points.push_back(dest.getTranslation());
+                if (state->tracing) {
+                    fillLines.push_back({
+                        {begin.getTranslation(), dest.getTranslation(), state->penWidth}, state->penColor
+                    });
+                }
             }
+
+            transform->assign(begin);
+            pushState();
+            transform->assign(dest);
+        }else{
+            state->transform.assign(dest);
         }
-
-        transform->assign(begin);
-        pushState();
-        transform->assign(dest);
-
-        traveling = false;
-        updateParent(false, false);
-    }
-
-    void Turtle::travelBack() {
-        //This function is redundant and should be removed.
-        //Alternatively, make travelTo function handle this case more efficiently.
-        const AffineTransform a = state->transform;
-        const AffineTransform b = std::prev(stateStack.end(), 2)->transform;
-
-        if (a == b)
-            return; //no interpolation or animation needed.
-
-        traveling = true;
-
-        if (screen != nullptr ? !screen->isclosed() : false) {//no point in animating with no screen
-            auto& scene = this->screen->getScene();
-            const float duration = static_cast<float>(getAnimMS());
-            const unsigned long startTime = detail::epochTime();
-
-            AffineTransform start;
-            start.assign(a);
-
-            float progress = duration == 0 ? 1 : 0;
-            while (progress < 1.0f) {
-                //We use the time between animation frames to smooth out
-                //our animations, making them take the same amount of time
-                //regardless of how it's performance.
-                unsigned long curTime = detail::epochTime();
-
-                transform->assign(start.lerp(b, progress));
-                travelPoints[0] = b.getTranslation();
-                travelPoints[1] = transform->getTranslation();
-                screen->redraw();
-
-                progress = (static_cast<float>(curTime - startTime) / duration);
-            }
-        }
-
-        state->transform.assign(b);
-
+        
         traveling = false;
         updateParent(false, false);
     }
@@ -4409,9 +4426,9 @@ namespace cturtle {
     void Turtle::pushState() {
         if (stateStack.size() + 1 > undoStackSize)
             stateStack.pop_front();
-        //        stateStack.push_back(PenState(state));
-        //This fixes an odd issue in MSVC where the cursor's shape pointer
-        //gets deleted for no obvious reason.
+        // stateStack.push_back(PenState(state));
+        // This fixes an odd issue in MSVC where the cursor's shape pointer
+        // gets deleted for no obvious reason.
         stateStack.push_back(stateStack.back()); //Push a copy of the back-most pen state->
         state = &stateStack.back();
         transform = &state->transform;
