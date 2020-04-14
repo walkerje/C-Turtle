@@ -71,3 +71,6 @@ As time progresses, and as I am afforded the opportunity, I will provide visual 
 An example of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
 Azis Toktobaev - Berea College
 ![Mondrian Art Example](https://i.imgur.com/PoMCwXn.png)
+
+A similar example of artwork also generated in the style of Piet Mondrian as part of an assignment on Recursion. Bryar Frank - Berea College
+![Mondrian Art Example 2](https://i.imgur.com/ixf4fUE.jpg)
