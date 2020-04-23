@@ -1,5 +1,0 @@
-<map id="cturtle::PenState" name="cturtle::PenState">
-<area shape="rect" id="node2" href="$classcturtle_1_1AffineTransform.html" title="The AffineTransform class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link: http://www.opengl&#45;tutorial.org/beginners&#45;tutorials/tutorial&#45;3&#45;matrices/. " alt="" coords="5,73,220,99"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. " alt="" coords="244,73,475,99"/>
-<area shape="rect" id="node4" href="$structcturtle_1_1Color.html" title="Color: Unsigned 8&#45;bit RGB Color Implementation Just contains R, G and B elements. Color Defines an in..." alt="" coords="499,73,633,99"/>
-</map>
