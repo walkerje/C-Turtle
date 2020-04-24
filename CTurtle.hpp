@@ -1994,7 +1994,7 @@ namespace cturtle {
         /**\brief Array access operator overload. Useful for convenience.
          *\param index The index of one of the components of this ivec2 (0..1)
          *\return A reference to the index */
-        inline int& operator[](int index) {
+        inline int& operator[](int index) const{
             return ((int*) this)[index];
         }
 
@@ -2034,14 +2034,15 @@ namespace cturtle {
      *\param c The color with which to draw the line.
      *\param width The width of the line.*/
     inline void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width = 1) {
-        if (x1 == x2 && y1 == y2) {
+        if(x1 == x2 && y1 == y2)
             return;
-        } else if (width == 1) {
+        else if (width == 1) {
             //Just use the built-in bresenham line function
             //to draw line with widths of 1.
             imgRef.draw_line(x1, y1, x2, y2, c.rgbPtr());
             return;
         }
+
         //We pretty much re-implement Bresenham's Line Algorithm here,
         //however instead of blitting pixels at each spot we put circles,
         //which matches the rounded thick lines present in the Python implementation.
@@ -2069,12 +2070,12 @@ namespace cturtle {
 
         const int maxX = x2;
         const int radius = static_cast<int>(std::ceil(float(width) / 2.0f));
-
         for (int x = x1; x < maxX; x++) {
-            if (isSteep)
+            if (isSteep){
                 imgRef.draw_circle(y, x, radius, c.rgbPtr());
-            else
+            }else{
                 imgRef.draw_circle(x, y, radius, c.rgbPtr());
+            }
             err -= dy;
             if (err < 0) {
                 y += ystep;
@@ -2537,8 +2538,6 @@ namespace cturtle {
         void draw(const Transform& t, Image& imgRef) const{
             const Point a = t(pointA);
             const Point b = t(pointB);
-            if (a.x == b.x && a.y == b.y)
-                return; //no point in drawing a line between like points.
             drawLine(imgRef, a.x, a.y, b.x, b.y, fillColor, width);
         }
     };
@@ -3393,19 +3392,19 @@ namespace cturtle {
          * May push a new fill vertex if filling and pushing state, and applies appropriate
          * lines if the pen is down. Generally manages all state related
          * to movement as a side effect.*/
-        void travelBetween(const Transform& from, const Transform& to, bool pushState);
+        void travelBetween(Transform from, const Transform& to, bool pushState);
 
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.
          * Pushes a new fill vertex if filling, and applies appropriate
-         * lines if the pen is down.*/
+         * lines if the pen is down. Does push the state stack.*/
         void travelTo(const Transform& dest){
             travelBetween(*transform, dest, true);
         }
 
         /**Performs an interpolation, with animation,
          * between the current transformation and the previous one.
-         * Will *not* pop state.
+         * Will *not* push the state stack.
          * ENSURE STACK IS BIG ENOUGH TO DO THIS BEFORE CALLING.*/
         void travelBack(){
             travelBetween(*transform, std::prev(stateStack.end(), 2)->transform, false);
@@ -4003,15 +4002,20 @@ namespace cturtle {
         Transform screen = screentransform();
         while (latestIter != objects.end()) {
             SceneObject& object = *latestIter;
-            Transform t(screen.copyConcatenate(object.transform));
-            AbstractDrawableObject* geom = object.geom.get();
+            const Transform t(screen.copyConcatenate(object.transform));
 
             object.geom->draw(t, canvas);
 
             latestIter++;
         }
 
-        turtleComposite.assign(canvas);
+        if (canvas.width() != turtleComposite.width() || canvas.height() != turtleComposite.height()) {
+            turtleComposite.assign(canvas);
+        } else {
+            //This works off the assumption that drawImage is accelerated.
+            //There might be a more efficient way to do this, however.
+            turtleComposite.draw_image(0, 0, canvas);
+        }
 
         for (Turtle* turt : turtles)
             turt->draw(screen, turtleComposite);
@@ -4296,7 +4300,7 @@ namespace cturtle {
             objects.push_back(std::prev(screen->getScene().end(), 1));
 
             //Add all trace lines created when tracing out the fill polygon.
-            if (state->filling && !fillLines.empty()) {
+            if (!fillLines.empty()) {
                 for (auto& lineInfo : fillLines) {
                     screen->getScene().emplace_back(lineInfo.copy(), Transform());
                     objects.push_back(std::prev(screen->getScene().end(), 1));
@@ -4326,7 +4330,6 @@ namespace cturtle {
                 //Draw the "Travel-Line" when in the middle of the travelTo func
                 travelPoints[0] = screen(travelPoints[0]);
                 travelPoints[1] = screen(travelPoints[1]);
-
                 drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state->penColor, state->penWidth);
             }
 
@@ -4387,7 +4390,7 @@ namespace cturtle {
         state->tracing = down;
     }
 
-    void Turtle::travelBetween(const Transform& src, const Transform& dest, bool doPushState){
+    void Turtle::travelBetween(Transform src, const Transform& dest, bool doPushState){
         if(dest == src)
             return;
 
@@ -4395,7 +4398,7 @@ namespace cturtle {
         traveling = true;
 
         const float duration = static_cast<float>(getAnimMS());
-        if (screen != nullptr ? !screen->isclosed() : false && duration > 0) {//no point in animating with no screen
+        if ((screen != nullptr ? !screen->isclosed() : false) && duration > 0) {//no point in animating with no screen
             const unsigned long startTime = detail::epochTime();
 
             float progress = 0;
@@ -4416,8 +4419,6 @@ namespace cturtle {
         }
 
         if(doPushState){
-            //Contents of PushCurrent moved here because every function
-            //that called this one called PushCurrent immediately after it.
             if (state->tracing && !state->filling) {
                 pushTraceLine(src.getTranslation(), dest.getTranslation());
             } else if (state->filling) {
