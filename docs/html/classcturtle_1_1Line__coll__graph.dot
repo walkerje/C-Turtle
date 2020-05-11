@@ -1,0 +1,12 @@
+digraph "cturtle::Line"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node2 [label="cturtle::Line",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="cturtle::AbstractDrawable\lObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcturtle_1_1AbstractDrawableObject.html",tooltip="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..."];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" fillColor\noutlineColor" ,fontname="Helvetica"];
+  Node4 [label="cturtle::Color",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcturtle_1_1Color.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pointA\npointB" ,fontname="Helvetica"];
+  Node5 [label="cturtle::ivec2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcturtle_1_1ivec2.html",tooltip="Represents a coordinate pair (e.g, x & y) This class is represented as a low-precision point..."];
+}

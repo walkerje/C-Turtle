@@ -2157,7 +2157,7 @@ namespace cturtle {
 
         /**\brief Returns rotation of this transform, in radians.
          *\return The rotation of this transform, in radians.*/
-        float getRotation() {
+        float getRotation() const {
             return rotation;
         }
 
@@ -2792,7 +2792,7 @@ namespace cturtle {
         }
 
         /**Adds a generic component to this CompoundPolygon.*/
-        void addcomponent(AbstractDrawableObject& obj, const Transform& transform = Transform()) {
+        void addcomponent(const AbstractDrawableObject& obj, const Transform& transform = Transform()) {
             components.emplace_back(transform, obj.copy());
         }
 
@@ -2816,7 +2816,7 @@ namespace cturtle {
     //Turtle prototype definition
     class Turtle;
     //TurtleScreen prototype definition
-    class TurtleScreen;
+    class InteractiveTurtleScreen;
 
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa Turtle::getAnimMS()*/
@@ -2936,6 +2936,81 @@ namespace cturtle {
         }
     };
 
+    /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
+     *        on TurtleScreens.
+     *\sa TurtleScreen::mode(ScreenMode)*/
+    enum ScreenMode {
+        SM_STANDARD,
+        SM_LOGO//,
+        //        SM_WORLD
+    };
+    //I'm leaving out SM_WORLD. Adding it would really require more work than I have time for.
+
+    //Turtle class prototype so we can go ahead and define abstract turtle screen type.
+    class Turtle;
+
+    /**
+     * The AbstractTurtleScreen class is the abstract type
+     * for most turtle functionality.
+     * It intentionally excludes all input/output functionality, allowing
+     * for two intended derivates: an "interactive" screen, vs an "offline rendering" screen.
+     * Turtle class doesn't care which one it gets, in theory.
+     */
+    class AbstractTurtleScreen{
+    public:
+        virtual ~AbstractTurtleScreen() = default;
+
+        virtual void tracer(int countmax, unsigned int delayMS = 10) = 0;
+
+        virtual int window_width() const = 0;
+        virtual int window_height() const = 0;
+        virtual Color bgcolor() const = 0;
+        virtual void bgcolor(const Color& c) = 0;
+        virtual void mode(ScreenMode mode) = 0;
+        virtual ScreenMode mode() const = 0;
+        virtual void clearscreen() = 0;
+
+        /**Alias for clearscreen function
+         *\sa clearscreen()*/
+        inline void clear() {
+            clearscreen();
+        }
+
+        virtual void resetscreen() = 0;
+
+        /**Resets all turtles belonging to this screen to their original state->*/
+        inline void reset() {
+            resetscreen();
+        }
+
+        virtual ivec2 screensize(Color& bg) = 0;
+        //code-smell from python->c++, considering separation of functionality
+
+        virtual ivec2 screensize() = 0;
+        virtual void update(bool invalidateDraw = false, bool processInput = true) = 0;
+        virtual void delay(unsigned int ms) = 0;
+        virtual unsigned int delay() = 0;
+        virtual void bye() = 0;
+
+        virtual Image& getcanvas() = 0;
+
+        virtual bool isclosed() = 0;
+
+        virtual void redraw(bool invalidate = false) = 0;
+
+        virtual Transform screentransform() const = 0;
+
+        virtual void add(Turtle& turtle) = 0;
+
+        virtual std::list<SceneObject>& getScene() = 0;
+
+        virtual AbstractDrawableObject& shape(const std::string& name) = 0;
+    protected:
+        //Abstract class. Private constructor only allows
+        //for derivative classes to be instantiated.
+        AbstractTurtleScreen(){};
+    };
+
     /**
      *  The Turtle Class
      * Symbolically represents a turtle that runs around a screen that has a
@@ -2948,8 +3023,7 @@ namespace cturtle {
      */
     class Turtle {
     public:
-        /*Implemented in source impl. file*/
-        Turtle(TurtleScreen& scr);
+        Turtle(AbstractTurtleScreen& scr);
 
         //Motion
 
@@ -3319,7 +3393,7 @@ namespace cturtle {
         void reset();
 
         /**Sets this turtles screen.*/
-        void setScreen(TurtleScreen* scr) {
+        void setScreen(AbstractTurtleScreen* scr) {
             screen = scr;
         }
 
@@ -3345,7 +3419,7 @@ namespace cturtle {
         Polygon fillAccum;
 
         /*Screen pointer. Assign before calling any other function!*/
-        TurtleScreen* screen = nullptr;
+        AbstractTurtleScreen* screen = nullptr;
 
         /**Pushes a copy of the pen's state on the stack.*/
         void pushState();
@@ -3414,19 +3488,9 @@ namespace cturtle {
         Turtle() {}
     };
 
-    /**\brief ScreenMode Enumeration, used to decide orientation of the drawing calls
-     *        on TurtleScreens.
-     *\sa TurtleScreen::mode(ScreenMode)*/
-    enum ScreenMode {
-        SM_STANDARD,
-        SM_LOGO//,
-        //        SM_WORLD
-    };
-    //I'm leaving out SM_WORLD. Adding it would really require more work than I have time for.
-
     /**
-     *  TurtleScreen
-     * Holds and maintains all facilities in relation to displaying
+     * InteractiveTurtleScreen
+     * Holds and maintains facilities in relation to displaying
      * turtles and consuming input events from users through callbacks.
      * This includes holding the actual data for a given scene after being
      * populated by Turtle. It layers draw calls in the order they are called,
@@ -3434,12 +3498,12 @@ namespace cturtle {
      *
      * \sa Turtle
      */
-    class TurtleScreen {
+    class InteractiveTurtleScreen : public AbstractTurtleScreen{
     public:
 
         /**Empty constructor.
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
-        TurtleScreen() : display(800, 600, "CTurtle", 0) {
+        InteractiveTurtleScreen() : display(800, 600, "CTurtle", 0) {
             canvas.assign(display);
             initEventThread();
             redraw(true);
@@ -3448,7 +3512,7 @@ namespace cturtle {
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
          *\param title The title to assign the display with.*/
-        TurtleScreen(const std::string& title) : display(800, 600, title.c_str(), 0) {
+        InteractiveTurtleScreen(const std::string& title) : display(800, 600, title.c_str(), 0) {
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
@@ -3461,7 +3525,7 @@ namespace cturtle {
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        TurtleScreen(int width, int height, const std::string& title = "CTurtle")
+        InteractiveTurtleScreen(int width, int height, const std::string& title = "CTurtle")
         : display(width, height) {
             display.set_title(title.c_str());
             display.set_normalization(0);
@@ -3471,7 +3535,7 @@ namespace cturtle {
         }
 
         /**Destructor. Calls "bye" function.*/
-        ~TurtleScreen() {
+        ~InteractiveTurtleScreen() {
             bye();
         }
 
@@ -3495,7 +3559,7 @@ namespace cturtle {
 
         /**Returns the background color of the screen.
          *\return The background color of the screen.*/
-        Color bgcolor();
+        Color bgcolor() const;
 
         /**\brief Sets the background image of the display.
          * Sets the background image. Please note that the background image
@@ -3512,7 +3576,7 @@ namespace cturtle {
         void mode(ScreenMode mode);
 
         /**Returns the screen mode of this screen.*/
-        ScreenMode mode() {
+        ScreenMode mode() const {
             return curMode;
         }
 
@@ -3628,28 +3692,28 @@ namespace cturtle {
          *\param func The function to call when the specified key is pressed.
          *\param key The specified key.*/
         void onkeypress(KeyFunc func, KeyboardKey key) {
-            cacheMutex.lock();
+            eventCacheMutex.lock();
             //determine if key list exists
             if (keyBindings[0].find(key) == keyBindings[0].end()) {
                 keyBindings[0][key] = std::list<KeyFunc>();
             }
             //then push it to the end of the list
             keyBindings[0][key].push_back(func);
-            cacheMutex.unlock();
+            eventCacheMutex.unlock();
         }
 
         /**\brief Adds an additional "on press" key binding for the specified key.
          *\param func The function to call when the specified key is released.
          *\param key The specified key.*/
         virtual void onkeyrelease(KeyFunc func, KeyboardKey key) {
-            cacheMutex.lock();
+            eventCacheMutex.lock();
             //determine if key list exists, if not, make one
             if (keyBindings[1].find(key) == keyBindings[1].end()) {
                 keyBindings[1][key] = std::list<KeyFunc>();
             }
             //then push it to the end of the list
             keyBindings[1][key].push_back(func);
-            cacheMutex.unlock();
+            eventCacheMutex.unlock();
         }
 
         /**\brief Simulates a key "on press" event.
@@ -3676,9 +3740,9 @@ namespace cturtle {
          *\param func The function to call when the specified button is clicked.
          *\param button The specified button.*/
         void onclick(MouseFunc func, MouseButton button = MOUSEB_LEFT) {
-            cacheMutex.lock();
+            eventCacheMutex.lock();
             mouseBindings[button].push_back(func);
-            cacheMutex.unlock();
+            eventCacheMutex.unlock();
         }
 
         /**Calls all previously added mouse button call-backs.
@@ -3686,11 +3750,11 @@ namespace cturtle {
          *\param y The Y coordinate at which to press.
          *\param button The button to simulate being pressed.*/
         void click(int x, int y, MouseButton button) {
-            cacheMutex.lock();
+            eventCacheMutex.lock();
             for (MouseFunc& func : mouseBindings[button]) {
                 func(x, y);
             }
-            cacheMutex.unlock();
+            eventCacheMutex.unlock();
         }
 
         /**\copydoc click(int, int, MouseButton)*/
@@ -3792,7 +3856,7 @@ namespace cturtle {
         bool killEventThread = false;
         /**The mutex which controls synchronization between the main
          * thread and the event thread.*/
-        std::mutex cacheMutex;
+        std::mutex eventCacheMutex;
 
         //this is an array. 0 for keyDown bindings, 1 for keyUp bindings.
         std::unordered_map<KeyboardKey, std::list<KeyFunc>> keyBindings[2] = {
@@ -3840,10 +3904,12 @@ namespace cturtle {
                     {5, 5}}}
         };
     };
+    //MAINTAIN TYPEDEF FOR PREVIOUS TYPE NAME FOR BACKWARDS COMPAT.
+    typedef InteractiveTurtleScreen TurtleScreen;
 
     //SECTION: TURTLE & TURTLE SCREEN IMPLEMENTATION
 
-    void TurtleScreen::clearscreen() {
+    void InteractiveTurtleScreen::clearscreen() {
         //1) Delete all drawings and turtles
         //2) White background
         //3) No background image
@@ -3859,35 +3925,35 @@ namespace cturtle {
         curMode = SM_STANDARD;
 
         //Gotta do binding alterations under the cache's mutex lock.
-        cacheMutex.lock();
+        eventCacheMutex.lock();
         timerBindings.clear();
         keyBindings[0].clear();
         keyBindings[1].clear();
         for (int i = 0; i < 3; i++)
             mouseBindings[i].clear();
-        cacheMutex.unlock();
+        eventCacheMutex.unlock();
     }
 
-    void TurtleScreen::bgcolor(const Color& color) {
+    void InteractiveTurtleScreen::bgcolor(const Color& color){
         backgroundColor = color;
         redraw(true);
     }
 
-    Color TurtleScreen::bgcolor() {
+    Color InteractiveTurtleScreen::bgcolor() const {
         return backgroundColor;
     }
 
-    void TurtleScreen::bgpic(const Image& img) {
+    void InteractiveTurtleScreen::bgpic(const Image& img) {
         backgroundImage.assign(img);
         backgroundImage.resize(window_width(), window_height());
         redraw(true);
     }
 
-    const Image& TurtleScreen::bgpic() {
+    const Image& InteractiveTurtleScreen::bgpic() {
         return backgroundImage;
     }
 
-    void TurtleScreen::mode(ScreenMode mode) {
+    void InteractiveTurtleScreen::mode(ScreenMode mode) {
         //Resets & re-orients all turtles.
 
         curMode = mode;
@@ -3896,12 +3962,12 @@ namespace cturtle {
         }
     }
 
-    void TurtleScreen::resetscreen() {
+    void InteractiveTurtleScreen::resetscreen() {
         for (Turtle* turtle : turtles)
             turtle->reset();
     }
 
-    void TurtleScreen::update(bool invalidateDraw, bool input) {
+    void InteractiveTurtleScreen::update(bool invalidateDraw, bool input) {
         /*Resize canvas when necessary.*/
         if (display.is_resized()) {
             display.resize();
@@ -3928,7 +3994,8 @@ namespace cturtle {
         if (cachedEvents.empty() || !input)
             return; //No events to process.
 
-        cacheMutex.lock();
+        //
+        eventCacheMutex.lock();
 
         for (InputEvent& event : cachedEvents) {
             if (event.type) {//process keyboard event
@@ -3941,18 +4008,18 @@ namespace cturtle {
         }
 
         cachedEvents.clear();
-        cacheMutex.unlock();
+        eventCacheMutex.unlock();
     }
 
-    void TurtleScreen::delay(unsigned int ms) {
+    void InteractiveTurtleScreen::delay(unsigned int ms) {
         delayMS = ms;
     }
 
-    unsigned int TurtleScreen::delay() {
+    unsigned int InteractiveTurtleScreen::delay() {
         return static_cast<unsigned int>(delayMS);
     }
 
-    void TurtleScreen::bye() {
+    void InteractiveTurtleScreen::bye() {
         if (eventThread.get() != nullptr) {
             killEventThread = true;
             eventThread->join();
@@ -3965,7 +4032,7 @@ namespace cturtle {
             display.close();
     }
 
-    void TurtleScreen::redraw(bool invalidate) {
+    void InteractiveTurtleScreen::redraw(bool invalidate) {
         if (isclosed())
             return;
         int fromBack = 0;
@@ -4025,7 +4092,7 @@ namespace cturtle {
         detail::sleep(delayMS);
     }
 
-    void TurtleScreen::initEventThread() {
+    void InteractiveTurtleScreen::initEventThread() {
         eventThread.reset(new std::thread([&]() {
             //Mouse button states, between updates.
             //Keeps track of release/press etc
@@ -4043,7 +4110,7 @@ namespace cturtle {
                     continue;
                 }
 
-                cacheMutex.lock();
+                eventCacheMutex.lock();
 
                 Transform mouseOffset = screentransform();
                 Point mousePos = {
@@ -4107,14 +4174,14 @@ namespace cturtle {
                 mButtons[0] = buttons[0];
                 mButtons[1] = buttons[1];
                 mButtons[2] = buttons[2];
-                cacheMutex.unlock();
+                eventCacheMutex.unlock();
             }
         }));
     }
 
     //SECTION: TURTLE IMPLEMENTATION
 
-    Turtle::Turtle(TurtleScreen& scr) {
+    Turtle::Turtle(AbstractTurtleScreen& scr) {
         screen = &scr;
         screen->add(*this);
         reset();
@@ -4344,6 +4411,7 @@ namespace cturtle {
     }
 
     bool Turtle::undo(bool try_redraw) {
+        //total objects on the state stack prior to
         const unsigned long int totalBefore = state->objectsBefore;
 
         if (stateStack.size() >= 2)

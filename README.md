@@ -27,7 +27,7 @@ The following table contains examples, which do the exact same thing, between C-
       namespace ct = cturtle;
 
       int main(int argc, char** argv) {
-          ct::TurtleScreen scr;
+          ct::InteractiveTurtleScreen scr;
           scr.bgcolor({"white"});
           ct::Turtle turtle(scr);
           turtle.speed(ct::TS_SLOWEST);

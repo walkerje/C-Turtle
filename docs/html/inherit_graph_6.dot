@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="cturtle::SceneObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcturtle_1_1SceneObject.html",tooltip="Turtles append Scene Objects to a list to keep track of what it has drawn (a history). SceneObject holds a description of something that needs to be on the screen. It&#39;s a general object which encompasses ALL things that can be on screen, ranging from stamps, misc. geometry, and strings. "];
+}
