@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['text',['Text',['../classcturtle_1_1Text.html',1,'cturtle::Text'],['../classcturtle_1_1Text.html#ac631d8199ccd9ae56f661e22acc157d9',1,'cturtle::Text::text()'],['../classcturtle_1_1Text.html#aad06f49d01be75cbfafedb64a38cfc29',1,'cturtle::Text::Text()']]],
+  ['text',['Text',['../classcturtle_1_1Text.html',1,'cturtle::Text'],['../classcturtle_1_1Text.html#aad06f49d01be75cbfafedb64a38cfc29',1,'cturtle::Text::Text()'],['../classcturtle_1_1Text.html#ac631d8199ccd9ae56f661e22acc157d9',1,'cturtle::Text::text()']]],
   ['tilt',['tilt',['../classcturtle_1_1Turtle.html#ae3e48f309eaea7b4426ad1a173f15ef5',1,'cturtle::Turtle::tilt(float angle)'],['../classcturtle_1_1Turtle.html#aec48e043d9f3a259d7500d94323d6890',1,'cturtle::Turtle::tilt() const']]],
   ['todo_20list',['Todo List',['../todo.html',1,'']]],
   ['towards',['towards',['../classcturtle_1_1Turtle.html#a1ac8961a3d5d3044b3f3f011778b51bf',1,'cturtle::Turtle::towards(int x, int y)'],['../classcturtle_1_1Turtle.html#ab625cf304b44417c7d3cacd65b372d37',1,'cturtle::Turtle::towards(const Point &amp;pt)']]],

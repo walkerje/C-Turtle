@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['text',['Text',['../classcturtle_1_1Text.html',1,'cturtle']]],
-  ['transform',['Transform',['../classcturtle_1_1Transform.html',1,'cturtle']]],
-  ['turtle',['Turtle',['../classcturtle_1_1Turtle.html',1,'cturtle']]]
+  ['sceneobject',['SceneObject',['../structcturtle_1_1SceneObject.html',1,'cturtle']]],
+  ['sprite',['Sprite',['../classcturtle_1_1Sprite.html',1,'cturtle']]]
 ];

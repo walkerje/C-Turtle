@@ -3488,6 +3488,256 @@ namespace cturtle {
         Turtle() {}
     };
 
+    constexpr int SCREEN_DEFAULT_WIDTH = 800;
+    constexpr int SCREEN_DEFAULT_HEIGHT = 600;
+
+    class OfflineTurtleScreen : public AbstractTurtleScreen{
+    public:
+        OfflineTurtleScreen()
+                : OfflineTurtleScreen(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT){}
+
+        OfflineTurtleScreen(int width, int height){
+            canvas = {width, height};
+            isClosed = false;
+            redraw(true);
+        }
+
+        void tracer(int countmax, unsigned int delayMS = 10){
+            redrawCounterMax = countmax;
+            delay(delayMS);
+            redraw();
+        }
+
+        int window_width() const{
+            return canvas.width();
+        }
+
+        int window_height() const{
+            return canvas.height();
+        }
+
+        Color bgcolor() const{
+            return backgroundColor;
+        }
+
+        void bgcolor(const Color& c){
+            backgroundColor = c;
+            redraw(true);
+        }
+
+        void mode(ScreenMode mode){
+            //Resets & re-orients all turtles.
+
+            curMode = mode;
+            for (Turtle* t : turtles) {
+                t->reset();
+            }
+        }
+
+        ScreenMode mode() const{
+            return curMode;
+        }
+
+        void clearscreen(){
+            //1) Delete all drawings and turtles
+            //2) White background
+            //3) No background image
+            //4) No event bindings
+
+            for (Turtle* turtle : turtles) {
+                turtle->setScreen(nullptr);
+            }
+
+            turtles.clear();
+            backgroundColor = Color("white");
+            backgroundImage.assign();//assign with no parameters is deleting whatever contents it may have.
+            curMode = SM_STANDARD;
+        }
+
+        void resetscreen(){
+            for (Turtle* turtle : turtles)
+                turtle->reset();
+        }
+
+        ivec2 screensize(Color& bg){
+            bg = backgroundColor;
+            return {canvas.width(), canvas.height()};
+        };
+        //code-smell from python->c++, considering separation of functionality
+
+        ivec2 screensize(){
+            return {canvas.width(), canvas.height()};
+        }
+
+        void update(bool invalidateDraw = false, bool processInput = false){
+            redraw(invalidateDraw);
+            //processInput is ignored. OfflineTurtleScreen does NOT support input.
+        }
+
+        void delay(unsigned int ms){
+            delayMS = ms;
+        }
+
+        unsigned int delay(){
+            return delayMS;
+        }
+
+        void bye() {
+            //TODO: this
+            clearscreen();
+            isClosed = true;
+        }
+
+        Image& getcanvas(){
+            return canvas;
+        }
+
+        bool isclosed(){
+            return isClosed;
+        }
+
+        virtual void redraw(bool invalidate = false){
+            if (isclosed())
+                return;
+            int fromBack = 0;
+            bool hasInvalidated = invalidate;
+
+            //Handle resizes.
+
+            if (lastTotalObjects <= objects.size()) {
+                fromBack = static_cast<int>(objects.size() - lastTotalObjects);
+            }
+
+            if (hasInvalidated) {
+                if (!backgroundImage.is_empty()) {
+                    canvas.assign(backgroundImage);
+                } else {
+                    canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
+                }
+                redrawCounter = 0;//Forced redraw due to canvas invalidation.
+            } else {
+                if (redrawCounter >= redrawCounterMax) {
+                    redrawCounter = 0;
+                } else {
+                    redrawCounter++;
+                    return;
+                }
+            }
+
+            auto latestIter = !hasInvalidated ? std::prev(objects.end(), fromBack) : objects.begin();
+
+            Transform screen = screentransform();
+            while (latestIter != objects.end()) {
+                SceneObject& object = *latestIter;
+                const Transform t(screen.copyConcatenate(object.transform));
+
+                object.geom->draw(t, canvas);
+
+                latestIter++;
+            }
+
+            if (canvas.width() != turtleComposite.width() || canvas.height() != turtleComposite.height()) {
+                turtleComposite.assign(canvas);
+            } else {
+                //This works off the assumption that drawImage is accelerated.
+                //There might be a more efficient way to do this, however.
+                turtleComposite.draw_image(0, 0, canvas);
+            }
+
+            for (Turtle* turt : turtles)
+                turt->draw(screen, turtleComposite);
+
+            lastTotalObjects = static_cast<int>(objects.size());
+            //TODO: Alternative to "display"
+            //      Will likely take the form of some "submit" function that can cache these images,
+            //      Configurable through an environment variable.
+            detail::sleep(delayMS);
+        }
+
+        Transform screentransform() const{
+            return Transform().translate(canvas.width()/2, canvas.height()/2).scale(1, -1.0f);
+        }
+
+        void add(Turtle& turtle){
+            turtles.push_back(&turtle);
+        }
+
+        std::list<SceneObject>& getScene(){
+            return objects;
+        }
+
+        AbstractDrawableObject& shape(const std::string& name){
+            return shapes[name];
+        }
+    private:
+        std::list<SceneObject> objects;
+        std::list<Turtle*>      turtles;
+
+        bool isClosed = true;
+        Image canvas;
+
+        //The turtle composite image.
+        //This image copies the canvas and has
+        //turtles drawn to it to avoid redrawing a "busy" canvas.
+        //Trace lines are also drawn on this when filling.
+        Image turtleComposite;
+
+        /**The total objects on screen the last time this screen was drawn.
+         * Used to keep track of newer scene objects for a speed improvement.*/
+        int lastTotalObjects = 0;
+
+        /**The background color of this TurtleScreen.*/
+        Color backgroundColor = Color("white");
+        /**The background image of this TurtleScreen.
+         * When not empty, this image takes precedence over
+         * the background color when drawing.**/
+        Image backgroundImage;
+        /**The current screen mode.
+         *\sa mode(m)*/
+        ScreenMode curMode = SM_STANDARD;
+
+        /**Redraw delay, in milliseconds.*/
+        long int delayMS = 10;
+
+        /** These variables are used specifically in tracer settings.**/
+        /**Redraw Counter.*/
+        int redrawCounter = 0;
+        /**Redraw counter max.*/
+        int redrawCounterMax = 0;
+
+        //Default shapes.
+        std::unordered_map<std::string, Polygon> shapes = {
+                //counterclockwise coordinates.
+                {"triangle",
+                        Polygon{
+                                {0, 0},
+                                {-5, 5},
+                                {5, 5}}},
+                {"square",
+                        Polygon{
+                                {-5, -5},
+                                {-5, 5},
+                                {5, 5},
+                                {5, -5}}},
+                {"indented triangle",
+                        Polygon{
+                                //CCW
+                                {0, 0},
+                                {-5, 10},
+                                {0, 8},
+                                {5, 10}}},
+                {"arrow",
+                        Polygon{
+                                {0, 0},
+                                {-5, 5},
+                                {-3, 5},
+                                {-3, 10},
+                                {3, 10},
+                                {3, 5},
+                                {5, 5}}}
+        };
+    };
+
     /**
      * InteractiveTurtleScreen
      * Holds and maintains facilities in relation to displaying
@@ -3503,7 +3753,7 @@ namespace cturtle {
 
         /**Empty constructor.
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
-        InteractiveTurtleScreen() : display(800, 600, "CTurtle", 0) {
+        InteractiveTurtleScreen() : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, "CTurtle", 0) {
             canvas.assign(display);
             initEventThread();
             redraw(true);
@@ -3512,7 +3762,7 @@ namespace cturtle {
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
          *\param title The title to assign the display with.*/
-        InteractiveTurtleScreen(const std::string& title) : display(800, 600, title.c_str(), 0) {
+        InteractiveTurtleScreen(const std::string& title) : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, title.c_str(), 0) {
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();

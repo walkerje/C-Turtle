@@ -6,4 +6,6 @@ digraph "Graphical Class Hierarchy"
   Node0 [label="cturtle::AbstractTurtleScreen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcturtle_1_1AbstractTurtleScreen.html"];
   Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 [label="cturtle::InteractiveTurtle\lScreen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcturtle_1_1InteractiveTurtleScreen.html"];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="cturtle::OfflineTurtleScreen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcturtle_1_1OfflineTurtleScreen.html"];
 }
