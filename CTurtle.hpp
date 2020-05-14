@@ -3932,14 +3932,12 @@ namespace cturtle {
             canvas.assign(width, height, 1, 3);
             canvas.fill(255);
             isClosed = false;
-            gifWriteBuffer = new uint32_t[width * height];
             gif = jo_gif_start(CTURTLE_HEADLESS_SAVEDIR, width, height, 1, 32);
             redraw(true);
         }
 
         ~OfflineTurtleScreen(){
             bye();
-            delete[] gifWriteBuffer;
         }
 
         void tracer(int countmax, unsigned int delayMS = 10){
@@ -4020,6 +4018,11 @@ namespace cturtle {
         }
 
         void bye() {
+            /*finish up drawing if redraw counter hasn't been met*/
+            if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
+                tracer(0, delayMS);
+                redraw(false);
+            }
             jo_gif_end(&gif);
             clearscreen();
             isClosed = true;
@@ -4086,6 +4089,9 @@ namespace cturtle {
 
             lastTotalObjects = static_cast<int>(objects.size());
 
+            /* The following code takes the place of swapping the display buffer for the canvas,
+             * which is what the interactive mode does.*/
+
             //This copy is NOT efficient.
             //I've tried to employ tricks to make it faster, though.
             const uint8_t* redData = turtleComposite.data(0,0,0,0);
@@ -4102,7 +4108,8 @@ namespace cturtle {
                 pixel[3] = 255;     //a
             }
 
-            jo_gif_frame(&gif, (uint8_t*)gifWriteBuffer, 32, true);
+            //GIF frames are measured in centiseconds, thus the /10 on the delayMS...
+            jo_gif_frame(&gif, (uint8_t*)gifWriteBuffer, delayMS / 10, true);
         }
 
         Transform screentransform() const{
@@ -4121,8 +4128,10 @@ namespace cturtle {
             return shapes[name];
         }
     private:
-        /*this is deleted when the screen is destructed.*/
-        uint32_t* gifWriteBuffer; //allocate enough to hold width*height*4 (4 because RGBA)
+        /*this can be a constant allocated buffer.*/
+        uint32_t gifWriteBuffer[CTURTLE_HEADLESS_WIDTH * CTURTLE_HEADLESS_HEIGHT];
+        //allocate enough to hold width*height*4 (4 because RGBA).
+        //this fits into uint32_t type quite nicely. (8+8+8+8 bits, r+g+b+a) = 32
 
         //This struct controls the writing of resulting GIFs.
         jo_gif_t gif;
@@ -4456,6 +4465,11 @@ namespace cturtle {
 
         /**Resets and closes this display.*/
         void bye(){
+            if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
+                tracer(0, delayMS);
+                redraw(false);
+            }
+
             if (eventThread.get() != nullptr) {
                 killEventThread = true;
                 eventThread->join();
