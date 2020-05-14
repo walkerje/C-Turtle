@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pencolor',['penColor',['../structcturtle_1_1PenState.html#a2fb76e7573bfa387e1858df701dab60b',1,'cturtle::PenState::penColor()'],['../classcturtle_1_1Turtle.html#a9fb220cdbffecdaaa8f8a722ef624eb8',1,'cturtle::Turtle::pencolor(Color c)'],['../classcturtle_1_1Turtle.html#ab14dd65bd0e882b815755656072a9cdd',1,'cturtle::Turtle::pencolor() const']]],
+  ['pencolor',['pencolor',['../classcturtle_1_1Turtle.html#a9fb220cdbffecdaaa8f8a722ef624eb8',1,'cturtle::Turtle::pencolor(Color c)'],['../classcturtle_1_1Turtle.html#ab14dd65bd0e882b815755656072a9cdd',1,'cturtle::Turtle::pencolor() const'],['../structcturtle_1_1PenState.html#a2fb76e7573bfa387e1858df701dab60b',1,'cturtle::PenState::penColor()']]],
   ['pendown',['pendown',['../classcturtle_1_1Turtle.html#a8256411dae140f1e09058afecf7e6e8e',1,'cturtle::Turtle']]],
   ['penstate',['PenState',['../structcturtle_1_1PenState.html',1,'cturtle']]],
   ['penup',['penup',['../classcturtle_1_1Turtle.html#a2ee85233603aac7e5e6bd9ede80d2970',1,'cturtle::Turtle']]],

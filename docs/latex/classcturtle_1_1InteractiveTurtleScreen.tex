@@ -31,7 +31,9 @@ void \hyperlink{classcturtle_1_1InteractiveTurtleScreen_acb5441704b45a01830d69df
 \item 
 void \hyperlink{classcturtle_1_1InteractiveTurtleScreen_af681fbd6140ea760204fa9a1766725e3}{bgpic} (const Image \&img)
 \begin{DoxyCompactList}\small\item\em Sets the background image of the display. Sets the background image. Please note that the background image takes precedence over background color. \end{DoxyCompactList}\item 
-const Image \& \hyperlink{classcturtle_1_1InteractiveTurtleScreen_a38a7be849056a8450e97b15e3a02d545}{bgpic} ()
+const Image \& \hyperlink{classcturtle_1_1InteractiveTurtleScreen_a57a90b8e6163e46c6fcb6f37b0b00e78}{bgpic} ()
+\item 
+bool \hyperlink{classcturtle_1_1InteractiveTurtleScreen_ad28f7c6e4058541a2c4258b4455fad74}{supports\+\_\+live\+\_\+animation} () const
 \item 
 void \hyperlink{classcturtle_1_1InteractiveTurtleScreen_a1c666afe65211cf9eedaffa17206a697}{mode} (Screen\+Mode mode)
 \item 
@@ -216,7 +218,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!bgcolor@{bgcolor}}
 \index{bgcolor@{bgcolor}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{bgcolor()}{bgcolor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bgcolor (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Color}{Color} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bgcolor (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Color}{Color} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Sets the background color of the screen. Please note that, if there is a background image, this color is not applied until it is removed. 
 \begin{DoxyParams}{Parameters}
@@ -234,7 +236,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!bgcolor@{bgcolor}}
 \index{bgcolor@{bgcolor}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{bgcolor()}{bgcolor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Interactive\+Turtle\+Screen\+::bgcolor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Interactive\+Turtle\+Screen\+::bgcolor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Returns the background color of the screen. \begin{DoxyReturn}{Returns}
 The background color of the screen. 
@@ -247,7 +249,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!bgpic@{bgpic}}
 \index{bgpic@{bgpic}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{bgpic()}{bgpic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bgpic (\begin{DoxyParamCaption}\item[{const Image \&}]{img }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bgpic (\begin{DoxyParamCaption}\item[{const Image \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -258,17 +260,17 @@ Sets the background image of the display. Sets the background image. Please note
 {\em img} & The background image. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_a38a7be849056a8450e97b15e3a02d545}\label{classcturtle_1_1InteractiveTurtleScreen_a38a7be849056a8450e97b15e3a02d545}} 
+\mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_a57a90b8e6163e46c6fcb6f37b0b00e78}\label{classcturtle_1_1InteractiveTurtleScreen_a57a90b8e6163e46c6fcb6f37b0b00e78}} 
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!bgpic@{bgpic}}
 \index{bgpic@{bgpic}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{bgpic()}{bgpic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const Image \& cturtle\+::\+Interactive\+Turtle\+Screen\+::bgpic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily const Image\& cturtle\+::\+Interactive\+Turtle\+Screen\+::bgpic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Returns a const reference to the background image. \mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_a045b2cc0c8869140015abcc11226a714}\label{classcturtle_1_1InteractiveTurtleScreen_a045b2cc0c8869140015abcc11226a714}} 
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!bye@{bye}}
 \index{bye@{bye}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{bye()}{bye()}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bye (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::bye (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Resets and closes this display. 
 
@@ -321,7 +323,7 @@ Calls all previously added mouse button call-\/backs.
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!delay@{delay}}
 \index{delay@{delay}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{delay()}{delay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::delay (\begin{DoxyParamCaption}\item[{unsigned int}]{ms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::delay (\begin{DoxyParamCaption}\item[{unsigned int}]{ms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Sets the delay set between turtle commands. 
 
@@ -331,7 +333,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!delay@{delay}}
 \index{delay@{delay}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{delay()}{delay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily unsigned int cturtle\+::\+Interactive\+Turtle\+Screen\+::delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned int cturtle\+::\+Interactive\+Turtle\+Screen\+::delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Returns the delay set between screen swaps in milliseconds. 
 
@@ -367,7 +369,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!init\+Event\+Thread@{init\+Event\+Thread}}
 \index{init\+Event\+Thread@{init\+Event\+Thread}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{init\+Event\+Thread()}{initEventThread()}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::init\+Event\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::init\+Event\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 Initializes the underlying event thread. This thread is cleanly managed and destroyed when its owning object is destroyed. The thread just populates the cached\+Events list, so that events may be processed in the main thread. \mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_a0ea57bab0cb93f0fa4629747bddbab30}\label{classcturtle_1_1InteractiveTurtleScreen_a0ea57bab0cb93f0fa4629747bddbab30}} 
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!internaldisplay@{internaldisplay}}
@@ -395,7 +397,7 @@ Enters a loop, lasting until the display has been closed, which updates the scre
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!mode@{mode}}
 \index{mode@{mode}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{mode()}{mode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::mode (\begin{DoxyParamCaption}\item[{Screen\+Mode}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::mode (\begin{DoxyParamCaption}\item[{Screen\+Mode}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Sets the screen mode of this screen. 
 \begin{DoxyParams}{Parameters}
@@ -505,7 +507,7 @@ Simulates a key \char`\"{}on press\char`\"{} event.
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!redraw@{redraw}}
 \index{redraw@{redraw}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{redraw()}{redraw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::redraw (\begin{DoxyParamCaption}\item[{bool}]{invalidate = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::redraw (\begin{DoxyParamCaption}\item[{bool}]{invalidate = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Draws all geometry from all child turtles and swaps this display. 
 
@@ -536,7 +538,7 @@ Resets all turtles belonging to this screen to their original state-\/$>$ \mbox{
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!resetscreen@{resetscreen}}
 \index{resetscreen@{resetscreen}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{resetscreen()}{resetscreen()}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::resetscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::resetscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Resets all turtles belonging to this screen to their original state-\/$>$ 
 
@@ -596,6 +598,19 @@ Returns the shape associated with the specified name.
 
 Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstract\+Turtle\+Screen}.
 
+\mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_ad28f7c6e4058541a2c4258b4455fad74}\label{classcturtle_1_1InteractiveTurtleScreen_ad28f7c6e4058541a2c4258b4455fad74}} 
+\index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}}
+\index{supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
+\subsubsection{\texorpdfstring{supports\+\_\+live\+\_\+animation()}{supports\_live\_animation()}}
+{\footnotesize\ttfamily bool cturtle\+::\+Interactive\+Turtle\+Screen\+::supports\+\_\+live\+\_\+animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a boolean indicating if this turtle screen supports live animation. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}{cturtle\+::\+Abstract\+Turtle\+Screen}.
+
 \mbox{\Hypertarget{classcturtle_1_1InteractiveTurtleScreen_ac6cbbcf714c490abb300cd6a931950f3}\label{classcturtle_1_1InteractiveTurtleScreen_ac6cbbcf714c490abb300cd6a931950f3}} 
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!tracer@{tracer}}
 \index{tracer@{tracer}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
@@ -617,7 +632,7 @@ Implements \hyperlink{classcturtle_1_1AbstractTurtleScreen}{cturtle\+::\+Abstrac
 \index{cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}!update@{update}}
 \index{update@{update}!cturtle\+::\+Interactive\+Turtle\+Screen@{cturtle\+::\+Interactive\+Turtle\+Screen}}
 \subsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::update (\begin{DoxyParamCaption}\item[{bool}]{invalidate\+Draw = {\ttfamily false},  }\item[{bool}]{process\+Input = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Interactive\+Turtle\+Screen\+::update (\begin{DoxyParamCaption}\item[{bool}]{invalidate\+Draw = {\ttfamily false},  }\item[{bool}]{process\+Input = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 Updates the screen\textquotesingle{}s graphics and input. 
 \begin{DoxyParams}{Parameters}

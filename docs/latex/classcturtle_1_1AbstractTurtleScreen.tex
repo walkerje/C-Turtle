@@ -42,6 +42,8 @@ virtual void {\bfseries resetscreen} ()=0
 \item 
 void \hyperlink{classcturtle_1_1AbstractTurtleScreen_ac791e1eca792e71c356006c96eb98788}{reset} ()
 \item 
+virtual bool \hyperlink{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}{supports\+\_\+live\+\_\+animation} () const =0
+\item 
 \mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a67b23a8833900072eb9079b836b1796e}\label{classcturtle_1_1AbstractTurtleScreen_a67b23a8833900072eb9079b836b1796e}} 
 virtual \hyperlink{structcturtle_1_1ivec2}{ivec2} {\bfseries screensize} (\hyperlink{classcturtle_1_1Color}{Color} \&bg)=0
 \item 
@@ -102,7 +104,20 @@ clearscreen()
 \subsubsection{\texorpdfstring{reset()}{reset()}}
 {\footnotesize\ttfamily void cturtle\+::\+Abstract\+Turtle\+Screen\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Resets all turtles belonging to this screen to their original state-\/$>$ 
+Resets all turtles belonging to this screen to their original state-\/$>$ \mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}\label{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}} 
+\index{cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}!supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}}
+\index{supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}!cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}}
+\subsubsection{\texorpdfstring{supports\+\_\+live\+\_\+animation()}{supports\_live\_animation()}}
+{\footnotesize\ttfamily virtual bool cturtle\+::\+Abstract\+Turtle\+Screen\+::supports\+\_\+live\+\_\+animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a boolean indicating if this turtle screen supports live animation. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcturtle_1_1InteractiveTurtleScreen_ad28f7c6e4058541a2c4258b4455fad74}{cturtle\+::\+Interactive\+Turtle\+Screen}.
+
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

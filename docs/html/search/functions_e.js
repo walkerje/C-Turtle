@@ -23,5 +23,6 @@ var searchData=
   ['shift',['shift',['../classcturtle_1_1Turtle.html#aea45fc1d0f00b82fc64a0f97dd6c1ea2',1,'cturtle::Turtle']]],
   ['showturtle',['showturtle',['../classcturtle_1_1Turtle.html#ac676ff53f6393c70d665053cab1d67c5',1,'cturtle::Turtle']]],
   ['speed',['speed',['../classcturtle_1_1Turtle.html#a5f2010373aeb82207975e9f1b4168747',1,'cturtle::Turtle::speed(float val)'],['../classcturtle_1_1Turtle.html#af018ea1fa9eb9be80fdf53fabcb668eb',1,'cturtle::Turtle::speed()']]],
-  ['stamp',['stamp',['../classcturtle_1_1Turtle.html#af7b7e9c43e22fabce3a5435d09c73f77',1,'cturtle::Turtle']]]
+  ['stamp',['stamp',['../classcturtle_1_1Turtle.html#af7b7e9c43e22fabce3a5435d09c73f77',1,'cturtle::Turtle']]],
+  ['supports_5flive_5fanimation',['supports_live_animation',['../classcturtle_1_1AbstractTurtleScreen.html#aa9651fa98eefdb83fd99d476217b5414',1,'cturtle::AbstractTurtleScreen::supports_live_animation()'],['../classcturtle_1_1InteractiveTurtleScreen.html#ad28f7c6e4058541a2c4258b4455fad74',1,'cturtle::InteractiveTurtleScreen::supports_live_animation()']]]
 ];
