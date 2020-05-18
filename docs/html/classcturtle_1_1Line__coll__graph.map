@@ -1,0 +1,5 @@
+<map id="cturtle::Line" name="cturtle::Line">
+<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="5,109,176,151"/>
+<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="cturtle::Color" alt="" coords="42,5,139,32"/>
+<area shape="rect" id="node4" href="$structcturtle_1_1ivec2.html" title="Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low&#45;precision point..." alt="" coords="201,117,298,143"/>
+</map>

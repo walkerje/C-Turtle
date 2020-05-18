@@ -1,7 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node0 [label="cturtle::ivec2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcturtle_1_1ivec2.html",tooltip="Represents a coordinate pair (e.g, x & y) This class is represented as a low-precision point..."];
-}

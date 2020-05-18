@@ -1,4 +1,3 @@
-
 /*Include GIF utility when compiling headless mode.*/
 /*License for CTurtle itself is found further down in the file.
  * Ctrl+F for "MIT" should get you there.*/
@@ -26,9 +25,8 @@
 
 #include <stdio.h>
 
-// To get a header file for this, either cut and paste the header,
-// or create jo_gif.h, #define JO_GIF_HEADER_FILE_ONLY, and
-// then include jo_gif.cpp from it.
+//Header edited to inline all GIF functionality to avoid re-definitions across compilation units
+//otherwise, left the same.
 
 typedef struct {
     FILE *fp;
@@ -41,20 +39,16 @@ typedef struct {
 // width/height	| the same for every frame
 // repeat       | 0 = loop forever, 1 = loop once, etc...
 // palSize		| must be power of 2 - 1. so, 255 not 256.
-extern jo_gif_t jo_gif_start(const char *filename, short width, short height, short repeat, int palSize);
+inline jo_gif_t jo_gif_start(const char *filename, short width, short height, short repeat, int palSize);
 
 // gif			| the state (returned from jo_gif_start)
 // rgba         | the pixels
 // delayCsec    | amount of time in between frames (in centiseconds)
 // localPalette | true if you want a unique palette generated for this frame (does not effect future frames)
-extern void jo_gif_frame(jo_gif_t *gif, unsigned char *rgba, short delayCsec, bool localPalette);
+inline void jo_gif_frame(jo_gif_t *gif, unsigned char *rgba, short delayCsec, bool localPalette);
 
 // gif          | the state (returned from jo_gif_start)
-extern void jo_gif_end(jo_gif_t *gif);
-
-#endif
-
-#ifndef JO_GIF_HEADER_FILE_ONLY
+inline void jo_gif_end(jo_gif_t *gif);
 
 #if defined(_MSC_VER) && _MSC_VER >= 0x1400
 #define _CRT_SECURE_NO_WARNINGS // suppress warnings about fopen()
@@ -65,7 +59,7 @@ extern void jo_gif_end(jo_gif_t *gif);
 #include <math.h>
 
 // Based on NeuQuant algorithm
-static void jo_gif_quantize(unsigned char *rgba, int rgbaSize, int sample, unsigned char *map, int numColors) {
+inline void jo_gif_quantize(unsigned char *rgba, int rgbaSize, int sample, unsigned char *map, int numColors) {
     // defs for freq and bias
     const int intbiasshift = 16; /* bias for fractions */
     const int intbias = (((int) 1) << intbiasshift);
@@ -214,7 +208,7 @@ typedef struct {
     int curBits;
 } jo_gif_lzw_t;
 
-static void jo_gif_lzw_write(jo_gif_lzw_t *s, int code) {
+inline void jo_gif_lzw_write(jo_gif_lzw_t *s, int code) {
     s->outBits |= code << s->curBits;
     s->curBits += s->numBits;
     while(s->curBits >= 8) {
@@ -229,7 +223,7 @@ static void jo_gif_lzw_write(jo_gif_lzw_t *s, int code) {
     }
 }
 
-static void jo_gif_lzw_encode(unsigned char *in, int len, FILE *fp) {
+inline void jo_gif_lzw_encode(unsigned char *in, int len, FILE *fp) {
     jo_gif_lzw_t state = {fp, 9};
     int maxcode = 511;
 
@@ -286,7 +280,7 @@ static void jo_gif_lzw_encode(unsigned char *in, int len, FILE *fp) {
     }
 }
 
-static int jo_gif_clamp(int a, int b, int c) { return a < b ? b : a > c ? c : a; }
+inline int jo_gif_clamp(int a, int b, int c) { return a < b ? b : a > c ? c : a; }
 
 jo_gif_t jo_gif_start(const char *filename, short width, short height, short repeat, int numColors) {
     numColors = numColors > 255 ? 255 : numColors < 2 ? 2 : numColors;
@@ -312,7 +306,7 @@ jo_gif_t jo_gif_start(const char *filename, short width, short height, short rep
     return gif;
 }
 
-void jo_gif_frame(jo_gif_t *gif, unsigned char * rgba, short delayCsec, bool localPalette) {
+inline void jo_gif_frame(jo_gif_t *gif, unsigned char * rgba, short delayCsec, bool localPalette) {
     if(!gif->fp) {
         return;
     }
@@ -394,7 +388,7 @@ void jo_gif_frame(jo_gif_t *gif, unsigned char * rgba, short delayCsec, bool loc
     free(indexedPixels);
 }
 
-void jo_gif_end(jo_gif_t *gif) {
+inline void jo_gif_end(jo_gif_t *gif) {
     if(!gif->fp) {
         return;
     }
@@ -437,7 +431,7 @@ void jo_gif_end(jo_gif_t *gif) {
 
 //Automatic linking when operating under MSVC
 //If linking errors occur when compiling on Non-MSVC,
-//Make sure you link X11 and PThread when using Unix-Like environments.
+//Make sure you link X11 and PThread when using Unix-Like environments, when NOT using headless mode.
 #ifndef CTURTLE_MSVC_NO_AUTOLINK
 #ifdef _MSC_VER
 /*Automatically link to the necessary windows libraries while under MSVC.*/
@@ -472,6 +466,9 @@ void jo_gif_end(jo_gif_t *gif) {
 //GIF utility is included at the top of the file when under headless mode.
 
 #ifdef CTURTLE_HEADLESS
+    //Optional define to disable HTML Base64 Image output
+    //#define CTURTLE_HEADLESS_NO_HTML
+
     //Define default width and height.
     #ifndef CTURTLE_HEADLESS_WIDTH
         #define CTURTLE_HEADLESS_WIDTH 400
@@ -482,7 +479,7 @@ void jo_gif_end(jo_gif_t *gif) {
     #endif
 
     #ifndef CTURTLE_HEADLESS_SAVEDIR
-        #error CTURTLE_HEADLESS requires CTURTLE_HEADLESS_SAVEDIR
+        #define CTURTLE_HEADLESS_SAVEDIR "./cturtle.gif"
     #endif
 #endif
 
@@ -490,6 +487,8 @@ void jo_gif_end(jo_gif_t *gif) {
 #include <unordered_map>
 #include <string>
 #include <cstdint>
+#include <fstream>
+#include <vector>
 
 //Used for random number generation.
 #include <chrono>
@@ -508,6 +507,61 @@ void jo_gif_end(jo_gif_t *gif) {
 #include <array>    //For Transform storage.
 
 #include <thread>
+#include <fstream>
+#include <iostream>
+#include <sstream>//used for base64 encoding.
+
+//See https://github.com/mvorbrodt/blog/blob/master/src/base64.hpp for original source.
+//The below has been modified to use unsigned characters to avoid signed->unsigned->signed fiddling.
+namespace base64{
+    static constexpr unsigned char kEncodeLookup[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    static constexpr unsigned char kPadCharacter = '=';
+
+    /**
+     * Encodes a given unsigned character buffer to Base64.
+     * Can be a file, for example.
+     * @param input data buffer
+     * @return Base64 encoded string.
+     */
+    inline std::string encode(const std::vector<unsigned char>& input)
+    {
+        std::stringstream encoded;
+        std::uint32_t temp{};
+
+        auto it = input.begin();
+
+        for(std::size_t i = 0; i < input.size() / 3; ++i)
+        {
+            temp  = (*it++) << 16;
+            temp += (*it++) << 8;
+            temp += (*it++);
+            encoded << kEncodeLookup[(temp & 0x00FC0000) >> 18];
+            encoded << kEncodeLookup[(temp & 0x0003F000) >> 12];
+            encoded << kEncodeLookup[(temp & 0x00000FC0) >> 6 ];
+            encoded << kEncodeLookup[(temp & 0x0000003F)      ];
+        }
+
+        switch(input.size() % 3)
+        {
+            case 1:
+                temp = (*it++) << 16;
+                encoded << kEncodeLookup[(temp & 0x00FC0000) >> 18];
+                encoded << kEncodeLookup[(temp & 0x0003F000) >> 12];
+                encoded << kPadCharacter << kPadCharacter;
+                break;
+            case 2:
+                temp  = (*it++) << 16;
+                temp += (*it++) << 8;
+                encoded << kEncodeLookup[(temp & 0x00FC0000) >> 18];
+                encoded << kEncodeLookup[(temp & 0x0003F000) >> 12];
+                encoded << kEncodeLookup[(temp & 0x00000FC0) >> 6 ];
+                encoded << kPadCharacter;
+                break;
+        }
+
+        return encoded.str();
+    }
+}
 
 namespace cturtle {
     /**The CImg library namespace alias used by the CTurtle library.*/
@@ -3924,6 +3978,17 @@ namespace cturtle {
     };
 
 #ifdef CTURTLE_HEADLESS
+    /*Used to output Base-64 GIF and HTML source for OfflineTurtleScreen.*/
+    inline std::string encodeFileBase64(const std::string& path){
+        std::ifstream file(path, std::ios::binary | std::ios::ate);
+        std::streamsize size = file.tellg();
+        file.seekg(0, std::ios::beg);
+
+        std::vector<unsigned char> buffer(size, 0);
+        file.read((char*)buffer.data(), size);
+        return base64::encode(buffer);
+    }
+
     class OfflineTurtleScreen : public AbstractTurtleScreen{
     public:
         OfflineTurtleScreen(){
@@ -4018,12 +4083,26 @@ namespace cturtle {
         }
 
         void bye() {
+            if(isClosed)
+                return;
+
             /*finish up drawing if redraw counter hasn't been met*/
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
                 tracer(0, delayMS);
-                redraw(false);
             }
             jo_gif_end(&gif);
+
+#ifndef CTURTLE_HEADLESS_NO_HTML
+            /*print base-64 encoding + HTML source*/
+            std::string imgCode = encodeFileBase64(CTURTLE_HEADLESS_SAVEDIR);
+
+            //See the following to understand why this was done:
+            //https://github.com/ericsonga/APCSAReview/blob/master/_sources/TurtleGraphics/turtleBasics.rst
+            std::cout << "<img src=\'data:image/gif;base64,";
+            std::cout << imgCode;
+            std::cout << "\'/>";
+#endif
+
             clearscreen();
             isClosed = true;
         }
@@ -4467,7 +4546,6 @@ namespace cturtle {
         void bye(){
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
                 tracer(0, delayMS);
-                redraw(false);
             }
 
             if (eventThread.get() != nullptr) {

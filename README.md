@@ -27,8 +27,7 @@ The following table contains examples, which do the exact same thing, between C-
       namespace ct = cturtle;
 
       int main(int argc, char** argv) {
-          ct::InteractiveTurtleScreen scr;
-          scr.bgcolor({"white"});
+          ct::TurtleScreen scr;
           ct::Turtle turtle(scr);
           turtle.speed(ct::TS_SLOWEST);
           turtle.fillcolor({"purple"});
@@ -64,6 +63,40 @@ The following table contains examples, which do the exact same thing, between C-
    </pre>
   </td>
 </table>
+
+## Headless Mode
+C-Turtle also supports drawing to an animated GIF instead of a display (e.g, "headless"). This is configurable through the "headless" preprocessor definitions, seen in following example. To write GIFs, C-Turtle uses [jo_gif](https://www.jonolick.com/home/gif-writer), a wonderful public domain GIF library created by Jon Olick. This avoids having ImageMagick as a dependency, which is what CImg uses by default to save animated GIFs.
+
+In "headless" mode, TurtleScreen has all functionality relating to input and background images removed. This is due to 1) the lack of a display to receive event notifications, and 2) the lack of a guarantee of a safely-usable filesystem to *load* images from. It does work under the assumption that the filesystem is safe to save to, however.
+
+```C++
+//Make special note of these defines prior to usage.
+#define CTURTLE_HEADLESS //Define to configure CTurtle for Headless mode.
+
+#define CTURTLE_HEADLESS_SAVEDIR "./test.gif" //Output GIF file.
+#define CTURTLE_HEADLESS_WIDTH 800 //Optional define, default is 400
+#define CTURTLE_HEADLESS_HEIGHT 600 //Optional define, default is 300
+
+#include "CTurtle.hpp"
+
+namespace ct = cturtle;
+
+int main(int argc, char** argv) {
+    ct::TurtleScreen scr;
+    ct::Turtle rt(scr);
+
+    for(int i = 0; i < 4; i++){
+        rt.forward(50);
+        rt.right(90);
+    }
+
+    scr.bye();
+    return 0;
+}
+```
+
+#### Why does headless mode take so long to save a GIF file?
+A frame is added to the resulting GIF for every change in state for a Turtle. This includes rotation, pen changes, size changes, etcetera. You can choose to display only every N frames, and thus save only every N frames, by taking advantage of tracer settings (see ```tracer(int countmax, unsigned int delayMS)``` function in TurtleScreen documentation). This dramatically reduces file size and write time in exchange for less frames in the image.
 
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
