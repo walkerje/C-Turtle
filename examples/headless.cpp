@@ -1,7 +1,7 @@
 //Make special note of these defines prior to usage.
 #define CTURTLE_HEADLESS //Define to configure CTurtle for Headless mode.
 
-#define CTURTLE_HEADLESS_SAVEDIR "./test.gif" //Output GIF file.
+#define CTURTLE_HEADLESS_SAVEDIR "./test.gif" //Optional define, default is "./cturtle.gif"
 #define CTURTLE_HEADLESS_WIDTH 800 //Optional define, default is 400
 #define CTURTLE_HEADLESS_HEIGHT 600 //Optional define, default is 300
 

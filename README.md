@@ -73,7 +73,7 @@ In "headless" mode, TurtleScreen has all functionality relating to input and bac
 //Make special note of these defines prior to usage.
 #define CTURTLE_HEADLESS //Define to configure CTurtle for Headless mode.
 
-#define CTURTLE_HEADLESS_SAVEDIR "./test.gif" //Output GIF file.
+#define CTURTLE_HEADLESS_SAVEDIR "./test.gif" //Optional define, default is "./cturtle.gif".
 #define CTURTLE_HEADLESS_WIDTH 800 //Optional define, default is 400
 #define CTURTLE_HEADLESS_HEIGHT 600 //Optional define, default is 300
 
@@ -97,6 +97,9 @@ int main(int argc, char** argv) {
 
 #### Why does headless mode take so long to save a GIF file?
 A frame is added to the resulting GIF for every change in state for a Turtle. This includes rotation, pen changes, size changes, etcetera. You can choose to display only every N frames, and thus save only every N frames, by taking advantage of tracer settings (see ```tracer(int countmax, unsigned int delayMS)``` function in TurtleScreen documentation). This dramatically reduces file size and write time in exchange for less frames in the image.
+
+#### Why does headless mode print HTML + Base64 by default?
+Headless mode was developed with the intention of being embedded in web applications, namely Runestone Interactive textbooks. As such, it prints HTML to display the results of the executed code by printing a Base64-encoded version of the resulting GIF file. This lets CTurtle be very easily embedded without needing any extra tricks or external File IO with any kind of backend. This can be disabled by having ```#define CTURTLE_HEADLESS_NO_HTML``` before the inclusion of CTurtle.
 
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
