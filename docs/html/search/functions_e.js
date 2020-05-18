@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['save',['save',['../classcturtle_1_1InteractiveTurtleScreen.html#ab0ded9c577f523ca45240e036318553e',1,'cturtle::InteractiveTurtleScreen']]],
+  ['scale',['scale',['../classcturtle_1_1Transform.html#a460e371e701eed2d19c14c6e93725c82',1,'cturtle::Transform']]],
+  ['sceneobject',['SceneObject',['../structcturtle_1_1SceneObject.html#ac51b04f4e0509e37a7acce739e608e49',1,'cturtle::SceneObject::SceneObject()'],['../structcturtle_1_1SceneObject.html#a278686eef9384bed5d891065a3a02619',1,'cturtle::SceneObject::SceneObject(AbstractDrawableObject *geom, const Transform &amp;t, int stampid=-1)']]],
+  ['screensize',['screensize',['../classcturtle_1_1InteractiveTurtleScreen.html#a005b25693386718a6d80feeac677d255',1,'cturtle::InteractiveTurtleScreen::screensize(Color &amp;bg)'],['../classcturtle_1_1InteractiveTurtleScreen.html#a1263d763eb9ef1b39f2e8c0a445d6a85',1,'cturtle::InteractiveTurtleScreen::screensize()']]],
+  ['screentransform',['screentransform',['../classcturtle_1_1InteractiveTurtleScreen.html#a6c81f204488e1ebe8180504990e559dc',1,'cturtle::InteractiveTurtleScreen']]],
+  ['seth',['seth',['../classcturtle_1_1Turtle.html#a2f578819830001dfb6694813f9a4aa19',1,'cturtle::Turtle']]],
+  ['setheading',['setheading',['../classcturtle_1_1Turtle.html#a4eb2630341ea5bb922c74f214037b361',1,'cturtle::Turtle']]],
+  ['setpenstate',['setpenstate',['../classcturtle_1_1Turtle.html#abaa5b7f8b659975bcfc9a787a93c123d',1,'cturtle::Turtle']]],
+  ['setpos',['setpos',['../classcturtle_1_1Turtle.html#ab7e2193a04b72e94069fcccd85fa40db',1,'cturtle::Turtle::setpos(int x, int y)'],['../classcturtle_1_1Turtle.html#a72b2958266efc5b3aea86a459bd04d0b',1,'cturtle::Turtle::setpos(const Point &amp;pt)']]],
+  ['setposition',['setposition',['../classcturtle_1_1Turtle.html#a5e9dd0e59f48e49719dd4e3bd06a82f1',1,'cturtle::Turtle::setposition(int x, int y)'],['../classcturtle_1_1Turtle.html#a7a4726103a42d73006357cc12ce79b72',1,'cturtle::Turtle::setposition(const Point &amp;pt)']]],
+  ['setrotation',['setRotation',['../classcturtle_1_1Transform.html#aafed415c37989dcc34ed5cadd7366487',1,'cturtle::Transform']]],
+  ['setscreen',['setScreen',['../classcturtle_1_1Turtle.html#a0f47c7d9a17258780d4d0134daf78522',1,'cturtle::Turtle']]],
+  ['setshowturtle',['setshowturtle',['../classcturtle_1_1Turtle.html#a9e83fdd5c469e4863cf9b460e4d29130',1,'cturtle::Turtle']]],
+  ['settranslation',['setTranslation',['../classcturtle_1_1Transform.html#a99366b0667eab2ea5f4f194f8500f94a',1,'cturtle::Transform']]],
+  ['settranslationx',['setTranslationX',['../classcturtle_1_1Transform.html#a1ce9955dd58f54a64e3c9277c82456d1',1,'cturtle::Transform']]],
+  ['settranslationy',['setTranslationY',['../classcturtle_1_1Transform.html#a6e861207764b8ca62152b99eb86a1f1a',1,'cturtle::Transform']]],
+  ['setundobuffer',['setundobuffer',['../classcturtle_1_1Turtle.html#a91536102f8903dc237d97dbf3f326eba',1,'cturtle::Turtle']]],
+  ['setx',['setx',['../classcturtle_1_1Turtle.html#a647d02a7847eef248c45b84251f6639c',1,'cturtle::Turtle']]],
+  ['sety',['sety',['../classcturtle_1_1Turtle.html#aeee8075a33445d89a060c4faa17f9e5c',1,'cturtle::Turtle']]],
+  ['shape',['shape',['../classcturtle_1_1Turtle.html#a5143887bbdb59bb55f583b62b2152a8e',1,'cturtle::Turtle::shape(const AbstractDrawableObject &amp;p)'],['../classcturtle_1_1Turtle.html#aecd7fb607369e3ece1854caa6ed92128',1,'cturtle::Turtle::shape(const std::string &amp;name)'],['../classcturtle_1_1Turtle.html#ab5b05852723852c00681da0844124e44',1,'cturtle::Turtle::shape()'],['../classcturtle_1_1InteractiveTurtleScreen.html#ae855fb3d2acd831ce751e9387b8edc06',1,'cturtle::InteractiveTurtleScreen::shape()']]],
+  ['shift',['shift',['../classcturtle_1_1Turtle.html#aea45fc1d0f00b82fc64a0f97dd6c1ea2',1,'cturtle::Turtle']]],
+  ['showturtle',['showturtle',['../classcturtle_1_1Turtle.html#ac676ff53f6393c70d665053cab1d67c5',1,'cturtle::Turtle']]],
+  ['speed',['speed',['../classcturtle_1_1Turtle.html#a5f2010373aeb82207975e9f1b4168747',1,'cturtle::Turtle::speed(float val)'],['../classcturtle_1_1Turtle.html#af018ea1fa9eb9be80fdf53fabcb668eb',1,'cturtle::Turtle::speed()']]],
+  ['stamp',['stamp',['../classcturtle_1_1Turtle.html#af7b7e9c43e22fabce3a5435d09c73f77',1,'cturtle::Turtle']]],
+  ['supports_5flive_5fanimation',['supports_live_animation',['../classcturtle_1_1AbstractTurtleScreen.html#aa9651fa98eefdb83fd99d476217b5414',1,'cturtle::AbstractTurtleScreen::supports_live_animation()'],['../classcturtle_1_1InteractiveTurtleScreen.html#ad28f7c6e4058541a2c4258b4455fad74',1,'cturtle::InteractiveTurtleScreen::supports_live_animation()']]]
+];

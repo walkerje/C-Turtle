@@ -1,0 +1,100 @@
+\hypertarget{structcturtle_1_1SceneObject}{}\section{cturtle\+:\+:Scene\+Object Struct Reference}
+\label{structcturtle_1_1SceneObject}\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+
+
+Turtles append Scene Objects to a list to keep track of what it has drawn (a history). \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object} holds a description of something that needs to be on the screen. It\textquotesingle{}s a general object which encompasses A\+LL things that can be on screen, ranging from stamps, misc. geometry, and strings.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Collaboration diagram for cturtle\+:\+:Scene\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{structcturtle_1_1SceneObject__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structcturtle_1_1SceneObject_ac51b04f4e0509e37a7acce739e608e49}{Scene\+Object} ()
+\item 
+\hyperlink{structcturtle_1_1SceneObject_a278686eef9384bed5d891065a3a02619}{Scene\+Object} (\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$\hyperlink{structcturtle_1_1SceneObject_a1db44363183fd197b232d5f6e4b89b5c}{geom}, const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, int \hyperlink{structcturtle_1_1SceneObject_ae6094918613e5d4d284805cd5afb2e65}{stampid}=-\/1)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $>$ \hyperlink{structcturtle_1_1SceneObject_a1db44363183fd197b232d5f6e4b89b5c}{geom}
+\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \hyperlink{structcturtle_1_1SceneObject_a427fb0ab63fa9e0dd5c7b5c15ac3f6f4}{transform}
+\item 
+bool \hyperlink{structcturtle_1_1SceneObject_a014644aee0792d77bd84a0b98464f39b}{stamp} = false
+\item 
+int \hyperlink{structcturtle_1_1SceneObject_ae6094918613e5d4d284805cd5afb2e65}{stampid} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Turtles append Scene Objects to a list to keep track of what it has drawn (a history). \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object} holds a description of something that needs to be on the screen. It\textquotesingle{}s a general object which encompasses A\+LL things that can be on screen, ranging from stamps, misc. geometry, and strings. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcturtle_1_1SceneObject_ac51b04f4e0509e37a7acce739e608e49}\label{structcturtle_1_1SceneObject_ac51b04f4e0509e37a7acce739e608e49}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!Scene\+Object@{Scene\+Object}}
+\index{Scene\+Object@{Scene\+Object}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{Scene\+Object()}{SceneObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Scene\+Object\+::\+Scene\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Empty constructor. \mbox{\Hypertarget{structcturtle_1_1SceneObject_a278686eef9384bed5d891065a3a02619}\label{structcturtle_1_1SceneObject_a278686eef9384bed5d891065a3a02619}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!Scene\+Object@{Scene\+Object}}
+\index{Scene\+Object@{Scene\+Object}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{Scene\+Object()}{SceneObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Scene\+Object\+::\+Scene\+Object (\begin{DoxyParamCaption}\item[{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$}]{geom,  }\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{int}]{stampid = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+General geometry constructor. 
+\begin{DoxyParams}{Parameters}
+{\em geom} & A dynamically allocated pointer to a Geometry object. Please note that, after this constructor call, the \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object} controls the life of the given pointer. Do not delete it yourself. \\
+\hline
+{\em color} & The color to draw the geometry in. \\
+\hline
+{\em t} & The transform at which to draw the geometry. \\
+\hline
+{\em stampid} & The ID of the stamp this object is related to. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structcturtle_1_1SceneObject_a1db44363183fd197b232d5f6e4b89b5c}\label{structcturtle_1_1SceneObject_a1db44363183fd197b232d5f6e4b89b5c}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!geom@{geom}}
+\index{geom@{geom}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{geom}{geom}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}$>$ cturtle\+::\+Scene\+Object\+::geom}
+
+The unique pointer to the geometry of this object. M\+U\+ST BE N\+O\+N-\/\+N\+U\+LL IF T\+HE O\+B\+J\+E\+CT IS IN A T\+U\+R\+T\+LE S\+C\+R\+E\+EN\textquotesingle{}S S\+C\+E\+NE. \mbox{\Hypertarget{structcturtle_1_1SceneObject_a014644aee0792d77bd84a0b98464f39b}\label{structcturtle_1_1SceneObject_a014644aee0792d77bd84a0b98464f39b}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!stamp@{stamp}}
+\index{stamp@{stamp}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{stamp}{stamp}}
+{\footnotesize\ttfamily bool cturtle\+::\+Scene\+Object\+::stamp = false}
+
+A boolean indicating if this scene object is a stamp. \mbox{\Hypertarget{structcturtle_1_1SceneObject_ae6094918613e5d4d284805cd5afb2e65}\label{structcturtle_1_1SceneObject_ae6094918613e5d4d284805cd5afb2e65}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!stampid@{stampid}}
+\index{stampid@{stampid}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{stampid}{stampid}}
+{\footnotesize\ttfamily int cturtle\+::\+Scene\+Object\+::stampid = -\/1}
+
+The integer representing the stamp ID, if this is a stamp. Valid stampids $>$ -\/1 \mbox{\Hypertarget{structcturtle_1_1SceneObject_a427fb0ab63fa9e0dd5c7b5c15ac3f6f4}\label{structcturtle_1_1SceneObject_a427fb0ab63fa9e0dd5c7b5c15ac3f6f4}} 
+\index{cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}!transform@{transform}}
+\index{transform@{transform}!cturtle\+::\+Scene\+Object@{cturtle\+::\+Scene\+Object}}
+\subsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform} cturtle\+::\+Scene\+Object\+::transform}
+
+The transform at which to draw this \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object}. Note that this is concatenated onto the Screen\+Transform of the drawing turtle\textquotesingle{}s screen. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

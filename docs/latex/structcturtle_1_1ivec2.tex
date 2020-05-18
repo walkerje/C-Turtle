@@ -1,0 +1,95 @@
+\hypertarget{structcturtle_1_1ivec2}{}\section{cturtle\+:\+:ivec2 Struct Reference}
+\label{structcturtle_1_1ivec2}\index{cturtle\+::ivec2@{cturtle\+::ivec2}}
+
+
+Represents a coordinate pair (e.\+g, x \& y) This class is represented as a low-\/precision point, because this data type tends to be most easily drawn to a simple canvas.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}\label{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}} 
+\hyperlink{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}{ivec2} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. Initializes X and Y to both equal 0. \end{DoxyCompactList}\item 
+\hyperlink{structcturtle_1_1ivec2_a7069d9f7c5ef7505c7c00c55958e0982}{ivec2} (int \hyperlink{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}{x}, int \hyperlink{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}{y})
+\begin{DoxyCompactList}\small\item\em Assignment constructor. \end{DoxyCompactList}\item 
+int \& \hyperlink{structcturtle_1_1ivec2_a83c6a5b1aab3c9a0a2374c843198067f}{operator\mbox{[}$\,$\mbox{]}} (int index) const
+\begin{DoxyCompactList}\small\item\em Array access operator overload. Useful for convenience. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcturtle_1_1ivec2_ab564fda10817a6e06b80b205f9833dee}\label{structcturtle_1_1ivec2_ab564fda10817a6e06b80b205f9833dee}} 
+bool \hyperlink{structcturtle_1_1ivec2_ab564fda10817a6e06b80b205f9833dee}{operator==} (const \hyperlink{structcturtle_1_1ivec2}{ivec2} \&other)
+\begin{DoxyCompactList}\small\item\em Comparison operator between this vector and the other specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}{x}
+\item 
+int \hyperlink{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}{y}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a coordinate pair (e.\+g, x \& y) This class is represented as a low-\/precision point, because this data type tends to be most easily drawn to a simple canvas. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structcturtle_1_1ivec2_a7069d9f7c5ef7505c7c00c55958e0982}\label{structcturtle_1_1ivec2_a7069d9f7c5ef7505c7c00c55958e0982}} 
+\index{cturtle\+::ivec2@{cturtle\+::ivec2}!ivec2@{ivec2}}
+\index{ivec2@{ivec2}!cturtle\+::ivec2@{cturtle\+::ivec2}}
+\subsubsection{\texorpdfstring{ivec2()}{ivec2()}}
+{\footnotesize\ttfamily cturtle\+::ivec2\+::ivec2 (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The X value of this \hyperlink{structcturtle_1_1ivec2}{ivec2}. \\
+\hline
+{\em y} & The Y value of this \hyperlink{structcturtle_1_1ivec2}{ivec2}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structcturtle_1_1ivec2_a83c6a5b1aab3c9a0a2374c843198067f}\label{structcturtle_1_1ivec2_a83c6a5b1aab3c9a0a2374c843198067f}} 
+\index{cturtle\+::ivec2@{cturtle\+::ivec2}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cturtle\+::ivec2@{cturtle\+::ivec2}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily int\& cturtle\+::ivec2\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Array access operator overload. Useful for convenience. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of one of the components of this \hyperlink{structcturtle_1_1ivec2}{ivec2} (0..1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the index 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}\label{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}} 
+\index{cturtle\+::ivec2@{cturtle\+::ivec2}!x@{x}}
+\index{x@{x}!cturtle\+::ivec2@{cturtle\+::ivec2}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily int cturtle\+::ivec2\+::x}
+
+The X component. \mbox{\Hypertarget{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}\label{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}} 
+\index{cturtle\+::ivec2@{cturtle\+::ivec2}!y@{y}}
+\index{y@{y}!cturtle\+::ivec2@{cturtle\+::ivec2}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily int cturtle\+::ivec2\+::y}
+
+The Y component. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

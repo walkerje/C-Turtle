@@ -1,3 +1,0 @@
-<map id="cturtle::Circle" name="cturtle::Circle">
-<area shape="rect" id="node2" href="$classcturtle_1_1IDrawableGeometry.html" title="IDrawableGeometry is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry in a generic fashion. " alt="" coords="5,5,236,32"/>
-</map>

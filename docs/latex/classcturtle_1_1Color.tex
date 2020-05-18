@@ -1,0 +1,54 @@
+\hypertarget{classcturtle_1_1Color}{}\section{cturtle\+:\+:Color Class Reference}
+\label{classcturtle_1_1Color}\index{cturtle\+::\+Color@{cturtle\+::\+Color}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_af5d6a12b28777dd614f1c66a220b2aa6}\label{classcturtle_1_1Color_af5d6a12b28777dd614f1c66a220b2aa6}} 
+typedef uint8\+\_\+t {\bfseries component\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_a38fcd21477603112e90092cbaf358f3a}\label{classcturtle_1_1Color_a38fcd21477603112e90092cbaf358f3a}} 
+{\bfseries Color} (detail\+::color\+\_\+int\+\_\+t packed\+Color)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_a759c7ab4973583164f86c9371d637fe6}\label{classcturtle_1_1Color_a759c7ab4973583164f86c9371d637fe6}} 
+{\bfseries Color} (component\+\_\+t r, component\+\_\+t g, component\+\_\+t b)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_afcd035af137a24bef76c3699f1470b6f}\label{classcturtle_1_1Color_afcd035af137a24bef76c3699f1470b6f}} 
+{\bfseries Color} (const \hyperlink{classcturtle_1_1Color}{Color} \&other)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_a3a3acf7d28bd8259ce7c43666f403447}\label{classcturtle_1_1Color_a3a3acf7d28bd8259ce7c43666f403447}} 
+{\bfseries Color} (const std\+::string \&name)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_a49a7db8dff7e1699ac61276cb27d6166}\label{classcturtle_1_1Color_a49a7db8dff7e1699ac61276cb27d6166}} 
+\hyperlink{classcturtle_1_1Color}{Color} \& {\bfseries operator=} (detail\+::color\+\_\+int\+\_\+t pack)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_adecef34180b8bebd7d5f0e9d4327a586}\label{classcturtle_1_1Color_adecef34180b8bebd7d5f0e9d4327a586}} 
+const component\+\_\+t $\ast$const \hyperlink{classcturtle_1_1Color_adecef34180b8bebd7d5f0e9d4327a586}{rgb\+Ptr} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the first component of this color. This is useful for functions which require color as an input array. Returns a read-\/only pointer to the elements, in sequential order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_ae285f2470e145a4bc34e22bc2f23dc5b}\label{classcturtle_1_1Color_ae285f2470e145a4bc34e22bc2f23dc5b}} 
+void \hyperlink{classcturtle_1_1Color_ae285f2470e145a4bc34e22bc2f23dc5b}{assign\+At} (component\+\_\+t $\ast$dest) const
+\begin{DoxyCompactList}\small\item\em Assigns R, G, and B values to the specified pointer. Must contain enough valid space at dest to hold 3 bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Color_a7c49039a0cacbafd43bd5e3fc152f6d7}\label{classcturtle_1_1Color_a7c49039a0cacbafd43bd5e3fc152f6d7}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\mbox{\Hypertarget{unioncturtle_1_1Color_1_1_0D0_ad59671efb0c31ea441e40662cddb1090}\label{unioncturtle_1_1Color_1_1_0D0_ad59671efb0c31ea441e40662cddb1090}} 
+\>struct \{\\
+\>\>component\_t {\bfseries r}\\
+\>\>component\_t {\bfseries g}\\
+\>\>component\_t {\bfseries b}\\
+\>\} \\
+\>component\_t {\bfseries components} \mbox{[}3\mbox{]}\\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

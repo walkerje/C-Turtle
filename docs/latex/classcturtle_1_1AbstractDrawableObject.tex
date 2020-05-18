@@ -1,0 +1,109 @@
+\hypertarget{classcturtle_1_1AbstractDrawableObject}{}\section{cturtle\+:\+:Abstract\+Drawable\+Object Class Reference}
+\label{classcturtle_1_1AbstractDrawableObject}\index{cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}}
+
+
+\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry/etc and attributes in a generic fashion.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Inheritance diagram for cturtle\+:\+:Abstract\+Drawable\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcturtle_1_1AbstractDrawableObject__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for cturtle\+:\+:Abstract\+Drawable\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classcturtle_1_1AbstractDrawableObject__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}\label{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}} 
+\hyperlink{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}{Abstract\+Drawable\+Object} ()
+\begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}\label{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}} 
+virtual \hyperlink{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}{$\sim$\+Abstract\+Drawable\+Object} ()
+\begin{DoxyCompactList}\small\item\em Empty-- virtual-- default de-\/constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}\label{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}} 
+virtual \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$ \hyperlink{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}{copy} () const =0
+\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{draw} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, Image \&img\+Ref) const =0
+\begin{DoxyCompactList}\small\item\em This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcturtle_1_1Color}{Color} \hyperlink{classcturtle_1_1AbstractDrawableObject_a37d635a02ad3e5206a6eb99b7b5f1963}{fill\+Color}
+\item 
+\hyperlink{classcturtle_1_1Color}{Color} \hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}
+\item 
+int \hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} is a base class, intended to be inherited from by all drawable objects. This class just contains a simple virtual drawing function, intended to be inherited from and to overload the draw function. This allows for the storage of drawable geometry/etc and attributes in a generic fashion. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}\label{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}} 
+\index{cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}!draw@{draw}}
+\index{draw@{draw}!cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual void cturtle\+::\+Abstract\+Drawable\+Object\+::draw (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The transform at which to draw the geometry. \\
+\hline
+{\em img\+Ref} & The canvas on which to draw. \\
+\hline
+{\em c} & The color with to draw the geometry. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}{cturtle\+::\+Compound\+Polygon}, \hyperlink{classcturtle_1_1Sprite_a7b57808acc51a2610b7d33f542a7f838}{cturtle\+::\+Sprite}, \hyperlink{classcturtle_1_1Polygon_a4a0b6c44656957b141b74bd5c1542622}{cturtle\+::\+Polygon}, \hyperlink{classcturtle_1_1Circle_a7c95f8f4d126e38661e4ee94be58a8c4}{cturtle\+::\+Circle}, \hyperlink{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}{cturtle\+::\+Line}, and \hyperlink{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}{cturtle\+::\+Text}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_a37d635a02ad3e5206a6eb99b7b5f1963}\label{classcturtle_1_1AbstractDrawableObject_a37d635a02ad3e5206a6eb99b7b5f1963}} 
+\index{cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}!fill\+Color@{fill\+Color}}
+\index{fill\+Color@{fill\+Color}!cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}}
+\subsubsection{\texorpdfstring{fill\+Color}{fillColor}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Abstract\+Drawable\+Object\+::fill\+Color}
+
+The internal fill color of the circle. \mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}\label{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}} 
+\index{cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}!outline\+Color@{outline\+Color}}
+\index{outline\+Color@{outline\+Color}!cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}}
+\subsubsection{\texorpdfstring{outline\+Color}{outlineColor}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Abstract\+Drawable\+Object\+::outline\+Color}
+
+The outline color of the circle. \mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}\label{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}} 
+\index{cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}!outline\+Width@{outline\+Width}}
+\index{outline\+Width@{outline\+Width}!cturtle\+::\+Abstract\+Drawable\+Object@{cturtle\+::\+Abstract\+Drawable\+Object}}
+\subsubsection{\texorpdfstring{outline\+Width}{outlineWidth}}
+{\footnotesize\ttfamily int cturtle\+::\+Abstract\+Drawable\+Object\+::outline\+Width = 0}
+
+The width of the outline of the circle, in pixels. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

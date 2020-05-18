@@ -1,0 +1,556 @@
+\hypertarget{classcturtle_1_1Transform}{}\section{cturtle\+:\+:Transform Class Reference}
+\label{classcturtle_1_1Transform}\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+
+
+The \hyperlink{classcturtle_1_1Transform}{Transform} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in C\+Turtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\tt http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}{Transform} ()
+\item 
+\hyperlink{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}{Transform} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a0102d86a459937597b4755650b94b4a2}{identity} ()
+\begin{DoxyCompactList}\small\item\em Sets this transform to an identity. When you concatenate an identity transform onto another object, The resulting point is the same as it would have been pre-\/concatenation. Such is the point of an identity transform, and is why Affine\+Transforms are initialized to have this value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1Transform_a77fe29e1fbf23aec97f988ca5f1bd3c3}\label{classcturtle_1_1Transform_a77fe29e1fbf23aec97f988ca5f1bd3c3}} 
+bool \hyperlink{classcturtle_1_1Transform_a77fe29e1fbf23aec97f988ca5f1bd3c3}{operator==} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&other) const
+\begin{DoxyCompactList}\small\item\em Returns a boolean indicating if this transform is equivalent in value to the one specified. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_ac7ab4863a65f6ee7d222be6bb01cc54c}{get\+ScaleX} () const
+\begin{DoxyCompactList}\small\item\em Returns the X scale of this transform. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_a7a47c8a4e32edfcccd871187dbd9680e}{get\+ScaleY} () const
+\begin{DoxyCompactList}\small\item\em Returns the Y scale of this transform. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_a341b1f4fe0055d1c27d3cbea61ef3788}{get\+TranslateX} () const
+\begin{DoxyCompactList}\small\item\em Returns the X translation of this transform. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_a9da2a0e256fdddbc0b5202c8d53a74bf}{get\+TranslateY} () const
+\begin{DoxyCompactList}\small\item\em Returns the Y translation of this transform. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_a1c879c9c239ca3a6af2d85c73b7e39b8}{get\+Rotation} () const
+\begin{DoxyCompactList}\small\item\em Returns rotation of this transform, in radians. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_ae0a81b79c7e737eadd880c20624acae3}{forward} (float distance)
+\item 
+\mbox{\Hypertarget{classcturtle_1_1Transform_ae52b78a68ee2005d0479b0347414ca28}\label{classcturtle_1_1Transform_ae52b78a68ee2005d0479b0347414ca28}} 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& {\bfseries backward} (float distance)
+\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a99366b0667eab2ea5f4f194f8500f94a}{set\+Translation} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the translation of this transform. \end{DoxyCompactList}\item 
+\hyperlink{structcturtle_1_1ivec2}{Point} \hyperlink{classcturtle_1_1Transform_a1458bf240e11c44e32c9acc483406aec}{get\+Translation} () const
+\begin{DoxyCompactList}\small\item\em Returns the translation of this transform as a point. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a1ce9955dd58f54a64e3c9277c82456d1}{set\+TranslationX} (int x)
+\begin{DoxyCompactList}\small\item\em Sets the X axis translation of this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a6e861207764b8ca62152b99eb86a1f1a}{set\+TranslationY} (int y)
+\begin{DoxyCompactList}\small\item\em Set the Y axis translation of this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_ae5029e23d426ff809a48ab56316dd989}{translate} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Translates this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a0f94d37257362afb874f5df8a127613a}{rotate} (float theta)
+\begin{DoxyCompactList}\small\item\em Rotates this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_aafed415c37989dcc34ed5cadd7366487}{set\+Rotation} (float val)
+\begin{DoxyCompactList}\small\item\em Sets the rotation of this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a985c6b26564267172e0f3d8ced7868e0}{rotate\+Around} (int x, int y, float theta)
+\begin{DoxyCompactList}\small\item\em Rotates this transform around a specified point. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_a460e371e701eed2d19c14c6e93725c82}{scale} (float sx, float sy)
+\begin{DoxyCompactList}\small\item\em Applies a scale transformation to this transform. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \& \hyperlink{classcturtle_1_1Transform_add9d96d9ea677c39e2c6133e7f133aff}{concatenate} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t)
+\begin{DoxyCompactList}\small\item\em Concatenates this \hyperlink{classcturtle_1_1Transform}{Transform} with another. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \hyperlink{classcturtle_1_1Transform_a52442d40b46368002c318f2167ff3db4}{copy\+Concatenate} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t) const
+\begin{DoxyCompactList}\small\item\em Creates a copy of this transform, concatenates the input, and returns it. \end{DoxyCompactList}\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \hyperlink{classcturtle_1_1Transform_aafca536c5297631923db197c225e8bf5}{lerp} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, float progress) const
+\begin{DoxyCompactList}\small\item\em Interpolates between this and the specified transform. Progress is a float in range of 0 to 1. \end{DoxyCompactList}\item 
+void \hyperlink{classcturtle_1_1Transform_a5eb270c2614cc18c23623b24feb6968e}{assign} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t)
+\begin{DoxyCompactList}\small\item\em Assigns the value of this transform to that of another. \end{DoxyCompactList}\item 
+\hyperlink{structcturtle_1_1ivec2}{Point} \hyperlink{classcturtle_1_1Transform_aa8631732daaddc8336ed29f5462d1fef}{transform} (\hyperlink{structcturtle_1_1ivec2}{Point} in, \hyperlink{structcturtle_1_1ivec2}{Point} $\ast$dst=nullptr) const
+\begin{DoxyCompactList}\small\item\em Transforms a point according to this transform. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename I\+T\+E\+R\+\_\+T $>$ }\\void \hyperlink{classcturtle_1_1Transform_aae183c07fb323d0dfe8b3d633d59415c}{transform\+Set} (I\+T\+E\+R\+\_\+T cur, I\+T\+E\+R\+\_\+T end) const
+\begin{DoxyCompactList}\small\item\em Transforms a set of points given a begin and end iterator. \end{DoxyCompactList}\item 
+\hyperlink{structcturtle_1_1ivec2}{Point} \hyperlink{classcturtle_1_1Transform_afc24321e5d8da21c310fd830aa76da84}{operator()} (\hyperlink{structcturtle_1_1ivec2}{Point} in) const
+\begin{DoxyCompactList}\small\item\em Operator overload to transform a single point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::array$<$ float, 9 $>$ \hyperlink{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}{mat\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \& \hyperlink{classcturtle_1_1Transform_a640a1e38d034eb0b3878c4c56f014dd2}{at} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Returns a reference to the float the specified coordinate. \end{DoxyCompactList}\item 
+float \hyperlink{classcturtle_1_1Transform_af6ab44503dfb32a56bbce3c8b2b5ea97}{at} (int row, int col) const
+\begin{DoxyCompactList}\small\item\em Returns a copy of the float at the specified coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}{mat\+\_\+t} \hyperlink{classcturtle_1_1Transform_a747be70a22109ecf9470c7ad75565c0c}{value}
+\item 
+float \hyperlink{classcturtle_1_1Transform_a79f7e11fb2b3d1093458100783cdd984}{rotation} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classcturtle_1_1Transform}{Transform} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in C\+Turtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\tt http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}. 
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}\label{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!mat\+\_\+t@{mat\+\_\+t}}
+\index{mat\+\_\+t@{mat\+\_\+t}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{mat\+\_\+t}{mat\_t}}
+{\footnotesize\ttfamily typedef std\+::array$<$float, 9$>$ \hyperlink{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}{cturtle\+::\+Transform\+::mat\+\_\+t}\hspace{0.3cm}{\ttfamily [protected]}}
+
+The underlying matrix type. It\textquotesingle{}s defined simply as an array of 9 floats. Retrieved from coordinate pairs using (x$\ast$3+y) as indices. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}\label{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!Transform@{Transform}}
+\index{Transform@{Transform}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs an empty transform. Initializes, by default, as an identity transform. \mbox{\Hypertarget{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}\label{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!Transform@{Transform}}
+\index{Transform@{Transform}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other transform from which to derive value. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a5eb270c2614cc18c23623b24feb6968e}\label{classcturtle_1_1Transform_a5eb270c2614cc18c23623b24feb6968e}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!assign@{assign}}
+\index{assign@{assign}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{assign()}{assign()}}
+{\footnotesize\ttfamily void cturtle\+::\+Transform\+::assign (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assigns the value of this transform to that of another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The other transform to derive value from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a640a1e38d034eb0b3878c4c56f014dd2}\label{classcturtle_1_1Transform_a640a1e38d034eb0b3878c4c56f014dd2}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!at@{at}}
+\index{at@{at}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& cturtle\+::\+Transform\+::at (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Returns a reference to the float the specified coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The specified row from which to get a component. \\
+\hline
+{\em col} & The specified column from which to get a component. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_af6ab44503dfb32a56bbce3c8b2b5ea97}\label{classcturtle_1_1Transform_af6ab44503dfb32a56bbce3c8b2b5ea97}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!at@{at}}
+\index{at@{at}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::at (\begin{DoxyParamCaption}\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Returns a copy of the float at the specified coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & The specified row from which to get a component. \\
+\hline
+{\em col} & The specified column from which to get a component. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_add9d96d9ea677c39e2c6133e7f133aff}\label{classcturtle_1_1Transform_add9d96d9ea677c39e2c6133e7f133aff}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{concatenate()}{concatenate()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::concatenate (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Concatenates this \hyperlink{classcturtle_1_1Transform}{Transform} with another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The other \hyperlink{classcturtle_1_1Transform}{Transform} to concatenate with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a52442d40b46368002c318f2167ff3db4}\label{classcturtle_1_1Transform_a52442d40b46368002c318f2167ff3db4}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!copy\+Concatenate@{copy\+Concatenate}}
+\index{copy\+Concatenate@{copy\+Concatenate}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{copy\+Concatenate()}{copyConcatenate()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform} cturtle\+::\+Transform\+::copy\+Concatenate (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a copy of this transform, concatenates the input, and returns it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The input to concatenate onto the copy of this transform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the concatenated copy of this transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_ae0a81b79c7e737eadd880c20624acae3}\label{classcturtle_1_1Transform_ae0a81b79c7e737eadd880c20624acae3}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!forward@{forward}}
+\index{forward@{forward}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::forward (\begin{DoxyParamCaption}\item[{float}]{distance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Moves this transform \char`\"{}forward\char`\"{} according to its rotation. \mbox{\Hypertarget{classcturtle_1_1Transform_a1c879c9c239ca3a6af2d85c73b7e39b8}\label{classcturtle_1_1Transform_a1c879c9c239ca3a6af2d85c73b7e39b8}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+Rotation@{get\+Rotation}}
+\index{get\+Rotation@{get\+Rotation}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Rotation()}{getRotation()}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::get\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns rotation of this transform, in radians. 
+
+\begin{DoxyReturn}{Returns}
+The rotation of this transform, in radians. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_ac7ab4863a65f6ee7d222be6bb01cc54c}\label{classcturtle_1_1Transform_ac7ab4863a65f6ee7d222be6bb01cc54c}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+ScaleX@{get\+ScaleX}}
+\index{get\+ScaleX@{get\+ScaleX}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Scale\+X()}{getScaleX()}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::get\+ScaleX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the X scale of this transform. 
+
+\begin{DoxyReturn}{Returns}
+Returns the X scale of this transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a7a47c8a4e32edfcccd871187dbd9680e}\label{classcturtle_1_1Transform_a7a47c8a4e32edfcccd871187dbd9680e}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+ScaleY@{get\+ScaleY}}
+\index{get\+ScaleY@{get\+ScaleY}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Scale\+Y()}{getScaleY()}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::get\+ScaleY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the Y scale of this transform. 
+
+\begin{DoxyReturn}{Returns}
+Returns the Y scale of this transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a341b1f4fe0055d1c27d3cbea61ef3788}\label{classcturtle_1_1Transform_a341b1f4fe0055d1c27d3cbea61ef3788}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+TranslateX@{get\+TranslateX}}
+\index{get\+TranslateX@{get\+TranslateX}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Translate\+X()}{getTranslateX()}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::get\+TranslateX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the X translation of this transform. 
+
+\begin{DoxyReturn}{Returns}
+Returns the X translation of this transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a9da2a0e256fdddbc0b5202c8d53a74bf}\label{classcturtle_1_1Transform_a9da2a0e256fdddbc0b5202c8d53a74bf}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+TranslateY@{get\+TranslateY}}
+\index{get\+TranslateY@{get\+TranslateY}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Translate\+Y()}{getTranslateY()}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::get\+TranslateY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the Y translation of this transform. 
+
+\begin{DoxyReturn}{Returns}
+Returns the Y translation of this transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a1458bf240e11c44e32c9acc483406aec}\label{classcturtle_1_1Transform_a1458bf240e11c44e32c9acc483406aec}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!get\+Translation@{get\+Translation}}
+\index{get\+Translation@{get\+Translation}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{get\+Translation()}{getTranslation()}}
+{\footnotesize\ttfamily \hyperlink{structcturtle_1_1ivec2}{Point} cturtle\+::\+Transform\+::get\+Translation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the translation of this transform as a point. 
+
+\begin{DoxyReturn}{Returns}
+The point which represents the transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a0102d86a459937597b4755650b94b4a2}\label{classcturtle_1_1Transform_a0102d86a459937597b4755650b94b4a2}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!identity@{identity}}
+\index{identity@{identity}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{identity()}{identity()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets this transform to an identity. When you concatenate an identity transform onto another object, The resulting point is the same as it would have been pre-\/concatenation. Such is the point of an identity transform, and is why Affine\+Transforms are initialized to have this value. 
+
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_aafca536c5297631923db197c225e8bf5}\label{classcturtle_1_1Transform_aafca536c5297631923db197c225e8bf5}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!lerp@{lerp}}
+\index{lerp@{lerp}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{lerp()}{lerp()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform} cturtle\+::\+Transform\+::lerp (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{float}]{progress }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Interpolates between this and the specified transform. Progress is a float in range of 0 to 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The destination transform. \\
+\hline
+{\em progress} & A progress float in range of 0 to 1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting interpolated transform. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_afc24321e5d8da21c310fd830aa76da84}\label{classcturtle_1_1Transform_afc24321e5d8da21c310fd830aa76da84}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!operator()@{operator()}}
+\index{operator()@{operator()}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \hyperlink{structcturtle_1_1ivec2}{Point} cturtle\+::\+Transform\+::operator() (\begin{DoxyParamCaption}\item[{\hyperlink{structcturtle_1_1ivec2}{Point}}]{in }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overload to transform a single point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & The point to transform. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a0f94d37257362afb874f5df8a127613a}\label{classcturtle_1_1Transform_a0f94d37257362afb874f5df8a127613a}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!rotate@{rotate}}
+\index{rotate@{rotate}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::rotate (\begin{DoxyParamCaption}\item[{float}]{theta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Rotates this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em theta} & The angle at which to rotate, in radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a985c6b26564267172e0f3d8ced7868e0}\label{classcturtle_1_1Transform_a985c6b26564267172e0f3d8ced7868e0}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!rotate\+Around@{rotate\+Around}}
+\index{rotate\+Around@{rotate\+Around}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{rotate\+Around()}{rotateAround()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::rotate\+Around (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{float}]{theta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Rotates this transform around a specified point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The X coordinate to rotate around. \\
+\hline
+{\em y} & The Y coordinate to rotate around. \\
+\hline
+{\em theta} & The angle at which to rotate, in radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a460e371e701eed2d19c14c6e93725c82}\label{classcturtle_1_1Transform_a460e371e701eed2d19c14c6e93725c82}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!scale@{scale}}
+\index{scale@{scale}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::scale (\begin{DoxyParamCaption}\item[{float}]{sx,  }\item[{float}]{sy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Applies a scale transformation to this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sx} & The X axis scale factor. \\
+\hline
+{\em sy} & The Y axis scale factor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_aafed415c37989dcc34ed5cadd7366487}\label{classcturtle_1_1Transform_aafed415c37989dcc34ed5cadd7366487}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!set\+Rotation@{set\+Rotation}}
+\index{set\+Rotation@{set\+Rotation}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{set\+Rotation()}{setRotation()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::set\+Rotation (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the rotation of this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The angle at which to rotate, in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a99366b0667eab2ea5f4f194f8500f94a}\label{classcturtle_1_1Transform_a99366b0667eab2ea5f4f194f8500f94a}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!set\+Translation@{set\+Translation}}
+\index{set\+Translation@{set\+Translation}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{set\+Translation()}{setTranslation()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::set\+Translation (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the translation of this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The number of units, or pixels, to transform on the X axis. \\
+\hline
+{\em y} & The number of units, or pixels, to transform on the Y axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a1ce9955dd58f54a64e3c9277c82456d1}\label{classcturtle_1_1Transform_a1ce9955dd58f54a64e3c9277c82456d1}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!set\+TranslationX@{set\+TranslationX}}
+\index{set\+TranslationX@{set\+TranslationX}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{set\+Translation\+X()}{setTranslationX()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::set\+TranslationX (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the X axis translation of this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The number of units, or pixels, to transform on the X axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a6e861207764b8ca62152b99eb86a1f1a}\label{classcturtle_1_1Transform_a6e861207764b8ca62152b99eb86a1f1a}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!set\+TranslationY@{set\+TranslationY}}
+\index{set\+TranslationY@{set\+TranslationY}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{set\+Translation\+Y()}{setTranslationY()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::set\+TranslationY (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the Y axis translation of this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The number of units, or pixels, to transform on the Y axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_aa8631732daaddc8336ed29f5462d1fef}\label{classcturtle_1_1Transform_aa8631732daaddc8336ed29f5462d1fef}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!transform@{transform}}
+\index{transform@{transform}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{transform()}{transform()}}
+{\footnotesize\ttfamily \hyperlink{structcturtle_1_1ivec2}{Point} cturtle\+::\+Transform\+::transform (\begin{DoxyParamCaption}\item[{\hyperlink{structcturtle_1_1ivec2}{Point}}]{in,  }\item[{\hyperlink{structcturtle_1_1ivec2}{Point} $\ast$}]{dst = {\ttfamily nullptr} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Transforms a point according to this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & The input point. \\
+\hline
+{\em dst} & The destination pointer to store the value. Can be same as input.. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the translated point. 
+
+Also assigns the value of dst pointer to the result. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Transform_aae183c07fb323d0dfe8b3d633d59415c}\label{classcturtle_1_1Transform_aae183c07fb323d0dfe8b3d633d59415c}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!transform\+Set@{transform\+Set}}
+\index{transform\+Set@{transform\+Set}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{transform\+Set()}{transformSet()}}
+{\footnotesize\ttfamily template$<$typename I\+T\+E\+R\+\_\+T $>$ \\
+void cturtle\+::\+Transform\+::transform\+Set (\begin{DoxyParamCaption}\item[{I\+T\+E\+R\+\_\+T}]{cur,  }\item[{I\+T\+E\+R\+\_\+T}]{end }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Transforms a set of points given a begin and end iterator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cur} & The beginning iterator of a set. \\
+\hline
+{\em end} & The ending iterator of a set. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_ae5029e23d426ff809a48ab56316dd989}\label{classcturtle_1_1Transform_ae5029e23d426ff809a48ab56316dd989}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!translate@{translate}}
+\index{translate@{translate}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}\& cturtle\+::\+Transform\+::translate (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Translates this transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The number of units, or pixels, to transform on the X axis. \\
+\hline
+{\em y} & The number of units, or pixels, to transform on the Y axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this transform. (e.\+g, $\ast$this) 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcturtle_1_1Transform_a79f7e11fb2b3d1093458100783cdd984}\label{classcturtle_1_1Transform_a79f7e11fb2b3d1093458100783cdd984}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!rotation@{rotation}}
+\index{rotation@{rotation}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{rotation}{rotation}}
+{\footnotesize\ttfamily float cturtle\+::\+Transform\+::rotation = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+The rotation of this transform, in radians. \mbox{\Hypertarget{classcturtle_1_1Transform_a747be70a22109ecf9470c7ad75565c0c}\label{classcturtle_1_1Transform_a747be70a22109ecf9470c7ad75565c0c}} 
+\index{cturtle\+::\+Transform@{cturtle\+::\+Transform}!value@{value}}
+\index{value@{value}!cturtle\+::\+Transform@{cturtle\+::\+Transform}}
+\subsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}{mat\+\_\+t} cturtle\+::\+Transform\+::value\hspace{0.3cm}{\ttfamily [protected]}}
+
+The value of this transform. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

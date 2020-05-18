@@ -1,7 +1,0 @@
-<map id="cturtle::IDrawableGeometry" name="cturtle::IDrawableGeometry">
-<area shape="rect" id="node2" href="$classcturtle_1_1Circle.html" title="The Circle class holds a radius and total number of steps, used to generate and draw a circles geomet..." alt="" coords="320,5,463,32"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1CompoundPolygon.html" title="cturtle::CompoundPolygon" alt="" coords="284,56,499,83"/>
-<area shape="rect" id="node4" href="$classcturtle_1_1Line.html" title="The Line class holds two points and the functionality to draw a line between them on a specified canv..." alt="" coords="328,107,455,133"/>
-<area shape="rect" id="node5" href="$classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image..." alt="" coords="316,157,467,184"/>
-<area shape="rect" id="node6" href="$classcturtle_1_1Sprite.html" title="cturtle::Sprite" alt="" coords="320,208,463,235"/>
-</map>

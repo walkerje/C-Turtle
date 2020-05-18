@@ -1,0 +1,130 @@
+\hypertarget{classcturtle_1_1AbstractTurtleScreen}{}\section{cturtle\+:\+:Abstract\+Turtle\+Screen Class Reference}
+\label{classcturtle_1_1AbstractTurtleScreen}\index{cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}}
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Inheritance diagram for cturtle\+:\+:Abstract\+Turtle\+Screen\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classcturtle_1_1AbstractTurtleScreen__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ad8e8c7abcc876b2ddd7d19494bb71985}\label{classcturtle_1_1AbstractTurtleScreen_ad8e8c7abcc876b2ddd7d19494bb71985}} 
+virtual void {\bfseries tracer} (int countmax, unsigned int delay\+MS=10)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a1ddb52212ec961b27c9c40c0786a2dee}\label{classcturtle_1_1AbstractTurtleScreen_a1ddb52212ec961b27c9c40c0786a2dee}} 
+virtual int {\bfseries window\+\_\+width} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a8a03d248a0a7b02e88d891f24a27fb8d}\label{classcturtle_1_1AbstractTurtleScreen_a8a03d248a0a7b02e88d891f24a27fb8d}} 
+virtual int {\bfseries window\+\_\+height} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ac542d5c180390842d99a6078965aa077}\label{classcturtle_1_1AbstractTurtleScreen_ac542d5c180390842d99a6078965aa077}} 
+virtual \hyperlink{classcturtle_1_1Color}{Color} {\bfseries bgcolor} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ac421f2018c0f88e3bc3b36f716c3fc04}\label{classcturtle_1_1AbstractTurtleScreen_ac421f2018c0f88e3bc3b36f716c3fc04}} 
+virtual void {\bfseries bgcolor} (const \hyperlink{classcturtle_1_1Color}{Color} \&c)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a66a3002d3a6713e615a58b345ec21062}\label{classcturtle_1_1AbstractTurtleScreen_a66a3002d3a6713e615a58b345ec21062}} 
+virtual void {\bfseries mode} (Screen\+Mode mode)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a6f4031d934f2785165b382384611b19d}\label{classcturtle_1_1AbstractTurtleScreen_a6f4031d934f2785165b382384611b19d}} 
+virtual Screen\+Mode {\bfseries mode} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ad37d1976302819c74e766290a2128072}\label{classcturtle_1_1AbstractTurtleScreen_ad37d1976302819c74e766290a2128072}} 
+virtual void {\bfseries clearscreen} ()=0
+\item 
+void \hyperlink{classcturtle_1_1AbstractTurtleScreen_abae240a2ba949c1628bb01ad850fb32b}{clear} ()
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a2a705428bc1fd07300ebcf1a6b10e989}\label{classcturtle_1_1AbstractTurtleScreen_a2a705428bc1fd07300ebcf1a6b10e989}} 
+virtual void {\bfseries resetscreen} ()=0
+\item 
+void \hyperlink{classcturtle_1_1AbstractTurtleScreen_ac791e1eca792e71c356006c96eb98788}{reset} ()
+\item 
+virtual bool \hyperlink{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}{supports\+\_\+live\+\_\+animation} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a67b23a8833900072eb9079b836b1796e}\label{classcturtle_1_1AbstractTurtleScreen_a67b23a8833900072eb9079b836b1796e}} 
+virtual \hyperlink{structcturtle_1_1ivec2}{ivec2} {\bfseries screensize} (\hyperlink{classcturtle_1_1Color}{Color} \&bg)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a9e8443b41b8d0765993b1b6fb5cfb94f}\label{classcturtle_1_1AbstractTurtleScreen_a9e8443b41b8d0765993b1b6fb5cfb94f}} 
+virtual \hyperlink{structcturtle_1_1ivec2}{ivec2} {\bfseries screensize} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a85ab4fad60333c90051219e32a299686}\label{classcturtle_1_1AbstractTurtleScreen_a85ab4fad60333c90051219e32a299686}} 
+virtual void {\bfseries update} (bool invalidate\+Draw=false, bool process\+Input=true)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a779ca47025b1d005ab0dcc5a0c368ac8}\label{classcturtle_1_1AbstractTurtleScreen_a779ca47025b1d005ab0dcc5a0c368ac8}} 
+virtual void {\bfseries delay} (unsigned int ms)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ab1d6569b39973c6df6507e4f9890407e}\label{classcturtle_1_1AbstractTurtleScreen_ab1d6569b39973c6df6507e4f9890407e}} 
+virtual unsigned int {\bfseries delay} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a04de9abc6c3a8f046568c7d1a842d168}\label{classcturtle_1_1AbstractTurtleScreen_a04de9abc6c3a8f046568c7d1a842d168}} 
+virtual void {\bfseries bye} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a090a77eb87eab4a3d3e4f1b9476abff2}\label{classcturtle_1_1AbstractTurtleScreen_a090a77eb87eab4a3d3e4f1b9476abff2}} 
+virtual Image \& {\bfseries getcanvas} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a5a68db439eb8e5016a290529d62610f5}\label{classcturtle_1_1AbstractTurtleScreen_a5a68db439eb8e5016a290529d62610f5}} 
+virtual bool {\bfseries isclosed} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a6bf8b7618ccd22087cc4fcb95d9e2ac5}\label{classcturtle_1_1AbstractTurtleScreen_a6bf8b7618ccd22087cc4fcb95d9e2ac5}} 
+virtual void {\bfseries redraw} (bool invalidate=false)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a602b6058a1d56e27700155987b791056}\label{classcturtle_1_1AbstractTurtleScreen_a602b6058a1d56e27700155987b791056}} 
+virtual \hyperlink{classcturtle_1_1Transform}{Transform} {\bfseries screentransform} () const =0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_aa82ae80751e1f6f71b07d2c0ba72e5e8}\label{classcturtle_1_1AbstractTurtleScreen_aa82ae80751e1f6f71b07d2c0ba72e5e8}} 
+virtual void {\bfseries add} (\hyperlink{classcturtle_1_1Turtle}{Turtle} \&turtle)=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ab4524119329c3ab3ce2a9a864ec87437}\label{classcturtle_1_1AbstractTurtleScreen_ab4524119329c3ab3ce2a9a864ec87437}} 
+virtual std\+::list$<$ \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object} $>$ \& {\bfseries get\+Scene} ()=0
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_a63ad1c2ec491e0a8773fc53aac0b9c3a}\label{classcturtle_1_1AbstractTurtleScreen_a63ad1c2ec491e0a8773fc53aac0b9c3a}} 
+virtual \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} \& {\bfseries shape} (const std\+::string \&name)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classcturtle_1_1AbstractTurtleScreen}{Abstract\+Turtle\+Screen} class is the abstract type for most turtle functionality. It intentionally excludes all input/output functionality, allowing for two intended derivates\+: an \char`\"{}interactive\char`\"{} screen, vs an \char`\"{}offline rendering\char`\"{} screen. \hyperlink{classcturtle_1_1Turtle}{Turtle} class doesn\textquotesingle{}t care which one it gets, in theory. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_abae240a2ba949c1628bb01ad850fb32b}\label{classcturtle_1_1AbstractTurtleScreen_abae240a2ba949c1628bb01ad850fb32b}} 
+\index{cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}!clear@{clear}}
+\index{clear@{clear}!cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void cturtle\+::\+Abstract\+Turtle\+Screen\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Alias for clearscreen function \begin{DoxySeeAlso}{See also}
+clearscreen() 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_ac791e1eca792e71c356006c96eb98788}\label{classcturtle_1_1AbstractTurtleScreen_ac791e1eca792e71c356006c96eb98788}} 
+\index{cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}!reset@{reset}}
+\index{reset@{reset}!cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void cturtle\+::\+Abstract\+Turtle\+Screen\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Resets all turtles belonging to this screen to their original state-\/$>$ \mbox{\Hypertarget{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}\label{classcturtle_1_1AbstractTurtleScreen_aa9651fa98eefdb83fd99d476217b5414}} 
+\index{cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}!supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}}
+\index{supports\+\_\+live\+\_\+animation@{supports\+\_\+live\+\_\+animation}!cturtle\+::\+Abstract\+Turtle\+Screen@{cturtle\+::\+Abstract\+Turtle\+Screen}}
+\subsubsection{\texorpdfstring{supports\+\_\+live\+\_\+animation()}{supports\_live\_animation()}}
+{\footnotesize\ttfamily virtual bool cturtle\+::\+Abstract\+Turtle\+Screen\+::supports\+\_\+live\+\_\+animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Returns}
+a boolean indicating if this turtle screen supports live animation. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcturtle_1_1InteractiveTurtleScreen_ad28f7c6e4058541a2c4258b4455fad74}{cturtle\+::\+Interactive\+Turtle\+Screen}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

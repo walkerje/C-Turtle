@@ -1,0 +1,143 @@
+\hypertarget{structcturtle_1_1PenState}{}\section{cturtle\+:\+:Pen\+State Struct Reference}
+\label{structcturtle_1_1PenState}\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Collaboration diagram for cturtle\+:\+:Pen\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{structcturtle_1_1PenState__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcturtle_1_1PenState_a308973ed85eee69acd4f98b72e2be21c}\label{structcturtle_1_1PenState_a308973ed85eee69acd4f98b72e2be21c}} 
+{\bfseries Pen\+State} (const \hyperlink{structcturtle_1_1PenState}{Pen\+State} \&copy)
+\item 
+\mbox{\Hypertarget{structcturtle_1_1PenState_aa324f2f3a6cc360d8d927e677c6b6d1a}\label{structcturtle_1_1PenState_aa324f2f3a6cc360d8d927e677c6b6d1a}} 
+\hyperlink{structcturtle_1_1PenState}{Pen\+State} \& {\bfseries operator=} (const \hyperlink{structcturtle_1_1PenState}{Pen\+State} \&copy)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcturtle_1_1Transform}{Transform} \hyperlink{structcturtle_1_1PenState_ac6b3e58155d09bf78a315c616874fa89}{transform}
+\item 
+float \hyperlink{structcturtle_1_1PenState_af5432bc75dcc374e6269a28a656a6c49}{move\+Speed} = T\+S\+\_\+\+N\+O\+R\+M\+AL
+\item 
+bool \hyperlink{structcturtle_1_1PenState_aa6992297fb8f109e20599c31dd29cd6f}{tracing} = true
+\item 
+bool \hyperlink{structcturtle_1_1PenState_ae860bb135dc50937453694b8331a014d}{angle\+Mode} = false
+\item 
+int \hyperlink{structcturtle_1_1PenState_a5ca3f05c53ca672de4466e4c7f5f3328}{pen\+Width} = 1
+\item 
+bool \hyperlink{structcturtle_1_1PenState_aa74bc9fbcc2f4eba76d8b8856ba30eff}{filling} = false
+\item 
+\hyperlink{classcturtle_1_1Color}{Color} \hyperlink{structcturtle_1_1PenState_a2fb76e7573bfa387e1858df701dab60b}{pen\+Color} = \hyperlink{classcturtle_1_1Color}{Color}(\char`\"{}black\char`\"{})
+\item 
+\hyperlink{classcturtle_1_1Color}{Color} \hyperlink{structcturtle_1_1PenState_a787b9819a36fe8b87d7ce60574df19df}{fill\+Color} = \hyperlink{classcturtle_1_1Color}{Color}(\char`\"{}black\char`\"{})
+\item 
+size\+\_\+t \hyperlink{structcturtle_1_1PenState_a7309ce91cbc711775e59a9ce1ed150a5}{objects\+Before} = 0
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $>$ \hyperlink{structcturtle_1_1PenState_af57060055c671d34395271a50553b922}{cursor} = nullptr
+\item 
+int \hyperlink{structcturtle_1_1PenState_a5a5c623893c76f00325223e075af714b}{cur\+Stamp} = 0
+\item 
+bool \hyperlink{structcturtle_1_1PenState_a7c1380e85858e04607427fcddeb1cba7}{visible} = true
+\item 
+float \hyperlink{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}{cursor\+Tilt} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pen State structure. Holds all pen attributes. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structcturtle_1_1PenState_ae860bb135dc50937453694b8331a014d}\label{structcturtle_1_1PenState_ae860bb135dc50937453694b8331a014d}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!angle\+Mode@{angle\+Mode}}
+\index{angle\+Mode@{angle\+Mode}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{angle\+Mode}{angleMode}}
+{\footnotesize\ttfamily bool cturtle\+::\+Pen\+State\+::angle\+Mode = false}
+
+The angle mode. False for degrees, true for radians. \mbox{\Hypertarget{structcturtle_1_1PenState_af57060055c671d34395271a50553b922}\label{structcturtle_1_1PenState_af57060055c671d34395271a50553b922}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!cursor@{cursor}}
+\index{cursor@{cursor}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{cursor}{cursor}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}$>$ cturtle\+::\+Pen\+State\+::cursor = nullptr}
+
+The turtle\textquotesingle{}s cursor geometry. M\+U\+ST A\+S\+S\+I\+GN B\+E\+F\+O\+RE U\+SE. \mbox{\Hypertarget{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}\label{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!cursor\+Tilt@{cursor\+Tilt}}
+\index{cursor\+Tilt@{cursor\+Tilt}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{cursor\+Tilt}{cursorTilt}}
+{\footnotesize\ttfamily float cturtle\+::\+Pen\+State\+::cursor\+Tilt = 0}
+
+A float for cursor tilt (e.\+g, rotation appleid to the cursor itself) \mbox{\Hypertarget{structcturtle_1_1PenState_a5a5c623893c76f00325223e075af714b}\label{structcturtle_1_1PenState_a5a5c623893c76f00325223e075af714b}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!cur\+Stamp@{cur\+Stamp}}
+\index{cur\+Stamp@{cur\+Stamp}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{cur\+Stamp}{curStamp}}
+{\footnotesize\ttfamily int cturtle\+::\+Pen\+State\+::cur\+Stamp = 0}
+
+The current stamp ID. \mbox{\Hypertarget{structcturtle_1_1PenState_a787b9819a36fe8b87d7ce60574df19df}\label{structcturtle_1_1PenState_a787b9819a36fe8b87d7ce60574df19df}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!fill\+Color@{fill\+Color}}
+\index{fill\+Color@{fill\+Color}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{fill\+Color}{fillColor}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Pen\+State\+::fill\+Color = \hyperlink{classcturtle_1_1Color}{Color}(\char`\"{}black\char`\"{})}
+
+The intended fill color. \mbox{\Hypertarget{structcturtle_1_1PenState_aa74bc9fbcc2f4eba76d8b8856ba30eff}\label{structcturtle_1_1PenState_aa74bc9fbcc2f4eba76d8b8856ba30eff}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!filling@{filling}}
+\index{filling@{filling}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{filling}{filling}}
+{\footnotesize\ttfamily bool cturtle\+::\+Pen\+State\+::filling = false}
+
+A boolean indicating if we\textquotesingle{}re trying to fill a shape. \mbox{\Hypertarget{structcturtle_1_1PenState_af5432bc75dcc374e6269a28a656a6c49}\label{structcturtle_1_1PenState_af5432bc75dcc374e6269a28a656a6c49}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!move\+Speed@{move\+Speed}}
+\index{move\+Speed@{move\+Speed}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{move\+Speed}{moveSpeed}}
+{\footnotesize\ttfamily float cturtle\+::\+Pen\+State\+::move\+Speed = T\+S\+\_\+\+N\+O\+R\+M\+AL}
+
+The movement speed of the turtle, in range of 0...10 \mbox{\Hypertarget{structcturtle_1_1PenState_a7309ce91cbc711775e59a9ce1ed150a5}\label{structcturtle_1_1PenState_a7309ce91cbc711775e59a9ce1ed150a5}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!objects\+Before@{objects\+Before}}
+\index{objects\+Before@{objects\+Before}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{objects\+Before}{objectsBefore}}
+{\footnotesize\ttfamily size\+\_\+t cturtle\+::\+Pen\+State\+::objects\+Before = 0}
+
+The total number of objects in the screen\textquotesingle{}s object stack prior to the addition of this state-\/$>$ \mbox{\Hypertarget{structcturtle_1_1PenState_a2fb76e7573bfa387e1858df701dab60b}\label{structcturtle_1_1PenState_a2fb76e7573bfa387e1858df701dab60b}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!pen\+Color@{pen\+Color}}
+\index{pen\+Color@{pen\+Color}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{pen\+Color}{penColor}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Color}{Color} cturtle\+::\+Pen\+State\+::pen\+Color = \hyperlink{classcturtle_1_1Color}{Color}(\char`\"{}black\char`\"{})}
+
+The color of the pen. \mbox{\Hypertarget{structcturtle_1_1PenState_a5ca3f05c53ca672de4466e4c7f5f3328}\label{structcturtle_1_1PenState_a5ca3f05c53ca672de4466e4c7f5f3328}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!pen\+Width@{pen\+Width}}
+\index{pen\+Width@{pen\+Width}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{pen\+Width}{penWidth}}
+{\footnotesize\ttfamily int cturtle\+::\+Pen\+State\+::pen\+Width = 1}
+
+The width of the pen, in pixels. \mbox{\Hypertarget{structcturtle_1_1PenState_aa6992297fb8f109e20599c31dd29cd6f}\label{structcturtle_1_1PenState_aa6992297fb8f109e20599c31dd29cd6f}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!tracing@{tracing}}
+\index{tracing@{tracing}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{tracing}{tracing}}
+{\footnotesize\ttfamily bool cturtle\+::\+Pen\+State\+::tracing = true}
+
+Whether or not the turtle\textquotesingle{}s \char`\"{}tail\char`\"{} (or pen) is down. \mbox{\Hypertarget{structcturtle_1_1PenState_ac6b3e58155d09bf78a315c616874fa89}\label{structcturtle_1_1PenState_ac6b3e58155d09bf78a315c616874fa89}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!transform@{transform}}
+\index{transform@{transform}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform} cturtle\+::\+Pen\+State\+::transform}
+
+The transform of the pen. holds position, rotation, and scale of the turtle. \mbox{\Hypertarget{structcturtle_1_1PenState_a7c1380e85858e04607427fcddeb1cba7}\label{structcturtle_1_1PenState_a7c1380e85858e04607427fcddeb1cba7}} 
+\index{cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}!visible@{visible}}
+\index{visible@{visible}!cturtle\+::\+Pen\+State@{cturtle\+::\+Pen\+State}}
+\subsubsection{\texorpdfstring{visible}{visible}}
+{\footnotesize\ttfamily bool cturtle\+::\+Pen\+State\+::visible = true}
+
+A boolean indicating if this turtle is visible. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

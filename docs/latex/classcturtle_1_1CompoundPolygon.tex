@@ -1,0 +1,79 @@
+\hypertarget{classcturtle_1_1CompoundPolygon}{}\section{cturtle\+:\+:Compound\+Polygon Class Reference}
+\label{classcturtle_1_1CompoundPolygon}\index{cturtle\+::\+Compound\+Polygon@{cturtle\+::\+Compound\+Polygon}}
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Inheritance diagram for cturtle\+:\+:Compound\+Polygon\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classcturtle_1_1CompoundPolygon__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for cturtle\+:\+:Compound\+Polygon\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classcturtle_1_1CompoundPolygon__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_a10c24e9f65b586dec2c4173d2e4ddc2a}\label{classcturtle_1_1CompoundPolygon_a10c24e9f65b586dec2c4173d2e4ddc2a}} 
+typedef std\+::pair$<$ \hyperlink{classcturtle_1_1Transform}{Transform}, std\+::unique\+\_\+ptr$<$ \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $>$ $>$ {\bfseries component\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_a4ec03c8f5d2a8658893156ccadf0b347}\label{classcturtle_1_1CompoundPolygon_a4ec03c8f5d2a8658893156ccadf0b347}} 
+{\bfseries Compound\+Polygon} (const \hyperlink{classcturtle_1_1CompoundPolygon}{Compound\+Polygon} \&\hyperlink{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}{copy})
+\item 
+void \hyperlink{classcturtle_1_1CompoundPolygon_a9b750af77967c4df01bab83785262e10}{addcomponent} (const \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} \&obj, const \hyperlink{classcturtle_1_1Transform}{Transform} \&transform=\hyperlink{classcturtle_1_1Transform}{Transform}())
+\item 
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}\label{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}} 
+\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$ \hyperlink{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}{copy} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+void \hyperlink{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}{draw} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, Image \&img\+Ref) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_aac8199703a019ce5f09fd4ba96c95a39}\label{classcturtle_1_1CompoundPolygon_aac8199703a019ce5f09fd4ba96c95a39}} 
+std\+::list$<$ component\+\_\+t $>$ {\bfseries components}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Compound Polygons can have a variety of attachments. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_a9b750af77967c4df01bab83785262e10}\label{classcturtle_1_1CompoundPolygon_a9b750af77967c4df01bab83785262e10}} 
+\index{cturtle\+::\+Compound\+Polygon@{cturtle\+::\+Compound\+Polygon}!addcomponent@{addcomponent}}
+\index{addcomponent@{addcomponent}!cturtle\+::\+Compound\+Polygon@{cturtle\+::\+Compound\+Polygon}}
+\subsubsection{\texorpdfstring{addcomponent()}{addcomponent()}}
+{\footnotesize\ttfamily void cturtle\+::\+Compound\+Polygon\+::addcomponent (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} \&}]{obj,  }\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{transform = {\ttfamily \hyperlink{classcturtle_1_1Transform}{Transform}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds a generic component to this \hyperlink{classcturtle_1_1CompoundPolygon}{Compound\+Polygon}. \mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}\label{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}} 
+\index{cturtle\+::\+Compound\+Polygon@{cturtle\+::\+Compound\+Polygon}!draw@{draw}}
+\index{draw@{draw}!cturtle\+::\+Compound\+Polygon@{cturtle\+::\+Compound\+Polygon}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void cturtle\+::\+Compound\+Polygon\+::draw (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Draws this \hyperlink{classcturtle_1_1CompoundPolygon}{Compound\+Polygon}. Disregards the \hyperlink{classcturtle_1_1Color}{Color} attribute in favor of the components\textquotesingle{} colors 
+
+Implements \hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{cturtle\+::\+Abstract\+Drawable\+Object}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}
