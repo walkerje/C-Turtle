@@ -450,17 +450,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #endif
 #endif
 
-#ifdef _MSC_VER
-//Disable MSVC warnings for CImg. Irrelevant to project.
-#include <CodeAnalysis/Warnings.h>
-#pragma warning(push, 0)
-#pragma warning (disable : ALL_CODE_ANALYSIS_WARNINGS)
-#include "CImg.h"
-#pragma warning(pop)
-#else
-#include "CImg.h"
-#endif
-
 //When using headless, simply pre-define CTURTLE_CONFIG_HEADLESS.
 //This disables the InteractiveTurtleScreen.
 //GIF utility is included at the top of the file when under headless mode.
@@ -468,6 +457,9 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #ifdef CTURTLE_HEADLESS
     //Optional define to disable HTML Base64 Image output
     //#define CTURTLE_HEADLESS_NO_HTML
+
+    //Disable CImg Display
+    #define cimg_display 0
 
     //Define default width and height.
     #ifndef CTURTLE_HEADLESS_WIDTH
@@ -481,6 +473,17 @@ inline void jo_gif_end(jo_gif_t *gif) {
     #ifndef CTURTLE_HEADLESS_SAVEDIR
         #define CTURTLE_HEADLESS_SAVEDIR "./cturtle.gif"
     #endif
+#endif
+
+#ifdef _MSC_VER
+//Disable MSVC warnings for CImg. Irrelevant to project.
+#include <CodeAnalysis/Warnings.h>
+#pragma warning(push, 0)
+#pragma warning (disable : ALL_CODE_ANALYSIS_WARNINGS)
+#include "CImg.h"
+#pragma warning(pop)
+#else
+#include "CImg.h"
 #endif
 
 //For specific integer types, maps, strings, etc.
