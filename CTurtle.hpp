@@ -4288,6 +4288,8 @@ namespace cturtle {
 
     typedef OfflineTurtleScreen TurtleScreen;
 #else /*NOT DEFINED CTURTLE_HEADLESS*/
+    constexpr int SCREEN_DEFAULT_WIDTH = 800;
+    constexpr int SCREEN_DEFAULT_HEIGHT = 600;
     /**
      * InteractiveTurtleScreen
      * Holds and maintains facilities in relation to displaying
