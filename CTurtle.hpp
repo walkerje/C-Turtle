@@ -2467,7 +2467,7 @@ namespace cturtle {
         /**\brief Empty constructor. Initializes X and Y to both equal 0.*/
         ivec2() : x(0), y(0){}
 
-        /**\brief Assignment constructor.
+        /**\brief Assignment cons tructor.
          *\param x The X value of this ivec2.
          *\param y The Y value of this ivec2.*/
         ivec2(int x, int y) : x(x), y(y) {}
@@ -2477,8 +2477,35 @@ namespace cturtle {
         /**\brief Array access operator overload. Useful for convenience.
          *\param index The index of one of the components of this ivec2 (0..1)
          *\return A reference to the index */
-        inline int& operator[](int index) const{
-            return ((int*) this)[index];
+        inline int& operator[](int index){
+            return index == 0 ? x : y;
+        }
+
+        /**\brief Array access operator overload. Useful for convenience.
+         *\param index The index of one of the components of this ivec2 (0..1)
+         *\return A reference to the index */
+        inline int operator[](int index) const{
+            return index == 0 ? x : y;
+        }
+        
+        ivec2 operator+(const ivec2& other) const{
+            return {x + other.x, y + other.y};
+        }
+        
+        ivec2& operator+=(const ivec2& other){
+            x += other.x;
+            y += other.y;
+            return *this;
+        }
+        
+        ivec2 operator-(const ivec2& other) const{
+            return {x - other.x, y - other.y};
+        }
+
+        ivec2& operator-=(const ivec2& other){
+            x -= other.x;
+            y -= other.y;
+            return *this;
         }
 
         /**\brief Comparison operator between this vector and the other specified.*/
@@ -3596,7 +3623,7 @@ namespace cturtle {
         void setx(int x);
         /**\brief Sets the Y-axis transform location of this turtle.*/
         void sety(int y);
-
+        
         /**
          * Adds a "dumb" translation to the current turtle's transform.
          * Does not take into account the rotation, or orientation, of the turtle.
@@ -3604,6 +3631,13 @@ namespace cturtle {
          * @param y component of coordinate pair.
          */
         void shift(int x, int y);
+        
+        /**
+         * @return a constant reference to the current state of this turtle.
+         */
+        const PenState& penstate() const{
+            return *state;
+        }
 
         /**\brief Sets the rotation of this turtle.
          * The unit by which the input is specified is determined by the current
@@ -3700,6 +3734,10 @@ namespace cturtle {
          *\param state Whether or not the turtle is filling a polygon.*/
         void fill(bool state);
 
+        inline bool filling() const{
+            return penstate().filling;
+        }
+        
         /**\brief Begins filling a polygon.
          *\sa fill(bool)*/
         inline void begin_fill() {
@@ -3717,6 +3755,7 @@ namespace cturtle {
         void fillcolor(Color c) {
             pushState();
             state->fillColor = c;
+            updateParent(false, false);
         }
 
         /**\brief Returns the fill color of this turtle.
@@ -3731,6 +3770,13 @@ namespace cturtle {
          *\sa fillcolor(color)*/
         void write(const std::string& text);
 
+        /**Writes the specified string to the screen.
+         * Uses the specified color.
+         *\param text The text to write.
+         *\param color The color to write the text in.
+         *\sa fillcolor(color)*/
+        void write(const std::string& text, Color color);
+        
         /**\brief Puts the current shape of this turtle on the screen
          *        with the current fill color and the outline of the shape.
          *\return The stamp ID of the put stamp.*/
@@ -3835,6 +3881,7 @@ namespace cturtle {
         void pencolor(Color c) {
             pushState();
             state->penColor = c;
+            updateParent(false, false);
         }
 
         /**\brief Returns the pen color; the color of the lines between movements.
@@ -4000,7 +4047,7 @@ namespace cturtle {
             canvas.assign(width, height, 1, 3);
             canvas.fill(255);
             isClosed = false;
-            gif = jo_gif_start(CTURTLE_HEADLESS_SAVEDIR, width, height, 1, 32);
+            gif = jo_gif_start(CTURTLE_HEADLESS_SAVEDIR, width, height,1, 31);
             redraw(true);
         }
 
@@ -4139,10 +4186,15 @@ namespace cturtle {
                 canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
                 redrawCounter = 0;//Forced redraw due to canvas invalidation.
             } else {
+                if(redrawCounterMax == 0){
+                    return;
+                }
+
+                redrawCounter++;
+
                 if (redrawCounter >= redrawCounterMax) {
                     redrawCounter = 0;
                 } else {
-                    redrawCounter++;
                     return;
                 }
             }
@@ -4176,23 +4228,20 @@ namespace cturtle {
              * which is what the interactive mode does.*/
 
             //This copy is NOT efficient.
-            //I've tried to employ tricks to make it faster, though.
-            const uint8_t* redData = turtleComposite.data(0,0,0,0);
-            const uint8_t* blueData = turtleComposite.data(0,0,0,1);
-            const uint8_t* greenData = turtleComposite.data(0,0,0,2);
+            //We should be able to take advantage of loop unrolling here
+            for(int x = 0; x < CTURTLE_HEADLESS_WIDTH; x++){
+                for(int y = 0; y < CTURTLE_HEADLESS_HEIGHT; y++){
+                    uint8_t* pixel = (&gifWriteBuffer[(y*CTURTLE_HEADLESS_WIDTH+x)*4]);
 
-            //We can try to use loop unrolling here. Single loop, with constant N.
-            for(int pixID = 0; pixID < CTURTLE_HEADLESS_WIDTH * CTURTLE_HEADLESS_HEIGHT; pixID++){
-                uint8_t* pixel = (uint8_t*)(&gifWriteBuffer[pixID]);
-                // 0 1 2 3 = r g b a
-                pixel[0] = *(redData + pixID);
-                pixel[1] = *(greenData + pixID);
-                pixel[2] = *(blueData + pixID);
-                pixel[3] = 255;     //a
+                    pixel[0] = turtleComposite(x,y,0);
+                    pixel[1] = turtleComposite(x,y,1);
+                    pixel[2] = turtleComposite(x,y,2);
+                    pixel[3] = 255;
+                }
             }
 
             //GIF frames are measured in centiseconds, thus the /10 on the delayMS...
-            jo_gif_frame(&gif, (uint8_t*)gifWriteBuffer, delayMS / 10, true);
+            jo_gif_frame(&gif, gifWriteBuffer, delayMS / 10, true);
         }
 
         Transform screentransform() const{
@@ -4212,7 +4261,7 @@ namespace cturtle {
         }
     private:
         /*this can be a constant allocated buffer.*/
-        uint32_t gifWriteBuffer[CTURTLE_HEADLESS_WIDTH * CTURTLE_HEADLESS_HEIGHT];
+        uint8_t gifWriteBuffer[CTURTLE_HEADLESS_WIDTH * CTURTLE_HEADLESS_HEIGHT*4];
         //allocate enough to hold width*height*4 (4 because RGBA).
         //this fits into uint32_t type quite nicely. (8+8+8+8 bits, r+g+b+a) = 32
 
@@ -4251,7 +4300,7 @@ namespace cturtle {
         /**Redraw Counter.*/
         int redrawCounter = 0;
         /**Redraw counter max.*/
-        int redrawCounterMax = 0;
+        int redrawCounterMax = 1;
 
         //Default shapes.
         std::unordered_map<std::string, Polygon> shapes = {
@@ -4328,7 +4377,7 @@ namespace cturtle {
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
         InteractiveTurtleScreen(int width, int height, const std::string& title = "CTurtle")
-        : display(width, height) {
+            : display(width, height) {
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
@@ -4343,7 +4392,8 @@ namespace cturtle {
 
         /**Sets an internal variable that dictates how many frames
          * are skipped between screen updates; higher numbers will
-         * speed up complex turtle drawings.
+         * speed up complex turtle drawings. Setting it to ZERO will
+         * COMPLETELY disable animation until this value changes.
          *\param countmax The value of the aforementioned variable.
          *\param delayMS This value is sent to function "delay".*/
         void tracer(int countmax, unsigned int delayMS = 10) {
@@ -4600,17 +4650,22 @@ namespace cturtle {
             }
 
             if (hasInvalidated) {
-                if (!backgroundImage.is_empty()) {
+                if(!backgroundImage.is_empty()) {
                     canvas.assign(backgroundImage);
                 } else {
                     canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
                 }
                 redrawCounter = 0;//Forced redraw due to canvas invalidation.
             } else {
+                if(redrawCounterMax == 0){
+                    return;
+                }
+
+                redrawCounter++;
+
                 if (redrawCounter >= redrawCounterMax) {
                     redrawCounter = 0;
                 } else {
-                    redrawCounter++;
                     return;
                 }
             }
@@ -4798,7 +4853,7 @@ namespace cturtle {
         /**Redraw Counter.*/
         int redrawCounter = 0;
         /**Redraw counter max.*/
-        int redrawCounterMax = 0;
+        int redrawCounterMax = 1;
 
         /**Initializes the underlying event thread.
          * This thread is cleanly managed and destroyed
@@ -4974,6 +5029,11 @@ namespace cturtle {
         pushText(*transform, state->fillColor, text);
         updateParent(false, false);
     }
+    
+    void Turtle::write(const std::string &text, Color color) {
+        pushText(*transform, color, text);
+        updateParent(false, false);
+    }
 
     //Stamps
 
@@ -5000,7 +5060,8 @@ namespace cturtle {
                 screen->getScene().erase(*iter);
             }
         }
-        updateParent(false,false);
+
+        updateParent(true,false);
     }
 
     void Turtle::clearstamps(int stampid) {
@@ -5021,7 +5082,7 @@ namespace cturtle {
             screen->getScene().erase(*iter);
             objects.erase(iter);
         }
-        updateParent(false, false);
+        updateParent(true, false);
     }
 
     void Turtle::shape(const std::string& name) {
@@ -5052,6 +5113,7 @@ namespace cturtle {
 
     void Turtle::left(float amt) {
         amt = state->angleMode ? amt : toRadians(amt);
+        
         //Flip angle orientation based on screen mode.
         travelTo(Transform(*transform).rotate(amt));
     }
@@ -5065,12 +5127,17 @@ namespace cturtle {
     }
 
     float Turtle::towards(int x, int y){
-        float amt = std::atan2(static_cast<float>(x) - transform->getTranslateX(), static_cast<float>(y) - transform->getTranslateY());
+        float amt = std::atan2(static_cast<float>(y) - transform->getTranslateY(), static_cast<float>(x) - transform->getTranslateX());
+        
+        if(toDegrees(amt) < 0){
+            amt = 6.28319f - (-amt);
+        }
+        
         //convert to degrees if necessary.
         amt = state->angleMode ? amt : toDegrees(amt);
-        return amt;
+        return amt + heading();
     }
-
+ 
     void Turtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
         travelTo(Transform(*transform).setTranslation(x, y));
     };
@@ -5104,6 +5171,7 @@ namespace cturtle {
         state = &stateStack.back();
 
         transform = &state->transform;
+        const auto numItems = objects.size();
 
         if (screen != nullptr) {
             //Re-assign cursor on reset, derived from parent screen.
@@ -5126,7 +5194,7 @@ namespace cturtle {
             }
         }
 
-        updateParent(true, false);
+        updateParent(numItems > 0, false);
     }
 
     //Conditional parent update.
