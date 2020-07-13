@@ -220,7 +220,7 @@ Image&#160;</td><td class="memItemRight" valign="bottom"><b>turtleComposite</b><
 <tr class="separator:a26338beec078bb1c29792cd658c1be71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39c21ce1ed1de241676ae329ecd962b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1InteractiveTurtleScreen.html#a39c21ce1ed1de241676ae329ecd962b8">redrawCounter</a> = 0</td></tr>
 <tr class="separator:a39c21ce1ed1de241676ae329ecd962b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cf0a4e382da4be238be3f9d3510b4e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1InteractiveTurtleScreen.html#a7cf0a4e382da4be238be3f9d3510b4e7">redrawCounterMax</a> = 0</td></tr>
+<tr class="memitem:a7cf0a4e382da4be238be3f9d3510b4e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1InteractiveTurtleScreen.html#a7cf0a4e382da4be238be3f9d3510b4e7">redrawCounterMax</a> = 1</td></tr>
 <tr class="separator:a7cf0a4e382da4be238be3f9d3510b4e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaea1170c38b5e79865841834c50718d"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="structcturtle_1_1SceneObject.html">SceneObject</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1InteractiveTurtleScreen.html#abaea1170c38b5e79865841834c50718d">objects</a></td></tr>
 <tr class="separator:abaea1170c38b5e79865841834c50718d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1532,7 +1532,7 @@ std::list&lt; std::tuple&lt; TimerFunc, uint64_t, uint64_t &gt; &gt;&#160;</td><
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets an internal variable that dictates how many frames are skipped between screen updates; higher numbers will speed up complex turtle drawings. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets an internal variable that dictates how many frames are skipped between screen updates; higher numbers will speed up complex turtle drawings. Setting it to ZERO will COMPLETELY disable animation until this value changes. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">countmax</td><td>The value of the aforementioned variable. </td></tr>
     <tr><td class="paramname">delayMS</td><td>This value is sent to function "delay". </td></tr>
@@ -2000,7 +2000,7 @@ std::list&lt; std::tuple&lt; TimerFunc, uint64_t, uint64_t &gt; &gt;&#160;</td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int cturtle::InteractiveTurtleScreen::redrawCounterMax = 0</td>
+          <td class="memname">int cturtle::InteractiveTurtleScreen::redrawCounterMax = 1</td>
         </tr>
       </table>
   </td>

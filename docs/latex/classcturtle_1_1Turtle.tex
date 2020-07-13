@@ -6,8 +6,7 @@
 
 
 
-Collaboration diagram for cturtle\+:\+:Turtle\+:
-\nopagebreak
+Collaboration diagram for cturtle\+:\+:Turtle\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -62,6 +61,8 @@ void \hyperlink{classcturtle_1_1Turtle_aeee8075a33445d89a060c4faa17f9e5c}{sety} 
 \begin{DoxyCompactList}\small\item\em Sets the Y-\/axis transform location of this turtle. \end{DoxyCompactList}\item 
 void \hyperlink{classcturtle_1_1Turtle_aea45fc1d0f00b82fc64a0f97dd6c1ea2}{shift} (int x, int y)
 \item 
+const \hyperlink{structcturtle_1_1PenState}{Pen\+State} \& \hyperlink{classcturtle_1_1Turtle_a2f6a16a0f4d700470bf69e0a15f3d2f4}{penstate} () const
+\item 
 void \hyperlink{classcturtle_1_1Turtle_a4eb2630341ea5bb922c74f214037b361}{setheading} (float angle)
 \begin{DoxyCompactList}\small\item\em Sets the rotation of this turtle. The unit by which the input is specified is determined by the current angle mode. The difference between Clockwise and Counterclockwise is determined by the current screen\textquotesingle{}s mode. \end{DoxyCompactList}\item 
 int \hyperlink{classcturtle_1_1Turtle_a4a6824b53f70323402d4e972f6da360c}{distance} (int x, int y)
@@ -86,6 +87,9 @@ void \hyperlink{classcturtle_1_1Turtle_af33a02ec769c35671204abcc33050b0f}{dot} (
 \begin{DoxyCompactList}\small\item\em Adds a dot to the screen. \end{DoxyCompactList}\item 
 void \hyperlink{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}{fill} (bool state)
 \begin{DoxyCompactList}\small\item\em Sets the \char`\"{}filling\char`\"{} state-\/$>$ If the input is false but the prior state is true, a \hyperlink{structcturtle_1_1SceneObject}{Scene\+Object} is put on the screen in the shape of the previously captured points. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_ac28e8f1d1fbf19abffb5e92b98e3c602}\label{classcturtle_1_1Turtle_ac28e8f1d1fbf19abffb5e92b98e3c602}} 
+bool {\bfseries filling} () const
+\item 
 void \hyperlink{classcturtle_1_1Turtle_a5d441494084c38e8947205a19f70ce73}{begin\+\_\+fill} ()
 \begin{DoxyCompactList}\small\item\em Begins filling a polygon. \end{DoxyCompactList}\item 
 void \hyperlink{classcturtle_1_1Turtle_aaf0576f0492ba3c4b1afa5bea50b9ddb}{end\+\_\+fill} ()
@@ -95,6 +99,8 @@ void \hyperlink{classcturtle_1_1Turtle_a222a95d61c5cfee661f5244e51d57539}{fillco
 \hyperlink{classcturtle_1_1Color}{Color} \hyperlink{classcturtle_1_1Turtle_aa35fb43f969187b513d5a1f443e98569}{fillcolor} ()
 \begin{DoxyCompactList}\small\item\em Returns the fill color of this turtle. \end{DoxyCompactList}\item 
 void \hyperlink{classcturtle_1_1Turtle_a6e814845ac619a90aeee25a67a3fc51d}{write} (const std\+::string \&text)
+\item 
+void \hyperlink{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}{write} (const std\+::string \&text, \hyperlink{classcturtle_1_1Color}{Color} color)
 \item 
 int \hyperlink{classcturtle_1_1Turtle_af7b7e9c43e22fabce3a5435d09c73f77}{stamp} ()
 \begin{DoxyCompactList}\small\item\em Puts the current shape of this turtle on the screen with the current fill color and the outline of the shape. \end{DoxyCompactList}\item 
@@ -554,6 +560,15 @@ Returns the pen color; the color of the lines between movements.
 \begin{DoxyReturn}{Returns}
 The color of the pen. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a2f6a16a0f4d700470bf69e0a15f3d2f4}\label{classcturtle_1_1Turtle_a2f6a16a0f4d700470bf69e0a15f3d2f4}} 
+\index{cturtle\+::\+Turtle@{cturtle\+::\+Turtle}!penstate@{penstate}}
+\index{penstate@{penstate}!cturtle\+::\+Turtle@{cturtle\+::\+Turtle}}
+\subsubsection{\texorpdfstring{penstate()}{penstate()}}
+{\footnotesize\ttfamily const \hyperlink{structcturtle_1_1PenState}{Pen\+State}\& cturtle\+::\+Turtle\+::penstate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+a constant reference to the current state of this turtle. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}\label{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}} 
 \index{cturtle\+::\+Turtle@{cturtle\+::\+Turtle}!pop\+State@{pop\+State}}
 \index{pop\+State@{pop\+State}!cturtle\+::\+Turtle@{cturtle\+::\+Turtle}}
@@ -968,12 +983,28 @@ The width of the line, in pixels.
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a6e814845ac619a90aeee25a67a3fc51d}\label{classcturtle_1_1Turtle_a6e814845ac619a90aeee25a67a3fc51d}} 
 \index{cturtle\+::\+Turtle@{cturtle\+::\+Turtle}!write@{write}}
 \index{write@{write}!cturtle\+::\+Turtle@{cturtle\+::\+Turtle}}
-\subsubsection{\texorpdfstring{write()}{write()}}
+\subsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})}
 
 Writes the specified string to the screen. Uses the current filling color. 
 \begin{DoxyParams}{Parameters}
 {\em text} & The text to write. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+fillcolor(color) 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}\label{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}} 
+\index{cturtle\+::\+Turtle@{cturtle\+::\+Turtle}!write@{write}}
+\index{write@{write}!cturtle\+::\+Turtle@{cturtle\+::\+Turtle}}
+\subsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{\hyperlink{classcturtle_1_1Color}{Color}}]{color }\end{DoxyParamCaption})}
+
+Writes the specified string to the screen. Uses the specified color. 
+\begin{DoxyParams}{Parameters}
+{\em text} & The text to write. \\
+\hline
+{\em color} & The color to write the text in. \\
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}

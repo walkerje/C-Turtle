@@ -6,5 +6,5 @@ var searchData=
   ['ontimer',['ontimer',['../classcturtle_1_1InteractiveTurtleScreen.html#ab60ddd682f7fa7df3635f936bcfd2f70',1,'cturtle::InteractiveTurtleScreen']]],
   ['operator_28_29',['operator()',['../classcturtle_1_1Transform.html#afc24321e5d8da21c310fd830aa76da84',1,'cturtle::Transform']]],
   ['operator_3d_3d',['operator==',['../structcturtle_1_1ivec2.html#ab564fda10817a6e06b80b205f9833dee',1,'cturtle::ivec2::operator==()'],['../classcturtle_1_1Transform.html#a77fe29e1fbf23aec97f988ca5f1bd3c3',1,'cturtle::Transform::operator==()']]],
-  ['operator_5b_5d',['operator[]',['../structcturtle_1_1ivec2.html#a83c6a5b1aab3c9a0a2374c843198067f',1,'cturtle::ivec2']]]
+  ['operator_5b_5d',['operator[]',['../structcturtle_1_1ivec2.html#adc88a30605f0f71ea7844956a9473fd9',1,'cturtle::ivec2::operator[](int index)'],['../structcturtle_1_1ivec2.html#aad734cde7ca729a1148b0edd84637e25',1,'cturtle::ivec2::operator[](int index) const']]]
 ];
