@@ -4139,8 +4139,9 @@ namespace cturtle {
 
             /*finish up drawing if redraw counter hasn't been met*/
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
-                tracer(0, delayMS);
+                tracer(1, delayMS);
             }
+            
             jo_gif_end(&gif);
 
 #ifndef CTURTLE_HEADLESS_NO_HTML
