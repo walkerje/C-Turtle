@@ -1,6 +1,7 @@
 /*Include GIF utility when compiling headless mode.*/
 /*License for CTurtle itself is found further down in the file.
  * Ctrl+F for "MIT" should get you there.*/
+
 #ifdef CTURTLE_HEADLESS
 
 /* public domain, Simple, Minimalistic GIF writer - http://jonolick.com
@@ -4601,7 +4602,7 @@ namespace cturtle {
         /**Resets and closes this display.*/
         void bye(){
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
-                tracer(0, delayMS);
+                tracer(1, delayMS);
             }
 
             if (eventThread.get() != nullptr) {
@@ -4794,6 +4795,11 @@ namespace cturtle {
         /**Binds the "bye" function to the onclick event for the left
          * mouse button.*/
         void exitonclick() {
+            //Catch up visually before entering event loop, when necessary.
+            if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
+                tracer(1, delayMS);
+            }
+            
             onclick([&](int x, int y) {
                 display.close();
             });
