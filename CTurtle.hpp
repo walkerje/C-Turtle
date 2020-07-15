@@ -2619,7 +2619,7 @@ namespace cturtle {
         /**\brief Sets this transform to an identity.
          * When you concatenate an identity transform onto another object,
          * The resulting point is the same as it would have been pre-concatenation.
-         * Such is the point of an identity transform, and is why AffineTransforms
+         * Such is the point of an identity transform, and is why Transforms
          * are initialized to have this value.
          *\return A reference to this transform. (e.g, *this)*/
         Transform& identity() {
@@ -2674,8 +2674,9 @@ namespace cturtle {
 
         /**Moves this transform "forward" according to its rotation.*/
         Transform& forward(float distance) {
-            at(0, 2) += (std::cos(rotation) * distance); //x component
-            at(1, 2) += (std::sin(rotation) * distance); //y component
+            //Adding the round here fixed rounding issues!
+            at(0, 2) += std::round(std::cos(rotation) * distance); //x component
+            at(1, 2) += std::round(std::sin(rotation) * distance); //y component
             return *this;
         }
 
@@ -2734,16 +2735,14 @@ namespace cturtle {
             //6.28319 is a full rotation in radians. (360 degrees)
             constexpr float fullcircle = 6.28319f;
 
-            // Loop rotations around in range of a full circle to avoid
-            // rounding errors with rotation when it gets real big.
-            // this just spins recursively until it gets a
-            // manageable theta that yields the same result visually
+            //Much smarter solution than recursive spinning.
+            //Takes the modulus between what would have been the pre-fix result
+            //and a full circle, and subtracts the original rotation.
+            //This gives pretty accurate rotations rather quickly.
+            //No recursive spinning required! :)
             const float origResult = rotation + theta;
-
-            if (origResult > fullcircle || origResult < 0) {
-                setRotation(0);
-                return rotate(origResult > fullcircle ? origResult - fullcircle : fullcircle + origResult);
-            }
+            if (origResult > fullcircle || origResult < 0) 
+                theta = std::fmod(origResult, fullcircle) - rotation;
 
             const float c = std::cos(theta);
             const float s = std::sin(theta);
@@ -2753,10 +2752,10 @@ namespace cturtle {
             const float new10 = at(1, 0) * c + at(1, 1) * s;
             const float new11 = at(1, 0) * -s + at(1, 1) * c;
 
-            at(0, 0) = new00;
-            at(0, 1) = new01;
-            at(1, 0) = new10;
-            at(1, 1) = new11;
+            at(0, 0) = new00;//x
+            at(0, 1) = new01;//y
+            at(1, 0) = new10;//rotX
+            at(1, 1) = new11;//rotY
 
             rotation += theta;
 
@@ -2861,13 +2860,14 @@ namespace cturtle {
         Point transform(Point in, Point* dst = nullptr) const {
             Point temp;
             Point* dstPtr = (dst == nullptr) ? &temp : dst;
-            //Rounding seems to fix off-by-one issues in regards to rotation.
-            dstPtr->x = static_cast<int>(std::round(at(0, 0) * (static_cast<float>(in.x)) +
-                                                            at(0, 1) * (static_cast<float>(in.y)) +
-                                                    at(0, 2)));
-            dstPtr->y = static_cast<int>(std::round(at(1, 0) * (static_cast<float>(in.x)) +
-                                                            at(1, 1) * (static_cast<float>(in.y)) +
-                                                    at(1, 2)));
+
+            dstPtr->x = static_cast<int>(
+                        at(0, 0) * (static_cast<float>(in.x)) +
+                        at(0, 1) * (static_cast<float>(in.y)) + at(0, 2));
+            dstPtr->y = static_cast<int>(
+                        at(1, 0) * (static_cast<float>(in.x)) +
+                        at(1, 1) * (static_cast<float>(in.y)) + at(1, 2));
+            
             return *dstPtr;
         }
 
@@ -4139,8 +4139,9 @@ namespace cturtle {
 
             /*finish up drawing if redraw counter hasn't been met*/
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
-                tracer(0, delayMS);
+                tracer(1, delayMS);
             }
+            
             jo_gif_end(&gif);
 
 #ifndef CTURTLE_HEADLESS_NO_HTML
