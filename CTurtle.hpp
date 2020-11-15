@@ -422,12 +422,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-/*
- * File:    CTurtle.hpp
- * Project: C-Turtle
- * Created on September 18, 2019, 10:44 AM
- */
-
 #pragma once
 
 //Automatic linking when operating under MSVC
@@ -2530,6 +2524,23 @@ namespace cturtle {
     inline ivec2 middle(const ivec2& a, const ivec2& b) {
         return ivec2((a.x + b.x) / 2, (a.y + b.y) / 2);
     }
+    
+    /**\brief Performs a linear interpolation between the two specified points.
+     *\param a The first point.
+     *\param b The second point.
+     *\param progress A float between 0...1; 0 is to A, 1 is to B, 0..1 is between.
+     *\return A point between A and B.
+     */
+    inline ivec2 lerp(const ivec2& a, const ivec2& b, float progress){
+        if (progress <= 0)
+            return a;
+        else if (progress >= 1)
+            return b;
+        return {
+            static_cast<int>(std::round(progress * (b.x - a.x))) + a.x,
+            static_cast<int>(std::round(progress * (b.y - a.y))) + a.y
+        };
+    }
 
     /**\brief An alias for ivec2. Strictly for convenience and clarity.*/
     typedef ivec2 Point;
@@ -2537,6 +2548,7 @@ namespace cturtle {
     /**\brief Draws a line of variable thickness on the specified image.
      * This needed to be implemented because the CImg display backend
      * has no facility to draw lines with a width greater than a single pixel!
+     * Width is clamped between 1 and 100, e.g, lines with a thickness above 100px are disallowed.
      *\param imgRef The image on which to draw the line.
      *\param The X component of the first coordinate.
      *\param The Y component of the first coordinate.
@@ -2544,7 +2556,8 @@ namespace cturtle {
      *\param the Y component of the second coordinate.
      *\param c The color with which to draw the line.
      *\param width The width of the line.*/
-    inline void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, unsigned int width = 1) {
+    inline void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, int width = 1) {
+        width = std::clamp(width, 1, 100);//clamp the line width to avoid wobbly lines...
         if(x1 == x2 && y1 == y2)
             return;
         else if (width == 1) {
@@ -2553,45 +2566,25 @@ namespace cturtle {
             imgRef.draw_line(x1, y1, x2, y2, c.rgbPtr());
             return;
         }
-
-        //We pretty much re-implement Bresenham's Line Algorithm here,
-        //however instead of blitting pixels at each spot we put circles,
-        //which matches the rounded thick lines present in the Python implementation.
-        //This also allows for variable width.
-        //Regrettably, this can be rather slow, but the invalidation
-        //algorithm lessens how many times this has to be done for a given scene.
-
-        const bool isSteep = (std::abs(y2 - y1) > std::abs(x2 - x1));
-        if (isSteep) {
-            std::swap(x1, y1);
-            std::swap(x2, y2);
-        }
-
-        if (x1 > x2) {
-            std::swap(x1, x2);
-            std::swap(y1, y2);
-        }
-
-        const int dx = x2 - x1;
-        const int dy = std::abs(y2 - y1);
-
-        int err = dx / 2;
-        const int ystep = (y1 < y2) ? 1 : -1;
-        int y = y1;
-
-        const int maxX = x2;
-        const int radius = static_cast<int>(std::ceil(float(width) / 2.0f));
-        for (int x = x1; x < maxX; x++) {
-            if (isSteep){
-                imgRef.draw_circle(y, x, radius, c.rgbPtr());
-            }else{
-                imgRef.draw_circle(x, y, radius, c.rgbPtr());
-            }
-            err -= dy;
-            if (err < 0) {
-                y += ystep;
-                err += dx;
-            }
+        
+        //Simplified this a bit. Might be a little bit faster.
+        //Old implementation was bresenham with a circle at every point.
+        //now, this algorithm considers the radius of each circle it will blit
+        //while traversing the line. Uses linear interpolation between two points.
+        //This should reduce the total number of blits on thicker lines.
+        //Consider a line with a width of 50; the radius for the circles would be
+        //25. We blit every one-third of the radius minus one, so a line that's 100 units long, for example,
+        //would get a circle around every 7 pixels. That's roughly 14-15 circles. Compared to the 100 circles
+        //it used to take, that's a considerable improvement.
+        //Creates wobbly lines at high thicknesses; thus, width is now confined to a range.
+        const ivec2 a = {x1,y1};
+        const ivec2 b = {x2,y2};
+        const int dist = distance(a, b);//distance to bound the lerp by.
+        const int radius = width / 2; //integer division... be mindful.
+        const int progression = std::max((radius/3)-1, 1); // division by 3 was an arbitrary choice, but yields good results
+        for(int i = 0; i < dist + progression; i += progression){ // progress by radius
+            const ivec2 position = lerp(a, b, float(i) / float(dist));
+            imgRef.draw_circle(position.x, position.y, radius, c.rgbPtr());
         }
     }
 
@@ -3293,8 +3286,7 @@ namespace cturtle {
     public:
         typedef std::pair<Transform, std::unique_ptr<AbstractDrawableObject>> component_t;
 
-        CompoundPolygon() {
-        }
+        CompoundPolygon() {}
 
         CompoundPolygon(const CompoundPolygon& copy){
             for(const component_t& component : copy.components){
@@ -3465,7 +3457,7 @@ namespace cturtle {
      * for most turtle functionality.
      * It intentionally excludes all input/output functionality, allowing
      * for two intended derivates: an "interactive" screen, vs an "offline rendering" screen.
-     * Turtle class doesn't care which one it gets, in theory.
+     * The Turtle class doesn't care which one it gets attached to.
      */
     class AbstractTurtleScreen{
     public:
@@ -3539,11 +3531,36 @@ namespace cturtle {
      */
     class Turtle {
     public:
+        /**
+         * \brief The turtle constructor. Turtles are attached to whatever screen they are constructed with.
+         * 
+         */
         Turtle(AbstractTurtleScreen& scr);
+        
+        /**
+         * \brief Turtles are not trivially copyable. The copy constructor is explicitly disallowed. 
+         */
+        Turtle(const Turtle&) = delete;
+        
+        /**
+         * \brief Turtles are not trivially moved. The move constructor is explicitly disallowed.
+         */
+        Turtle(Turtle&& mv) = delete;
 
+        /**
+         * \brief Turtles are not trivially moved. The copy operator is explicitly disallowed.
+         */
+        Turtle& operator=(const Turtle&) = delete;
+
+        /**
+         * \brief Turtles are not trivially moved. The move operator is explicitly disallowed.
+         */
+        Turtle& operator=(Turtle&& turtle) = delete;
+        
         //Motion
 
-        /**\brief Moves the turtle forward the specified number of pixels.*/
+        /**\brief Moves the turtle forward the specified number of pixels.
+         * \param pixels total number of pixels to move.*/
         void forward(int pixels);
 
         /**\copydoc forward(int)*/
@@ -4019,7 +4036,7 @@ namespace cturtle {
         /**Performs an interpolation, with animation,
          * between the current transformation and the previous one.
          * Will *not* push the state stack.
-         * ENSURE STACK IS BIG ENOUGH TO DO THIS BEFORE CALLING.*/
+         * ENSURE STATE STACK IS BIG ENOUGH TO DO THIS BEFORE CALLING.*/
         void travelBack(){
             travelBetween(*transform, std::prev(stateStack.end(), 2)->transform, false);
         }
@@ -4896,9 +4913,9 @@ namespace cturtle {
                     //Update mouse button input.
                     const unsigned int button = display.button();
                     bool buttons[3] = {
-                            button & 1, //left
-                            button & 2, //right
-                            button & 4 //middle
+                            static_cast<bool>(button & 1), //left
+                            static_cast<bool>(button & 2), //right
+                            static_cast<bool>(button & 4) //middle
                     };
 
                     for (int i = 0; i < 3; i++) {
@@ -5158,7 +5175,7 @@ namespace cturtle {
     }
 
     void Turtle::shift(int x, int y) {
-        travelTo(Transform(*transform).translate(x, y));
+        travelTo(Transform(*transform).setTranslation(transform->getTranslateX()+x, transform->getTranslateY()+y));
     }
 
     void Turtle::home() {

@@ -1,10 +1,10 @@
 <p align="center">
-  <img width="460" height="300" src="https://publicdomainvectors.org/photos/Tortoise-.png">
+  <img src="https://i.imgur.com/X8lztkD.png">
   <br>
 </p>
 
-# C-Turtle
-#### [Documentation](https://walkerje.github.io/C-Turtle/docs/html/annotated.html)
+# C-Turtle | [Documentation](https://walkerje.github.io/C-Turtle/docs/index.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
+
 
 C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible". This package has been released under the MIT license accordingly.
 Given that this is intended to be an education-oriented package, to ease the setup process it has been created to be Header-Only. Simply copy CTurtle.hpp (alongside CImg.hpp) into your include path or project and you're ready to go.
@@ -21,11 +21,11 @@ The following table contains examples, which do the exact same thing, between C-
   </tr>
   <td>
     <pre lang="c++">
-    
+
       #include "CTurtle.hpp"
-
+    
       namespace ct = cturtle;
-
+    
       int main(int argc, char** argv) {
           ct::TurtleScreen scr;
           ct::Turtle turtle(scr);
@@ -47,17 +47,17 @@ The following table contains examples, which do the exact same thing, between C-
     <pre lang="python">
      
       import turtle
-
+    
       turt = turtle.Turtle()
       turt.fillcolor("purple")
       turt.speed("slowest")
-
+    
       turt.begin_fill()
       for i in range(4):
           turt.forward(50)
           turt.right(90)
       turt.end_fill()
-
+    
       turt.bye()
 
    </pre>
@@ -110,9 +110,10 @@ Headless mode was developed with the intention of being embedded in web applicat
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
 
-An example of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
-Azis Toktobaev - Berea College
+Two examples of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
+
+##### Azis Toktobaev - Berea College
 ![Mondrian Art Example](https://i.imgur.com/PoMCwXn.png)
 
-A similar example of artwork also generated in the style of Piet Mondrian as part of an assignment on Recursion. Bryar Frank - Berea College
+##### Bryar Frank - Berea College
 ![Mondrian Art Example 2](https://i.imgur.com/ixf4fUE.jpg)
