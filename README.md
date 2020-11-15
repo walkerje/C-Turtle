@@ -3,7 +3,7 @@
   <br>
 </p>
 
-# C-Turtle | [Documentation](https://walkerje.github.io/C-Turtle/docs/index.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
+# C-Turtle | [Documentation](http://walkerje.me/C-Turtle/docs/html/annotated.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
 
 
 C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible". This package has been released under the MIT license accordingly.
@@ -40,7 +40,7 @@ The following table contains examples, which do the exact same thing, between C-
           scr.bye();
           return 0;
       }
-
+http://walkerje.me/C-Turtle/docs/html/annotated.html
   </pre>
   </td>
   <td>
