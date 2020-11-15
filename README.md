@@ -1,7 +1,8 @@
 <p align="center">
-  <img width="460" height="300" src="https://publicdomainvectors.org/photos/Tortoise-.png">
+  <img src="https://i.imgur.com/X8lztkD.png">
   <br>
 </p>
+
 
 # C-Turtle
 #### [Documentation](https://walkerje.github.io/C-Turtle/docs/index.html)
@@ -21,11 +22,11 @@ The following table contains examples, which do the exact same thing, between C-
   </tr>
   <td>
     <pre lang="c++">
-    
+
       #include "CTurtle.hpp"
-
+    
       namespace ct = cturtle;
-
+    
       int main(int argc, char** argv) {
           ct::TurtleScreen scr;
           ct::Turtle turtle(scr);
@@ -47,17 +48,17 @@ The following table contains examples, which do the exact same thing, between C-
     <pre lang="python">
      
       import turtle
-
+    
       turt = turtle.Turtle()
       turt.fillcolor("purple")
       turt.speed("slowest")
-
+    
       turt.begin_fill()
       for i in range(4):
           turt.forward(50)
           turt.right(90)
       turt.end_fill()
-
+    
       turt.bye()
 
    </pre>
