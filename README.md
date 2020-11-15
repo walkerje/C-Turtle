@@ -3,8 +3,8 @@
   <br>
 </p>
 
-
 # C-Turtle | [Documentation](https://walkerje.github.io/C-Turtle/docs/index.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
+
 
 C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible". This package has been released under the MIT license accordingly.
 Given that this is intended to be an education-oriented package, to ease the setup process it has been created to be Header-Only. Simply copy CTurtle.hpp (alongside CImg.hpp) into your include path or project and you're ready to go.
@@ -63,6 +63,12 @@ The following table contains examples, which do the exact same thing, between C-
    </pre>
   </td>
 </table>
+
+## Try it in your browser with ReplIt!
+
+<a href="https://repl.it/talk/share/CTurtle-Tree-Showcase/46245">
+    <img src="http://i.imgur.com/Pp4IWQB.png" />
+</a>
 
 ## Headless Mode
 C-Turtle also supports drawing to an animated GIF instead of a display (e.g, "headless"). This is configurable through the "headless" preprocessor definitions, seen in following example. To write GIFs, C-Turtle uses [jo_gif](https://www.jonolick.com/home/gif-writer), a wonderful public domain GIF library created by Jon Olick. This avoids having ImageMagick as a dependency, which is what CImg uses by default to save animated GIFs.
