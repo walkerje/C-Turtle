@@ -64,12 +64,6 @@ The following table contains examples, which do the exact same thing, between C-
   </td>
 </table>
 
-## Try it in your browser with ReplIt!
-
-<a href="https://repl.it/talk/share/CTurtle-Tree-Showcase/46245">
-    <img src="http://i.imgur.com/Pp4IWQB.png" />
-</a>
-
 ## Headless Mode
 C-Turtle also supports drawing to an animated GIF instead of a display (e.g, "headless"). This is configurable through the "headless" preprocessor definitions, seen in following example. To write GIFs, C-Turtle uses [jo_gif](https://www.jonolick.com/home/gif-writer), a wonderful public domain GIF library created by Jon Olick. This avoids having ImageMagick as a dependency, which is what CImg uses by default to save animated GIFs.
 
