@@ -1,3 +1,4 @@
 <map id="cturtle::SceneObject" name="cturtle::SceneObject">
+<area shape="rect" id="node1" title="Turtles append Scene Objects to a list to keep track of what it has drawn (a history)...." alt="" coords="5,95,147,121"/>
 <area shape="rect" id="node2" href="$classcturtle_1_1Transform.html" title="The Transform class provides a myriad of functions to simply transform points. This class it the back..." alt="" coords="13,5,139,32"/>
 </map>

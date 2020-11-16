@@ -1,3 +1,4 @@
 <map id="cturtle::AbstractTurtleScreen" name="cturtle::AbstractTurtleScreen">
-<area shape="rect" id="node2" href="$classcturtle_1_1InteractiveTurtleScreen.html" title="cturtle::InteractiveTurtle\lScreen" alt="" coords="20,80,180,121"/>
+<area shape="rect" id="node1" title="The AbstractTurtleScreen class is the abstract type for most turtle functionality...." alt="" coords="5,5,195,32"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1InteractiveTurtleScreen.html" title="The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying turtles an..." alt="" coords="20,80,180,121"/>
 </map>

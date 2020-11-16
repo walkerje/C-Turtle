@@ -1,8 +1,8 @@
-\hypertarget{classcturtle_1_1Line}{}\section{cturtle\+:\+:Line Class Reference}
-\label{classcturtle_1_1Line}\index{cturtle\+::\+Line@{cturtle\+::\+Line}}
+\hypertarget{classcturtle_1_1Line}{}\doxysection{cturtle\+::Line Class Reference}
+\label{classcturtle_1_1Line}\index{cturtle::Line@{cturtle::Line}}
 
 
-The \hyperlink{classcturtle_1_1Line}{Line} class holds two points and the functionality to draw a line between them on a specified canvas.  
+The \mbox{\hyperlink{classcturtle_1_1Line}{Line}} class holds two points and the functionality to draw a line between them on a specified canvas.  
 
 
 
@@ -11,7 +11,7 @@ The \hyperlink{classcturtle_1_1Line}{Line} class holds two points and the functi
 
 
 
-Inheritance diagram for cturtle\+:\+:Line\+:\nopagebreak
+Inheritance diagram for cturtle\+::Line\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,51 +20,51 @@ Inheritance diagram for cturtle\+:\+:Line\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for cturtle\+:\+:Line\+:\nopagebreak
+Collaboration diagram for cturtle\+::Line\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=300pt]{classcturtle_1_1Line__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classcturtle_1_1Line_ac6d8c8133ddbb5cafa31be364b0ed4f6}\label{classcturtle_1_1Line_ac6d8c8133ddbb5cafa31be364b0ed4f6}} 
-\hyperlink{classcturtle_1_1Line_ac6d8c8133ddbb5cafa31be364b0ed4f6}{Line} ()
+\mbox{\hyperlink{classcturtle_1_1Line_ac6d8c8133ddbb5cafa31be364b0ed4f6}{Line}} ()
 \begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\item 
-\hyperlink{classcturtle_1_1Line_ae08d302308c4b10cc714508b2acca228}{Line} (\hyperlink{structcturtle_1_1ivec2}{Point} a, \hyperlink{structcturtle_1_1ivec2}{Point} b, \hyperlink{classcturtle_1_1Color}{Color} color, int \hyperlink{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}{width}=1)
+\mbox{\hyperlink{classcturtle_1_1Line_ae08d302308c4b10cc714508b2acca228}{Line}} (\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} a, \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} b, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color, int \mbox{\hyperlink{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}{width}}=1)
 \begin{DoxyCompactList}\small\item\em Value constructor. merely assigns value of pointA and pointB to respective A and B. \end{DoxyCompactList}\item 
-\hyperlink{classcturtle_1_1Line_ac1b144ecd3e23c5f296b4f845f332c73}{Line} (const \hyperlink{classcturtle_1_1Line}{Line} \&other)
+\mbox{\hyperlink{classcturtle_1_1Line_ac1b144ecd3e23c5f296b4f845f332c73}{Line}} (const \mbox{\hyperlink{classcturtle_1_1Line}{Line}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy constructor. Merely assigns the \char`\"{}to\char`\"{} and \char`\"{}from\char`\"{} points. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Line_a004870caac1e5632064ff28ae5a7e0ff}\label{classcturtle_1_1Line_a004870caac1e5632064ff28ae5a7e0ff}} 
-\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$ \hyperlink{classcturtle_1_1Line_a004870caac1e5632064ff28ae5a7e0ff}{copy} () const
+\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Line_a004870caac1e5632064ff28ae5a7e0ff}{copy}} () const
 \begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Line_a885276e725f86d89f79b32ee3d885079}\label{classcturtle_1_1Line_a885276e725f86d89f79b32ee3d885079}} 
-\hyperlink{classcturtle_1_1Line_a885276e725f86d89f79b32ee3d885079}{$\sim$\+Line} ()
+\mbox{\hyperlink{classcturtle_1_1Line_a885276e725f86d89f79b32ee3d885079}{$\sim$\+Line}} ()
 \begin{DoxyCompactList}\small\item\em Empty de-\/constructor. \end{DoxyCompactList}\item 
-void \hyperlink{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}{draw} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, Image \&img\+Ref) const
+void \mbox{\hyperlink{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const
 \begin{DoxyCompactList}\small\item\em This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structcturtle_1_1ivec2}{Point} \hyperlink{classcturtle_1_1Line_aca3d9298f4dc790552ed6515e2880ed8}{pointA}
+\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \mbox{\hyperlink{classcturtle_1_1Line_aca3d9298f4dc790552ed6515e2880ed8}{pointA}}
 \item 
-\hyperlink{structcturtle_1_1ivec2}{Point} \hyperlink{classcturtle_1_1Line_a138b108f3a3531c4f7f72a8e26a16fcf}{pointB}
+\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \mbox{\hyperlink{classcturtle_1_1Line_a138b108f3a3531c4f7f72a8e26a16fcf}{pointB}}
 \item 
-int \hyperlink{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}{width} = 1
+int \mbox{\hyperlink{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}{width}} = 1
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-The \hyperlink{classcturtle_1_1Line}{Line} class holds two points and the functionality to draw a line between them on a specified canvas. 
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classcturtle_1_1Line}{Line}} class holds two points and the functionality to draw a line between them on a specified canvas. 
 
-\subsection{Constructor \& Destructor Documentation}
+\doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Line_ae08d302308c4b10cc714508b2acca228}\label{classcturtle_1_1Line_ae08d302308c4b10cc714508b2acca228}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!Line@{Line}}
-\index{Line@{Line}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{Line()}{Line()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Line\+::\+Line (\begin{DoxyParamCaption}\item[{\hyperlink{structcturtle_1_1ivec2}{Point}}]{a,  }\item[{\hyperlink{structcturtle_1_1ivec2}{Point}}]{b,  }\item[{\hyperlink{classcturtle_1_1Color}{Color}}]{color,  }\item[{int}]{width = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\index{cturtle::Line@{cturtle::Line}!Line@{Line}}
+\index{Line@{Line}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{Line()}{Line()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Line\+::\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{a,  }\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{b,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color,  }\item[{int}]{width = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -78,10 +78,10 @@ Value constructor. merely assigns value of pointA and pointB to respective A and
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classcturtle_1_1Line_ac1b144ecd3e23c5f296b4f845f332c73}\label{classcturtle_1_1Line_ac1b144ecd3e23c5f296b4f845f332c73}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!Line@{Line}}
-\index{Line@{Line}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{Line()}{Line()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Line\+::\+Line (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Line}{Line} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\index{cturtle::Line@{cturtle::Line}!Line@{Line}}
+\index{Line@{Line}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{Line()}{Line()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cturtle\+::\+Line\+::\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Line}{Line}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -94,12 +94,12 @@ Copy constructor. Merely assigns the \char`\"{}to\char`\"{} and \char`\"{}from\c
 \end{DoxyParams}
 
 
-\subsection{Member Function Documentation}
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}\label{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!draw@{draw}}
-\index{draw@{draw}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Line\+::draw (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\index{cturtle::Line@{cturtle::Line}!draw@{draw}}
+\index{draw@{draw}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void cturtle\+::\+Line\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -116,27 +116,27 @@ This function is intended to draw all applicable geometry in this object to the 
 \end{DoxyParams}
 
 
-Implements \hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{cturtle\+::\+Abstract\+Drawable\+Object}.
+Implements \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{cturtle\+::\+Abstract\+Drawable\+Object}}.
 
 
 
-\subsection{Member Data Documentation}
+\doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Line_aca3d9298f4dc790552ed6515e2880ed8}\label{classcturtle_1_1Line_aca3d9298f4dc790552ed6515e2880ed8}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!pointA@{pointA}}
-\index{pointA@{pointA}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{pointA}{pointA}}
-{\footnotesize\ttfamily \hyperlink{structcturtle_1_1ivec2}{Point} cturtle\+::\+Line\+::pointA}
+\index{cturtle::Line@{cturtle::Line}!pointA@{pointA}}
+\index{pointA@{pointA}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{pointA}{pointA}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} cturtle\+::\+Line\+::pointA}
 
 The \char`\"{}\+From\char`\"{} point. Lines drawn with this object start here. \mbox{\Hypertarget{classcturtle_1_1Line_a138b108f3a3531c4f7f72a8e26a16fcf}\label{classcturtle_1_1Line_a138b108f3a3531c4f7f72a8e26a16fcf}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!pointB@{pointB}}
-\index{pointB@{pointB}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{pointB}{pointB}}
-{\footnotesize\ttfamily \hyperlink{structcturtle_1_1ivec2}{Point} cturtle\+::\+Line\+::pointB}
+\index{cturtle::Line@{cturtle::Line}!pointB@{pointB}}
+\index{pointB@{pointB}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{pointB}{pointB}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} cturtle\+::\+Line\+::pointB}
 
 The \char`\"{}\+To\char`\"{} point. Lines drawn with this object end here. \mbox{\Hypertarget{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}\label{classcturtle_1_1Line_ae0c426af211fc443b7ad2bed4c30050b}} 
-\index{cturtle\+::\+Line@{cturtle\+::\+Line}!width@{width}}
-\index{width@{width}!cturtle\+::\+Line@{cturtle\+::\+Line}}
-\subsubsection{\texorpdfstring{width}{width}}
+\index{cturtle::Line@{cturtle::Line}!width@{width}}
+\index{width@{width}!cturtle::Line@{cturtle::Line}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
 {\footnotesize\ttfamily int cturtle\+::\+Line\+::width = 1}
 
 The width of the line, in pixels. 

@@ -1,9 +1,10 @@
 <map id="cturtle::Turtle" name="cturtle::Turtle">
-<area shape="rect" id="node2" href="$structcturtle_1_1PenState.html" title="cturtle::PenState" alt="" coords="533,67,653,93"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1Transform.html" title="The Transform class provides a myriad of functions to simply transform points. This class it the back..." alt="" coords="243,11,368,37"/>
-<area shape="rect" id="node4" href="$classcturtle_1_1Color.html" title="cturtle::Color" alt="" coords="5,119,103,145"/>
-<area shape="rect" id="node6" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="220,146,391,187"/>
-<area shape="rect" id="node5" href="$classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image..." alt="" coords="537,117,650,144"/>
-<area shape="rect" id="node7" href="$structcturtle_1_1ivec2.html" title="Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low&#45;precision point..." alt="" coords="545,168,642,195"/>
-<area shape="rect" id="node8" href="$classcturtle_1_1AbstractTurtleScreen.html" title="cturtle::AbstractTurtleScreen" alt="" coords="499,219,688,245"/>
+<area shape="rect" id="node1" title="The Turtle Class Symbolically represents a turtle that runs around a screen that has a paint brush at..." alt="" coords="809,119,908,145"/>
+<area shape="rect" id="node2" href="$structcturtle_1_1PenState.html" title="The Pen State structure Holds all pen attributes, which are grouped in this way to allow stack&#45;based ..." alt="" coords="533,68,653,95"/>
+<area shape="rect" id="node3" href="$classcturtle_1_1Transform.html" title="The Transform class provides a myriad of functions to simply transform points. This class it the back..." alt="" coords="243,12,368,39"/>
+<area shape="rect" id="node4" href="$classcturtle_1_1Color.html" title="The primary representation of Color for this library. Represented as a simple RGB color composed of u..." alt="" coords="5,120,103,147"/>
+<area shape="rect" id="node6" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="220,147,391,189"/>
+<area shape="rect" id="node5" href="$classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image...." alt="" coords="537,119,650,145"/>
+<area shape="rect" id="node7" href="$structcturtle_1_1ivec2.html" title="Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low&#45;precision point,..." alt="" coords="545,169,642,196"/>
+<area shape="rect" id="node8" href="$classcturtle_1_1AbstractTurtleScreen.html" title="The AbstractTurtleScreen class is the abstract type for most turtle functionality...." alt="" coords="499,220,688,247"/>
 </map>

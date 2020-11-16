@@ -1,3 +1,4 @@
 <map id="cturtle::CompoundPolygon" name="cturtle::CompoundPolygon">
-<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="8,5,179,47"/>
+<area shape="rect" id="node1" title="a Compound Polygon instance is composed from a number of smaller parts, which are each derived from A..." alt="" coords="5,95,181,121"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="8,5,179,47"/>
 </map>

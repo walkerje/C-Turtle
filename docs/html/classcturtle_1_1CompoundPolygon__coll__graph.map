@@ -1,4 +1,5 @@
 <map id="cturtle::CompoundPolygon" name="cturtle::CompoundPolygon">
-<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="8,109,179,151"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="cturtle::Color" alt="" coords="45,5,142,32"/>
+<area shape="rect" id="node1" title="a Compound Polygon instance is composed from a number of smaller parts, which are each derived from A..." alt="" coords="5,200,181,227"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="8,109,179,151"/>
+<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="The primary representation of Color for this library. Represented as a simple RGB color composed of u..." alt="" coords="45,5,142,32"/>
 </map>

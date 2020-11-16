@@ -1,3 +1,4 @@
 <map id="cturtle::Polygon" name="cturtle::Polygon">
-<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node1" title="The polygon class merely holds a vector of points and a function to draw this series to an image...." alt="" coords="34,95,147,121"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="5,5,176,47"/>
 </map>

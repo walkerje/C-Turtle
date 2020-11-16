@@ -1369,6 +1369,14 @@ namespace cturtle {
         }
     }
 
+    /**
+     * \brief The primary representation of Color for this library. 
+     * Represented as a simple RGB color composed of unsigned bytes,
+     * Color objects can be referenced by string and by packed integer.
+     * \sa detail::resolveColorComp()
+     * \sa detail::resolveColorInt()
+     * \sa fromName() 
+     */
     class Color {
     public:
         typedef uint8_t component_t;
@@ -2427,6 +2435,10 @@ namespace cturtle {
         MOUSEB_MIDDLE//Middle Mouse Button
     };
 
+    /**
+     * \brief The internally-used representation of an Input Event.
+     * Contains information pertaining to keyboard and mouse events, as well as callback pointers for either case.
+     */
     struct InputEvent {
         //True for keyboard, false for mouse
         bool type = false;
@@ -2969,6 +2981,9 @@ namespace cturtle {
         virtual void draw(const Transform& t, Image& imgRef) const = 0;
     };
 
+    /**\brief The Text class represents a basic string that is drawn on the screen.
+     * Unfortunately, Text objects are very simple. They have no notion of either text size of font.
+     */
     class Text : public AbstractDrawableObject {
     public:
         /** The text to draw.*/
@@ -3186,8 +3201,9 @@ namespace cturtle {
         }
     };
 
-    /**
-     * Sprites represent a selection of an image.*/
+    /**\brief The Sprite class represents a selection of a larger image.
+     * This class ignores color in favor of color provided by the image the sprite corresponds to.
+     */
     class Sprite : public AbstractDrawableObject {
     public:
         int srcX, srcY, srcW, srcH;
@@ -3280,7 +3296,10 @@ namespace cturtle {
     };
 
     /**
-     * Compound Polygons can have a variety of attachments.
+     * \brief a Compound Polygon instance is composed from a number of smaller parts, which are each derived from AbstractDrawableObject.
+     * Compound Polygons can have a variety of attachments. After the parts are assembled, the polygon is essentially read-only.
+     * These can be used to assemble several pieces of geometry into one object. These objects are self-contained
+     * and have ownership of all AbstractDrawableObject instances they contain.
      * */
     class CompoundPolygon : public AbstractDrawableObject {
     public:
@@ -3315,11 +3334,6 @@ namespace cturtle {
     };
 
     //SECTION: TURTLE & TURTLE SCREEN
-
-    //Turtle prototype definition
-    class Turtle;
-    //TurtleScreen prototype definition
-    class InteractiveTurtleScreen;
 
     /**\brief Describes the speed at which a Turtle moves and rotates.
      * \sa Turtle::getAnimMS()*/
@@ -3372,8 +3386,9 @@ namespace cturtle {
         }
     };
 
-    /**Pen State structure.
-     * Holds all pen attributes.*/
+    /**\brief The Pen State structure Holds all pen attributes, which are grouped in this way to allow stack-based
+     * undo for Turtle objects. Instances of this object are self-contained, and
+     * has ownership of all objects and memory referenced by itself.*/
     struct PenState {
         /**The transform of the pen.
          * holds position, rotation, and scale of the turtle.*/
@@ -3453,8 +3468,7 @@ namespace cturtle {
     class Turtle;
 
     /**
-     * The AbstractTurtleScreen class is the abstract type
-     * for most turtle functionality.
+     * \brief The AbstractTurtleScreen class is the abstract type for most turtle functionality.
      * It intentionally excludes all input/output functionality, allowing
      * for two intended derivates: an "interactive" screen, vs an "offline rendering" screen.
      * The Turtle class doesn't care which one it gets attached to.
@@ -3520,7 +3534,7 @@ namespace cturtle {
     };
 
     /**
-     *  The Turtle Class
+     * \brief The Turtle Class
      * Symbolically represents a turtle that runs around a screen that has a
      * paint brush attached to its tail. The tail can be in two states; up and down.
      * As the turtle moves forwards, backwards, left, and right, it can draw
@@ -4359,8 +4373,7 @@ namespace cturtle {
     constexpr int SCREEN_DEFAULT_WIDTH = 800;
     constexpr int SCREEN_DEFAULT_HEIGHT = 600;
     /**
-     * InteractiveTurtleScreen
-     * Holds and maintains facilities in relation to displaying
+     * \brief The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying
      * turtles and consuming input events from users through callbacks.
      * This includes holding the actual data for a given scene after being
      * populated by Turtle. It layers draw calls in the order they are called,

@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcturtle_1_1AbstractTurtleScreen.html" title="cturtle::AbstractTurtleScreen" alt="" coords="5,13,195,39"/>
-<area shape="rect" id="node2" href="$classcturtle_1_1InteractiveTurtleScreen.html" title="cturtle::InteractiveTurtle\lScreen" alt="" coords="243,5,403,47"/>
+<area shape="rect" id="node1" href="$classcturtle_1_1AbstractTurtleScreen.html" title="The AbstractTurtleScreen class is the abstract type for most turtle functionality...." alt="" coords="5,13,195,39"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1InteractiveTurtleScreen.html" title="The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying turtles an..." alt="" coords="243,5,403,47"/>
 </map>
