@@ -1,8 +1,18 @@
-\hypertarget{classcturtle_1_1Text}{}\section{cturtle\+:\+:Text Class Reference}
-\label{classcturtle_1_1Text}\index{cturtle\+::\+Text@{cturtle\+::\+Text}}
+\hypertarget{classcturtle_1_1Text}{}\doxysection{cturtle\+::Text Class Reference}
+\label{classcturtle_1_1Text}\index{cturtle::Text@{cturtle::Text}}
 
 
-Inheritance diagram for cturtle\+:\+:Text\+:\nopagebreak
+The \mbox{\hyperlink{classcturtle_1_1Text}{Text}} class represents a basic string that is drawn on the screen. Unfortunately, \mbox{\hyperlink{classcturtle_1_1Text}{Text}} objects are very simple. They have no notion of either text size of font.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+
+
+Inheritance diagram for cturtle\+::Text\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,51 +21,55 @@ Inheritance diagram for cturtle\+:\+:Text\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for cturtle\+:\+:Text\+:\nopagebreak
+Collaboration diagram for cturtle\+::Text\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=208pt]{classcturtle_1_1Text__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcturtle_1_1Text_aad06f49d01be75cbfafedb64a38cfc29}{Text} ()
+\mbox{\hyperlink{classcturtle_1_1Text_aad06f49d01be75cbfafedb64a38cfc29}{Text}} ()
 \item 
 \mbox{\Hypertarget{classcturtle_1_1Text_a9adab9abc546c76b39feb594e0f4de1a}\label{classcturtle_1_1Text_a9adab9abc546c76b39feb594e0f4de1a}} 
-{\bfseries Text} (const std\+::string \&\hyperlink{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}{text}, \hyperlink{classcturtle_1_1Color}{Color} color)
+{\bfseries Text} (const std\+::string \&\mbox{\hyperlink{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}{text}}, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color)
 \item 
 \mbox{\Hypertarget{classcturtle_1_1Text_acea0ae681ef02899079547d852810687}\label{classcturtle_1_1Text_acea0ae681ef02899079547d852810687}} 
-{\bfseries Text} (const \hyperlink{classcturtle_1_1Text}{Text} \&\hyperlink{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}{copy})
+{\bfseries Text} (const \mbox{\hyperlink{classcturtle_1_1Text}{Text}} \&\mbox{\hyperlink{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}{copy}})
 \item 
 \mbox{\Hypertarget{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}\label{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}} 
-\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object} $\ast$ \hyperlink{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}{copy} () const
+\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Text_acb0908ae70d1194d6e47a8f8ba51461a}{copy}} () const
 \begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
-void \hyperlink{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}{draw} (const \hyperlink{classcturtle_1_1Transform}{Transform} \&t, Image \&img\+Ref) const
+void \mbox{\hyperlink{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const
 \begin{DoxyCompactList}\small\item\em This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::string \hyperlink{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}{text}
+std\+::string \mbox{\hyperlink{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}{text}}
 \end{DoxyCompactItemize}
 
 
-\subsection{Constructor \& Destructor Documentation}
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classcturtle_1_1Text}{Text}} class represents a basic string that is drawn on the screen. Unfortunately, \mbox{\hyperlink{classcturtle_1_1Text}{Text}} objects are very simple. They have no notion of either text size of font. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Text_aad06f49d01be75cbfafedb64a38cfc29}\label{classcturtle_1_1Text_aad06f49d01be75cbfafedb64a38cfc29}} 
-\index{cturtle\+::\+Text@{cturtle\+::\+Text}!Text@{Text}}
-\index{Text@{Text}!cturtle\+::\+Text@{cturtle\+::\+Text}}
-\subsubsection{\texorpdfstring{Text()}{Text()}}
+\index{cturtle::Text@{cturtle::Text}!Text@{Text}}
+\index{Text@{Text}!cturtle::Text@{cturtle::Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}}
 {\footnotesize\ttfamily cturtle\+::\+Text\+::\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Blank default destructor. 
 
-\subsection{Member Function Documentation}
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}\label{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}} 
-\index{cturtle\+::\+Text@{cturtle\+::\+Text}!draw@{draw}}
-\index{draw@{draw}!cturtle\+::\+Text@{cturtle\+::\+Text}}
-\subsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Text\+::draw (\begin{DoxyParamCaption}\item[{const \hyperlink{classcturtle_1_1Transform}{Transform} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+\index{cturtle::Text@{cturtle::Text}!draw@{draw}}
+\index{draw@{draw}!cturtle::Text@{cturtle::Text}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void cturtle\+::\+Text\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -72,15 +86,15 @@ This function is intended to draw all applicable geometry in this object to the 
 \end{DoxyParams}
 
 
-Implements \hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{cturtle\+::\+Abstract\+Drawable\+Object}.
+Implements \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{cturtle\+::\+Abstract\+Drawable\+Object}}.
 
 
 
-\subsection{Member Data Documentation}
+\doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}\label{classcturtle_1_1Text_ac631d8199ccd9ae56f661e22acc157d9}} 
-\index{cturtle\+::\+Text@{cturtle\+::\+Text}!text@{text}}
-\index{text@{text}!cturtle\+::\+Text@{cturtle\+::\+Text}}
-\subsubsection{\texorpdfstring{text}{text}}
+\index{cturtle::Text@{cturtle::Text}!text@{text}}
+\index{text@{text}!cturtle::Text@{cturtle::Text}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
 {\footnotesize\ttfamily std\+::string cturtle\+::\+Text\+::text}
 
 The text to draw. 

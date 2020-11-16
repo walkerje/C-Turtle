@@ -1,4 +1,5 @@
 <map id="cturtle::Polygon" name="cturtle::Polygon">
-<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="5,109,176,151"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="cturtle::Color" alt="" coords="42,5,139,32"/>
+<area shape="rect" id="node1" title="The polygon class merely holds a vector of points and a function to draw this series to an image...." alt="" coords="34,200,147,227"/>
+<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="5,109,176,151"/>
+<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="The primary representation of Color for this library. Represented as a simple RGB color composed of u..." alt="" coords="42,5,139,32"/>
 </map>

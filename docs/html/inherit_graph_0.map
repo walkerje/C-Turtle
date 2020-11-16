@@ -1,9 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects..." alt="" coords="5,125,176,166"/>
+<area shape="rect" id="node1" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="5,125,176,166"/>
 <area shape="rect" id="node2" href="$classcturtle_1_1Circle.html" title="The Circle class holds a radius and total number of steps, used to generate and draw a circles geomet..." alt="" coords="262,5,362,32"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1CompoundPolygon.html" title="cturtle::CompoundPolygon" alt="" coords="224,56,400,83"/>
+<area shape="rect" id="node3" href="$classcturtle_1_1CompoundPolygon.html" title="a Compound Polygon instance is composed from a number of smaller parts, which are each derived from A..." alt="" coords="224,56,400,83"/>
 <area shape="rect" id="node4" href="$classcturtle_1_1Line.html" title="The Line class holds two points and the functionality to draw a line between them on a specified canv..." alt="" coords="267,107,357,133"/>
-<area shape="rect" id="node5" href="$classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image..." alt="" coords="255,157,369,184"/>
-<area shape="rect" id="node6" href="$classcturtle_1_1Sprite.html" title="cturtle::Sprite" alt="" coords="262,208,362,235"/>
-<area shape="rect" id="node7" href="$classcturtle_1_1Text.html" title="cturtle::Text" alt="" coords="266,259,358,285"/>
+<area shape="rect" id="node5" href="$classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image...." alt="" coords="255,157,369,184"/>
+<area shape="rect" id="node6" href="$classcturtle_1_1Sprite.html" title="The Sprite class represents a selection of a larger image. This class ignores color in favor of color..." alt="" coords="262,208,362,235"/>
+<area shape="rect" id="node7" href="$classcturtle_1_1Text.html" title="The Text class represents a basic string that is drawn on the screen. Unfortunately,..." alt="" coords="267,259,357,285"/>
 </map>
