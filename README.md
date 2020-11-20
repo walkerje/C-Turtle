@@ -1,3 +1,5 @@
+
+
 <p align="center">
   <img src="https://i.imgur.com/X8lztkD.png">
   <br>
@@ -40,7 +42,6 @@ The following table contains examples, which do the exact same thing, between C-
           scr.bye();
           return 0;
       }
-http://walkerje.me/C-Turtle/docs/html/annotated.html
   </pre>
   </td>
   <td>
@@ -104,10 +105,13 @@ Headless mode was developed with the intention of being embedded in web applicat
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
 
-Two examples of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
-
+Three examples of artwork generated in the style of Piet Mondrian as part of an assignment on Recursion.
+&nbsp;
 ##### Azis Toktobaev - Berea College
-![Mondrian Art Example](https://i.imgur.com/PoMCwXn.png)
-
+![Mondrian Art Example 1](https://i.imgur.com/PoMCwXn.png)
+&nbsp;
 ##### Bryar Frank - Berea College
 ![Mondrian Art Example 2](https://i.imgur.com/ixf4fUE.jpg)
+&nbsp;
+##### Karina Agliullova - Berea College
+![Mondrian Art Example 3](https://i.imgur.com/fsgkYfc.png)
