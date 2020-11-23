@@ -13,6 +13,9 @@ Given that this is intended to be an education-oriented package, to ease the set
 
 This package heavily uses [CImg](http://cimg.eu/) for its display and drawing functions. As such, it must be available in the include path alongside CTurtle itself.
 
+#### Is it "C-Turtle" or "CTurtle"?
+Either one works. The "C" prefix is a nod to the single dependency of this project, [CImg](http://cimg.eu/). CTurtle quickly became the preference in reference to the name of the header file, "CTurtle.hpp", whereas C-Turtle was originally though to be its proper name. As time has progressed, the two spellings have become synonymous in meaning.
+
 ## Direct Comparison between C++ and Python
 The following table contains examples, which do the exact same thing, between C-Turtle and Python's Turtle.
 
@@ -100,7 +103,29 @@ int main(int argc, char** argv) {
 A frame is added to the resulting GIF for every change in state for a Turtle. This includes rotation, pen changes, size changes, etcetera. You can choose to display only every N frames, and thus save only every N frames, by taking advantage of tracer settings (see ```tracer(int countmax, unsigned int delayMS)``` function in TurtleScreen documentation). This dramatically reduces file size and write time in exchange for less frames in the image.
 
 #### Why does headless mode print HTML + Base64 by default?
-Headless mode was developed with the intention of being embedded in web applications, namely Runestone Interactive textbooks. As such, it prints HTML to display the results of the executed code by printing a Base64-encoded version of the resulting GIF file. This lets CTurtle be very easily embedded without needing any extra tricks or external File IO with any kind of backend. This can be disabled by having ```#define CTURTLE_HEADLESS_NO_HTML``` before the inclusion of CTurtle.
+Headless mode was developed with the intention of being embedded in web applications, namely [Runestone Interactive](https://runestone.academy/) textbooks. As such, it prints HTML to display the results of the executed code by printing a Base64-encoded version of the resulting GIF file. This lets CTurtle be very easily embedded without needing any extra tricks or external File IO with any kind of backend. This can be disabled by having ```#define CTURTLE_HEADLESS_NO_HTML``` before the inclusion of CTurtle.
+
+# Examples and Derivative Works
+## Packaged alongside CTurtle
+These examples can be found in the `examples` directory at the root of this repository. Many are derived from Runestone Interactive textbooks, such as the Sierpinski Triangle, Knight's Tour, Multiple Turtles, and Recursion Tree examples. Others, such as the Koch Fractal examples, are derived from Berea College coursework and were manually converted from Python.
+
+- [Headless Mode](https://github.com/walkerje/C-Turtle/blob/master/examples/headless.cpp)
+- [Knight's Tour](https://github.com/walkerje/C-Turtle/blob/master/examples/knights_tour.cpp)
+- [Koch Fractal](https://github.com/walkerje/C-Turtle/blob/master/examples/koch.cpp) | [Koch Fractal Class](https://github.com/walkerje/C-Turtle/blob/master/examples/koch_class.cpp)
+- [Recursive Spiral](https://github.com/walkerje/C-Turtle/blob/master/examples/show_recursion_spiral.cpp)
+- [Recursive Tree](https://github.com/walkerje/C-Turtle/blob/master/examples/show_tree_recursion.cpp)
+- [Sierpinski's Triangle](https://github.com/walkerje/C-Turtle/blob/master/examples/show_recursive_sierpinski_triangle.cpp)
+- [Undo](https://github.com/walkerje/C-Turtle/blob/master/examples/show_undo.cpp)
+- [Multiple Turtles](https://github.com/walkerje/C-Turtle/blob/master/examples/show_two_turtle.cpp)
+
+## Derivative Works
+
+The following four works are shared with permission of their creator, Dr. Mark Liu, from the University of Kentucky. These are fantastic examples of games, and voice-controlled play provides a particularly interesting change from command-line or button-based interfaces.
+
+- [Connect 4](https://github.com/markhliu/Cplusplus-graphical-Connect-Four-Game)
+- [Voice-Controlled Connect 4](https://github.com/markhliu/CPP-Voice-Connect-Four)
+- [Tic-Tac-Toe](https://github.com/markhliu/CPP-graphical-Tic-Tac-Toe)
+- [Voice-Controlled Tic-Tac-Toe ](https://github.com/markhliu/Cplusplus-Voice-Tic-Tac-Toe)
 
 ## Student Work Showcase
 As time progresses, and as I am afforded the opportunity, I will provide visual examples of work students have done using this library. None of these are produced by my own work (but did use C-Turtle in their generation), however permission was given to post the works here!
