@@ -1,0 +1,147 @@
+\hypertarget{classcturtle_1_1BitmapFont}{}\doxysection{cturtle\+::Bitmap\+Font Class Reference}
+\label{classcturtle_1_1BitmapFont}\index{cturtle::BitmapFont@{cturtle::BitmapFont}}
+
+
+The Bitmap Font represents monospaced font image files that covers a range of lower A\+S\+C\+II. The default font, for example, covers 32-\/127 (e.\+g, char 32 to char 127). This is a particularly naive implementation of bitmap fonts, however, all basic properties required are here.  
+
+
+
+
+{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcturtle_1_1BitmapFont_a808f8db65c21e8d58e08225d531f3218}{Bitmap\+Font}} (const Image \&img, int ascii\+Offs, int glyph\+Width, int glyph\+Height, int glyphsX, int glyphsY)
+\item 
+const Image \& \mbox{\hyperlink{classcturtle_1_1BitmapFont_a307440dfac1d09a82ef9489d7b9dc6da}{get\+Glyph\+Image}} (unsigned char c) const
+\item 
+const Image \& \mbox{\hyperlink{classcturtle_1_1BitmapFont_a7d8692696f31fe87cea675c4edcc6776}{operator\mbox{[}$\,$\mbox{]}}} (unsigned char c) const
+\item 
+\mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} \mbox{\hyperlink{classcturtle_1_1BitmapFont_af247623c0b08f686da4f734683fdb204}{get\+Glyph\+Position}} (unsigned char c) const
+\begin{DoxyCompactList}\small\item\em Returns the position of the specified character in the font image. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} \mbox{\hyperlink{classcturtle_1_1BitmapFont_a0739ef2ed1d6377d2635c102396356d0}{get\+Glyph\+Extent}} () const
+\begin{DoxyCompactList}\small\item\em Returns the size of a single character glyph, in pixels. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classcturtle_1_1BitmapFont_aa353605a38812cc7a8500aeda6adfe01}{get\+Total\+Glyphs}} () const
+\item 
+bool \mbox{\hyperlink{classcturtle_1_1BitmapFont_afda648c8e82a917a7b8482324a320253}{is\+Valid}} (char c) const
+\item 
+\mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} \mbox{\hyperlink{classcturtle_1_1BitmapFont_a5e0105bfdcfede2f5936a54498f2e424}{get\+Glyph\+Axes}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of glyphs along each axis of the underlying image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Bitmap Font represents monospaced font image files that covers a range of lower A\+S\+C\+II. The default font, for example, covers 32-\/127 (e.\+g, char 32 to char 127). This is a particularly naive implementation of bitmap fonts, however, all basic properties required are here. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_a808f8db65c21e8d58e08225d531f3218}\label{classcturtle_1_1BitmapFont_a808f8db65c21e8d58e08225d531f3218}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!BitmapFont@{BitmapFont}}
+\index{BitmapFont@{BitmapFont}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{BitmapFont()}{BitmapFont()}}
+{\footnotesize\ttfamily cturtle\+::\+Bitmap\+Font\+::\+Bitmap\+Font (\begin{DoxyParamCaption}\item[{const Image \&}]{img,  }\item[{int}]{ascii\+Offs,  }\item[{int}]{glyph\+Width,  }\item[{int}]{glyph\+Height,  }\item[{int}]{glyphsX,  }\item[{int}]{glyphsY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Bitmap Font constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ascii\+Offs} & \\
+\hline
+{\em glyph\+Width} & \\
+\hline
+{\em glyph\+Height} & \\
+\hline
+{\em glyphsX} & \\
+\hline
+{\em glyphsY} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_a5e0105bfdcfede2f5936a54498f2e424}\label{classcturtle_1_1BitmapFont_a5e0105bfdcfede2f5936a54498f2e424}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!getGlyphAxes@{getGlyphAxes}}
+\index{getGlyphAxes@{getGlyphAxes}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{getGlyphAxes()}{getGlyphAxes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} cturtle\+::\+Bitmap\+Font\+::get\+Glyph\+Axes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of glyphs along each axis of the underlying image. 
+
+\begin{DoxyReturn}{Returns}
+the number of glyphs along each axis of the underlying image. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_a0739ef2ed1d6377d2635c102396356d0}\label{classcturtle_1_1BitmapFont_a0739ef2ed1d6377d2635c102396356d0}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!getGlyphExtent@{getGlyphExtent}}
+\index{getGlyphExtent@{getGlyphExtent}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{getGlyphExtent()}{getGlyphExtent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} cturtle\+::\+Bitmap\+Font\+::get\+Glyph\+Extent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the size of a single character glyph, in pixels. 
+
+\begin{DoxyReturn}{Returns}
+the width (x) and height (y) of the glyph, in pixels. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_a307440dfac1d09a82ef9489d7b9dc6da}\label{classcturtle_1_1BitmapFont_a307440dfac1d09a82ef9489d7b9dc6da}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!getGlyphImage@{getGlyphImage}}
+\index{getGlyphImage@{getGlyphImage}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{getGlyphImage()}{getGlyphImage()}}
+{\footnotesize\ttfamily const Image\& cturtle\+::\+Bitmap\+Font\+::get\+Glyph\+Image (\begin{DoxyParamCaption}\item[{unsigned char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the appropriate image for the specified character. 
+\begin{DoxyParams}{Parameters}
+{\em c} & character to retrieve the associated image for. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_af247623c0b08f686da4f734683fdb204}\label{classcturtle_1_1BitmapFont_af247623c0b08f686da4f734683fdb204}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!getGlyphPosition@{getGlyphPosition}}
+\index{getGlyphPosition@{getGlyphPosition}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{getGlyphPosition()}{getGlyphPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} cturtle\+::\+Bitmap\+Font\+::get\+Glyph\+Position (\begin{DoxyParamCaption}\item[{unsigned char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the position of the specified character in the font image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & character to get the position of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position of the character. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_aa353605a38812cc7a8500aeda6adfe01}\label{classcturtle_1_1BitmapFont_aa353605a38812cc7a8500aeda6adfe01}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!getTotalGlyphs@{getTotalGlyphs}}
+\index{getTotalGlyphs@{getTotalGlyphs}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{getTotalGlyphs()}{getTotalGlyphs()}}
+{\footnotesize\ttfamily int cturtle\+::\+Bitmap\+Font\+::get\+Total\+Glyphs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the total number of valid glyphs in this bitmap font. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_afda648c8e82a917a7b8482324a320253}\label{classcturtle_1_1BitmapFont_afda648c8e82a917a7b8482324a320253}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!isValid@{isValid}}
+\index{isValid@{isValid}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily bool cturtle\+::\+Bitmap\+Font\+::is\+Valid (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+a boolean indicating if the specified character is valid within this bitmap font. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcturtle_1_1BitmapFont_a7d8692696f31fe87cea675c4edcc6776}\label{classcturtle_1_1BitmapFont_a7d8692696f31fe87cea675c4edcc6776}} 
+\index{cturtle::BitmapFont@{cturtle::BitmapFont}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cturtle::BitmapFont@{cturtle::BitmapFont}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily const Image\& cturtle\+::\+Bitmap\+Font\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{unsigned char}]{c }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the appropriate image for the specified character. 
+\begin{DoxyParams}{Parameters}
+{\em c} & character to retrieve the associated image for. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+Turtle.\+hpp\end{DoxyCompactItemize}

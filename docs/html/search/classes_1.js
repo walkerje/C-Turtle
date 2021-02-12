@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['circle_184',['Circle',['../classcturtle_1_1Circle.html',1,'cturtle']]],
-  ['color_185',['Color',['../classcturtle_1_1Color.html',1,'cturtle']]],
-  ['compoundpolygon_186',['CompoundPolygon',['../classcturtle_1_1CompoundPolygon.html',1,'cturtle']]]
+  ['bitmapfont_190',['BitmapFont',['../classcturtle_1_1BitmapFont.html',1,'cturtle']]]
 ];

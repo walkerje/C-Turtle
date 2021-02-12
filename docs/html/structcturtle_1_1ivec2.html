@@ -85,7 +85,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#a98b74bd6df906a25ef700397d6190103">ivec2</a> ()</td></tr>
 <tr class="memdesc:a98b74bd6df906a25ef700397d6190103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor. Initializes X and Y to both equal 0. <br /></td></tr>
 <tr class="separator:a98b74bd6df906a25ef700397d6190103"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7069d9f7c5ef7505c7c00c55958e0982"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#a7069d9f7c5ef7505c7c00c55958e0982">ivec2</a> (int <a class="el" href="structcturtle_1_1ivec2.html#acf8e72e8e3847b3a62f35bfbe588b637">x</a>, int <a class="el" href="structcturtle_1_1ivec2.html#a20914f8516f2f9b8e88e81cdf8415897">y</a>)</td></tr>
+<tr class="memitem:a7069d9f7c5ef7505c7c00c55958e0982"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#a7069d9f7c5ef7505c7c00c55958e0982">ivec2</a> (int x, int y)</td></tr>
 <tr class="memdesc:a7069d9f7c5ef7505c7c00c55958e0982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment cons tructor.  <a href="structcturtle_1_1ivec2.html#a7069d9f7c5ef7505c7c00c55958e0982">More...</a><br /></td></tr>
 <tr class="separator:a7069d9f7c5ef7505c7c00c55958e0982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc88a30605f0f71ea7844956a9473fd9"><td class="memItemLeft" align="right" valign="top">int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#adc88a30605f0f71ea7844956a9473fd9">operator[]</a> (int index)</td></tr>
@@ -113,10 +113,23 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:acf8e72e8e3847b3a62f35bfbe588b637"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#acf8e72e8e3847b3a62f35bfbe588b637">x</a></td></tr>
-<tr class="separator:acf8e72e8e3847b3a62f35bfbe588b637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20914f8516f2f9b8e88e81cdf8415897"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcturtle_1_1ivec2.html#a20914f8516f2f9b8e88e81cdf8415897">y</a></td></tr>
-<tr class="separator:a20914f8516f2f9b8e88e81cdf8415897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af252fa1ec7a2ac8fdfaecd08ed78a978"><td class="memItemLeft" ><a id="af252fa1ec7a2ac8fdfaecd08ed78a978"></a>
+union {</td></tr>
+<tr class="memitem:ae1995fa08aadd3c03cd8452774dc02a7"><td class="memItemLeft" ><a id="ae1995fa08aadd3c03cd8452774dc02a7"></a>
+&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:af940ed2fa5009afb654d32dd27a83b8d"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<b>x</b></td></tr>
+<tr class="separator:af940ed2fa5009afb654d32dd27a83b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf11c7dbcc9e912776eb62f718bf1a9"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;int&#160;&#160;&#160;<b>y</b></td></tr>
+<tr class="separator:adbf11c7dbcc9e912776eb62f718bf1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1995fa08aadd3c03cd8452774dc02a7"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:ae1995fa08aadd3c03cd8452774dc02a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a2dfde4ce4ba02a11b05f127507b5c6"><td class="memItemLeft" >
+&#160;&#160;&#160;int&#160;&#160;&#160;<b>data</b> [2]</td></tr>
+<tr class="separator:a1a2dfde4ce4ba02a11b05f127507b5c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af252fa1ec7a2ac8fdfaecd08ed78a978"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:af252fa1ec7a2ac8fdfaecd08ed78a978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a coordinate pair (e.g, x &amp; y) This class is represented as a low-precision point, because this data type tends to be most easily drawn to a simple canvas. </p>
@@ -234,37 +247,6 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the index </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="acf8e72e8e3847b3a62f35bfbe588b637"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf8e72e8e3847b3a62f35bfbe588b637">&#9670;&nbsp;</a></span>x</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cturtle::ivec2::x</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The X component. </p>
-
-</div>
-</div>
-<a id="a20914f8516f2f9b8e88e81cdf8415897"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20914f8516f2f9b8e88e81cdf8415897">&#9670;&nbsp;</a></span>y</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cturtle::ivec2::y</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The Y component. </p>
 
 </div>
 </div>

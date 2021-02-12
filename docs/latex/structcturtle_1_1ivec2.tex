@@ -15,7 +15,7 @@ Represents a coordinate pair (e.\+g, x \& y) This class is represented as a low-
 \mbox{\Hypertarget{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}\label{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}} 
 \mbox{\hyperlink{structcturtle_1_1ivec2_a98b74bd6df906a25ef700397d6190103}{ivec2}} ()
 \begin{DoxyCompactList}\small\item\em Empty constructor. Initializes X and Y to both equal 0. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structcturtle_1_1ivec2_a7069d9f7c5ef7505c7c00c55958e0982}{ivec2}} (int \mbox{\hyperlink{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}{x}}, int \mbox{\hyperlink{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}{y}})
+\mbox{\hyperlink{structcturtle_1_1ivec2_a7069d9f7c5ef7505c7c00c55958e0982}{ivec2}} (int x, int y)
 \begin{DoxyCompactList}\small\item\em Assignment cons tructor. \end{DoxyCompactList}\item 
 int \& \mbox{\hyperlink{structcturtle_1_1ivec2_adc88a30605f0f71ea7844956a9473fd9}{operator\mbox{[}$\,$\mbox{]}}} (int index)
 \begin{DoxyCompactList}\small\item\em Array access operator overload. Useful for convenience. \end{DoxyCompactList}\item 
@@ -39,10 +39,19 @@ bool \mbox{\hyperlink{structcturtle_1_1ivec2_ab564fda10817a6e06b80b205f9833dee}{
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}{x}}
-\item 
-int \mbox{\hyperlink{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}{y}}
-\end{DoxyCompactItemize}
+\mbox{\Hypertarget{structcturtle_1_1ivec2_af252fa1ec7a2ac8fdfaecd08ed78a978}\label{structcturtle_1_1ivec2_af252fa1ec7a2ac8fdfaecd08ed78a978}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\mbox{\Hypertarget{unioncturtle_1_1ivec2_1_1_0d4_ae1995fa08aadd3c03cd8452774dc02a7}\label{unioncturtle_1_1ivec2_1_1_0d4_ae1995fa08aadd3c03cd8452774dc02a7}} 
+\>struct \{\\
+\>\>int {\bfseries x}\\
+\>\>int {\bfseries y}\\
+\>\} \\
+\>int {\bfseries data} \mbox{[}2\mbox{]}\\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -106,21 +115,6 @@ Array access operator overload. Useful for convenience.
 A reference to the index 
 \end{DoxyReturn}
 
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}\label{structcturtle_1_1ivec2_acf8e72e8e3847b3a62f35bfbe588b637}} 
-\index{cturtle::ivec2@{cturtle::ivec2}!x@{x}}
-\index{x@{x}!cturtle::ivec2@{cturtle::ivec2}}
-\doxysubsubsection{\texorpdfstring{x}{x}}
-{\footnotesize\ttfamily int cturtle\+::ivec2\+::x}
-
-The X component. \mbox{\Hypertarget{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}\label{structcturtle_1_1ivec2_a20914f8516f2f9b8e88e81cdf8415897}} 
-\index{cturtle::ivec2@{cturtle::ivec2}!y@{y}}
-\index{y@{y}!cturtle::ivec2@{cturtle::ivec2}}
-\doxysubsubsection{\texorpdfstring{y}{y}}
-{\footnotesize\ttfamily int cturtle\+::ivec2\+::y}
-
-The Y component. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

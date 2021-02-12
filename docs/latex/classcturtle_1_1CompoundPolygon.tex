@@ -40,10 +40,9 @@ typedef std\+::pair$<$ \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}}, 
 {\bfseries Compound\+Polygon} (const \mbox{\hyperlink{classcturtle_1_1CompoundPolygon}{Compound\+Polygon}} \&\mbox{\hyperlink{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}{copy}})
 \item 
 void \mbox{\hyperlink{classcturtle_1_1CompoundPolygon_a9b750af77967c4df01bab83785262e10}{addcomponent}} (const \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} \&obj, const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&transform=\mbox{\hyperlink{classcturtle_1_1Transform}{Transform}}())
-\item 
-\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}\label{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}} 
+\begin{DoxyCompactList}\small\item\em Adds a component to this compound polygon. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}{copy}} () const
-\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
@@ -65,7 +64,28 @@ a Compound \mbox{\hyperlink{classcturtle_1_1Polygon}{Polygon}} instance is compo
 \doxysubsubsection{\texorpdfstring{addcomponent()}{addcomponent()}}
 {\footnotesize\ttfamily void cturtle\+::\+Compound\+Polygon\+::addcomponent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} \&}]{obj,  }\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{transform = {\ttfamily \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Adds a generic component to this \mbox{\hyperlink{classcturtle_1_1CompoundPolygon}{Compound\+Polygon}}. \mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}\label{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}} 
+
+
+Adds a component to this compound polygon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Object to copy and add. \\
+\hline
+{\em transform} & relative to root transform. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}\label{classcturtle_1_1CompoundPolygon_af413f879d12105c9997b0e2e81e440a3}} 
+\index{cturtle::CompoundPolygon@{cturtle::CompoundPolygon}!copy@{copy}}
+\index{copy@{copy}!cturtle::CompoundPolygon@{cturtle::CompoundPolygon}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}}$\ast$ cturtle\+::\+Compound\+Polygon\+::copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Creates a copy of this Compound \mbox{\hyperlink{classcturtle_1_1Polygon}{Polygon}} allocated with the new keyword. This must be deleted at the responsibility of the invoker. 
+
+Implements \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}{cturtle\+::\+Abstract\+Drawable\+Object}}.
+
+\mbox{\Hypertarget{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}\label{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}} 
 \index{cturtle::CompoundPolygon@{cturtle::CompoundPolygon}!draw@{draw}}
 \index{draw@{draw}!cturtle::CompoundPolygon@{cturtle::CompoundPolygon}}
 \doxysubsubsection{\texorpdfstring{draw()}{draw()}}
