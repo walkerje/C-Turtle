@@ -1,8 +1,84 @@
-/*Include GIF utility when compiling headless mode.*/
-/*License for CTurtle itself is found further down in the file.
- * Ctrl+F for "MIT" should get you there.*/
+// MIT License
+// 
+// Copyright (c) 2021 Jesse W. Walker
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+/**
+    :::::::: ::::::::::: :::    ::: ::::::::: ::::::::::: :::        ::::::::::
+   :+:    :+:    :+:     :+:    :+: :+:    :+:    :+:     :+:        :+:
+   +:+           +:+     +:+    +:+ +:+    +:+    +:+     +:+        +:+
+   +#+           +#+     +#+    +:+ +#++:++#:     +#+     +#+        +#++:++#
+   +#+           +#+     +#+    +#+ +#+    +#+    +#+     +#+        +#+
+   #+#    #+#    #+#     #+#    #+# #+#    #+#    #+#     #+#        #+#
+    ########     ###      ########  ###    ###    ###     ########## ########## 
+   =================================v1.0.0====================================>
+   
+   GitHub: https://github.com/walkerje/C-Turtle
+   Documentation: http://walkerje.me/C-Turtle/docs/html/annotated.html
+   Semantic Versioning (see https://semver.org/)
+   Changelog (see https://keepachangelog.com/)
+   
+   Release                              v1.0.0
+   -----------------2/13/21-------------------
+   --- Added
+   ~ Simplistic Bitmap Font Support
+   ~ Default Bitmap Font, Proggy Clean (see https://proggyfonts.net)
+   ~ Support for more dynamic font rendering, specifically allowing control over orientation, scale, and alignment.
+   ~ "face" function to Turtles to orient the turtle towards another Point.
+   ~ "addfont" and "font" function to the TurtleScreen class to register and retrieve user-provided Bitmap Fonts.
+   ~ Appended version number to default title constructors in the TurtleScreen class.
+   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)
+   
+   --- Changed
+   ~ Moved turtle function implementations to the inside of the Turtle Class
+   ~ Moved default shape map definition to AbstractTurtleScreen rather than individual screens.
+   ~ Refactored the internal turtle function "pushGeom" to "pushGeometry"
+   ~ Organized include statements, and the top of the file in general.
+   ~ Updated Documentation
+   ~ Changed ivec2 implementation to use a union between an anonymous structure and an 2-wide array of integers
+   
+   --- Removed
+   ~ N/A
+   
+   Release                              v0.2.X
+   ------------------4/23/20------------------
+   ~ See GitHub commit histories 744dd6d through e7e17de
+   
+   Release                              v0.1.X
+   ------------------4/23/20------------------
+   ~ See GitHub commit histories a93dc4d through 744dd6d
+   
+   Release                              v0.0.X
+   -------------------9/7/19------------------
+   ~ See GitHub commit histories 12888e7 through a93dc4d
+**/
+
+#pragma once
+
+#define CTURTLE_VERSION_MAJOR "1"
+#define CTURTLE_VERSION_MINOR "0"
+#define CTURTLE_VERSION_PATCH "0"
+#define CTURTLE_VERSION "v" CTURTLE_VERSION_MAJOR "." CTURTLE_VERSION_MINOR "." CTURTLE_VERSION_PATCH
 
 #ifdef CTURTLE_HEADLESS
+/*Include GIF utility when compiling headless mode.*/
 
 /* public domain, Simple, Minimalistic GIF writer - http://jonolick.com
  *
@@ -400,30 +476,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #endif /*JO_INCLUDE_GIF_H*/
 #endif /*CTURTLE_HEADLESS*/
 
-//MIT License
-//
-//Copyright (c) 2019 Jesse W. Walker
-//
-//Permission is hereby granted, free of charge, to any person obtaining a copy
-//of this software and associated documentation files (the "Software"), to deal
-//in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//copies of the Software, and to permit persons to whom the Software is
-//furnished to do so, subject to the following conditions:
-//
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
-//
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//SOFTWARE.
-
-#pragma once
-
 //Automatic linking when operating under MSVC
 //If linking errors occur when compiling on Non-MSVC,
 //Make sure you link X11 and PThread when using Unix-Like environments, when NOT using headless mode.
@@ -438,8 +490,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
 #ifndef _MSC_VER
-#include <cmath>//for M_PI
-#else
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288
 #endif
@@ -481,32 +531,25 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #include "CImg.h"
 #endif
 
-//For specific integer types, maps, strings, etc.
-#include <unordered_map>
-#include <string>
-#include <cstdint>
-#include <vector>
-
-#include <chrono>       //For time management for movement animations and callbacks.
-#include <random>       //for random color creation. 
-
 #include <memory>       //For smart pointers.
-#include <mutex>        //Mutex object for event thread synchronization.
-
 #include <list>         //For the ever-useful list data structure.
+#include <unordered_map>//For named color and keys.
+#include <chrono>       //For time management for movement animations and callbacks.
+#include <random>       //For random color creation. 
 #include <functional>   //For event function callbacks.
-
 #include <tuple>        //Used for CompoundShapes
-#include <cstring>      //memcpy
+#include <cstring>      //For memcpy
 #include <vector>       //For Polygon point storage
 #include <cmath>        //For rounding, etc
 #include <algorithm>    //For std::count 
 #include <array>        //For Transform storage.
-
-#include <thread>
-#include <fstream>
-#include <iostream>
-#include <sstream>//used for base64 encoding.
+#include <string>       //Strings...
+#include <cstdint>      //For well-defined integer types.
+#include <thread>       //For the event threa
+#include <mutex>        //Mutex object for event thread synchronization. 
+#include <fstream>      //For GIF base-64 encoding to write the file out.
+#include <iostream>     //For GIF reading.
+#include <sstream>      //used for base64 encoding.
 
 //See https://github.com/mvorbrodt/blog/blob/master/src/base64.hpp for original source.
 //The below has been modified to use unsigned characters to avoid signed->unsigned->signed fiddling.
@@ -5121,6 +5164,8 @@ namespace cturtle {
 #else /*NOT DEFINED CTURTLE_HEADLESS*/
     constexpr int SCREEN_DEFAULT_WIDTH = 800;
     constexpr int SCREEN_DEFAULT_HEIGHT = 600;
+    constexpr char SCREEN_DEFAULT_TITLE[] = "CTurtle " CTURTLE_VERSION;
+    
     /**
      * \brief The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying
      * turtles and consuming input events from users through callbacks.
@@ -5133,7 +5178,7 @@ namespace cturtle {
     public:
         /**Empty constructor.
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
-        InteractiveTurtleScreen() : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, "CTurtle", 0) {
+        InteractiveTurtleScreen() : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, SCREEN_DEFAULT_TITLE, 0) {
             canvas.assign(display);
             initEventThread();
             redraw(true);
@@ -5165,7 +5210,7 @@ namespace cturtle {
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        InteractiveTurtleScreen(int width, int height, const std::string& title = "CTurtle")
+        InteractiveTurtleScreen(int width, int height, const std::string& title = SCREEN_DEFAULT_TITLE)
             : display(width, height) {
             display.set_title(title.c_str());
             display.set_normalization(0);
@@ -5233,13 +5278,15 @@ namespace cturtle {
         }
 
         /**Sets the screen mode of this screen.
+         * Screen mode influences the initial heading added Turtles have,
+         * as well as the direction of rotations.
+         * This function brings ALL attached turtles to the home/default location.
          *\param mode The screen mode.
-         *\todo Refine this documentation.*/
+         */
         void mode(ScreenMode mode){
             curMode = mode;
-            for (Turtle* t : turtles) {
-                t->reset();
-            }
+            for (Turtle* t : turtles)
+                t->home();
         }
 
         /**Returns the screen mode of this screen.*/
