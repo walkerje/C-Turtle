@@ -111,10 +111,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CompoundPolygon</b> (const <a class="el" href="classcturtle_1_1CompoundPolygon.html">CompoundPolygon</a> &amp;<a class="el" href="classcturtle_1_1CompoundPolygon.html#af413f879d12105c9997b0e2e81e440a3">copy</a>)</td></tr>
 <tr class="separator:a4ec03c8f5d2a8658893156ccadf0b347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b750af77967c4df01bab83785262e10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1CompoundPolygon.html#a9b750af77967c4df01bab83785262e10">addcomponent</a> (const <a class="el" href="classcturtle_1_1AbstractDrawableObject.html">AbstractDrawableObject</a> &amp;obj, const <a class="el" href="classcturtle_1_1Transform.html">Transform</a> &amp;transform=<a class="el" href="classcturtle_1_1Transform.html">Transform</a>())</td></tr>
+<tr class="memdesc:a9b750af77967c4df01bab83785262e10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a component to this compound polygon.  <a href="classcturtle_1_1CompoundPolygon.html#a9b750af77967c4df01bab83785262e10">More...</a><br /></td></tr>
 <tr class="separator:a9b750af77967c4df01bab83785262e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af413f879d12105c9997b0e2e81e440a3"><td class="memItemLeft" align="right" valign="top"><a id="af413f879d12105c9997b0e2e81e440a3"></a>
-<a class="el" href="classcturtle_1_1AbstractDrawableObject.html">AbstractDrawableObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1CompoundPolygon.html#af413f879d12105c9997b0e2e81e440a3">copy</a> () const</td></tr>
-<tr class="memdesc:af413f879d12105c9997b0e2e81e440a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a copy of this drawable object, allocated with NEW. Result Must be deleted at the responsibility of the invoker. <br /></td></tr>
+<tr class="memitem:af413f879d12105c9997b0e2e81e440a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1AbstractDrawableObject.html">AbstractDrawableObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1CompoundPolygon.html#af413f879d12105c9997b0e2e81e440a3">copy</a> () const</td></tr>
 <tr class="separator:af413f879d12105c9997b0e2e81e440a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee485a61907d0a9c135344eadd5c52ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1CompoundPolygon.html#aee485a61907d0a9c135344eadd5c52ad">draw</a> (const <a class="el" href="classcturtle_1_1Transform.html">Transform</a> &amp;t, Image &amp;imgRef) const</td></tr>
 <tr class="separator:aee485a61907d0a9c135344eadd5c52ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,7 +179,43 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Adds a generic component to this <a class="el" href="classcturtle_1_1CompoundPolygon.html" title="a Compound Polygon instance is composed from a number of smaller parts, which are each derived from A...">CompoundPolygon</a>. </p>
+
+<p>Adds a component to this compound polygon. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>Object to copy and add. </td></tr>
+    <tr><td class="paramname">transform</td><td>relative to root transform. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af413f879d12105c9997b0e2e81e440a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af413f879d12105c9997b0e2e81e440a3">&#9670;&nbsp;</a></span>copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcturtle_1_1AbstractDrawableObject.html">AbstractDrawableObject</a>* cturtle::CompoundPolygon::copy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a copy of this Compound <a class="el" href="classcturtle_1_1Polygon.html" title="The polygon class merely holds a vector of points and a function to draw this series to an image....">Polygon</a> allocated with the new keyword. This must be deleted at the responsibility of the invoker. </p>
+
+<p>Implements <a class="el" href="classcturtle_1_1AbstractDrawableObject.html#acff3437e999d281773b66e6cf2115372">cturtle::AbstractDrawableObject</a>.</p>
 
 </div>
 </div>

@@ -21,6 +21,7 @@ Collaboration diagram for cturtle\+::Turtle\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_af819a08c50a1eaceae945e69c4c7968a}\label{classcturtle_1_1Turtle_af819a08c50a1eaceae945e69c4c7968a}} 
 \mbox{\hyperlink{classcturtle_1_1Turtle_af819a08c50a1eaceae945e69c4c7968a}{Turtle}} (\mbox{\hyperlink{classcturtle_1_1AbstractTurtleScreen}{Abstract\+Turtle\+Screen}} \&scr)
 \begin{DoxyCompactList}\small\item\em The turtle constructor. Turtles are attached to whatever screen they are constructed with. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a96d7f1fbbbcd69437637e1270296bac2}\label{classcturtle_1_1Turtle_a96d7f1fbbbcd69437637e1270296bac2}} 
@@ -78,8 +79,12 @@ void \mbox{\hyperlink{classcturtle_1_1Turtle_aea45fc1d0f00b82fc64a0f97dd6c1ea2}{
 \item 
 const \mbox{\hyperlink{structcturtle_1_1PenState}{Pen\+State}} \& \mbox{\hyperlink{classcturtle_1_1Turtle_a2f6a16a0f4d700470bf69e0a15f3d2f4}{penstate}} () const
 \item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_a4eb2630341ea5bb922c74f214037b361}{setheading}} (float angle)
+void \mbox{\hyperlink{classcturtle_1_1Turtle_a32e0c03d6a17e2dc75fa4faa50bd80db}{setheading}} (float amt)
 \begin{DoxyCompactList}\small\item\em Sets the rotation of this turtle. The unit by which the input is specified is determined by the current angle mode. The difference between Clockwise and Counterclockwise is determined by the current screen\textquotesingle{}s mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcturtle_1_1Turtle_affa0d75c05ce53c2562cdc221b0fc081}{face}} (int x, int y)
+\item 
+void \mbox{\hyperlink{classcturtle_1_1Turtle_a030fae72a70edcd3b2a26167d0e5da07}{face}} (const \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \&pt)
+\item 
 int \mbox{\hyperlink{classcturtle_1_1Turtle_a4a6824b53f70323402d4e972f6da360c}{distance}} (int x, int y)
 \item 
 int \mbox{\hyperlink{classcturtle_1_1Turtle_aa8b64c7361639dec2eafedaf640a0ebd}{distance}} (const \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \&pt)
@@ -91,7 +96,7 @@ float \mbox{\hyperlink{classcturtle_1_1Turtle_a1ac8961a3d5d3044b3f3f011778b51bf}
 float \mbox{\hyperlink{classcturtle_1_1Turtle_ab625cf304b44417c7d3cacd65b372d37}{towards}} (const \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \&pt)
 \begin{DoxyCompactList}\small\item\em Returns the angle between the line of the current turtle transform to the given point. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classcturtle_1_1Turtle_a5c90aa6dea03e88f202dcadc4ff77354}{heading}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the heading of the \mbox{\hyperlink{classcturtle_1_1Turtle}{Turtle}} (e.\+g, its current rotation). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_ab6558ff8b547bfb54a68c55259f7bb32}{home}} ()
 \item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_a6ce4e8065581887d006f420d0e93967e}{circle}} (int radius, int steps, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color)
@@ -100,7 +105,7 @@ void \mbox{\hyperlink{classcturtle_1_1Turtle_a1f945648941a632ed33d28e9c51b8207}{
 \begin{DoxyCompactList}\small\item\em Adds a circle to the screen. Default parameters are circle with a radius of 30 with 15 steps. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_af33a02ec769c35671204abcc33050b0f}{dot}} (\mbox{\hyperlink{classcturtle_1_1Color}{Color}} color, int size=10)
 \begin{DoxyCompactList}\small\item\em Adds a dot to the screen. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}{fill}} (bool state)
+void \mbox{\hyperlink{classcturtle_1_1Turtle_abc968c0b9efc483194cf70a5256cbc46}{fill}} (bool val)
 \begin{DoxyCompactList}\small\item\em Sets the \char`\"{}filling\char`\"{} state-\/$>$ If the input is false but the prior state is true, a \mbox{\hyperlink{structcturtle_1_1SceneObject}{Scene\+Object}} is put on the screen in the shape of the previously captured points. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Turtle_ac28e8f1d1fbf19abffb5e92b98e3c602}\label{classcturtle_1_1Turtle_ac28e8f1d1fbf19abffb5e92b98e3c602}} 
 bool {\bfseries filling} () const
@@ -115,7 +120,7 @@ void \mbox{\hyperlink{classcturtle_1_1Turtle_a222a95d61c5cfee661f5244e51d57539}{
 \begin{DoxyCompactList}\small\item\em Returns the fill color of this turtle. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_a6e814845ac619a90aeee25a67a3fc51d}{write}} (const std\+::string \&text)
 \item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}{write}} (const std\+::string \&text, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color)
+void \mbox{\hyperlink{classcturtle_1_1Turtle_ada6be9e595e6aad0f2c23448f9f2de87}{write}} (const std\+::string \&text, const std\+::string \&font, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color=\{\char`\"{}white\char`\"{}\}, float scale=1.\+0f, Text\+Align alignment=T\+E\+X\+T\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT)
 \item 
 int \mbox{\hyperlink{classcturtle_1_1Turtle_af7b7e9c43e22fabce3a5435d09c73f77}{stamp}} ()
 \begin{DoxyCompactList}\small\item\em Puts the current shape of this turtle on the screen with the current fill color and the outline of the shape. \end{DoxyCompactList}\item 
@@ -145,13 +150,13 @@ void \mbox{\hyperlink{classcturtle_1_1Turtle_a5f2010373aeb82207975e9f1b4168747}{
 \mbox{\Hypertarget{classcturtle_1_1Turtle_af018ea1fa9eb9be80fdf53fabcb668eb}\label{classcturtle_1_1Turtle_af018ea1fa9eb9be80fdf53fabcb668eb}} 
 float \mbox{\hyperlink{classcturtle_1_1Turtle_af018ea1fa9eb9be80fdf53fabcb668eb}{speed}} ()
 \begin{DoxyCompactList}\small\item\em Returns the speed of this turtle. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcturtle_1_1Turtle_ae3e48f309eaea7b4426ad1a173f15ef5}\label{classcturtle_1_1Turtle_ae3e48f309eaea7b4426ad1a173f15ef5}} 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_ae3e48f309eaea7b4426ad1a173f15ef5}{tilt}} (float angle)
-\begin{DoxyCompactList}\small\item\em Applies a rotation to the. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_ae1120619312cc453134a88a319ffcfef}\label{classcturtle_1_1Turtle_ae1120619312cc453134a88a319ffcfef}} 
+void \mbox{\hyperlink{classcturtle_1_1Turtle_ae1120619312cc453134a88a319ffcfef}{tilt}} (float amt)
+\begin{DoxyCompactList}\small\item\em Applies a rotation to the turtle\textquotesingle{}s cursor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Turtle_aec48e043d9f3a259d7500d94323d6890}\label{classcturtle_1_1Turtle_aec48e043d9f3a259d7500d94323d6890}} 
 float \mbox{\hyperlink{classcturtle_1_1Turtle_aec48e043d9f3a259d7500d94323d6890}{tilt}} () const
 \begin{DoxyCompactList}\small\item\em Returns the rotation of the cursor. Not the heading, or the angle at which the forward function will move. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_a9e83fdd5c469e4863cf9b460e4d29130}{setshowturtle}} (bool state)
+void \mbox{\hyperlink{classcturtle_1_1Turtle_a031507fa1bc060bf12c563744797497b}{setshowturtle}} (bool val)
 \begin{DoxyCompactList}\small\item\em Set whether or not the turtle is being shown. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_ac676ff53f6393c70d665053cab1d67c5}{showturtle}} ()
 \begin{DoxyCompactList}\small\item\em Shows the turtle. Equivalent to calling setshowturtle(true). \end{DoxyCompactList}\item 
@@ -191,23 +196,25 @@ virtual \mbox{\hyperlink{classcturtle_1_1Turtle_a7224baf1faed4dd203e09522507b9d3
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}{push\+State}} ()
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}\label{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}} 
+void {\bfseries push\+State} ()
 \item 
-bool \mbox{\hyperlink{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}{pop\+State}} ()
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}\label{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}} 
+bool {\bfseries pop\+State} ()
 \item 
-bool \mbox{\hyperlink{classcturtle_1_1Turtle_a68ea497f0c865e812026d861882a1c1a}{push\+Geom}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$geom)
+bool \mbox{\hyperlink{classcturtle_1_1Turtle_a1b7268d51bd48b8a026f31bda5ebe7c2}{push\+Geometry}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$geom)
 \begin{DoxyCompactList}\small\item\em Internal function used to add geometry to the turtle screen. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classcturtle_1_1Turtle_a7bcfb1444531cfb43bf51e9b1b94793b}{push\+Stamp}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$geom)
 \begin{DoxyCompactList}\small\item\em Internal function used to add a stamp object to the turtle screen. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classcturtle_1_1Turtle_a5c6d5684bd6fb11e291576a5c55c2dbf}{push\+Text}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color, const std\+::string \&text)
+bool \mbox{\hyperlink{classcturtle_1_1Turtle_a2c3bd1677307e639625b58ac362ca79a}{push\+Text}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} color, const \mbox{\hyperlink{classcturtle_1_1BitmapFont}{Bitmap\+Font}} \&font, const std\+::string \&text, float scale=1.\+0f, Text\+Align alignment=T\+E\+X\+T\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT)
 \begin{DoxyCompactList}\small\item\em Internal function used to add a text object to the turtle screen. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classcturtle_1_1Turtle_a5ea16e46b1220ea6afb0d40abecbec17}{push\+Trace\+Line}} (\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} a, \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} b)
-\begin{DoxyCompactList}\small\item\em Internal function used to add a trace line object to the turtle screen. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Internal function used to add a trace line object to the turtle screen. Trace lines do N\+OT push a state. Their state is encompassed by movement, and these lines are only added when moving the turtle while the pen is down. \end{DoxyCompactList}\item 
 long int \mbox{\hyperlink{classcturtle_1_1Turtle_af567c8c2491fb8dca54d4725f2a6a7a8}{get\+Anim\+MS}} ()
 \item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_ada9ddbc87c2c9baaf2f1a1051acc3851}{update\+Parent}} (bool invalidate=false, bool input=true)
 \item 
-void \mbox{\hyperlink{classcturtle_1_1Turtle_a1fada959d0f1bd31b3854adea6d3d6de}{travel\+Between}} (\mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} from, const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&to, bool \mbox{\hyperlink{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}{push\+State}})
+void \mbox{\hyperlink{classcturtle_1_1Turtle_a962700b3a0ec7bd8185b7a31cca68db5}{travel\+Between}} (\mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} src, const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&dest, bool do\+Push\+State)
 \item 
 void \mbox{\hyperlink{classcturtle_1_1Turtle_af838da6166c05227dac1a8b57ca27414}{travel\+To}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&dest)
 \item 
@@ -233,7 +240,8 @@ std\+::list$<$ \mbox{\hyperlink{classcturtle_1_1Line}{Line}} $>$ {\bfseries fill
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a4a1b26c2dfad5a0b1f034fa09768ec37}\label{classcturtle_1_1Turtle_a4a1b26c2dfad5a0b1f034fa09768ec37}} 
 \mbox{\hyperlink{structcturtle_1_1PenState}{Pen\+State}} $\ast$ {\bfseries state} = nullptr
 \item 
-\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \mbox{\hyperlink{classcturtle_1_1Turtle_ab7156951a007fbbc8a07cbb66e7b888b}{travel\+Points}} \mbox{[}2\mbox{]}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_ab7156951a007fbbc8a07cbb66e7b888b}\label{classcturtle_1_1Turtle_ab7156951a007fbbc8a07cbb66e7b888b}} 
+\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} {\bfseries travel\+Points} \mbox{[}2\mbox{]}
 \item 
 \mbox{\Hypertarget{classcturtle_1_1Turtle_ab155ecd4e4388b214d387f1b27f2d91a}\label{classcturtle_1_1Turtle_ab155ecd4e4388b214d387f1b27f2d91a}} 
 bool {\bfseries traveling} = false
@@ -258,20 +266,10 @@ Turtle\+Screen
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_af819a08c50a1eaceae945e69c4c7968a}\label{classcturtle_1_1Turtle_af819a08c50a1eaceae945e69c4c7968a}} 
-\index{cturtle::Turtle@{cturtle::Turtle}!Turtle@{Turtle}}
-\index{Turtle@{Turtle}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{Turtle()}{Turtle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Turtle\+::\+Turtle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcturtle_1_1AbstractTurtleScreen}{Abstract\+Turtle\+Screen}} \&}]{scr }\end{DoxyParamCaption})}
-
-
-
-The turtle constructor. Turtles are attached to whatever screen they are constructed with. 
-
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a09d00aef49f669e24cab5574f184e07a}\label{classcturtle_1_1Turtle_a09d00aef49f669e24cab5574f184e07a}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!Turtle@{Turtle}}
 \index{Turtle@{Turtle}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{Turtle()}{Turtle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{Turtle()}{Turtle()}}
 {\footnotesize\ttfamily cturtle\+::\+Turtle\+::\+Turtle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 Inheritors must assign screen pointer! 
@@ -298,7 +296,7 @@ Moves the turtle backward the specified number of pixels.
 Begins filling a polygon. 
 
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}{fill(bool)}} 
+\mbox{\hyperlink{classcturtle_1_1Turtle_abc968c0b9efc483194cf70a5256cbc46}{fill(bool)}} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a3f1ce4b0c550d890f8bfc7e6a02ea1ef}\label{classcturtle_1_1Turtle_a3f1ce4b0c550d890f8bfc7e6a02ea1ef}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!bk@{bk}}
@@ -329,7 +327,7 @@ Adds a circle to the screen. Default parameters are circle with a radius of 30 w
 \index{cturtle::Turtle@{cturtle::Turtle}!circle@{circle}}
 \index{circle@{circle}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{circle()}{circle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::circle (\begin{DoxyParamCaption}\item[{int}]{radius,  }\item[{int}]{steps,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::circle (\begin{DoxyParamCaption}\item[{int}]{radius,  }\item[{int}]{steps,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -339,7 +337,7 @@ Adds a circle to the screen.
 \begin{DoxyParams}{Parameters}
 {\em radius} & The radius, in pixels, of the circle. \\
 \hline
-{\em steps} & The \char`\"{}quality\char`\"{} of the circle. Higher is slow but looks better. \\
+{\em steps} & The \char`\"{}quality\char`\"{} of the circle. Higher is slow but looks better. Use with low numbers for N-\/sided shapes. \\
 \hline
 {\em color} & The color of the circle. \\
 \hline
@@ -378,14 +376,17 @@ Returns the distance between this turtle and the given point.
 
 Returns the distance between this turtle and the given coordinate pair. 
 \begin{DoxyParams}{Parameters}
-{\em x} & \\
+{\em x} & X axis \\
 \hline
-{\em y} & \\
+{\em y} & Y axis \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-
+distance between turtle position and coordinate pair. 
 \end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+distance(point) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_af33a02ec769c35671204abcc33050b0f}\label{classcturtle_1_1Turtle_af33a02ec769c35671204abcc33050b0f}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!dot@{dot}}
 \index{dot@{dot}!cturtle::Turtle@{cturtle::Turtle}}
@@ -407,7 +408,7 @@ Adds a dot to the screen.
 \index{cturtle::Turtle@{cturtle::Turtle}!draw@{draw}}
 \index{draw@{draw}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{screen\+Transform,  }\item[{Image \&}]{canvas }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{screen\+Transform,  }\item[{Image \&}]{canvas }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -431,7 +432,37 @@ Draws this turtle on the specified canvas with the specified transform.
 Stops filling a polygon. 
 
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}{fill(bool)}} 
+\mbox{\hyperlink{classcturtle_1_1Turtle_abc968c0b9efc483194cf70a5256cbc46}{fill(bool)}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a030fae72a70edcd3b2a26167d0e5da07}\label{classcturtle_1_1Turtle_a030fae72a70edcd3b2a26167d0e5da07}} 
+\index{cturtle::Turtle@{cturtle::Turtle}!face@{face}}
+\index{face@{face}!cturtle::Turtle@{cturtle::Turtle}}
+\doxysubsubsection{\texorpdfstring{face()}{face()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::face (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \&}]{pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotates the turtle to face the specified point. 
+\begin{DoxyParams}{Parameters}
+{\em pt} & point to face towards \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+face(x, y) 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_affa0d75c05ce53c2562cdc221b0fc081}\label{classcturtle_1_1Turtle_affa0d75c05ce53c2562cdc221b0fc081}} 
+\index{cturtle::Turtle@{cturtle::Turtle}!face@{face}}
+\index{face@{face}!cturtle::Turtle@{cturtle::Turtle}}
+\doxysubsubsection{\texorpdfstring{face()}{face()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::face (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotates the turtle to face the specified point. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate along the x axis to face \\
+\hline
+{\em y} & coordinate along the y axis to face \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+face(point) 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a2a9fa6b316c96af547eb90b44fbacdc0}\label{classcturtle_1_1Turtle_a2a9fa6b316c96af547eb90b44fbacdc0}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!fd@{fd}}
@@ -448,11 +479,11 @@ Moves the turtle forward the specified number of pixels.
 {\em pixels} & total number of pixels to move. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}\label{classcturtle_1_1Turtle_a7026fc9ad563b91b5a7a168718e91d6f}} 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_abc968c0b9efc483194cf70a5256cbc46}\label{classcturtle_1_1Turtle_abc968c0b9efc483194cf70a5256cbc46}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!fill@{fill}}
 \index{fill@{fill}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{fill()}{fill()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::fill (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::fill (\begin{DoxyParamCaption}\item[{bool}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -495,7 +526,7 @@ Sets the fill color of this turtle.
 \index{cturtle::Turtle@{cturtle::Turtle}!forward@{forward}}
 \index{forward@{forward}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{forward()}{forward()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::forward (\begin{DoxyParamCaption}\item[{int}]{pixels }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::forward (\begin{DoxyParamCaption}\item[{int}]{pixels }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -518,8 +549,12 @@ Returns the speed, of any applicable animation in milliseconds, based off of thi
 \doxysubsubsection{\texorpdfstring{heading()}{heading()}}
 {\footnotesize\ttfamily float cturtle\+::\+Turtle\+::heading (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Returns the heading of the \mbox{\hyperlink{classcturtle_1_1Turtle}{Turtle}} (e.\+g, its current rotation). \begin{DoxyReturn}{Returns}
 
+
+Returns the heading of the \mbox{\hyperlink{classcturtle_1_1Turtle}{Turtle}} (e.\+g, its current rotation). 
+
+\begin{DoxyReturn}{Returns}
+the heading of the \mbox{\hyperlink{classcturtle_1_1Turtle}{Turtle}} (e.\+g, its current rotation) 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a9703e6352bb71bb995ad0d364be66a49}\label{classcturtle_1_1Turtle_a9703e6352bb71bb995ad0d364be66a49}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!hideturtle@{hideturtle}}
@@ -532,13 +567,13 @@ Returns the heading of the \mbox{\hyperlink{classcturtle_1_1Turtle}{Turtle}} (e.
 Hides the turtle. 
 
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classcturtle_1_1Turtle_a9e83fdd5c469e4863cf9b460e4d29130}{setshowturtle(bool)}} 
+\mbox{\hyperlink{classcturtle_1_1Turtle_a031507fa1bc060bf12c563744797497b}{setshowturtle(bool)}} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_ab6558ff8b547bfb54a68c55259f7bb32}\label{classcturtle_1_1Turtle_ab6558ff8b547bfb54a68c55259f7bb32}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!home@{home}}
 \index{home@{home}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{home()}{home()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \textbackslash{}\+Brings the turtle back to its origin. Depends on the current screen mode. If the screen mode is set to \char`\"{}world\char`\"{}, The turtle is turned to the right and positive angles are counterclockwise. Otherwise, if it is set to \char`\"{}logo\char`\"{}, The turtle face upwards and positive angles are clockwise. \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{classcturtle_1_1InteractiveTurtleScreen_a1c666afe65211cf9eedaffa17206a697}{Turtle\+Screen\+::mode()}} 
@@ -547,7 +582,7 @@ Hides the turtle.
 \index{cturtle::Turtle@{cturtle::Turtle}!left@{left}}
 \index{left@{left}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{left()}{left()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::left (\begin{DoxyParamCaption}\item[{float}]{amt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::left (\begin{DoxyParamCaption}\item[{float}]{amt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -614,17 +649,11 @@ Sets the pen color.
 \begin{DoxyReturn}{Returns}
 a constant reference to the current state of this turtle. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}\label{classcturtle_1_1Turtle_a5c30156bce0af41ff3d66ecb30017dff}} 
-\index{cturtle::Turtle@{cturtle::Turtle}!popState@{popState}}
-\index{popState@{popState}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{popState()}{popState()}}
-{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::pop\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-Pops the top of the pen\textquotesingle{}s state stack. \mbox{\Hypertarget{classcturtle_1_1Turtle_a68ea497f0c865e812026d861882a1c1a}\label{classcturtle_1_1Turtle_a68ea497f0c865e812026d861882a1c1a}} 
-\index{cturtle::Turtle@{cturtle::Turtle}!pushGeom@{pushGeom}}
-\index{pushGeom@{pushGeom}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{pushGeom()}{pushGeom()}}
-{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Geom (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$}]{geom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a1b7268d51bd48b8a026f31bda5ebe7c2}\label{classcturtle_1_1Turtle_a1b7268d51bd48b8a026f31bda5ebe7c2}} 
+\index{cturtle::Turtle@{cturtle::Turtle}!pushGeometry@{pushGeometry}}
+\index{pushGeometry@{pushGeometry}!cturtle::Turtle@{cturtle::Turtle}}
+\doxysubsubsection{\texorpdfstring{pushGeometry()}{pushGeometry()}}
+{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Geometry (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$}]{geom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -646,7 +675,7 @@ A boolean indicating if the geometry was added to the scene.
 \index{cturtle::Turtle@{cturtle::Turtle}!pushStamp@{pushStamp}}
 \index{pushStamp@{pushStamp}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{pushStamp()}{pushStamp()}}
-{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Stamp (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$}]{geom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Stamp (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$}]{geom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -661,17 +690,11 @@ Internal function used to add a stamp object to the turtle screen.
 {\em geom} & The geometry of the stamp. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}\label{classcturtle_1_1Turtle_a5e602612caf63a1e2778b7c700cb7579}} 
-\index{cturtle::Turtle@{cturtle::Turtle}!pushState@{pushState}}
-\index{pushState@{pushState}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{pushState()}{pushState()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::push\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-Pushes a copy of the pen\textquotesingle{}s state on the stack. \mbox{\Hypertarget{classcturtle_1_1Turtle_a5c6d5684bd6fb11e291576a5c55c2dbf}\label{classcturtle_1_1Turtle_a5c6d5684bd6fb11e291576a5c55c2dbf}} 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a2c3bd1677307e639625b58ac362ca79a}\label{classcturtle_1_1Turtle_a2c3bd1677307e639625b58ac362ca79a}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!pushText@{pushText}}
 \index{pushText@{pushText}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{pushText()}{pushText()}}
-{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Text (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color,  }\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Text (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color,  }\item[{const \mbox{\hyperlink{classcturtle_1_1BitmapFont}{Bitmap\+Font}} \&}]{font,  }\item[{const std\+::string \&}]{text,  }\item[{float}]{scale = {\ttfamily 1.0f},  }\item[{Text\+Align}]{alignment = {\ttfamily TEXT\+\_\+ALIGN\+\_\+LEFT} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -683,18 +706,24 @@ Internal function used to add a text object to the turtle screen.
 \hline
 {\em color} & The color with which to draw the text. \\
 \hline
+{\em font} & to use to draw the text. \\
+\hline
+{\em scale} & to draw the text at. \\
+\hline
 {\em text} & The string to draw. \\
+\hline
+{\em alignment} & The alignment of the text. Particularly useful for multi-\/line strings. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a5ea16e46b1220ea6afb0d40abecbec17}\label{classcturtle_1_1Turtle_a5ea16e46b1220ea6afb0d40abecbec17}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!pushTraceLine@{pushTraceLine}}
 \index{pushTraceLine@{pushTraceLine}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{pushTraceLine()}{pushTraceLine()}}
-{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Trace\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{a,  }\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool cturtle\+::\+Turtle\+::push\+Trace\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{a,  }\item[{\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}}}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
-Internal function used to add a trace line object to the turtle screen. 
+Internal function used to add a trace line object to the turtle screen. Trace lines do N\+OT push a state. Their state is encompassed by movement, and these lines are only added when moving the turtle while the pen is down. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -716,7 +745,7 @@ degress()
 \index{cturtle::Turtle@{cturtle::Turtle}!right@{right}}
 \index{right@{right}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{right()}{right()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::right (\begin{DoxyParamCaption}\item[{float}]{amt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::right (\begin{DoxyParamCaption}\item[{float}]{amt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -763,11 +792,11 @@ Sets the rotation of this turtle. The unit by which the input is specified is de
 
 \mbox{\hyperlink{classcturtle_1_1InteractiveTurtleScreen_a1c666afe65211cf9eedaffa17206a697}{Turtle\+Screen\+::mode()}} 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_a4eb2630341ea5bb922c74f214037b361}\label{classcturtle_1_1Turtle_a4eb2630341ea5bb922c74f214037b361}} 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_a32e0c03d6a17e2dc75fa4faa50bd80db}\label{classcturtle_1_1Turtle_a32e0c03d6a17e2dc75fa4faa50bd80db}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!setheading@{setheading}}
 \index{setheading@{setheading}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{setheading()}{setheading()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::setheading (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::setheading (\begin{DoxyParamCaption}\item[{float}]{amt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -826,11 +855,11 @@ Sets the transform location of this turtle.
 \doxysubsubsection{\texorpdfstring{setScreen()}{setScreen()}}
 {\footnotesize\ttfamily void cturtle\+::\+Turtle\+::set\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcturtle_1_1AbstractTurtleScreen}{Abstract\+Turtle\+Screen}} $\ast$}]{scr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Sets this turtles screen. \mbox{\Hypertarget{classcturtle_1_1Turtle_a9e83fdd5c469e4863cf9b460e4d29130}\label{classcturtle_1_1Turtle_a9e83fdd5c469e4863cf9b460e4d29130}} 
+Sets this turtles screen. \mbox{\Hypertarget{classcturtle_1_1Turtle_a031507fa1bc060bf12c563744797497b}\label{classcturtle_1_1Turtle_a031507fa1bc060bf12c563744797497b}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!setshowturtle@{setshowturtle}}
 \index{setshowturtle@{setshowturtle}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{setshowturtle()}{setshowturtle()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::setshowturtle (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::setshowturtle (\begin{DoxyParamCaption}\item[{bool}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -875,7 +904,7 @@ Sets the shape of this turtle.
 \index{cturtle::Turtle@{cturtle::Turtle}!shape@{shape}}
 \index{shape@{shape}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{shape()}{shape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::shape (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::shape (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -890,7 +919,7 @@ Sets the shape of this turtle from the specified shape name.
 \index{cturtle::Turtle@{cturtle::Turtle}!shift@{shift}}
 \index{shift@{shift}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{shift()}{shift()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::shift (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::shift (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Adds a \char`\"{}dumb\char`\"{} translation to the current turtle\textquotesingle{}s transform. Does not take into account the rotation, or orientation, of the turtle. 
 \begin{DoxyParams}{Parameters}
@@ -910,7 +939,7 @@ Adds a \char`\"{}dumb\char`\"{} translation to the current turtle\textquotesingl
 Shows the turtle. Equivalent to calling setshowturtle(true). 
 
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classcturtle_1_1Turtle_a9e83fdd5c469e4863cf9b460e4d29130}{setshowturtle(bool)}} 
+\mbox{\hyperlink{classcturtle_1_1Turtle_a031507fa1bc060bf12c563744797497b}{setshowturtle(bool)}} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classcturtle_1_1Turtle_a5f2010373aeb82207975e9f1b4168747}\label{classcturtle_1_1Turtle_a5f2010373aeb82207975e9f1b4168747}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!speed@{speed}}
@@ -934,7 +963,7 @@ cturtle\+::\+Turtle\+Speed
 \index{cturtle::Turtle@{cturtle::Turtle}!stamp@{stamp}}
 \index{stamp@{stamp}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{stamp()}{stamp()}}
-{\footnotesize\ttfamily int cturtle\+::\+Turtle\+::stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int cturtle\+::\+Turtle\+::stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -965,7 +994,7 @@ Returns the angle between the line of the current turtle transform to the given 
 \index{cturtle::Turtle@{cturtle::Turtle}!towards@{towards}}
 \index{towards@{towards}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{towards()}{towards()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily float cturtle\+::\+Turtle\+::towards (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily float cturtle\+::\+Turtle\+::towards (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -987,11 +1016,11 @@ Returns the angle between the line of the current turtle transform to the given 
 \doxysubsubsection{\texorpdfstring{travelBack()}{travelBack()}}
 {\footnotesize\ttfamily void cturtle\+::\+Turtle\+::travel\+Back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
-Performs an interpolation, with animation, between the current transformation and the previous one. Will {\itshape not} push the state stack. E\+N\+S\+U\+RE S\+T\+A\+TE S\+T\+A\+CK IS B\+IG E\+N\+O\+U\+GH TO DO T\+H\+IS B\+E\+F\+O\+RE C\+A\+L\+L\+I\+NG. \mbox{\Hypertarget{classcturtle_1_1Turtle_a1fada959d0f1bd31b3854adea6d3d6de}\label{classcturtle_1_1Turtle_a1fada959d0f1bd31b3854adea6d3d6de}} 
+Performs an interpolation, with animation, between the current transformation and the previous one. Will {\itshape not} push the state stack. E\+N\+S\+U\+RE S\+T\+A\+TE S\+T\+A\+CK IS B\+IG E\+N\+O\+U\+GH TO DO T\+H\+IS B\+E\+F\+O\+RE C\+A\+L\+L\+I\+NG. \mbox{\Hypertarget{classcturtle_1_1Turtle_a962700b3a0ec7bd8185b7a31cca68db5}\label{classcturtle_1_1Turtle_a962700b3a0ec7bd8185b7a31cca68db5}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!travelBetween@{travelBetween}}
 \index{travelBetween@{travelBetween}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{travelBetween()}{travelBetween()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::travel\+Between (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcturtle_1_1Transform}{Transform}}}]{from,  }\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{to,  }\item[{bool}]{push\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::travel\+Between (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcturtle_1_1Transform}{Transform}}}]{src,  }\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{dest,  }\item[{bool}]{do\+Push\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 Performs an interpolation, with animation, between the source transform and the destination transform. May push a new fill vertex if filling and pushing state, and applies appropriate lines if the pen is down. Generally manages all state related to movement as a side effect. \mbox{\Hypertarget{classcturtle_1_1Turtle_af838da6166c05227dac1a8b57ca27414}\label{classcturtle_1_1Turtle_af838da6166c05227dac1a8b57ca27414}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!travelTo@{travelTo}}
@@ -1003,7 +1032,7 @@ Performs an interpolation, with animation, between the current transform and the
 \index{cturtle::Turtle@{cturtle::Turtle}!updateParent@{updateParent}}
 \index{updateParent@{updateParent}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{updateParent()}{updateParent()}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::update\+Parent (\begin{DoxyParamCaption}\item[{bool}]{invalidate = {\ttfamily false},  }\item[{bool}]{input = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::update\+Parent (\begin{DoxyParamCaption}\item[{bool}]{invalidate = {\ttfamily false},  }\item[{bool}]{input = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 Conditionally calls the parent screen\textquotesingle{}s update function. \mbox{\Hypertarget{classcturtle_1_1Turtle_af45bb9721decb8f091622863d337e9af}\label{classcturtle_1_1Turtle_af45bb9721decb8f091622863d337e9af}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!width@{width}}
@@ -1029,7 +1058,7 @@ Sets the width of the pen line.
 \index{cturtle::Turtle@{cturtle::Turtle}!write@{write}}
 \index{write@{write}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Writes the specified string to the screen. Uses the current filling color. 
 \begin{DoxyParams}{Parameters}
@@ -1039,32 +1068,29 @@ Writes the specified string to the screen. Uses the current filling color.
 \begin{DoxySeeAlso}{See also}
 fillcolor(color) 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}\label{classcturtle_1_1Turtle_afa05ae8897410f6ff0ed6578ddf004f3}} 
+\mbox{\Hypertarget{classcturtle_1_1Turtle_ada6be9e595e6aad0f2c23448f9f2de87}\label{classcturtle_1_1Turtle_ada6be9e595e6aad0f2c23448f9f2de87}} 
 \index{cturtle::Turtle@{cturtle::Turtle}!write@{write}}
 \index{write@{write}!cturtle::Turtle@{cturtle::Turtle}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cturtle\+::\+Turtle\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{const std\+::string \&}]{font,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{color = {\ttfamily \{\char`\"{}white\char`\"{}\}},  }\item[{float}]{scale = {\ttfamily 1.0f},  }\item[{Text\+Align}]{alignment = {\ttfamily TEXT\+\_\+ALIGN\+\_\+LEFT} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Writes the specified string to the screen. Uses the specified color. 
 \begin{DoxyParams}{Parameters}
 {\em text} & The text to write. \\
 \hline
+{\em font} & The font name to use. Uses \char`\"{}default\char`\"{} font by default. Must be registered to parent screen. \\
+\hline
 {\em color} & The color to write the text in. \\
+\hline
+{\em scale} & The scale to draw the text at. This is relative to the size of the used font. \\
+\hline
+{\em alignment} & The horizontal alignment of text. This is specifically useful for multi-\/line strings. \\
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
 fillcolor(color) 
 \end{DoxySeeAlso}
 
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classcturtle_1_1Turtle_ab7156951a007fbbc8a07cbb66e7b888b}\label{classcturtle_1_1Turtle_ab7156951a007fbbc8a07cbb66e7b888b}} 
-\index{cturtle::Turtle@{cturtle::Turtle}!travelPoints@{travelPoints}}
-\index{travelPoints@{travelPoints}!cturtle::Turtle@{cturtle::Turtle}}
-\doxysubsubsection{\texorpdfstring{travelPoints}{travelPoints}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} cturtle\+::\+Turtle\+::travel\+Points\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
-
-These variables are used to draw the \char`\"{}travel\char`\"{} line when the turtle is traveling. (e.\+g, the line between where it\textquotesingle{}s going 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

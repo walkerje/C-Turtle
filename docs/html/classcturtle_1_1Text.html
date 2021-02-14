@@ -92,19 +92,18 @@ Collaboration diagram for cturtle::Text:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcturtle_1_1Text__coll__graph.png" border="0" usemap="#cturtle_1_1Text_coll__map" alt="Collaboration graph"/></div>
 <map name="cturtle_1_1Text_coll__map" id="cturtle_1_1Text_coll__map">
-<area shape="rect" title="The Text class represents a basic string that is drawn on the screen. Unfortunately,..." alt="" coords="45,200,136,227"/>
+<area shape="rect" title="The Text class represents a basic string that is drawn on the screen. Unfortunately,..." alt="" coords="177,213,268,240"/>
 <area shape="rect" href="classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="5,109,176,151"/>
 <area shape="rect" href="classcturtle_1_1Color.html" title="The primary representation of Color for this library. Represented as a simple RGB color composed of u..." alt="" coords="42,5,139,32"/>
+<area shape="rect" href="classcturtle_1_1BitmapFont.html" title="The Bitmap Font represents monospaced font image files that covers a range of lower ASCII...." alt="" coords="200,117,333,143"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aad06f49d01be75cbfafedb64a38cfc29"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1Text.html#aad06f49d01be75cbfafedb64a38cfc29">Text</a> ()</td></tr>
-<tr class="separator:aad06f49d01be75cbfafedb64a38cfc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9adab9abc546c76b39feb594e0f4de1a"><td class="memItemLeft" align="right" valign="top"><a id="a9adab9abc546c76b39feb594e0f4de1a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Text</b> (const std::string &amp;<a class="el" href="classcturtle_1_1Text.html#ac631d8199ccd9ae56f661e22acc157d9">text</a>, <a class="el" href="classcturtle_1_1Color.html">Color</a> color)</td></tr>
-<tr class="separator:a9adab9abc546c76b39feb594e0f4de1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282c8dccd366e527c9de2539f38fbfbf"><td class="memItemLeft" align="right" valign="top"><a id="a282c8dccd366e527c9de2539f38fbfbf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Text</b> (const std::string &amp;<a class="el" href="classcturtle_1_1Text.html#aa1aa8cfb9703aca19887dbedd74355b9">text</a>, const <a class="el" href="classcturtle_1_1BitmapFont.html">BitmapFont</a> &amp;font, <a class="el" href="classcturtle_1_1Color.html">Color</a> color, float scale=1.0f, TextAlign alignment=TEXT_ALIGN_LEFT)</td></tr>
+<tr class="separator:a282c8dccd366e527c9de2539f38fbfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acea0ae681ef02899079547d852810687"><td class="memItemLeft" align="right" valign="top"><a id="acea0ae681ef02899079547d852810687"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Text</b> (const <a class="el" href="classcturtle_1_1Text.html">Text</a> &amp;<a class="el" href="classcturtle_1_1Text.html#acb0908ae70d1194d6e47a8f8ba51461a">copy</a>)</td></tr>
 <tr class="separator:acea0ae681ef02899079547d852810687"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,8 +126,17 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac631d8199ccd9ae56f661e22acc157d9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1Text.html#ac631d8199ccd9ae56f661e22acc157d9">text</a></td></tr>
-<tr class="separator:ac631d8199ccd9ae56f661e22acc157d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1aa8cfb9703aca19887dbedd74355b9"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1Text.html#aa1aa8cfb9703aca19887dbedd74355b9">text</a></td></tr>
+<tr class="separator:aa1aa8cfb9703aca19887dbedd74355b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac084585709405dda12f53a1ddf77f12b"><td class="memItemLeft" align="right" valign="top"><a id="ac084585709405dda12f53a1ddf77f12b"></a>
+const <a class="el" href="classcturtle_1_1BitmapFont.html">BitmapFont</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>font</b></td></tr>
+<tr class="separator:ac084585709405dda12f53a1ddf77f12b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724b76a0ac8f542c89b755922e49dcdd"><td class="memItemLeft" align="right" valign="top"><a id="a724b76a0ac8f542c89b755922e49dcdd"></a>
+TextAlign&#160;</td><td class="memItemRight" valign="bottom"><b>alignment</b></td></tr>
+<tr class="separator:a724b76a0ac8f542c89b755922e49dcdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97f014d54f8f3aba8c42120d4a5c8ce3"><td class="memItemLeft" align="right" valign="top"><a id="a97f014d54f8f3aba8c42120d4a5c8ce3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b></td></tr>
+<tr class="separator:a97f014d54f8f3aba8c42120d4a5c8ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classcturtle_1_1AbstractDrawableObject"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classcturtle_1_1AbstractDrawableObject')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classcturtle_1_1AbstractDrawableObject.html">cturtle::AbstractDrawableObject</a></td></tr>
 <tr class="memitem:a37d635a02ad3e5206a6eb99b7b5f1963 inherit pub_attribs_classcturtle_1_1AbstractDrawableObject"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcturtle_1_1Color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcturtle_1_1AbstractDrawableObject.html#a37d635a02ad3e5206a6eb99b7b5f1963">fillColor</a></td></tr>
 <tr class="separator:a37d635a02ad3e5206a6eb99b7b5f1963 inherit pub_attribs_classcturtle_1_1AbstractDrawableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,34 +147,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classcturtle_1_1Text.html" title="The Text class represents a basic string that is drawn on the screen. Unfortunately,...">Text</a> class represents a basic string that is drawn on the screen. Unfortunately, <a class="el" href="classcturtle_1_1Text.html" title="The Text class represents a basic string that is drawn on the screen. Unfortunately,...">Text</a> objects are very simple. They have no notion of either text size of font. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aad06f49d01be75cbfafedb64a38cfc29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad06f49d01be75cbfafedb64a38cfc29">&#9670;&nbsp;</a></span>Text()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">cturtle::Text::Text </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Blank default destructor. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a80003e4c447def1c7de8daf29a8fc5ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80003e4c447def1c7de8daf29a8fc5ec">&#9670;&nbsp;</a></span>draw()</h2>
 
@@ -216,14 +197,14 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ac631d8199ccd9ae56f661e22acc157d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac631d8199ccd9ae56f661e22acc157d9">&#9670;&nbsp;</a></span>text</h2>
+<a id="aa1aa8cfb9703aca19887dbedd74355b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1aa8cfb9703aca19887dbedd74355b9">&#9670;&nbsp;</a></span>text</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string cturtle::Text::text</td>
+          <td class="memname">const std::string cturtle::Text::text</td>
         </tr>
       </table>
 </div><div class="memdoc">

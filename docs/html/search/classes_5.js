@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sceneobject_193',['SceneObject',['../structcturtle_1_1SceneObject.html',1,'cturtle']]],
-  ['sprite_194',['Sprite',['../classcturtle_1_1Sprite.html',1,'cturtle']]]
+  ['penstate_198',['PenState',['../structcturtle_1_1PenState.html',1,'cturtle']]],
+  ['polygon_199',['Polygon',['../classcturtle_1_1Polygon.html',1,'cturtle']]]
 ];

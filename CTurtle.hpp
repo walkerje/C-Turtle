@@ -1,8 +1,84 @@
-/*Include GIF utility when compiling headless mode.*/
-/*License for CTurtle itself is found further down in the file.
- * Ctrl+F for "MIT" should get you there.*/
+// MIT License
+// 
+// Copyright (c) 2021 Jesse W. Walker
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+/**
+    :::::::: ::::::::::: :::    ::: ::::::::: ::::::::::: :::        ::::::::::
+   :+:    :+:    :+:     :+:    :+: :+:    :+:    :+:     :+:        :+:
+   +:+           +:+     +:+    +:+ +:+    +:+    +:+     +:+        +:+
+   +#+           +#+     +#+    +:+ +#++:++#:     +#+     +#+        +#++:++#
+   +#+           +#+     +#+    +#+ +#+    +#+    +#+     +#+        +#+
+   #+#    #+#    #+#     #+#    #+# #+#    #+#    #+#     #+#        #+#
+    ########     ###      ########  ###    ###    ###     ########## ########## 
+   =================================v1.0.0====================================>
+   
+   GitHub: https://github.com/walkerje/C-Turtle
+   Documentation: http://walkerje.me/C-Turtle/docs/html/annotated.html
+   Semantic Versioning (see https://semver.org/)
+   Changelog (see https://keepachangelog.com/)
+   
+   Release                              v1.0.0
+   -----------------2/13/21-------------------
+   --- Added
+   ~ Simplistic Bitmap Font Support
+   ~ Default Bitmap Font, Proggy Clean (see https://proggyfonts.net)
+   ~ Support for more dynamic font rendering, specifically allowing control over orientation, scale, and alignment.
+   ~ "face" function to Turtles to orient the turtle towards another Point.
+   ~ "addfont" and "font" function to the TurtleScreen class to register and retrieve user-provided Bitmap Fonts.
+   ~ Appended version number to default title constructors in the TurtleScreen class.
+   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)
+   
+   --- Changed
+   ~ Moved turtle function implementations to the inside of the Turtle Class
+   ~ Moved default shape map definition to AbstractTurtleScreen rather than individual screens.
+   ~ Refactored the internal turtle function "pushGeom" to "pushGeometry"
+   ~ Organized include statements, and the top of the file in general.
+   ~ Updated Documentation
+   ~ Changed ivec2 implementation to use a union between an anonymous structure and an 2-wide array of integers
+   
+   --- Removed
+   ~ N/A
+   
+   Release                              v0.2.X
+   ------------------4/23/20------------------
+   ~ See GitHub commit histories 744dd6d through e7e17de
+   
+   Release                              v0.1.X
+   ------------------4/23/20------------------
+   ~ See GitHub commit histories a93dc4d through 744dd6d
+   
+   Release                              v0.0.X
+   -------------------9/7/19------------------
+   ~ See GitHub commit histories 12888e7 through a93dc4d
+**/
+
+#pragma once
+
+#define CTURTLE_VERSION_MAJOR "1"
+#define CTURTLE_VERSION_MINOR "0"
+#define CTURTLE_VERSION_PATCH "0"
+#define CTURTLE_VERSION "v" CTURTLE_VERSION_MAJOR "." CTURTLE_VERSION_MINOR "." CTURTLE_VERSION_PATCH
 
 #ifdef CTURTLE_HEADLESS
+/*Include GIF utility when compiling headless mode.*/
 
 /* public domain, Simple, Minimalistic GIF writer - http://jonolick.com
  *
@@ -400,30 +476,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #endif /*JO_INCLUDE_GIF_H*/
 #endif /*CTURTLE_HEADLESS*/
 
-//MIT License
-//
-//Copyright (c) 2019 Jesse W. Walker
-//
-//Permission is hereby granted, free of charge, to any person obtaining a copy
-//of this software and associated documentation files (the "Software"), to deal
-//in the Software without restriction, including without limitation the rights
-//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//copies of the Software, and to permit persons to whom the Software is
-//furnished to do so, subject to the following conditions:
-//
-//The above copyright notice and this permission notice shall be included in all
-//copies or substantial portions of the Software.
-//
-//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//SOFTWARE.
-
-#pragma once
-
 //Automatic linking when operating under MSVC
 //If linking errors occur when compiling on Non-MSVC,
 //Make sure you link X11 and PThread when using Unix-Like environments, when NOT using headless mode.
@@ -438,8 +490,6 @@ inline void jo_gif_end(jo_gif_t *gif) {
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
 #ifndef _MSC_VER
-#include <cmath>//for M_PI
-#else
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288
 #endif
@@ -481,33 +531,25 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #include "CImg.h"
 #endif
 
-//For specific integer types, maps, strings, etc.
-#include <unordered_map>
-#include <string>
-#include <cstdint>
-#include <fstream>
-#include <vector>
-
-//Used for random number generation.
-#include <chrono>
-#include <random>
-
 #include <memory>       //For smart pointers.
-#include <mutex>        //Mutex object for event thread synchronization.
-
-#include <list>
-#include <functional>
-
-#include <tuple>    //Used for CompoundShapes
-#include <cstring>  //memcpy
-#include <vector>   //For Polygon point storage
-#include <cmath>    //For rounding, etc
-#include <array>    //For Transform storage.
-
-#include <thread>
-#include <fstream>
-#include <iostream>
-#include <sstream>//used for base64 encoding.
+#include <list>         //For the ever-useful list data structure.
+#include <unordered_map>//For named color and keys.
+#include <chrono>       //For time management for movement animations and callbacks.
+#include <random>       //For random color creation. 
+#include <functional>   //For event function callbacks.
+#include <tuple>        //Used for CompoundShapes
+#include <cstring>      //For memcpy
+#include <vector>       //For Polygon point storage
+#include <cmath>        //For rounding, etc
+#include <algorithm>    //For std::count 
+#include <array>        //For Transform storage.
+#include <string>       //Strings...
+#include <cstdint>      //For well-defined integer types.
+#include <thread>       //For the event threa
+#include <mutex>        //Mutex object for event thread synchronization. 
+#include <fstream>      //For GIF base-64 encoding to write the file out.
+#include <iostream>     //For GIF reading.
+#include <sstream>      //used for base64 encoding.
 
 //See https://github.com/mvorbrodt/blog/blob/master/src/base64.hpp for original source.
 //The below has been modified to use unsigned characters to avoid signed->unsigned->signed fiddling.
@@ -1382,7 +1424,6 @@ namespace cturtle {
         typedef uint8_t component_t;
 
         union {
-
             struct {
                 component_t r;
                 component_t g;
@@ -1441,6 +1482,87 @@ namespace cturtle {
             dest[2] = b;
         }
     };
+    
+    constexpr char DEFAULT_FONT[] = "default";
+    constexpr uint32_t DEFAULT_FONT_PIXELS_WIDTH = 256;
+    constexpr uint32_t DEFAULT_FONT_PIXELS_HEIGHT = 128;
+    constexpr uint32_t DEFAULT_FONT_GLYPH_WIDTH = 8;
+    constexpr uint32_t DEFAULT_FONT_GLYPH_HEIGHT = 16;
+    constexpr uint32_t DEFAULT_FONT_GLYPHS_X = 32;
+    constexpr uint32_t DEFAULT_FONT_GLYPHS_Y = 8;
+    constexpr uint32_t DEFAULT_FONT_PIXELS_LEN = 1024;
+    constexpr uint32_t DEFAULT_FONT_ASCII_OFFSET = 32;
+
+    //Proggy clean font, 8x16 glyphs, ASCII offset of 32.
+    //fairly compact in memory when expressed ike this.
+    //1-bit encoding per pixel. 1 is opaque white, 0 is transparent/empty.
+    //Proggy clean can be found HERE: https://proggyfonts.net/
+    const uint32_t DEFAULT_FONT_PIXELS[] =
+            { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x102814, 0x10443010, 0x18300000, 0x4, 0x38103838, 0x47c187c, 0x38380000, 0x38,
+              0x102814, 0x3ca84810, 0x10100000, 0x8, 0x44304444, 0xc402004, 0x44440000, 0x44, 0x10007e, 0x50a84800, 0x20081010, 0x8, 0x44500404, 0x14404008, 0x44441020, 0xc006004,
+              0x100028, 0x50503200, 0x20085410, 0x10, 0x54100818, 0x24787808, 0x38441020, 0x307e1808, 0x100028, 0x38144a00, 0x2008387c, 0x7c0010, 0x54101004, 0x44044410, 0x443c0000, 0xc0000610,
+              0x1000fc, 0x142a4400, 0x20085410, 0x20, 0x44102004, 0x7e044410, 0x44040000, 0x307e1810, 0x50, 0x142a4400, 0x20081010, 0x20002020, 0x44104044, 0x4444420, 0x44081020, 0xc006000,
+              0x100050, 0x78443a00, 0x10100000, 0x20002040, 0x387c7c38, 0x4383820, 0x38301020, 0x10, 0x0, 0x10000000, 0x10100000, 0x20000040, 0x0, 0x0, 0x20, 0x0,
+              0x0, 0x0, 0x8200000, 0x40000000, 0x0, 0x0, 0x40, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3818781c, 0x787c7c1c, 0x42383842, 0x40c66218, 0x7818783c, 0xfe428282, 0x42827e38, 0x40381000,
+              0x44184422, 0x44404022, 0x42100844, 0x40c66224, 0x44244442, 0x10428292, 0x42820220, 0x20082800, 0x9a244440, 0x42404040, 0x42100848, 0x40aa5242, 0x44424440, 0x10424492, 0x24440420, 0x20082800,
+              0xaa247c40, 0x42787840, 0x7e100850, 0x40aa5242, 0x44424430, 0x104244aa, 0x18280820, 0x10084400, 0xaa3c4240, 0x4240404e, 0x42100870, 0x40924a42, 0x7842780c, 0x104228aa, 0x18101020, 0x10084400,
+              0x9c424240, 0x42404042, 0x42100848, 0x40924a42, 0x40424802, 0x1042286c, 0x24102020, 0x8080000, 0x40424222, 0x44404022, 0x42100844, 0x40824624, 0x40244442, 0x10421044, 0x42104020, 0x8080000,
+              0x3c427c1c, 0x787c401c, 0x42387042, 0x7c824618, 0x401a423c, 0x103c1044, 0x42107e20, 0x4080000, 0x0, 0x0, 0x0, 0x0, 0x20000, 0x0, 0x20, 0x40800fe,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x38, 0x380000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30004000, 0x4003c00, 0x40100840, 0x30000000, 0x0, 0x20000000, 0x1c, 0x10700000,
+              0x4000, 0x4002000, 0x40000040, 0x10000000, 0x0, 0x20000000, 0x10, 0x10100000, 0x387838, 0x3c38783c, 0x78301844, 0x10ec7838, 0x783c583c, 0x3c444482, 0x44447c10, 0x10100000,
+              0x44444, 0x44442044, 0x44100848, 0x10924444, 0x44446440, 0x20444492, 0x28440410, 0x10107200, 0x3c4440, 0x447c2044, 0x44100850, 0x10924444, 0x44444030, 0x20442892, 0x10440860, 0x100c9c00,
+              0x444440, 0x44402044, 0x44100870, 0x10924444, 0x44444008, 0x204428aa, 0x10441010, 0x10100000, 0x444444, 0x44442044, 0x44100848, 0x10924444, 0x44444004, 0x2044106c, 0x28442010, 0x10100000,
+              0x3c7838, 0x3c38203c, 0x44100844, 0x10924438, 0x783c4078, 0x1c3c1044, 0x443c7c10, 0x10100000, 0x0, 0x4, 0x800, 0x0, 0x40040000, 0x0, 0x40010, 0x10100000,
+              0x0, 0x4, 0x7000, 0x0, 0x40040000, 0x0, 0x4000c, 0x10600000, 0x0, 0x38, 0x0, 0x0, 0x40040000, 0x0, 0x380000, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0xfefe, 0xfefefefe, 0xfefefefe, 0xfe00fe00, 0xfefefe, 0xfefefefe, 0xfefefefe, 0xfe00fefe, 0x8282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282,
+              0x1c008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282, 0x22008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282,
+              0x78008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282, 0x20008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282,
+              0x78008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282, 0x22008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282,
+              0x1c008282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282, 0x8282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282,
+              0x8282, 0x82828282, 0x82828282, 0x82008200, 0x828282, 0x82828282, 0x82828282, 0x82008282, 0xfefe, 0xfefefefe, 0xfefefefe, 0xfe00fe00, 0xfefefe, 0xfefefefe, 0xfefefefe, 0xfe00fefe,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0xfe, 0x0, 0x0, 0x0, 0x4040400, 0x100018, 0x82107c, 0x287c3000, 0x7c00, 0x78007878, 0x18003e00, 0x607800, 0x4c4cec10,
+              0x1020, 0x82821040, 0x820800, 0x8200, 0x48101030, 0x7400, 0x204800, 0x48486800, 0x103820, 0x7c441030, 0x9a3814, 0xb200, 0x30102008, 0x447400, 0x204850, 0x50503010,
+              0x105478, 0x44281028, 0xa24828, 0xaa00, 0x7c7870, 0x443438, 0x703028, 0x101cd010, 0x105020, 0x44100018, 0xa23850, 0x7800b200, 0x100000, 0x441438, 0x14, 0x24222420,
+              0x105020, 0x447c1004, 0x9a0028, 0x800aa00, 0x100000, 0x441438, 0x28, 0x2c242c40, 0x105440, 0x7c101044, 0x820014, 0x8008200, 0x0, 0x641400, 0x50, 0x5e485e44,
+              0x10387c, 0x82101038, 0x7c0000, 0x8007c00, 0x7c0000, 0x5a1400, 0x0, 0x444e4438, 0x1000, 0x1000, 0x0, 0x0, 0x0, 0x401400, 0x18000000, 0x0,
+              0x0, 0x1000, 0x0, 0x0, 0x0, 0x800000, 0x8000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10000000, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x10081814, 0x180000, 0x20081000, 0x10081000, 0x141008, 0x18140000, 0x100818, 0x80000, 0x8102428, 0x24241e1c, 0x10102828, 0x8102828, 0x280810, 0x24282400, 0x1a081024, 0x2410407c,
+              0x18181818, 0x18182822, 0x7c7c7c7c, 0x38383838, 0x78621818, 0x18181800, 0x24424242, 0x42824044, 0x24242424, 0x24242840, 0x40404040, 0x10101010, 0x44522424, 0x24242444, 0x4a424242, 0x42827878,
+              0x24242424, 0x24244c40, 0x40404040, 0x10101010, 0x42524242, 0x42424228, 0x4a424242, 0x42444444, 0x3c3c3c3c, 0x3c3c7840, 0x78787878, 0x10101010, 0xf24a4242, 0x42424210, 0x52424242, 0x42284442,
+              0x42424242, 0x42428840, 0x40404040, 0x10101010, 0x424a4242, 0x42424228, 0x52424242, 0x42107842, 0x42424242, 0x42428822, 0x40404040, 0x10101010, 0x44462424, 0x24242444, 0x24424242, 0x42104042,
+              0x42424242, 0x42428e1c, 0x7c7c7c7c, 0x38383838, 0x78461818, 0x18181800, 0x583c3c3c, 0x3c10407c, 0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80,
+              0x0, 0x8, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x100000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1818383c, 0x28380000, 0x30303828, 0x30303828, 0x3c783018, 0x383c2800, 0x303038, 0x28184028,
+              0x0, 0x0, 0x0, 0x0, 0x14000000, 0x0, 0x4000000, 0x4000, 0x38383838, 0x38386c38, 0x38383838, 0x30303030, 0x4783838, 0x38383810, 0x38444444, 0x44447844,
+              0x4040404, 0x4041244, 0x44444444, 0x10101010, 0x3c444444, 0x44444400, 0x4c444444, 0x44444444, 0x3c3c3c3c, 0x3c3c7e40, 0x7c7c7c7c, 0x10101010, 0x44444444, 0x4444447c, 0x54444444, 0x44444444,
+              0x44444444, 0x44449040, 0x40404040, 0x10101010, 0x44444444, 0x44444400, 0x54444444, 0x44444444, 0x44444444, 0x44449244, 0x44444444, 0x10101010, 0x44444444, 0x44444410, 0x64444444, 0x44444444,
+              0x3c3c3c3c, 0x3c3c7c38, 0x38383838, 0x10101010, 0x38443838, 0x38383800, 0x383c3c3c, 0x3c3c783c, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x40000000, 0x44004,
+              0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x44004, 0x0, 0x20, 0x0, 0x0, 0x0, 0x0, 0x0, 0x380038,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+              0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
+
 
     const std::unordered_map<std::string, detail::color_int_t> NAMED_COLORS = {
         {"alice blue", detail::col::alice_blue},
@@ -2204,7 +2326,6 @@ namespace cturtle {
     inline Color randomColor() {
         static std::default_random_engine rng(detail::epochTime());
         static std::uniform_int_distribution<int> rng_dist(0, 255);
-
         return Color((uint8_t) rng_dist(rng), (uint8_t) rng_dist(rng), (uint8_t) rng_dist(rng));
     }
 
@@ -2466,10 +2587,12 @@ namespace cturtle {
      * This class is represented as a low-precision point, because
      * this data type tends to be most easily drawn to a simple canvas.*/
     struct ivec2 {
-        /**The X component.*/
-        int x;
-        /**The Y component.*/
-        int y;
+        union{
+            struct{
+                int x, y;
+            };
+            int data[2];
+        };
 
         /**\brief Empty constructor. Initializes X and Y to both equal 0.*/
         ivec2() : x(0), y(0){}
@@ -2485,14 +2608,14 @@ namespace cturtle {
          *\param index The index of one of the components of this ivec2 (0..1)
          *\return A reference to the index */
         inline int& operator[](int index){
-            return index == 0 ? x : y;
+            return data[index];
         }
 
         /**\brief Array access operator overload. Useful for convenience.
          *\param index The index of one of the components of this ivec2 (0..1)
          *\return A reference to the index */
         inline int operator[](int index) const{
-            return index == 0 ? x : y;
+            return data[index];
         }
         
         ivec2 operator+(const ivec2& other) const{
@@ -2608,7 +2731,6 @@ namespace cturtle {
      */
     class Transform {
     public:
-
         /**Constructs an empty transform.
          * Initializes, by default, as an identity transform.*/
         Transform() {
@@ -2940,6 +3062,99 @@ namespace cturtle {
     inline T toDegrees(T val) {
         return std::round(T(val * (180.0 / M_PI)));
     }
+    
+    /**
+     * \brief The Bitmap Font represents monospaced font image files that covers a range of lower ASCII.
+     * The default font, for example, covers 32-127 (e.g, char 32 to char 127). This is a particularly
+     * naive implementation of bitmap fonts, however, all basic properties required are here.
+     */
+    class BitmapFont{
+    public:
+        /**
+         * Bitmap Font constructor.
+         * @param asciiOffs
+         * @param glyphWidth
+         * @param glyphHeight
+         * @param glyphsX
+         * @param glyphsY
+         */
+        BitmapFont(const Image& img, int asciiOffs, int glyphWidth, int glyphHeight, int glyphsX, int glyphsY)
+            : asciiOffset(asciiOffs),
+              glyphWidth(glyphWidth), glyphHeight(glyphHeight),
+              glyphsX(glyphsX), glyphsY(glyphsY){
+            
+            //fill the glyphs vector...
+            const ivec2 glyphSz = {glyphWidth, glyphHeight};
+            
+            for(unsigned char c = static_cast<char>(asciiOffset); c < UINT8_MAX; c++){
+                const ivec2 min = getGlyphPosition(c);
+                const ivec2 max = (min + glyphSz) - ivec2(1, 1);
+                glyphs.push_back(img.get_crop(
+                        min.x, min.y,
+                        max.x, max.y));
+            }
+        }
+        
+        /**
+         * Returns the appropriate image for the specified character.
+         * \param c character to retrieve the associated image for.
+         */
+        const Image& getGlyphImage(unsigned char c) const{
+            return glyphs.at(c - asciiOffset);
+        }
+
+        /**
+         * Returns the appropriate image for the specified character.
+         * \param c character to retrieve the associated image for.
+         */
+        inline const Image& operator[](unsigned char c) const{
+            return getGlyphImage(c);
+        }
+        
+        /**
+         * \brief Returns the position of the specified character in the font image.
+         * @param c character to get the position of
+         * @return position of the character.
+         */
+        ivec2 getGlyphPosition(unsigned char c) const{
+            return {((c - asciiOffset) % glyphsX) * glyphWidth,
+                    (static_cast<int>(std::floor(float(c - asciiOffset) / (float)glyphsX))) * glyphHeight
+            };
+        }
+        
+        /**
+         * \brief Returns the size of a single character glyph, in pixels.
+         * @return the width (x) and height (y) of the glyph, in pixels.
+         */
+        ivec2 getGlyphExtent() const{
+            return {glyphWidth, glyphHeight};
+        }
+        
+        /**
+         * @return the total number of valid glyphs in this bitmap font.
+         */
+        int getTotalGlyphs() const{
+            return glyphsX * glyphsY;
+        }
+        
+        /**
+         * @return a boolean indicating if the specified character is valid within this bitmap font.
+         */
+        bool isValid(char c) const{
+            return 255 > (c - asciiOffset) > -1;
+        }
+        
+        /**
+         * \brief Returns the number of glyphs along each axis of the underlying image.
+         * @return the number of glyphs along each axis of the underlying image.
+         */
+        ivec2 getGlyphAxes() const{
+            return {glyphsX, glyphsY};
+        }
+    private:
+        std::vector<Image> glyphs;
+        int asciiOffset, glyphWidth, glyphHeight, glyphsX, glyphsY;
+    };
 
     /**\brief AbstractDrawableObject is a base class, intended to be
      *        inherited from by all drawable objects.
@@ -2980,6 +3195,16 @@ namespace cturtle {
          * \param c The color with to draw the geometry.*/
         virtual void draw(const Transform& t, Image& imgRef) const = 0;
     };
+    
+    /**
+     * Text Alignment enumerations, used for aligning multi-line text
+     * strings when writing to screens with turtles.
+     */
+    enum TextAlign{
+        TEXT_ALIGN_LEFT,
+        TEXT_ALIGN_RIGHT,
+        TEXT_ALIGN_CENTER
+    };
 
     /**\brief The Text class represents a basic string that is drawn on the screen.
      * Unfortunately, Text objects are very simple. They have no notion of either text size of font.
@@ -2987,18 +3212,18 @@ namespace cturtle {
     class Text : public AbstractDrawableObject {
     public:
         /** The text to draw.*/
-        std::string text;
-
-        /**Blank default destructor.*/
-        Text(){}
-
-        Text(const std::string& text, Color color)
-            : text(text){
+        const std::string text;
+        const BitmapFont& font;
+        TextAlign alignment;
+        float scale;
+        
+        Text(const std::string& text, const BitmapFont& font, Color color, float scale = 1.0f, TextAlign alignment = TEXT_ALIGN_LEFT)
+            : text(text), font(font), scale(scale), alignment(alignment){
             fillColor = color;
         }
 
         Text(const Text& copy)
-            : text(copy.text){
+            : text(copy.text), font(copy.font), scale(copy.scale), alignment(copy.alignment){
             fillColor = copy.fillColor;
         }
 
@@ -3007,8 +3232,85 @@ namespace cturtle {
         }
 
         void draw(const Transform& t, Image& imgRef) const{
-            const Point pos = t.getTranslation();
-            imgRef.draw_text(pos.x,pos.y,text.c_str(),fillColor.rgbPtr());
+            //keep track of the length of the longest line of text...
+            int longestLine = 0;
+            
+            //First, split the text into lines.
+            std::string temp;
+            std::list<std::string> textLines;
+            std::stringstream ss(text);
+            while(std::getline(ss, temp, '\n')){
+                longestLine = std::max(longestLine, static_cast<int>(temp.size()));
+                textLines.push_back(temp);
+            }
+            
+            //From there we can get some basic metrics.
+            const ivec2 glyphSz = font.getGlyphExtent();//the size of a single glyph
+            const int lines = textLines.size();//the total number of lines of text
+            const int strPixLen = glyphSz.x * longestLine;//the length, in pixels, of the longest line of text
+            
+            //Create the temporary image.
+            //we double the temp image size to get a proper final rotation.
+            Image textImage(strPixLen * 2, (glyphSz.y * lines) * 2);
+            textImage.channels(0, 3);//force RGBA on temp image
+            
+            int line = 0;
+            //blit each character into the temporary image
+
+            auto lineIter = textLines.begin();
+            while(lineIter != textLines.end()){
+                const std::string& text = *lineIter;
+
+                //text alignment with some relatively simple maths.
+                int hOffset = 0;
+                
+                switch(alignment){
+                    case TEXT_ALIGN_LEFT:
+                        break;//left align left needs no horizontal offset...
+                    case TEXT_ALIGN_RIGHT:
+                        hOffset = strPixLen - (text.size() * glyphSz.x);
+                        break;
+                    case TEXT_ALIGN_CENTER:
+                        hOffset = (strPixLen / 2) - ((text.size() * glyphSz.x) / 2);
+                        break;
+                }
+                
+                for(int i = 0; i < text.size(); i++) {
+                    const char curChar = text[i];
+                    if(curChar == ' ' || !font.isValid(curChar))//skip space or out-of-range characters...
+                        continue;
+                    
+                    const Image& tempGlyph = font[curChar];
+                    const ivec2 destPosition = {strPixLen + hOffset + (i * glyphSz.x), line * glyphSz.y};
+                    textImage.draw_image(destPosition.x, destPosition.y,
+                            tempGlyph);
+                    
+                    //Apply the fill color with a multiplication filter for the size of each glyph.
+                    //for each pixel in the previously written glyph, multiply its color...
+                    for(int y = destPosition.y; y < destPosition.y + tempGlyph.height(); y++)
+                        for(int x = destPosition.x; x < destPosition.x + tempGlyph.width(); x++)
+                            for(int c = 0; c < 3; c++)
+                                textImage(x,y,c) *= (fillColor.components[c] / float(UINT8_MAX));
+                }
+                
+                lineIter++;
+                line++;
+            }
+            
+            //resize image according to scale
+            textImage.resize(static_cast<int>(std::round(textImage.width() * scale)),
+                    static_cast<int>(std::round(textImage.height() * scale)));
+
+            //rotate the image with nearest-neighbor interpolation
+            textImage.rotate(-toDegrees(t.getRotation()), 1, 0);
+            
+            //draw the image centered
+            //rotating a doubly-sized image makes the origin of the rotation essentially halfway through the image
+            //therefore, to draw at the proper location, we need to center it relative to the transform location.
+            imgRef.draw_image(
+                    t.getTranslateX() - (textImage.width() / 2),
+                    t.getTranslateY() - (textImage.height() / 2),
+                    textImage, textImage.get_shared_channel(3), 1, 255);
         }
 
         ~Text(){}
@@ -3051,8 +3353,7 @@ namespace cturtle {
         }
 
         /**\brief Empty de-constructor.*/
-        ~Line() {
-        }
+        ~Line() {}
 
         void draw(const Transform& t, Image& imgRef) const{
             const Point a = t(pointA);
@@ -3134,8 +3435,7 @@ namespace cturtle {
         std::vector<Point> points;
 
         /**\brief Empty default constructor.*/
-        Polygon() {
-        }
+        Polygon() {}
 
         /**\brief   Initializer list instructor which assigns the points
          *          to the contents of the specified initializer list.
@@ -3165,21 +3465,24 @@ namespace cturtle {
             outlineWidth = other.outlineWidth;
         }
 
+        /**
+         * Returns a copy of this polygon allocated with the new keyword.
+         * Must be deleted at the responsibility of the invoker.
+         */
         AbstractDrawableObject* copy() const{
             return new Polygon(*this);
         }
 
         /**\brief Empty de-constructor.*/
-        ~Polygon() {
-        }
+        ~Polygon() {}
 
         void draw(const Transform& t, Image& imgRef) const{
             if (points.empty())
                 return;
-            /*CImg is a pain in the butt and requires all polygons to be
-              passed in as an instance of the image object. Therefore,
-              we can specify an "int" image with a width of 2 (x,y) and height
-              of the total number of elements in the point vector.*/
+            /*CImg requires all polygons to be passed in as an instance of
+              the image object. Therefore, we can specify an "int" image with
+              a width of 2 (x,y) and height of the total number of
+              elements in the point vector.*/
             cimg::CImg<int> passPts(static_cast<int>(points.size()), 2);
 
             for (int i = 0; i < points.size(); i++) {
@@ -3207,7 +3510,6 @@ namespace cturtle {
     class Sprite : public AbstractDrawableObject {
     public:
         int srcX, srcY, srcW, srcH;
-
         int drawWidth = 0;
         int drawHeight = 0;
 
@@ -3237,8 +3539,7 @@ namespace cturtle {
             this->outlineColor = outlineColor;
         }
 
-        ~Sprite() {
-        }
+        ~Sprite() {}
 
         AbstractDrawableObject* copy() const{
             return new Sprite(*this);
@@ -3303,6 +3604,7 @@ namespace cturtle {
      * */
     class CompoundPolygon : public AbstractDrawableObject {
     public:
+        //Compound Polygon components are pairs of transforms and unique pointers to other drawable objects..
         typedef std::pair<Transform, std::unique_ptr<AbstractDrawableObject>> component_t;
 
         CompoundPolygon() {}
@@ -3312,12 +3614,22 @@ namespace cturtle {
                 components.emplace_back(component.first, component.second->copy());
             }
         }
+        
+        ~CompoundPolygon(){}
 
-        /**Adds a generic component to this CompoundPolygon.*/
+        /**
+         * \brief Adds a component to this compound polygon.
+         * @param obj Object to copy and add.
+         * @param transform relative to root transform.
+         */
         void addcomponent(const AbstractDrawableObject& obj, const Transform& transform = Transform()) {
             components.emplace_back(transform, obj.copy());
         }
-
+        
+        /**
+         * Creates a copy of this Compound Polygon allocated with the new keyword.
+         * This must be deleted at the responsibility of the invoker.
+         */
         AbstractDrawableObject* copy() const{
             return new CompoundPolygon(*this);
         }
@@ -3476,15 +3788,44 @@ namespace cturtle {
     class AbstractTurtleScreen{
     public:
         virtual ~AbstractTurtleScreen() = default;
-
+        
+        /**
+         * Sets the tracer setting for this window.
+         */
         virtual void tracer(int countmax, unsigned int delayMS = 10) = 0;
-
+        
+        /**
+         * Returns the width of the window, in pixels.
+         */
         virtual int window_width() const = 0;
+        
+        /**
+         * Returns the height of the window, in pixels.
+         */
         virtual int window_height() const = 0;
+        
+        /**
+         * Returns the current background color.
+         */
         virtual Color bgcolor() const = 0;
+        
+        /**
+         * Sets the current background color.
+         */
         virtual void bgcolor(const Color& c) = 0;
+        
+        /**
+         * Sets the current screen mode.
+         */
         virtual void mode(ScreenMode mode) = 0;
+        
+        /**
+         * Returns the current screen mode.
+         */
         virtual ScreenMode mode() const = 0;
+        /**
+         * Clears the screen.
+         */
         virtual void clearscreen() = 0;
 
         /**Alias for clearscreen function
@@ -3493,15 +3834,18 @@ namespace cturtle {
             clearscreen();
         }
 
+        /**Resets all turtles belonging to this screen to their original state.*/
         virtual void resetscreen() = 0;
 
-        /**Resets all turtles belonging to this screen to their original state->*/
+        /**Resets all turtles belonging to this screen to their original state.*/
         inline void reset() {
             resetscreen();
         }
 
         /**
          * @return a boolean indicating if this turtle screen supports live animation.
+         * "Live animation" is regarded as the frames of animation that encompass
+         * movement over space.
          */
         virtual bool supports_live_animation() const = 0;
 
@@ -3512,6 +3856,10 @@ namespace cturtle {
         virtual void update(bool invalidateDraw = false, bool processInput = true) = 0;
         virtual void delay(unsigned int ms) = 0;
         virtual unsigned int delay() = 0;
+        
+        /**
+         * Closes this turtle screen.
+         */
         virtual void bye() = 0;
 
         virtual Image& getcanvas() = 0;
@@ -3520,14 +3868,100 @@ namespace cturtle {
 
         virtual void redraw(bool invalidate = false) = 0;
 
+        /**
+         * @brief Calculates and returns the root-level screen transformation.
+         */
         virtual Transform screentransform() const = 0;
 
+        /**
+         * @brief Adds the specified turtle to this screen.
+         * The turtle cannot belong to other screens, as
+         * that would break ownership responsibility.
+         */
         virtual void add(Turtle& turtle) = 0;
 
+        /**
+         * @brief Returns a read-write reference to the list of scene objects currently residing on this screen.
+         * @return the list of scene objects currently residing on this screen.
+         */
         virtual std::list<SceneObject>& getScene() = 0;
 
+        /**
+         * @brief Returns a read-write reference to the registered shape with the specified name. 
+         * @param name of the shape
+         * @return read-write reference to the associated shape
+         */
         virtual AbstractDrawableObject& shape(const std::string& name) = 0;
+        
+        /**
+         * @brief Returns a read-only reference to a previously loaded bitmap font.
+         * @return a previously loaded font by its specified name.
+         */
+        virtual const BitmapFont& font(const std::string& name) const = 0;
     protected:
+        /**
+         * Decodes the default font image from memory. The font is encoded
+         * as 1 bit per pixel (on/off) for simplicity, and is relatively
+         * easily decoded through bit-shifting.
+         * 
+         * The loading of this was delegated to the AbstractTurtleScreen class
+         * simply because all derived classes should have an idea of their
+         * own internal states, however they will ALL have these managed states,
+         * and thus ALL derived classes will need to call this function at some point
+         * while performing default initialization.
+         * @return the decoded default font image.
+         */
+        Image decodeDefaultFont() const{
+            Image img(DEFAULT_FONT_PIXELS_WIDTH, DEFAULT_FONT_PIXELS_HEIGHT);
+            img.channels(0, 3);//force RGBA
+            for(int pixId = 0; pixId < DEFAULT_FONT_PIXELS_LEN; pixId++){
+                const unsigned int decodeVal = DEFAULT_FONT_PIXELS[pixId];
+                // 8 integers per row of pixels (8*32=256)
+                const int pixY = pixId / 8;
+                const int pixOffsX = (pixId % 8) * 32;//offset of every pixel for the current integer.
+                for(int i = 0; i < 32; i++){ // for every bit in the unsigned integer...
+                    const int pixX = pixOffsX + (31 - i);//31 due to number of bits in unsigned int...
+                    //get i'th pixel in the integer by bitmask and multiply
+                    const uint8_t pixel = ((decodeVal >> i) & 1) * 255;
+                    for(int c = 0; c < 4; c++)
+                        img(pixX, pixY, 0, c) = pixel;
+                }
+            }
+            return img;
+        }
+        
+        /*The default shapes that screens initialize with.*/
+        std::unordered_map<std::string, Polygon> shapes = {
+                //counterclockwise coordinates.
+                {"triangle",
+                        Polygon{
+                                {0, 0},
+                                {-5, 5},
+                                {5, 5}}},
+                {"square",
+                        Polygon{
+                                {-5, -5},
+                                {-5, 5},
+                                {5, 5},
+                                {5, -5}}},
+                {"indented triangle",
+                        Polygon{
+                                //CCW
+                                {0, 0},
+                                {-5, 10},
+                                {0, 8},
+                                {5, 10}}},
+                {"arrow",
+                        Polygon{
+                                {0, 0},
+                                {-5, 5},
+                                {-3, 5},
+                                {-3, 10},
+                                {3, 10},
+                                {3, 5},
+                                {5, 5}}}
+        };
+        
         //Abstract class. Private constructor only allows
         //for derivative classes to be instantiated.
         AbstractTurtleScreen(){};
@@ -3543,13 +3977,16 @@ namespace cturtle {
      *
      * \sa TurtleScreen
      */
-    class Turtle {
+    class Turtle{
     public:
         /**
-         * \brief The turtle constructor. Turtles are attached to whatever screen they are constructed with.
-         * 
+         * \brief The turtle constructor. Turtles are attached to whatever screen they are constructed with
          */
-        Turtle(AbstractTurtleScreen& scr);
+        Turtle(AbstractTurtleScreen& scr){
+            screen = &scr;
+            screen->add(*this);
+            reset();
+        }
         
         /**
          * \brief Turtles are not trivially copyable. The copy constructor is explicitly disallowed. 
@@ -3575,7 +4012,11 @@ namespace cturtle {
 
         /**\brief Moves the turtle forward the specified number of pixels.
          * \param pixels total number of pixels to move.*/
-        void forward(int pixels);
+        void forward(int pixels){
+            if (screen == nullptr)
+                return;
+            travelTo(Transform(*transform).forward(static_cast<float>(pixels)));
+        }
 
         /**\copydoc forward(int)*/
         inline void fd(int pixels) {
@@ -3583,7 +4024,11 @@ namespace cturtle {
         }
 
         /**\brief Moves the turtle backward the specified number of pixels.*/
-        void backward(int pixels);
+        void backward(int pixels){
+            if (screen == nullptr)
+                return;
+            travelTo(Transform(*transform).backward(static_cast<float>(pixels)));
+        }
 
         /**\copydoc backward(int)*/
         inline void bk(int pixels) {
@@ -3602,7 +4047,11 @@ namespace cturtle {
          * \sa degrees()
          * \sa radians()
          * \sa TurtleScreen::mode()*/
-        void right(float amt);
+        void right(float amt){
+            amt = state->angleMode ? -amt : -toRadians(amt);
+            //Flip angle orientation based on screen mode.
+            travelTo(Transform(*transform).rotate(amt));
+        }
 
         /**\copydoc right(float)*/
         inline void rt(float angle) {
@@ -3616,7 +4065,11 @@ namespace cturtle {
          * \sa degrees()
          * \sa radians()
          * \sa TurtleScreen::mode()*/
-        void left(float amt);
+        void left(float amt){
+            amt = state->angleMode ? amt : toRadians(amt);
+            //Flip angle orientation based on screen mode.
+            travelTo(Transform(*transform).rotate(amt));
+        }
 
         /**\copydoc left(float)*/
         inline void lt(float angle) {
@@ -3652,9 +4105,14 @@ namespace cturtle {
         }
 
         /**\brief Sets the X-axis transform location of this turtle.*/
-        void setx(int x);
+        void setx(int x){
+            travelTo(Transform(*transform).setTranslationX(x));
+        }
+        
         /**\brief Sets the Y-axis transform location of this turtle.*/
-        void sety(int y);
+        void sety(int y){
+            travelTo(Transform(*transform).setTranslationY(y));
+        }
         
         /**
          * Adds a "dumb" translation to the current turtle's transform.
@@ -3662,7 +4120,9 @@ namespace cturtle {
          * @param x component of coordinate pair
          * @param y component of coordinate pair.
          */
-        void shift(int x, int y);
+        void shift(int x, int y){
+            travelTo(Transform(*transform).setTranslation(transform->getTranslateX()+x, transform->getTranslateY()+y));
+        }
         
         /**
          * @return a constant reference to the current state of this turtle.
@@ -3678,13 +4138,39 @@ namespace cturtle {
          * \sa degrees()
          * \sa radians()
          * \sa TurtleScreen::mode()*/
-        void setheading(float angle);
+        void setheading(float amt){
+            //Swap to correct unit if necessary.
+            amt = state->angleMode ? amt : toRadians(amt);
+            //Flip angle orientation based on screen mode.
+            amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : amt;
+            travelTo(Transform(*transform).setRotation(amt));
+        }
+        
+        /**
+         * Rotates the turtle to face the specified point.
+         * @param x coordinate along the x axis to face
+         * @param y coordinate along the y axis to face
+         * \sa face(point)
+         */
+        inline void face(int x, int y){
+            setheading(towards(x,y) - heading());
+        }
+        
+        /**
+         * Rotates the turtle to face the specified point.
+         * @param pt point to face towards
+         * \sa face(x, y)
+         */
+        inline void face(const Point& pt){
+            setheading(towards(pt) - heading());
+        }
 
         /**
          * Returns the distance between this turtle and the given coordinate pair.
-         * @param x
-         * @param y
-         * @return
+         * @param x X axis
+         * @param y Y axis
+         * @return distance between turtle position and coordinate pair.
+         * \sa distance(point)
          */
         int distance(int x, int y){
             return cturtle::distance(transform->getTranslation(), {x,y});
@@ -3711,7 +4197,17 @@ namespace cturtle {
          * @param y component of coordinate pair.
          * @return
          */
-        float towards(int x, int y);
+        float towards(int x, int y){
+            float amt = std::atan2(static_cast<float>(y) - transform->getTranslateY(), static_cast<float>(x) - transform->getTranslateX());
+
+            //6.28319 is a full rotation in radians...
+            if(toDegrees(amt) < 0)
+                amt = 6.28319f + amt;
+
+            //convert to degrees if necessary.
+            amt = state->angleMode ? amt : toDegrees(amt);
+            return amt + heading();
+        }
 
         /**
          * \brief Returns the angle between the line of the current turtle transform to the given point.
@@ -3723,8 +4219,8 @@ namespace cturtle {
         }
 
         /**
-         * Returns the heading of the Turtle (e.g, its current rotation).
-         * @return
+         * \brief Returns the heading of the Turtle (e.g, its current rotation).
+         * @return the heading of the Turtle (e.g, its current rotation)
          */
         inline float heading() {
             return state->angleMode ? transform->getRotation() : toDegrees(transform->getRotation());
@@ -3737,13 +4233,18 @@ namespace cturtle {
          * Otherwise, if it is set to "logo", The turtle face upwards and positive
          * angles are clockwise.
          * \sa TurtleScreen::mode()*/
-        void home();
+        void home(){
+            travelTo(Transform());//set transform to identity, more-or-less...
+        }
 
         /**\brief Adds a circle to the screen.
          *\param radius The radius, in pixels, of the circle.
-         *\param steps The "quality" of the circle. Higher is slow but looks better.
+         *\param steps The "quality" of the circle. Higher is slow but looks better. Use with low numbers for N-sided shapes.
          *\param color The color of the circle.*/
-        void circle(int radius, int steps, Color color);
+        void circle(int radius, int steps, Color color){
+            pushGeometry(*transform, new Circle(radius, steps, color));
+            updateParent();
+        }
 
         /**\brief Adds a circle to the screen.
          * Default parameters are circle with a radius of 30 with 15 steps.
@@ -3764,8 +4265,32 @@ namespace cturtle {
          * If the input is false but the prior state is true, a SceneObject
          * is put on the screen in the shape of the previously captured points.
          *\param state Whether or not the turtle is filling a polygon.*/
-        void fill(bool state);
+        void fill(bool val){
+            if(state->filling && !val) {
+                //Add the fill polygon
+                screen->getScene().emplace_back(new Polygon(fillAccum.points, state->fillColor), Transform());
+                objects.push_back(std::prev(screen->getScene().end(), 1));
 
+                //Add all trace lines created when tracing out the fill polygon.
+                if(!fillLines.empty()) {
+                    //for each line we've created when having the pen down, and have been tracing a shape
+                    for(Line& lineInfo : fillLines) {
+                        screen->getScene().emplace_back(lineInfo.copy(), Transform());
+                        objects.push_back(std::prev(screen->getScene().end(), 1));
+                    }
+                    fillLines.clear();
+                }
+
+                fillAccum.points.clear();
+                updateParent(false, false);
+            }
+            state->filling = val;
+        }
+
+        /**
+         * \brief Returns a boolean indicating if this turtle is currently filling a shape.
+         * \return a boolean indicating if this turtle is currently filling a shape.
+         */
         inline bool filling() const{
             return penstate().filling;
         }
@@ -3800,24 +4325,82 @@ namespace cturtle {
          * Uses the current filling color.
          *\param text The text to write.
          *\sa fillcolor(color)*/
-        void write(const std::string& text);
+        void write(const std::string& text){
+            if(text.empty())
+                return;
+            pushText(*transform, state->fillColor, screen->font(DEFAULT_FONT), text, 1.0f);
+            updateParent(false, false);
+        }
 
         /**Writes the specified string to the screen.
          * Uses the specified color.
          *\param text The text to write.
+         *\param font The font name to use. Uses "default" font by default. Must be registered to parent screen.
          *\param color The color to write the text in.
+         *\param scale The scale to draw the text at. This is relative to the size of the used font.
+         *\param alignment The horizontal alignment of text. This is specifically useful for multi-line strings.
          *\sa fillcolor(color)*/
-        void write(const std::string& text, Color color);
+        void write(const std::string& text, const std::string& font, Color color = {"white"}, float scale = 1.0f, TextAlign alignment = TEXT_ALIGN_LEFT){
+            if(text.empty())
+                return;
+            pushText(*transform, color, screen->font(font), text, scale, alignment);
+            updateParent(false, false);
+        }
         
         /**\brief Puts the current shape of this turtle on the screen
          *        with the current fill color and the outline of the shape.
          *\return The stamp ID of the put stamp.*/
-        int stamp();
+        int stamp(){
+            pushStamp(*transform, state->cursor.get()->copy());
+            return state->curStamp;
+        }
+        
         /**\brief Removes the stamp with the specified ID.*/
-        void clearstamp(int stampid);
+        void clearstamp(int stampid){
+            auto iter = objects.begin(); //iterator which holds an iterator to the screen's scene list.
+
+            while (iter != objects.end()) {
+                auto& objIter = *iter;
+                if (objIter->stamp && objIter->stampid == stampid) {
+                    break;
+                }
+                iter++;
+            }
+
+            if (iter != objects.end()) {
+                objects.erase(iter);
+
+                if (screen != nullptr) {
+                    screen->getScene().erase(*iter);
+                }
+            }
+
+            updateParent(true,false);
+        }
+        
         /**\brief Removes all stamps with an ID less than that which is specified.
          *        If the specified stampid is less than 0, it removes ALL stamps.*/
-        void clearstamps(int stampid = -1);
+        void clearstamps(int stampid = -1){
+            typedef decltype(objects.begin()) iter_t;
+
+            std::list<iter_t> removals;
+
+            iter_t iter = objects.begin();
+            while (iter != objects.end()) {
+                auto& objIter = *iter;
+                if (stampid < 0 ? objIter->stamp : (objIter->stamp && objIter->stampid <= stampid)) {
+                    removals.push_back(iter);
+                }
+                iter++;
+            }
+
+            for (iter_t& iter : removals) {
+                screen->getScene().erase(*iter);
+                objects.erase(iter);
+            }
+
+            updateParent(true, false);
+        }
 
         /**\brief Sets the shape of this turtle.
          *\param p The polygon to derive shape geometry from.*/
@@ -3829,7 +4412,11 @@ namespace cturtle {
 
         /**\brief Sets the shape of this turtle from the specified shape name.
          *\param name The name of the shape to set.*/
-        void shape(const std::string& name);
+        void shape(const std::string& name){
+            pushState();
+            state->cursor.reset((screen->shape(name).copy()));
+            updateParent(false, false);
+        }
 
         /**\brief Returns the shape of this turtle.*/
         const AbstractDrawableObject& shape() {
@@ -3837,7 +4424,32 @@ namespace cturtle {
         }
 
         /**\brief Undoes the previous action of this turtle.*/
-        bool undo(bool try_redraw = true);
+        bool undo(bool try_redraw = true){
+            //total objects on the state stack prior to
+            const unsigned long int totalBefore = state->objectsBefore;
+
+            if (stateStack.size() >= 2)
+                travelBack(); //Travel back if stack size >= 2
+
+            //If we can't pop the state, break early.
+            if (!popState()) {
+                return false;
+            }
+
+            auto begin = std::prev(objects.end(), (totalBefore - state->objectsBefore));
+            auto iter = begin;
+
+            while (iter != objects.end()) {
+                screen->getScene().erase(*iter);
+                iter++;
+            }
+
+            objects.erase(begin, objects.end());
+
+            //Will invalidate the whole screen due to object removal, but we allow the option to not.
+            updateParent(try_redraw, false);
+            return true;
+        }
 
         /**\brief Set, or disable, the undo buffer.
          *\param size The size of the undo buffer.*/
@@ -3869,8 +4481,15 @@ namespace cturtle {
             return state->moveSpeed;
         }
 
-        /**\brief Applies a rotation to the */
-        void tilt(float angle);
+        /**\brief Applies a rotation to the turtle's cursor.*/
+        void tilt(float amt){
+            amt = state->angleMode ? amt : toRadians(amt);
+            //Flip angle orientation based on screen mode.
+            amt = screen->mode() == SM_STANDARD ? amt : -amt;
+            pushState();
+            state->cursorTilt += amt;
+            updateParent(false, false);
+        }
 
         /**\brief Returns the rotation of the cursor. Not the heading,
          *        or the angle at which the forward function will move.*/
@@ -3880,7 +4499,11 @@ namespace cturtle {
 
         /**\brief Set whether or not the turtle is being shown.
          *\param state True when showing, false othewise.*/
-        void setshowturtle(bool state);
+        void setshowturtle(bool val){
+            pushState();
+            state->visible = val;
+            updateParent(false, false);
+        }
 
         /**\brief Shows the turtle.
          *        Equivalent to calling setshowturtle(true).
@@ -3896,7 +4519,10 @@ namespace cturtle {
         }
 
         /**\brief Sets whether or not the pen is down.*/
-        void setpenstate(bool down);
+        void setpenstate(bool down){
+            pushState();
+            state->tracing = down;
+        }
 
         /**\brief Brings the pen up.*/
         inline void penup() {
@@ -3938,7 +4564,34 @@ namespace cturtle {
         /**\brief Draws this turtle on the specified canvas with the specified transform.
          *\param screenTransform The transform at which to draw the turtle objects.
          *\param canvas The canvas on which to draw this turtle.*/
-        void draw(const Transform& screenTransform, Image& canvas);
+        void draw(const Transform& screenTransform, Image& canvas){
+            if (this->screen == nullptr)
+                return;
+
+            if (!state->visible)
+                return;
+            
+            //Draw all lines queued during filling a shape.
+            //This is only populated when the turtle moves between a beginfill
+            //and endfill while the pen is down.
+            for (const Line& line : fillLines)
+                line.draw(screenTransform, canvas);
+
+            if (traveling && state->tracing) {
+                //Draw the "Travel-Line" when in the middle of the travelTo func
+                travelPoints[0] = screenTransform(travelPoints[0]);
+                travelPoints[1] = screenTransform(travelPoints[1]);
+                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state->penColor, state->penWidth);
+            }
+
+            //Add the extra rotate to start cursor facing right :)
+            const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416f;
+            Transform cursorTransform = screenTransform.copyConcatenate(*transform).rotate(cursorRot + state->cursorTilt);
+            state->cursor->fillColor = state->fillColor;
+            state->cursor->outlineWidth = 1;
+            state->cursor->outlineColor = state->penColor;
+            state->cursor->draw(cursorTransform, canvas);
+        }
 
         /**Sets this turtle to use angles measured in degrees.
          *\sa radians()*/
@@ -3957,7 +4610,40 @@ namespace cturtle {
         /**\brief Resets this turtle.
          * Moves this turtle home, resets all pen attributes,
          * and removes all previously added scene objects.*/
-        void reset();
+        void reset(){
+            //Reset objects, transforms, trace lines, state, etc.
+
+            //Note to self, clearing the list, appending a new transform,
+            //then reassigning the transform reference just didn't want to work.
+            //I have no idea why. Therefore, we're resetting it in the same
+            //manner we initially construct it.
+            stateStack = {PenState()};
+            state = &stateStack.back();
+
+            transform = &state->transform;
+            const auto numItems = objects.size();
+
+            if (screen != nullptr) {
+                //Re-assign cursor on reset, derived from parent screen.
+                state->cursor.reset(screen->shape("indented triangle").copy());
+                //Erase all objects
+                while (!objects.empty()) {
+                    screen->getScene().erase(objects.front());
+                    objects.pop_front();
+                }
+
+                //Alter cursor tilt and default transform
+                //when operating under SM_LOGO mode.
+                //This is to bring it up-to-par with Python's
+                //implementation of screen modes.
+                if (screen->mode() == SM_LOGO) {
+                    state->cursorTilt = (-1.5708f);
+                    transform->rotate(1.5708f);
+                }
+            }
+
+            updateParent(numItems > 0, false);
+        }
 
         /**Sets this turtles screen.*/
         void setScreen(AbstractTurtleScreen* scr) {
@@ -3967,16 +4653,24 @@ namespace cturtle {
         /**\brief Empty virtual destructor.*/
         virtual ~Turtle() {}
     protected:
+        //a list of iterators that point to the parent screen's scene list.
+        //this list is in-order as they are created by this instance.
         std::list<std::list<SceneObject>::iterator> objects;
+        //the pen-state stack is, as its name might imply, the previous states
+        //of the pen owned by this turtle.
         std::list<PenState> stateStack = {PenState()};
         std::list<Line> fillLines;
 
-        //lines to be drawn to temp screen when filling to avoid invalidating screen
+        //the current transform. This points to the topmost state's transform
+        //on the pen state stack.
         Transform* transform = nullptr;
+        //the current state. This points directly to the topmost state
+        //on the pen state stack.
         PenState* state = nullptr;
 
-        /**These variables are used to draw the "travel" line when
-         * the turtle is traveling. (e.g, the line between where it's going*/
+        /* These variables are used to draw the "travel" line when
+         * the turtle is traveling. (e.g, the line between where it's going
+         * and where it's been)*/
         Point travelPoints[2];
         bool traveling = false;
 
@@ -3989,10 +4683,26 @@ namespace cturtle {
         /*Screen pointer. Assign before calling any other function!*/
         AbstractTurtleScreen* screen = nullptr;
 
-        /**Pushes a copy of the pen's state on the stack.*/
-        void pushState();
-        /**Pops the top of the pen's state stack.*/
-        bool popState();
+        /*Pushes a copy of the pen's state on the stack.*/
+        void pushState(){
+            if (stateStack.size() + 1 > undoStackSize)
+                stateStack.pop_front();
+
+            stateStack.push_back(stateStack.back()); //Push a copy of the back-most pen state.
+            state = &stateStack.back();
+            transform = &state->transform;
+            state->objectsBefore = objects.size();
+        }
+        
+        /*Pops the top of the pen's state stack.*/
+        bool popState(){
+            if (stateStack.size() == 1)
+                return false;
+            stateStack.pop_back();
+            state = &stateStack.back();
+            transform = &state->transform;
+            return true;
+        }
 
         /**
          * \brief Internal function used to add geometry to the turtle screen.
@@ -4001,24 +4711,74 @@ namespace cturtle {
          * \param geom The geometry to add.
          * \return A boolean indicating if the geometry was added to the scene.
          */
-        bool pushGeom(const Transform& t, AbstractDrawableObject* geom);
+        bool pushGeometry(const Transform& t, AbstractDrawableObject* geom){
+            if (screen != nullptr) {
+                pushState();
+                screen->getScene().emplace_back(geom, t);
+                objects.push_back(std::prev(screen->getScene().end()));
+                return true;
+            }
+            return false;
+        }
 
         /**\brief Internal function used to add a stamp object to the turtle screen.
          *\param t The transform at which to draw the stamp.
          *\param color The color with which to draw the stamp.
          *\param geom The geometry of the stamp.*/
-        bool pushStamp(const Transform& t, AbstractDrawableObject* geom);
+        bool pushStamp(const Transform& t, AbstractDrawableObject* geom){
+            if (screen != nullptr) {
+                pushState();
+                const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416f;
+
+                Transform trans(t);
+                trans.rotate(cursorRot + state->cursorTilt);
+
+                geom->outlineWidth = 1;
+                geom->outlineColor = state->penColor;
+
+                screen->getScene().emplace_back(geom, trans, state->curStamp++);
+                SceneObject& obj = screen->getScene().back();
+
+                objects.push_back(std::prev(screen->getScene().end()));
+                return true;
+            }
+            return false;
+        }
 
         /**\brief Internal function used to add a text object to the turtle screen.
          *\param t The transform at which to draw the text.
          *\param color The color with which to draw the text.
-         *\param text The string to draw.*/
-        bool pushText(const Transform& t, Color color, const std::string& text);
+         *\param font to use to draw the text.
+         *\param scale to draw the text at.
+         *\param text The string to draw.
+         *\param alignment The alignment of the text. Particularly useful for multi-line strings.*/
+        bool pushText(const Transform& t, Color color, const BitmapFont& font, const std::string& text, float scale = 1.0f, TextAlign alignment = TEXT_ALIGN_LEFT){
+            if (screen != nullptr) {
+                pushState();
+                screen->getScene().emplace_back(new Text(text, font, color, scale, alignment), t);
+                objects.push_back(std::prev(screen->getScene().end()));
+                return true;
+            }
+            return false;
+        }
 
         /**\brief Internal function used to add a trace line object to the turtle screen.
+         * Trace lines do NOT push a state. Their state is encompassed by movement,
+         * and these lines are only added when moving the turtle while the pen is down.
          *\param a Point A
          *\param b Point B*/
-        bool pushTraceLine(Point a, Point b);
+        bool pushTraceLine(Point a, Point b){
+            if (screen != nullptr) {
+                screen->getScene().emplace_back(new Line(a, b, state->penColor, state->penWidth), Transform());
+                objects.push_back(std::prev(screen->getScene().end()));
+                //Trace lines do NOT push a state->
+                //Their state is encompassed by movement,
+                //and these lines are only added when moving the turtle
+                //while the pen is down.
+                return true;
+            }
+            return false;
+        }
 
         /**Returns the speed, of any applicable animation
           in milliseconds, based off of this turtle's speed setting.*/
@@ -4026,18 +4786,65 @@ namespace cturtle {
             //300 is the "scale" animations adhere to.
             //The longest animation is 300 milliseconds, shortest is 0.
             //This was an arbitrary choice, trying to match the speed of the Python implementation.
-            return screen->supports_live_animation() ? state->moveSpeed <= 0 ? 0 : long(((11.0f - state->moveSpeed) / 10.0f) * 300) : 0;
+            if(!screen->supports_live_animation() || state->moveSpeed < 0)
+                return 0;//no animation means no time spent animating...
+            return long((state->moveSpeed / 10.0f) * 300); //<----
         }
 
         /**Conditionally calls the parent screen's update function.*/
-        void updateParent(bool invalidate = false, bool input = true);
+        void updateParent(bool invalidate = false, bool input = true){
+            if (screen != nullptr)
+                screen->update(invalidate, input);
+        }
 
         /**Performs an interpolation, with animation,
          * between the source transform and the destination transform.
          * May push a new fill vertex if filling and pushing state, and applies appropriate
          * lines if the pen is down. Generally manages all state related
          * to movement as a side effect.*/
-        void travelBetween(Transform from, const Transform& to, bool pushState);
+        void travelBetween(Transform src, const Transform& dest, bool doPushState){
+            if(dest == src)
+                return;
+
+            //Set the "traveling" state for screen drawing. Indicates when to draw travel lines (e.g, when pen is down).
+            traveling = true;
+
+            const float duration = static_cast<float>(getAnimMS());
+            if ((screen != nullptr ? !screen->isclosed() : false) && duration > 0) {//no point in animating with no screen
+                const unsigned long startTime = detail::epochTime();
+
+                float progress = 0;
+                while (progress < 1.0f) {
+                    const unsigned long curTime = detail::epochTime();
+
+                    transform->assign(src.lerp(dest, progress));
+                    travelPoints[0] = src.getTranslation();
+                    travelPoints[1] = transform->getTranslation();
+
+                    updateParent(false, false);
+
+                    progress = (static_cast<float>(curTime - startTime) / duration);
+                }
+            }
+
+            if(doPushState){
+                if (state->tracing && !state->filling) {
+                    pushTraceLine(src.getTranslation(), dest.getTranslation());
+                } else if (state->filling) {
+                    fillAccum.points.push_back(dest.getTranslation());
+                    if (state->tracing) {
+                        fillLines.push_back({src.getTranslation(), dest.getTranslation(), state->penColor, state->penWidth});
+                    }
+                }
+
+                transform->assign(src);
+                pushState();
+            }
+
+            transform->assign(dest);
+            traveling = false;
+            updateParent(false, false);
+        }
 
         /**Performs an interpolation, with animation,
          * between the current transform and the specified one.
@@ -4292,6 +5099,17 @@ namespace cturtle {
         AbstractDrawableObject& shape(const std::string& name){
             return shapes[name];
         }
+        
+        /**
+         * Returns a read-only reference to the bitmap font with the specified name.
+         * For the case of OfflineTurtleScreen instances, this ALWAYS returns a reference
+         * to the default font.
+         * @param name to be given to the font. Irrelevant for the offline turtle screen.
+         * @return read-only BitmapFont reference to the default font.
+         */
+        const BitmapFont& font(const std::string& name) const{
+            return *defaultFont;
+        }
     private:
         /*this can be a constant allocated buffer.*/
         uint8_t gifWriteBuffer[CTURTLE_HEADLESS_WIDTH * CTURTLE_HEADLESS_HEIGHT*4];
@@ -4334,72 +5152,56 @@ namespace cturtle {
         int redrawCounter = 0;
         /**Redraw counter max.*/
         int redrawCounterMax = 1;
-
-        //Default shapes.
-        std::unordered_map<std::string, Polygon> shapes = {
-                //counterclockwise coordinates.
-                {"triangle",
-                        Polygon{
-                                {0, 0},
-                                {-5, 5},
-                                {5, 5}}},
-                {"square",
-                        Polygon{
-                                {-5, -5},
-                                {-5, 5},
-                                {5, 5},
-                                {5, -5}}},
-                {"indented triangle",
-                        Polygon{
-                                //CCW
-                                {0, 0},
-                                {-5, 10},
-                                {0, 8},
-                                {5, 10}}},
-                {"arrow",
-                        Polygon{
-                                {0, 0},
-                                {-5, 5},
-                                {-3, 5},
-                                {-3, 10},
-                                {3, 10},
-                                {3, 5},
-                                {5, 5}}}
-        };
+        
+        std::unique_ptr<BitmapFont> defaultFont = 
+                std::make_unique<BitmapFont>(
+                     decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
+                     DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
+                     DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
     };
 
     typedef OfflineTurtleScreen TurtleScreen;
 #else /*NOT DEFINED CTURTLE_HEADLESS*/
     constexpr int SCREEN_DEFAULT_WIDTH = 800;
     constexpr int SCREEN_DEFAULT_HEIGHT = 600;
+    constexpr char SCREEN_DEFAULT_TITLE[] = "CTurtle " CTURTLE_VERSION;
+    
     /**
      * \brief The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying
      * turtles and consuming input events from users through callbacks.
      * This includes holding the actual data for a given scene after being
      * populated by Turtle. It layers draw calls in the order they are called,
      * independent of whatever Turtle object creates it.
-     *
      * \sa Turtle
      */
     class InteractiveTurtleScreen : public AbstractTurtleScreen{
     public:
-
         /**Empty constructor.
          * Assigns an 800 x 600 pixel display with a title of "CTurtle".*/
-        InteractiveTurtleScreen() : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, "CTurtle", 0) {
+        InteractiveTurtleScreen() : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, SCREEN_DEFAULT_TITLE, 0) {
             canvas.assign(display);
             initEventThread();
             redraw(true);
+            fonts[DEFAULT_FONT] =
+                std::make_unique<BitmapFont>(
+                     decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
+                     DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
+                     DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
         }
 
         /**Title constructor.
          * Assigns an 800 x 600 pixel display with a specified title.
          *\param title The title to assign the display with.*/
         InteractiveTurtleScreen(const std::string& title) : display(SCREEN_DEFAULT_WIDTH, SCREEN_DEFAULT_HEIGHT, title.c_str(), 0) {
-            display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
             redraw(true);
+
+            fonts[DEFAULT_FONT] =
+                    std::make_unique<BitmapFont>(
+                            decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
+                            DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
+                            DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
         }
 
         /**Width, height, and title constructor.
@@ -4408,13 +5210,19 @@ namespace cturtle {
          *\param width The width of the display, in pixels.
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
-        InteractiveTurtleScreen(int width, int height, const std::string& title = "CTurtle")
+        InteractiveTurtleScreen(int width, int height, const std::string& title = SCREEN_DEFAULT_TITLE)
             : display(width, height) {
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
             initEventThread();
             redraw(true);
+
+            fonts[DEFAULT_FONT] =
+                    std::make_unique<BitmapFont>(
+                            decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
+                            DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
+                            DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
         }
 
         /**Destructor. Calls "bye" function.*/
@@ -4470,13 +5278,15 @@ namespace cturtle {
         }
 
         /**Sets the screen mode of this screen.
+         * Screen mode influences the initial heading added Turtles have,
+         * as well as the direction of rotations.
+         * This function brings ALL attached turtles to the home/default location.
          *\param mode The screen mode.
-         *\todo Refine this documentation.*/
+         */
         void mode(ScreenMode mode){
             curMode = mode;
-            for (Turtle* t : turtles) {
-                t->reset();
-            }
+            for (Turtle* t : turtles)
+                t->home();
         }
 
         /**Returns the screen mode of this screen.*/
@@ -4682,35 +5492,31 @@ namespace cturtle {
             }
 
             if (hasInvalidated) {
-                if(!backgroundImage.is_empty()) {
-                    canvas.assign(backgroundImage);
-                } else {
-                    canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
-                }
+                if(!backgroundImage.is_empty()) canvas.assign(backgroundImage);
+                else canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
+                
                 redrawCounter = 0;//Forced redraw due to canvas invalidation.
             } else {
-                if(redrawCounterMax == 0){
+                if(redrawCounterMax == 0)//tracer settings may disable rendering for a short time...
                     return;
-                }
-
                 redrawCounter++;
 
-                if (redrawCounter >= redrawCounterMax) {
+                if(redrawCounter >= redrawCounterMax)
                     redrawCounter = 0;
-                } else {
-                    return;
-                }
+                else return;
             }
 
+            //get the iterator pointing to the oldest scene object that hasn't been drawn yet
+            //if the scene has been invalidated, the latest object is the first one in the scene.
+            //otherwise, 
             auto latestIter = !hasInvalidated ? std::prev(objects.end(), fromBack) : objects.begin();
 
             Transform screen = screentransform();
             while (latestIter != objects.end()) {
                 SceneObject& object = *latestIter;
                 const Transform t(screen.copyConcatenate(object.transform));
-
                 object.geom->draw(t, canvas);
-
+                
                 latestIter++;
             }
 
@@ -4855,6 +5661,25 @@ namespace cturtle {
          */
         AbstractDrawableObject& shape(const std::string& name) {
             return shapes[name];
+        }
+        
+        /**
+         * Adds the specified bitmap font to the screen.
+         * It can be referenced later by its given name.
+         * @param name the name given to the font.
+         * @param font to add to the screen.
+         */
+        void addfont(const std::string& name, const BitmapFont& font){
+            fonts[name] = std::make_unique<BitmapFont>(font);
+        }
+        
+        /**
+         * Returns a read-only reference to the bitmap font with the specified name.
+         * @param name to be given to the font.
+         * @return read-only BitmapFont reference.
+         */
+        const BitmapFont& font(const std::string& name) const{
+            return *fonts.at(name);
         }
     protected:
         /**The underlying display mechanism for a TurtleScreen.*/
@@ -5016,450 +5841,11 @@ namespace cturtle {
         //timer bindings, one function per originating time and delta.
         std::list<std::tuple<TimerFunc, uint64_t, uint64_t>> timerBindings;
 
-        //Default shapes.
-        std::unordered_map<std::string, Polygon> shapes = {
-            //counterclockwise coordinates.
-            {"triangle",
-                Polygon{
-                    {0, 0},
-                    {-5, 5},
-                    {5, 5}}},
-            {"square",
-                Polygon{
-                    {-5, -5},
-                    {-5, 5},
-                    {5, 5},
-                    {5, -5}}},
-            {"indented triangle",
-                Polygon{
-                    //CCW
-                    {0, 0},
-                    {-5, 10},
-                    {0, 8},
-                    {5, 10}}},
-            {"arrow",
-                Polygon{
-                    {0, 0},
-                    {-5, 5},
-                    {-3, 5},
-                    {-3, 10},
-                    {3, 10},
-                    {3, 5},
-                    {5, 5}}}
-        };
+        //map of fonts. only "default" is initially populated.
+        std::unordered_map<std::string, std::unique_ptr<BitmapFont>> fonts;
+        
     };
 
     typedef InteractiveTurtleScreen TurtleScreen;
 #endif /*CTURTLE_HEADLESS*/
-
-    //SECTION: TURTLE IMPLEMENTATION
-
-    Turtle::Turtle(AbstractTurtleScreen& scr) {
-        screen = &scr;
-        screen->add(*this);
-        reset();
-    }
-
-    //write
-
-    void Turtle::write(const std::string& text) {
-        pushText(*transform, state->fillColor, text);
-        updateParent(false, false);
-    }
-    
-    void Turtle::write(const std::string &text, Color color) {
-        pushText(*transform, color, text);
-        updateParent(false, false);
-    }
-
-    //Stamps
-
-    int Turtle::stamp() {
-        pushStamp(*transform, state->cursor.get()->copy());
-        return state->curStamp;
-    }
-
-    void Turtle::clearstamp(int stampid) {
-        auto iter = objects.begin(); //iterator which holds an iterator to the screen's scene list.
-
-        while (iter != objects.end()) {
-            auto& objIter = *iter;
-            if (objIter->stamp && objIter->stampid == stampid) {
-                break;
-            }
-            iter++;
-        }
-
-        if (iter != objects.end()) {
-            objects.erase(iter);
-
-            if (screen != nullptr) {
-                screen->getScene().erase(*iter);
-            }
-        }
-
-        updateParent(true,false);
-    }
-
-    void Turtle::clearstamps(int stampid) {
-        typedef decltype(objects.begin()) iter_t;
-
-        std::list<iter_t> removals;
-
-        iter_t iter = objects.begin();
-        while (iter != objects.end()) {
-            auto& objIter = *iter;
-            if (stampid < 0 ? objIter->stamp : (objIter->stamp && objIter->stampid <= stampid)) {
-                removals.push_back(iter);
-            }
-            iter++;
-        }
-
-        for (iter_t& iter : removals) {
-            screen->getScene().erase(*iter);
-            objects.erase(iter);
-        }
-        updateParent(true, false);
-    }
-
-    void Turtle::shape(const std::string& name) {
-        pushState();
-        state->cursor.reset((screen->shape(name).copy()));
-        updateParent(false, false);
-    }
-
-    //Movement
-
-    void Turtle::forward(int pixels) {
-        if (screen == nullptr)
-            return;
-        travelTo(Transform(*transform).forward(static_cast<float>(pixels)));
-    }
-
-    void Turtle::backward(int pixels) {
-        if (screen == nullptr)
-            return;
-        travelTo(Transform(*transform).backward(static_cast<float>(pixels)));
-    }
-
-    void Turtle::right(float amt) {
-        amt = state->angleMode ? -amt : -toRadians(amt);
-        //Flip angle orientation based on screen mode.
-        travelTo(Transform(*transform).rotate(amt));
-    }
-
-    void Turtle::left(float amt) {
-        amt = state->angleMode ? amt : toRadians(amt);
-        
-        //Flip angle orientation based on screen mode.
-        travelTo(Transform(*transform).rotate(amt));
-    }
-
-    void Turtle::setheading(float amt) {
-        //Swap to correct unit if necessary.
-        amt = state->angleMode ? amt : toRadians(amt);
-        //Flip angle orientation based on screen mode.
-        amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : amt;
-        travelTo(Transform(*transform).setRotation(amt));
-    }
-
-    float Turtle::towards(int x, int y){
-        float amt = std::atan2(static_cast<float>(y) - transform->getTranslateY(), static_cast<float>(x) - transform->getTranslateX());
-        
-        if(toDegrees(amt) < 0){
-            amt = 6.28319f - (-amt);
-        }
-        
-        //convert to degrees if necessary.
-        amt = state->angleMode ? amt : toDegrees(amt);
-        return amt + heading();
-    }
- 
-    void Turtle::goTo(int x, int y) {//had to change due to C++ keyword "goto"
-        travelTo(Transform(*transform).setTranslation(x, y));
-    };
-
-    void Turtle::setx(int x) {
-        travelTo(Transform(*transform).setTranslationX(x));
-    }
-
-    void Turtle::sety(int y) {
-        travelTo(Transform(*transform).setTranslationY(y));
-    }
-
-    void Turtle::shift(int x, int y) {
-        travelTo(Transform(*transform).setTranslation(transform->getTranslateX()+x, transform->getTranslateY()+y));
-    }
-
-    void Turtle::home() {
-        travelTo(Transform());
-    }
-
-    //Drawing & Misc.
-
-    void Turtle::reset() {
-        //Reset objects, transforms, trace lines, state, etc.
-
-        //Note to self, clearing the list, appending a new transform,
-        //then reassigning the transform reference just didn't want to work.
-        //I have no idea why. Therefore, we're resetting it in the same
-        //manner we initially construct it.
-        stateStack = {PenState()};
-        state = &stateStack.back();
-
-        transform = &state->transform;
-        const auto numItems = objects.size();
-
-        if (screen != nullptr) {
-            //Re-assign cursor on reset, derived from parent screen.
-            state->cursor.reset(screen->shape("indented triangle").copy());
-            //Erase all objects
-            while (!objects.empty()) {
-                screen->getScene().erase(objects.front());
-                objects.pop_front();
-            }
-
-            //Alter cursor tilt and default transform
-            //when operating under SM_LOGO mode.
-            //This is to bring it up-to-par with Python's
-            //implementation of screen modes.
-            //I can't decide if this solution is too "hacky" or not;
-            //it solves the problem, but I could have done it differently.
-            if (screen->mode() == SM_LOGO) {
-                state->cursorTilt = (-1.5708f);
-                transform->rotate(1.5708f);
-            }
-        }
-
-        updateParent(numItems > 0, false);
-    }
-
-    //Conditional parent update.
-
-    void Turtle::updateParent(bool invalidate, bool input) {
-        if (screen != nullptr)
-            screen->update(invalidate, input);
-    }
-
-    void Turtle::circle(int radius, int steps, Color color) {
-        pushGeom(*transform, new Circle(radius, steps, color));
-        updateParent();
-    }
-
-    void Turtle::fill(bool val) {
-        if (state->filling && !val) {
-            //Add the fill polygon
-            screen->getScene().emplace_back(new Polygon(fillAccum.points, state->fillColor), Transform());
-            objects.push_back(std::prev(screen->getScene().end(), 1));
-
-            //Add all trace lines created when tracing out the fill polygon.
-            if (!fillLines.empty()) {
-                for (auto& lineInfo : fillLines) {
-                    screen->getScene().emplace_back(lineInfo.copy(), Transform());
-                    objects.push_back(std::prev(screen->getScene().end(), 1));
-                }
-                fillLines.clear();
-            }
-
-            fillAccum.points.clear();
-            updateParent(false, false);
-            //trace line geometry in the screen's scene list.
-        }
-        state->filling = val;
-    }
-
-    void Turtle::draw(const Transform& screen, Image& canvas) {
-        if (this->screen == nullptr || (!state->visible && !state->tracing))
-            return;
-
-        if (state->visible) {
-            //Draw all lines queued during filling a shape.
-            //This is only populated when the turtle moves between a beginfill
-            //and endfill while the pen is down.
-            for (const Line& line : fillLines)
-                line.draw(screen, canvas);
-
-            if (traveling && state->tracing) {
-                //Draw the "Travel-Line" when in the middle of the travelTo func
-                travelPoints[0] = screen(travelPoints[0]);
-                travelPoints[1] = screen(travelPoints[1]);
-                drawLine(canvas, travelPoints[0].x, travelPoints[0].y, travelPoints[1].x, travelPoints[1].y, state->penColor, state->penWidth);
-            }
-
-            //Add the extra rotate to start cursor facing right :)
-            const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416f;
-            Transform cursorTransform = screen.copyConcatenate(*transform).rotate(cursorRot + state->cursorTilt);
-            state->cursor->fillColor = state->fillColor;
-            state->cursor->outlineWidth = 1;
-            state->cursor->outlineColor = state->penColor;
-            state->cursor->draw(cursorTransform, canvas);
-        }
-    }
-
-    bool Turtle::undo(bool try_redraw) {
-        //total objects on the state stack prior to
-        const unsigned long int totalBefore = state->objectsBefore;
-
-        if (stateStack.size() >= 2)
-            travelBack(); //Travel back if stack size >= 2
-
-        //If we can't pop the state, break early.
-        //TODO: Remove features as they're undone, rather than at the end of the traveling animation.
-        if (!popState()) {
-            return false;
-        }
-
-        auto begin = std::prev(objects.end(), (totalBefore - state->objectsBefore));
-        auto iter = begin;
-
-        while (iter != objects.end()) {
-            screen->getScene().erase(*iter);
-            iter++;
-        }
-
-        objects.erase(begin, objects.end());
-
-        //Will invalidate the whole screen due to object removal, but we allow the option to not.
-        updateParent(try_redraw, false);
-        return true;
-    }
-
-    void Turtle::tilt(float amt) {
-        amt = state->angleMode ? amt : toRadians(amt);
-        //Flip angle orientation based on screen mode.
-        amt = screen->mode() == SM_STANDARD ? amt : -amt;
-        pushState();
-        state->cursorTilt += amt;
-        updateParent(false, false);
-    }
-
-    void Turtle::setshowturtle(bool val) {
-        pushState();
-        state->visible = val;
-        updateParent(false, false);
-    }
-
-    void Turtle::setpenstate(bool down) {
-        pushState();
-        state->tracing = down;
-    }
-
-    void Turtle::travelBetween(Transform src, const Transform& dest, bool doPushState){
-        if(dest == src)
-            return;
-
-        //Set the "traveling" state for screen drawing. Indicates when to draw travel lines (e.g, when pen is down).
-        traveling = true;
-
-        const float duration = static_cast<float>(getAnimMS());
-        if ((screen != nullptr ? !screen->isclosed() : false) && duration > 0) {//no point in animating with no screen
-            const unsigned long startTime = detail::epochTime();
-
-            float progress = 0;
-            while (progress < 1.0f) {
-                //We use the time between animation frames to smooth out
-                //our animations, making them take the same amount of time
-                //regardless of how it's performance.
-                const unsigned long curTime = detail::epochTime();
-
-                transform->assign(src.lerp(dest, progress));
-                travelPoints[0] = src.getTranslation();
-                travelPoints[1] = transform->getTranslation();
-
-                updateParent(false, false);
-
-                progress = (static_cast<float>(curTime - startTime) / duration);
-            }
-        }
-
-        if(doPushState){
-            if (state->tracing && !state->filling) {
-                pushTraceLine(src.getTranslation(), dest.getTranslation());
-            } else if (state->filling) {
-                fillAccum.points.push_back(dest.getTranslation());
-                if (state->tracing) {
-                    fillLines.push_back({src.getTranslation(), dest.getTranslation(), state->penColor, state->penWidth});
-                }
-            }
-
-            transform->assign(src);
-            pushState();
-        }
-
-        transform->assign(dest);
-        traveling = false;
-        updateParent(false, false);
-    }
-
-    void Turtle::pushState() {
-        if (stateStack.size() + 1 > undoStackSize)
-            stateStack.pop_front();
-
-        stateStack.push_back(stateStack.back()); //Push a copy of the back-most pen state.
-        state = &stateStack.back();
-        transform = &state->transform;
-        state->objectsBefore = objects.size();
-    }
-
-    bool Turtle::popState() {
-        if (stateStack.size() == 1)
-            return false;
-        stateStack.pop_back();
-        state = &stateStack.back();
-        transform = &state->transform;
-        return true;
-    }
-
-    bool Turtle::pushGeom(const Transform& t, AbstractDrawableObject* geom) {
-        if (screen != nullptr) {
-            pushState();
-            screen->getScene().emplace_back(geom, t);
-            objects.push_back(std::prev(screen->getScene().end()));
-            return true;
-        }
-        return false;
-    }
-
-    bool Turtle::pushStamp(const Transform& t, AbstractDrawableObject* geom) {
-        if (screen != nullptr) {
-            pushState();
-            const float cursorRot = this->screen->mode() == SM_STANDARD ? 1.5708f : -3.1416f;
-
-            Transform trans(t);
-            trans.rotate(cursorRot + state->cursorTilt);
-
-            geom->outlineWidth = 1;
-            geom->outlineColor = state->penColor;
-
-            screen->getScene().emplace_back(geom, trans, state->curStamp++);
-            SceneObject& obj = screen->getScene().back();
-
-            objects.push_back(std::prev(screen->getScene().end()));
-            return true;
-        }
-        return false;
-    }
-
-    bool Turtle::pushText(const Transform& t, Color color, const std::string& text) {
-        if (screen != nullptr) {
-            pushState();
-            screen->getScene().emplace_back(new Text(text, color), t);
-            objects.push_back(std::prev(screen->getScene().end()));
-            return true;
-        }
-        return false;
-    }
-
-    bool Turtle::pushTraceLine(Point a, Point b) {
-        if (screen != nullptr) {
-            screen->getScene().emplace_back(new Line(a, b, state->penColor, state->penWidth), Transform());
-            objects.push_back(std::prev(screen->getScene().end()));
-            //Trace lines do NOT push a state->
-            //Their state is encompassed by movement,
-            //and these lines are only added when moving the turtle
-            //while the pen is down.
-            return true;
-        }
-        return false;
-    }
 }
