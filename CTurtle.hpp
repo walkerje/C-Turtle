@@ -28,12 +28,22 @@
    +#+           +#+     +#+    +#+ +#+    +#+    +#+     +#+        +#+
    #+#    #+#    #+#     #+#    #+# #+#    #+#    #+#     #+#        #+#
     ########     ###      ########  ###    ###    ###     ########## ########## 
-   =================================v1.0.0====================================>
+   =================================v1.0.1====================================>
    
    GitHub: https://github.com/walkerje/C-Turtle
    Documentation: http://walkerje.me/C-Turtle/docs/html/annotated.html
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
+   
+   Patch                                v1.0.1
+   -----------------2/13/21-------------------
+   --- Added
+   ~ Added new constructor to Transform class to construct with an position and a rotation.
+   
+   --- Changed
+   ~ Preprocessor check for M_PI under MSVC was malformed; replaced ifndef with ifdef
+   ~ Implemented polygon line filling for drawLine function, reducing complexity to O(1) from O(n).
+   ~ Removed 100-pixel line width maximum from drawLine function.
    
    Release                              v1.0.0
    -----------------2/13/21-------------------
@@ -44,7 +54,7 @@
    ~ "face" function to Turtles to orient the turtle towards another Point.
    ~ "addfont" and "font" function to the TurtleScreen class to register and retrieve user-provided Bitmap Fonts.
    ~ Appended version number to default title constructors in the TurtleScreen class.
-   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)
+   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)  
    
    --- Changed
    ~ Moved turtle function implementations to the inside of the Turtle Class
@@ -74,7 +84,7 @@
 
 #define CTURTLE_VERSION_MAJOR "1"
 #define CTURTLE_VERSION_MINOR "0"
-#define CTURTLE_VERSION_PATCH "0"
+#define CTURTLE_VERSION_PATCH "1"
 #define CTURTLE_VERSION "v" CTURTLE_VERSION_MAJOR "." CTURTLE_VERSION_MINOR "." CTURTLE_VERSION_PATCH
 
 #ifdef CTURTLE_HEADLESS
@@ -489,7 +499,7 @@ inline void jo_gif_end(jo_gif_t *gif) {
 
 //MSVC 2017 doesn't seem to like defining M_PI. We define it ourselves
 //when compiling under VisualC++.
-#ifndef _MSC_VER
+#ifdef _MSC_VER
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288
 #endif
@@ -2680,49 +2690,6 @@ namespace cturtle {
     /**\brief An alias for ivec2. Strictly for convenience and clarity.*/
     typedef ivec2 Point;
 
-    /**\brief Draws a line of variable thickness on the specified image.
-     * This needed to be implemented because the CImg display backend
-     * has no facility to draw lines with a width greater than a single pixel!
-     * Width is clamped between 1 and 100, e.g, lines with a thickness above 100px are disallowed.
-     *\param imgRef The image on which to draw the line.
-     *\param The X component of the first coordinate.
-     *\param The Y component of the first coordinate.
-     *\param the X component of the second coordinate.
-     *\param the Y component of the second coordinate.
-     *\param c The color with which to draw the line.
-     *\param width The width of the line.*/
-    inline void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, int width = 1) {
-        width = std::clamp(width, 1, 100);//clamp the line width to avoid wobbly lines...
-        if(x1 == x2 && y1 == y2)
-            return;
-        else if (width == 1) {
-            //Just use the built-in bresenham line function
-            //to draw line with widths of 1.
-            imgRef.draw_line(x1, y1, x2, y2, c.rgbPtr());
-            return;
-        }
-        
-        //Simplified this a bit. Might be a little bit faster.
-        //Old implementation was bresenham with a circle at every point.
-        //now, this algorithm considers the radius of each circle it will blit
-        //while traversing the line. Uses linear interpolation between two points.
-        //This should reduce the total number of blits on thicker lines.
-        //Consider a line with a width of 50; the radius for the circles would be
-        //25. We blit every one-third of the radius minus one, so a line that's 100 units long, for example,
-        //would get a circle around every 7 pixels. That's roughly 14-15 circles. Compared to the 100 circles
-        //it used to take, that's a considerable improvement.
-        //Creates wobbly lines at high thicknesses; thus, width is now confined to a range.
-        const ivec2 a = {x1,y1};
-        const ivec2 b = {x2,y2};
-        const int dist = distance(a, b);//distance to bound the lerp by.
-        const int radius = width / 2; //integer division... be mindful.
-        const int progression = std::max((radius/3)-1, 1); // division by 3 was an arbitrary choice, but yields good results
-        for(int i = 0; i < dist + progression; i += progression){ // progress by radius
-            const ivec2 position = lerp(a, b, float(i) / float(dist));
-            imgRef.draw_circle(position.x, position.y, radius, c.rgbPtr());
-        }
-    }
-
     /**\brief The Transform class provides a myriad of functions to
      *        simply transform points.
      * This class it the backbone of almost all cartesian plane math in CTurtle.
@@ -2741,6 +2708,17 @@ namespace cturtle {
          *\param other The other transform from which to derive value.*/
         Transform(const Transform& other)
         : value(other.value), rotation(other.rotation) {
+        }
+        
+        /**\brief Point and rotation. constructor.
+         * Initializes a transform with the specified rotation, a translation matching the specified point.
+         * \param point The translation of this newly constructed transform.
+         * \param rotation The rotation of this newly constructed transform.
+         */
+        Transform(const ivec2& point, float rotation = 0.0f){
+            identity();
+            setTranslation(point.x, point.y);
+            rotate(rotation);
         }
 
         /**\brief Sets this transform to an identity.
@@ -3061,6 +3039,64 @@ namespace cturtle {
     template<typename T>
     inline T toDegrees(T val) {
         return std::round(T(val * (180.0 / M_PI)));
+    }
+
+
+    /**\brief Draws a rounded line of variable thickness on the specified image.
+     *\param imgRef The image on which to draw the line.
+     *\param The X component of the first coordinate.
+     *\param The Y component of the first coordinate.
+     *\param the X component of the second coordinate.
+     *\param the Y component of the second coordinate.
+     *\param c The color with which to draw the line.
+     *\param width The width of the line.*/
+    inline void drawLine(Image& imgRef, int x1, int y1, int x2, int y2, Color c, int width = 1) {
+        if(x1 == x2 && y1 == y2)
+            return;
+        else if (width == 1) {
+            //Just use the built-in bresenham line function
+            //to draw line with widths of 1.
+            imgRef.draw_line(x1, y1, x2, y2, c.rgbPtr());
+            return;
+        }
+        
+        const int radius = width / 2;//integer division, be careful here...
+        cimg::CImg<int> lineGeom(4, 2);
+        
+        //convert line (p1, p2) to polygon (p1,p2,p3,p4)... huzzah, O(1) implementation!
+        //start with two transforms (one for each coordinate pair), rotated to face towards one-another,
+        //with an added 90-degree rotation (1.571~ ish radians).
+
+        Transform transforms[2] = {
+            {{x1, y1}, std::atan2(static_cast<float>(y2) - y1, static_cast<float>(x2) - x1) + 1.57079633f},
+            {{x2, y2}, std::atan2(static_cast<float>(y1) - y2, static_cast<float>(x1) - x2) + 1.57079633f}
+        };
+        Point temp[2];
+        
+        for(int i = 0; i < 2; i++){//for both of the transforms...
+            Transform& trans = transforms[i];
+            
+            //move it forward and back, getting the adjacent corners of the polygon line
+            trans.forward(radius);
+            temp[0] = trans.getTranslation();
+            
+            trans.backward(radius * 2);
+            temp[1] = trans.getTranslation();
+            
+            //then, using a loop, copy our temporary points to the point image.
+            //the first transform (pt a) are indices 0, 1
+            //the second transform (pt b) are indices 2, 3
+            //this ensures proper cw/ccw vertex ordering.
+            for(int j = 0; j < 2; j++){
+                lineGeom((i * 2) + j, 0) = temp[j][0];
+                lineGeom((i * 2) + j, 1) = temp[j][1];
+            }
+        }
+        
+        //draw the rounded caps and the fill polygon
+        imgRef.draw_circle(x1, y1, radius, c.rgbPtr());//circle 1
+        imgRef.draw_polygon(lineGeom, c.rgbPtr());//line fill
+        imgRef.draw_circle(x2, y2, radius, c.rgbPtr());//circle 2
     }
     
     /**
