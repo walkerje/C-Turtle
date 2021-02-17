@@ -3042,10 +3042,7 @@ namespace cturtle {
     }
 
 
-    /**\brief Draws a line of variable thickness on the specified image.
-     * This needed to be implemented because the CImg display backend
-     * has no facility to draw lines with a width greater than a single pixel!
-     * Width is clamped between 1 and 100, e.g, lines with a thickness above 100px are disallowed.
+    /**\brief Draws a rounded line of variable thickness on the specified image.
      *\param imgRef The image on which to draw the line.
      *\param The X component of the first coordinate.
      *\param The Y component of the first coordinate.
