@@ -5,7 +5,7 @@
   <br>
 </p>
 
-# C-Turtle 1.0.1 | [Documentation](http://walkerje.me/C-Turtle/docs/html/annotated.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
+# C-Turtle 1.0.2 | [Documentation](http://walkerje.me/C-Turtle/docs/html/annotated.html) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
 
 C-Turtle is a port of Python's Turtle facility for C++11, with the intent of being a close analog to the Python implementation. This package was developed with the intent of student usage under an academic setting, and was designed to be "as easy to use as possible". This package has been released under the MIT license accordingly.
 Given that this is intended to be an education-oriented package, to ease the setup process it has been created to be Header-Only. Simply copy CTurtle.hpp (alongside CImg.hpp) into your include path or project and you're ready to go.
