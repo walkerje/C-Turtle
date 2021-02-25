@@ -28,12 +28,20 @@
    +#+           +#+     +#+    +#+ +#+    +#+    +#+     +#+        +#+
    #+#    #+#    #+#     #+#    #+# #+#    #+#    #+#     #+#        #+#
     ########     ###      ########  ###    ###    ###     ########## ########## 
-   =================================v1.0.1====================================>
+   =================================v1.0.2====================================>
    
    GitHub: https://github.com/walkerje/C-Turtle
    Documentation: http://walkerje.me/C-Turtle/docs/html/annotated.html
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
+   
+   Patch                                v1.0.1
+   -----------------2/13/21-------------------
+   --- Added
+   ~ Implementation for turtle's goTo function that got erroneously removed.
+   
+   --- Changed
+   ~ Change isValid for BitmapFont class to consider the size of the glyph vector.
    
    Patch                                v1.0.1
    -----------------2/13/21-------------------
@@ -84,7 +92,7 @@
 
 #define CTURTLE_VERSION_MAJOR "1"
 #define CTURTLE_VERSION_MINOR "0"
-#define CTURTLE_VERSION_PATCH "1"
+#define CTURTLE_VERSION_PATCH "2"
 #define CTURTLE_VERSION "v" CTURTLE_VERSION_MAJOR "." CTURTLE_VERSION_MINOR "." CTURTLE_VERSION_PATCH
 
 #ifdef CTURTLE_HEADLESS
@@ -510,7 +518,7 @@ inline void jo_gif_end(jo_gif_t *gif) {
 //GIF utility is included at the top of the file when under headless mode.
 
 #ifdef CTURTLE_HEADLESS
-    //Optional define to disable HTML Base64 Image output
+//Optional define to disable HTML Base64 Image output
     //#define CTURTLE_HEADLESS_NO_HTML
 
     //Disable CImg Display
@@ -1451,13 +1459,13 @@ namespace cturtle {
           \param g Green component.
           \param b Blue component.*/
         Color(component_t r, component_t g, component_t b) :
-        r(r), g(g), b(b) {
+                r(r), g(g), b(b) {
         };
 
         /*\brief Copy constructor.
           \param other Constant reference to other instance of a color object.*/
         Color(const Color& other) :
-        r(other.r), g(other.g), b(other.b) {
+                r(other.r), g(other.g), b(other.b) {
         }
 
         /*\brief Name constructor.
@@ -1492,7 +1500,7 @@ namespace cturtle {
             dest[2] = b;
         }
     };
-    
+
     constexpr char DEFAULT_FONT[] = "default";
     constexpr uint32_t DEFAULT_FONT_PIXELS_WIDTH = 256;
     constexpr uint32_t DEFAULT_FONT_PIXELS_HEIGHT = 128;
@@ -1575,758 +1583,758 @@ namespace cturtle {
 
 
     const std::unordered_map<std::string, detail::color_int_t> NAMED_COLORS = {
-        {"alice blue", detail::col::alice_blue},
-        {"AliceBlue", detail::col::AliceBlue},
-        {"antique white", detail::col::antique_white},
-        {"AntiqueWhite", detail::col::AntiqueWhite},
-        {"AntiqueWhite1", detail::col::AntiqueWhite1},
-        {"AntiqueWhite2", detail::col::AntiqueWhite2},
-        {"AntiqueWhite3", detail::col::AntiqueWhite3},
-        {"AntiqueWhite4", detail::col::AntiqueWhite4},
-        {"aquamarine", detail::col::aquamarine},
-        {"aquamarine1", detail::col::aquamarine1},
-        {"aquamarine2", detail::col::aquamarine2},
-        {"aquamarine3", detail::col::aquamarine3},
-        {"aquamarine4", detail::col::aquamarine4},
-        {"azure", detail::col::azure},
-        {"azure1", detail::col::azure1},
-        {"azure2", detail::col::azure2},
-        {"azure3", detail::col::azure3},
-        {"azure4", detail::col::azure4},
-        {"beige", detail::col::beige},
-        {"bisque", detail::col::bisque},
-        {"bisque1", detail::col::bisque1},
-        {"bisque2", detail::col::bisque2},
-        {"bisque3", detail::col::bisque3},
-        {"bisque4", detail::col::bisque4},
-        {"black", detail::col::black},
-        {"blanched almond", detail::col::blanched_almond},
-        {"BlanchedAlmond", detail::col::BlanchedAlmond},
-        {"blue", detail::col::blue},
-        {"blue violet", detail::col::blue_violet},
-        {"blue1", detail::col::blue1},
-        {"blue2", detail::col::blue2},
-        {"blue3", detail::col::blue3},
-        {"blue4", detail::col::blue4},
-        {"BlueViolet", detail::col::BlueViolet},
-        {"brown", detail::col::brown},
-        {"brown1", detail::col::brown1},
-        {"brown2", detail::col::brown2},
-        {"brown3", detail::col::brown3},
-        {"brown4", detail::col::brown4},
-        {"burlywood", detail::col::burlywood},
-        {"burlywood1", detail::col::burlywood1},
-        {"burlywood2", detail::col::burlywood2},
-        {"burlywood3", detail::col::burlywood3},
-        {"burlywood4", detail::col::burlywood4},
-        {"cadet blue", detail::col::cadet_blue},
-        {"CadetBlue", detail::col::CadetBlue},
-        {"CadetBlue1", detail::col::CadetBlue1},
-        {"CadetBlue2", detail::col::CadetBlue2},
-        {"CadetBlue3", detail::col::CadetBlue3},
-        {"CadetBlue4", detail::col::CadetBlue4},
-        {"chartreuse", detail::col::chartreuse},
-        {"chartreuse1", detail::col::chartreuse1},
-        {"chartreuse2", detail::col::chartreuse2},
-        {"chartreuse3", detail::col::chartreuse3},
-        {"chartreuse4", detail::col::chartreuse4},
-        {"chocolate", detail::col::chocolate},
-        {"chocolate1", detail::col::chocolate1},
-        {"chocolate2", detail::col::chocolate2},
-        {"chocolate3", detail::col::chocolate3},
-        {"chocolate4", detail::col::chocolate4},
-        {"coral", detail::col::coral},
-        {"coral1", detail::col::coral1},
-        {"coral2", detail::col::coral2},
-        {"coral3", detail::col::coral3},
-        {"coral4", detail::col::coral4},
-        {"cornflower blue", detail::col::cornflower_blue},
-        {"CornflowerBlue", detail::col::CornflowerBlue},
-        {"cornsilk", detail::col::cornsilk},
-        {"cornsilk1", detail::col::cornsilk1},
-        {"cornsilk2", detail::col::cornsilk2},
-        {"cornsilk3", detail::col::cornsilk3},
-        {"cornsilk4", detail::col::cornsilk4},
-        {"cyan", detail::col::cyan},
-        {"cyan1", detail::col::cyan1},
-        {"cyan2", detail::col::cyan2},
-        {"cyan3", detail::col::cyan3},
-        {"cyan4", detail::col::cyan4},
-        {"dark blue", detail::col::dark_blue},
-        {"dark cyan", detail::col::dark_cyan},
-        {"dark goldenrod", detail::col::dark_goldenrod},
-        {"dark gray", detail::col::dark_gray},
-        {"dark green", detail::col::dark_green},
-        {"dark grey", detail::col::dark_grey},
-        {"dark khaki", detail::col::dark_khaki},
-        {"dark magenta", detail::col::dark_magenta},
-        {"dark olive green", detail::col::dark_olive_green},
-        {"dark orange", detail::col::dark_orange},
-        {"dark orchid", detail::col::dark_orchid},
-        {"dark red", detail::col::dark_red},
-        {"dark salmon", detail::col::dark_salmon},
-        {"dark sea green", detail::col::dark_sea_green},
-        {"dark slate blue", detail::col::dark_slate_blue},
-        {"dark slate gray", detail::col::dark_slate_gray},
-        {"dark slate grey", detail::col::dark_slate_grey},
-        {"dark turquoise", detail::col::dark_turquoise},
-        {"dark violet", detail::col::dark_violet},
-        {"DarkBlue", detail::col::DarkBlue},
-        {"DarkCyan", detail::col::DarkCyan},
-        {"DarkGoldenrod", detail::col::DarkGoldenrod},
-        {"DarkGoldenrod1", detail::col::DarkGoldenrod1},
-        {"DarkGoldenrod2", detail::col::DarkGoldenrod2},
-        {"DarkGoldenrod3", detail::col::DarkGoldenrod3},
-        {"DarkGoldenrod4", detail::col::DarkGoldenrod4},
-        {"DarkGray", detail::col::DarkGray},
-        {"DarkGreen", detail::col::DarkGreen},
-        {"DarkGrey", detail::col::DarkGrey},
-        {"DarkKhaki", detail::col::DarkKhaki},
-        {"DarkMagenta", detail::col::DarkMagenta},
-        {"DarkOliveGreen", detail::col::DarkOliveGreen},
-        {"DarkOliveGreen1", detail::col::DarkOliveGreen1},
-        {"DarkOliveGreen2", detail::col::DarkOliveGreen2},
-        {"DarkOliveGreen3", detail::col::DarkOliveGreen3},
-        {"DarkOliveGreen4", detail::col::DarkOliveGreen4},
-        {"DarkOrange", detail::col::DarkOrange},
-        {"DarkOrange1", detail::col::DarkOrange1},
-        {"DarkOrange2", detail::col::DarkOrange2},
-        {"DarkOrange3", detail::col::DarkOrange3},
-        {"DarkOrange4", detail::col::DarkOrange4},
-        {"DarkOrchid", detail::col::DarkOrchid},
-        {"DarkOrchid1", detail::col::DarkOrchid1},
-        {"DarkOrchid2", detail::col::DarkOrchid2},
-        {"DarkOrchid3", detail::col::DarkOrchid3},
-        {"DarkOrchid4", detail::col::DarkOrchid4},
-        {"DarkRed", detail::col::DarkRed},
-        {"DarkSalmon", detail::col::DarkSalmon},
-        {"DarkSeaGreen", detail::col::DarkSeaGreen},
-        {"DarkSeaGreen1", detail::col::DarkSeaGreen1},
-        {"DarkSeaGreen2", detail::col::DarkSeaGreen2},
-        {"DarkSeaGreen3", detail::col::DarkSeaGreen3},
-        {"DarkSeaGreen4", detail::col::DarkSeaGreen4},
-        {"DarkSlateBlue", detail::col::DarkSlateBlue},
-        {"DarkSlateGray", detail::col::DarkSlateGray},
-        {"DarkSlateGray1", detail::col::DarkSlateGray1},
-        {"DarkSlateGray2", detail::col::DarkSlateGray2},
-        {"DarkSlateGray3", detail::col::DarkSlateGray3},
-        {"DarkSlateGray4", detail::col::DarkSlateGray4},
-        {"DarkSlateGrey", detail::col::DarkSlateGrey},
-        {"DarkTurquoise", detail::col::DarkTurquoise},
-        {"DarkViolet", detail::col::DarkViolet},
-        {"deep pink", detail::col::deep_pink},
-        {"deep sky blue", detail::col::deep_sky_blue},
-        {"DeepPink", detail::col::DeepPink},
-        {"DeepPink1", detail::col::DeepPink1},
-        {"DeepPink2", detail::col::DeepPink2},
-        {"DeepPink3", detail::col::DeepPink3},
-        {"DeepPink4", detail::col::DeepPink4},
-        {"DeepSkyBlue", detail::col::DeepSkyBlue},
-        {"DeepSkyBlue1", detail::col::DeepSkyBlue1},
-        {"DeepSkyBlue2", detail::col::DeepSkyBlue2},
-        {"DeepSkyBlue3", detail::col::DeepSkyBlue3},
-        {"DeepSkyBlue4", detail::col::DeepSkyBlue4},
-        {"dim gray", detail::col::dim_gray},
-        {"dim grey", detail::col::dim_grey},
-        {"DimGray", detail::col::DimGray},
-        {"DimGrey", detail::col::DimGrey},
-        {"dodger blue", detail::col::dodger_blue},
-        {"DodgerBlue", detail::col::DodgerBlue},
-        {"DodgerBlue1", detail::col::DodgerBlue1},
-        {"DodgerBlue2", detail::col::DodgerBlue2},
-        {"DodgerBlue3", detail::col::DodgerBlue3},
-        {"DodgerBlue4", detail::col::DodgerBlue4},
-        {"firebrick", detail::col::firebrick},
-        {"firebrick1", detail::col::firebrick1},
-        {"firebrick2", detail::col::firebrick2},
-        {"firebrick3", detail::col::firebrick3},
-        {"firebrick4", detail::col::firebrick4},
-        {"floral white", detail::col::floral_white},
-        {"FloralWhite", detail::col::FloralWhite},
-        {"forest green", detail::col::forest_green},
-        {"ForestGreen", detail::col::ForestGreen},
-        {"gainsboro", detail::col::gainsboro},
-        {"ghost white", detail::col::ghost_white},
-        {"GhostWhite", detail::col::GhostWhite},
-        {"gold", detail::col::gold},
-        {"gold1", detail::col::gold1},
-        {"gold2", detail::col::gold2},
-        {"gold3", detail::col::gold3},
-        {"gold4", detail::col::gold4},
-        {"goldenrod", detail::col::goldenrod},
-        {"goldenrod1", detail::col::goldenrod1},
-        {"goldenrod2", detail::col::goldenrod2},
-        {"goldenrod3", detail::col::goldenrod3},
-        {"goldenrod4", detail::col::goldenrod4},
-        {"gray", detail::col::gray},
-        {"gray0", detail::col::gray0},
-        {"gray1", detail::col::gray1},
-        {"gray2", detail::col::gray2},
-        {"gray3", detail::col::gray3},
-        {"gray4", detail::col::gray4},
-        {"gray5", detail::col::gray5},
-        {"gray6", detail::col::gray6},
-        {"gray7", detail::col::gray7},
-        {"gray8", detail::col::gray8},
-        {"gray9", detail::col::gray9},
-        {"gray10", detail::col::gray10},
-        {"gray11", detail::col::gray11},
-        {"gray12", detail::col::gray12},
-        {"gray13", detail::col::gray13},
-        {"gray14", detail::col::gray14},
-        {"gray15", detail::col::gray15},
-        {"gray16", detail::col::gray16},
-        {"gray17", detail::col::gray17},
-        {"gray18", detail::col::gray18},
-        {"gray19", detail::col::gray19},
-        {"gray20", detail::col::gray20},
-        {"gray21", detail::col::gray21},
-        {"gray22", detail::col::gray22},
-        {"gray23", detail::col::gray23},
-        {"gray24", detail::col::gray24},
-        {"gray25", detail::col::gray25},
-        {"gray26", detail::col::gray26},
-        {"gray27", detail::col::gray27},
-        {"gray28", detail::col::gray28},
-        {"gray29", detail::col::gray29},
-        {"gray30", detail::col::gray30},
-        {"gray31", detail::col::gray31},
-        {"gray32", detail::col::gray32},
-        {"gray33", detail::col::gray33},
-        {"gray34", detail::col::gray34},
-        {"gray35", detail::col::gray35},
-        {"gray36", detail::col::gray36},
-        {"gray37", detail::col::gray37},
-        {"gray38", detail::col::gray38},
-        {"gray39", detail::col::gray39},
-        {"gray40", detail::col::gray40},
-        {"gray41", detail::col::gray41},
-        {"gray42", detail::col::gray42},
-        {"gray43", detail::col::gray43},
-        {"gray44", detail::col::gray44},
-        {"gray45", detail::col::gray45},
-        {"gray46", detail::col::gray46},
-        {"gray47", detail::col::gray47},
-        {"gray48", detail::col::gray48},
-        {"gray49", detail::col::gray49},
-        {"gray50", detail::col::gray50},
-        {"gray51", detail::col::gray51},
-        {"gray52", detail::col::gray52},
-        {"gray53", detail::col::gray53},
-        {"gray54", detail::col::gray54},
-        {"gray55", detail::col::gray55},
-        {"gray56", detail::col::gray56},
-        {"gray57", detail::col::gray57},
-        {"gray58", detail::col::gray58},
-        {"gray59", detail::col::gray59},
-        {"gray60", detail::col::gray60},
-        {"gray61", detail::col::gray61},
-        {"gray62", detail::col::gray62},
-        {"gray63", detail::col::gray63},
-        {"gray64", detail::col::gray64},
-        {"gray65", detail::col::gray65},
-        {"gray66", detail::col::gray66},
-        {"gray67", detail::col::gray67},
-        {"gray68", detail::col::gray68},
-        {"gray69", detail::col::gray69},
-        {"gray70", detail::col::gray70},
-        {"gray71", detail::col::gray71},
-        {"gray72", detail::col::gray72},
-        {"gray73", detail::col::gray73},
-        {"gray74", detail::col::gray74},
-        {"gray75", detail::col::gray75},
-        {"gray76", detail::col::gray76},
-        {"gray77", detail::col::gray77},
-        {"gray78", detail::col::gray78},
-        {"gray79", detail::col::gray79},
-        {"gray80", detail::col::gray80},
-        {"gray81", detail::col::gray81},
-        {"gray82", detail::col::gray82},
-        {"gray83", detail::col::gray83},
-        {"gray84", detail::col::gray84},
-        {"gray85", detail::col::gray85},
-        {"gray86", detail::col::gray86},
-        {"gray87", detail::col::gray87},
-        {"gray88", detail::col::gray88},
-        {"gray89", detail::col::gray89},
-        {"gray90", detail::col::gray90},
-        {"gray91", detail::col::gray91},
-        {"gray92", detail::col::gray92},
-        {"gray93", detail::col::gray93},
-        {"gray94", detail::col::gray94},
-        {"gray95", detail::col::gray95},
-        {"gray96", detail::col::gray96},
-        {"gray97", detail::col::gray97},
-        {"gray98", detail::col::gray98},
-        {"gray99", detail::col::gray99},
-        {"gray100", detail::col::gray100},
-        {"green", detail::col::green},
-        {"green yellow", detail::col::green_yellow},
-        {"green1", detail::col::green1},
-        {"green2", detail::col::green2},
-        {"green3", detail::col::green3},
-        {"green4", detail::col::green4},
-        {"GreenYellow", detail::col::GreenYellow},
-        {"grey", detail::col::grey},
-        {"grey0", detail::col::grey0},
-        {"grey1", detail::col::grey1},
-        {"grey2", detail::col::grey2},
-        {"grey3", detail::col::grey3},
-        {"grey4", detail::col::grey4},
-        {"grey5", detail::col::grey5},
-        {"grey6", detail::col::grey6},
-        {"grey7", detail::col::grey7},
-        {"grey8", detail::col::grey8},
-        {"grey9", detail::col::grey9},
-        {"grey10", detail::col::grey10},
-        {"grey11", detail::col::grey11},
-        {"grey12", detail::col::grey12},
-        {"grey13", detail::col::grey13},
-        {"grey14", detail::col::grey14},
-        {"grey15", detail::col::grey15},
-        {"grey16", detail::col::grey16},
-        {"grey17", detail::col::grey17},
-        {"grey18", detail::col::grey18},
-        {"grey19", detail::col::grey19},
-        {"grey20", detail::col::grey20},
-        {"grey21", detail::col::grey21},
-        {"grey22", detail::col::grey22},
-        {"grey23", detail::col::grey23},
-        {"grey24", detail::col::grey24},
-        {"grey25", detail::col::grey25},
-        {"grey26", detail::col::grey26},
-        {"grey27", detail::col::grey27},
-        {"grey28", detail::col::grey28},
-        {"grey29", detail::col::grey29},
-        {"grey30", detail::col::grey30},
-        {"grey31", detail::col::grey31},
-        {"grey32", detail::col::grey32},
-        {"grey33", detail::col::grey33},
-        {"grey34", detail::col::grey34},
-        {"grey35", detail::col::grey35},
-        {"grey36", detail::col::grey36},
-        {"grey37", detail::col::grey37},
-        {"grey38", detail::col::grey38},
-        {"grey39", detail::col::grey39},
-        {"grey40", detail::col::grey40},
-        {"grey41", detail::col::grey41},
-        {"grey42", detail::col::grey42},
-        {"grey43", detail::col::grey43},
-        {"grey44", detail::col::grey44},
-        {"grey45", detail::col::grey45},
-        {"grey46", detail::col::grey46},
-        {"grey47", detail::col::grey47},
-        {"grey48", detail::col::grey48},
-        {"grey49", detail::col::grey49},
-        {"grey50", detail::col::grey50},
-        {"grey51", detail::col::grey51},
-        {"grey52", detail::col::grey52},
-        {"grey53", detail::col::grey53},
-        {"grey54", detail::col::grey54},
-        {"grey55", detail::col::grey55},
-        {"grey56", detail::col::grey56},
-        {"grey57", detail::col::grey57},
-        {"grey58", detail::col::grey58},
-        {"grey59", detail::col::grey59},
-        {"grey60", detail::col::grey60},
-        {"grey61", detail::col::grey61},
-        {"grey62", detail::col::grey62},
-        {"grey63", detail::col::grey63},
-        {"grey64", detail::col::grey64},
-        {"grey65", detail::col::grey65},
-        {"grey66", detail::col::grey66},
-        {"grey67", detail::col::grey67},
-        {"grey68", detail::col::grey68},
-        {"grey69", detail::col::grey69},
-        {"grey70", detail::col::grey70},
-        {"grey71", detail::col::grey71},
-        {"grey72", detail::col::grey72},
-        {"grey73", detail::col::grey73},
-        {"grey74", detail::col::grey74},
-        {"grey75", detail::col::grey75},
-        {"grey76", detail::col::grey76},
-        {"grey77", detail::col::grey77},
-        {"grey78", detail::col::grey78},
-        {"grey79", detail::col::grey79},
-        {"grey80", detail::col::grey80},
-        {"grey81", detail::col::grey81},
-        {"grey82", detail::col::grey82},
-        {"grey83", detail::col::grey83},
-        {"grey84", detail::col::grey84},
-        {"grey85", detail::col::grey85},
-        {"grey86", detail::col::grey86},
-        {"grey87", detail::col::grey87},
-        {"grey88", detail::col::grey88},
-        {"grey89", detail::col::grey89},
-        {"grey90", detail::col::grey90},
-        {"grey91", detail::col::grey91},
-        {"grey92", detail::col::grey92},
-        {"grey93", detail::col::grey93},
-        {"grey94", detail::col::grey94},
-        {"grey95", detail::col::grey95},
-        {"grey96", detail::col::grey96},
-        {"grey97", detail::col::grey97},
-        {"grey98", detail::col::grey98},
-        {"grey99", detail::col::grey99},
-        {"grey100", detail::col::grey100},
-        {"honeydew", detail::col::honeydew},
-        {"honeydew1", detail::col::honeydew1},
-        {"honeydew2", detail::col::honeydew2},
-        {"honeydew3", detail::col::honeydew3},
-        {"honeydew4", detail::col::honeydew4},
-        {"hot pink", detail::col::hot_pink},
-        {"HotPink", detail::col::HotPink},
-        {"HotPink1", detail::col::HotPink1},
-        {"HotPink2", detail::col::HotPink2},
-        {"HotPink3", detail::col::HotPink3},
-        {"HotPink4", detail::col::HotPink4},
-        {"indian red", detail::col::indian_red},
-        {"IndianRed", detail::col::IndianRed},
-        {"IndianRed1", detail::col::IndianRed1},
-        {"IndianRed2", detail::col::IndianRed2},
-        {"IndianRed3", detail::col::IndianRed3},
-        {"IndianRed4", detail::col::IndianRed4},
-        {"ivory", detail::col::ivory},
-        {"ivory1", detail::col::ivory1},
-        {"ivory2", detail::col::ivory2},
-        {"ivory3", detail::col::ivory3},
-        {"ivory4", detail::col::ivory4},
-        {"khaki", detail::col::khaki},
-        {"khaki1", detail::col::khaki1},
-        {"khaki2", detail::col::khaki2},
-        {"khaki3", detail::col::khaki3},
-        {"khaki4", detail::col::khaki4},
-        {"lavender", detail::col::lavender},
-        {"lavender blush", detail::col::lavender_blush},
-        {"LavenderBlush", detail::col::LavenderBlush},
-        {"LavenderBlush1", detail::col::LavenderBlush1},
-        {"LavenderBlush2", detail::col::LavenderBlush2},
-        {"LavenderBlush3", detail::col::LavenderBlush3},
-        {"LavenderBlush4", detail::col::LavenderBlush4},
-        {"lawn green", detail::col::lawn_green},
-        {"LawnGreen", detail::col::LawnGreen},
-        {"lemon chiffon", detail::col::lemon_chiffon},
-        {"LemonChiffon", detail::col::LemonChiffon},
-        {"LemonChiffon1", detail::col::LemonChiffon1},
-        {"LemonChiffon2", detail::col::LemonChiffon2},
-        {"LemonChiffon3", detail::col::LemonChiffon3},
-        {"LemonChiffon4", detail::col::LemonChiffon4},
-        {"light blue", detail::col::light_blue},
-        {"light coral", detail::col::light_coral},
-        {"light cyan", detail::col::light_cyan},
-        {"light goldenrod", detail::col::light_goldenrod},
-        {"light goldenrod yellow", detail::col::light_goldenrod_yellow},
-        {"light gray", detail::col::light_gray},
-        {"light green", detail::col::light_green},
-        {"light grey", detail::col::light_grey},
-        {"light pink", detail::col::light_pink},
-        {"light salmon", detail::col::light_salmon},
-        {"light sea green", detail::col::light_sea_green},
-        {"light sky blue", detail::col::light_sky_blue},
-        {"light slate blue", detail::col::light_slate_blue},
-        {"light slate gray", detail::col::light_slate_gray},
-        {"light slate grey", detail::col::light_slate_grey},
-        {"light steel blue", detail::col::light_steel_blue},
-        {"light yellow", detail::col::light_yellow},
-        {"LightBlue", detail::col::LightBlue},
-        {"LightBlue1", detail::col::LightBlue1},
-        {"LightBlue2", detail::col::LightBlue2},
-        {"LightBlue3", detail::col::LightBlue3},
-        {"LightBlue4", detail::col::LightBlue4},
-        {"LightCoral", detail::col::LightCoral},
-        {"LightCyan", detail::col::LightCyan},
-        {"LightCyan1", detail::col::LightCyan1},
-        {"LightCyan2", detail::col::LightCyan2},
-        {"LightCyan3", detail::col::LightCyan3},
-        {"LightCyan4", detail::col::LightCyan4},
-        {"LightGoldenrod", detail::col::LightGoldenrod},
-        {"LightGoldenrod1", detail::col::LightGoldenrod1},
-        {"LightGoldenrod2", detail::col::LightGoldenrod2},
-        {"LightGoldenrod3", detail::col::LightGoldenrod3},
-        {"LightGoldenrod4", detail::col::LightGoldenrod4},
-        {"LightGoldenrodYellow", detail::col::LightGoldenrodYellow},
-        {"LightGray", detail::col::LightGray},
-        {"LightGreen", detail::col::LightGreen},
-        {"LightGrey", detail::col::LightGrey},
-        {"LightPink", detail::col::LightPink},
-        {"LightPink1", detail::col::LightPink1},
-        {"LightPink2", detail::col::LightPink2},
-        {"LightPink3", detail::col::LightPink3},
-        {"LightPink4", detail::col::LightPink4},
-        {"LightSalmon", detail::col::LightSalmon},
-        {"LightSalmon1", detail::col::LightSalmon1},
-        {"LightSalmon2", detail::col::LightSalmon2},
-        {"LightSalmon3", detail::col::LightSalmon3},
-        {"LightSalmon4", detail::col::LightSalmon4},
-        {"LightSeaGreen", detail::col::LightSeaGreen},
-        {"LightSkyBlue", detail::col::LightSkyBlue},
-        {"LightSkyBlue1", detail::col::LightSkyBlue1},
-        {"LightSkyBlue2", detail::col::LightSkyBlue2},
-        {"LightSkyBlue3", detail::col::LightSkyBlue3},
-        {"LightSkyBlue4", detail::col::LightSkyBlue4},
-        {"LightSlateBlue", detail::col::LightSlateBlue},
-        {"LightSlateGray", detail::col::LightSlateGray},
-        {"LightSlateGrey", detail::col::LightSlateGrey},
-        {"LightSteelBlue", detail::col::LightSteelBlue},
-        {"LightSteelBlue1", detail::col::LightSteelBlue1},
-        {"LightSteelBlue2", detail::col::LightSteelBlue2},
-        {"LightSteelBlue3", detail::col::LightSteelBlue3},
-        {"LightSteelBlue4", detail::col::LightSteelBlue4},
-        {"LightYellow", detail::col::LightYellow},
-        {"LightYellow1", detail::col::LightYellow1},
-        {"LightYellow2", detail::col::LightYellow2},
-        {"LightYellow3", detail::col::LightYellow3},
-        {"LightYellow4", detail::col::LightYellow4},
-        {"lime green", detail::col::lime_green},
-        {"LimeGreen", detail::col::LimeGreen},
-        {"linen", detail::col::linen},
-        {"magenta", detail::col::magenta},
-        {"magenta1", detail::col::magenta1},
-        {"magenta2", detail::col::magenta2},
-        {"magenta3", detail::col::magenta3},
-        {"magenta4", detail::col::magenta4},
-        {"maroon", detail::col::maroon},
-        {"maroon1", detail::col::maroon1},
-        {"maroon2", detail::col::maroon2},
-        {"maroon3", detail::col::maroon3},
-        {"maroon4", detail::col::maroon4},
-        {"medium aquamarine", detail::col::medium_aquamarine},
-        {"medium blue", detail::col::medium_blue},
-        {"medium orchid", detail::col::medium_orchid},
-        {"medium purple", detail::col::medium_purple},
-        {"medium sea green", detail::col::medium_sea_green},
-        {"medium slate blue", detail::col::medium_slate_blue},
-        {"medium spring green", detail::col::medium_spring_green},
-        {"medium turquoise", detail::col::medium_turquoise},
-        {"medium violet red", detail::col::medium_violet_red},
-        {"MediumAquamarine", detail::col::MediumAquamarine},
-        {"MediumBlue", detail::col::MediumBlue},
-        {"MediumOrchid", detail::col::MediumOrchid},
-        {"MediumOrchid1", detail::col::MediumOrchid1},
-        {"MediumOrchid2", detail::col::MediumOrchid2},
-        {"MediumOrchid3", detail::col::MediumOrchid3},
-        {"MediumOrchid4", detail::col::MediumOrchid4},
-        {"MediumPurple", detail::col::MediumPurple},
-        {"MediumPurple1", detail::col::MediumPurple1},
-        {"MediumPurple2", detail::col::MediumPurple2},
-        {"MediumPurple3", detail::col::MediumPurple3},
-        {"MediumPurple4", detail::col::MediumPurple4},
-        {"MediumSeaGreen", detail::col::MediumSeaGreen},
-        {"MediumSlateBlue", detail::col::MediumSlateBlue},
-        {"MediumSpringGreen", detail::col::MediumSpringGreen},
-        {"MediumTurquoise", detail::col::MediumTurquoise},
-        {"MediumVioletRed", detail::col::MediumVioletRed},
-        {"midnight blue", detail::col::midnight_blue},
-        {"MidnightBlue", detail::col::MidnightBlue},
-        {"mint cream", detail::col::mint_cream},
-        {"MintCream", detail::col::MintCream},
-        {"misty rose", detail::col::misty_rose},
-        {"MistyRose", detail::col::MistyRose},
-        {"MistyRose1", detail::col::MistyRose1},
-        {"MistyRose2", detail::col::MistyRose2},
-        {"MistyRose3", detail::col::MistyRose3},
-        {"MistyRose4", detail::col::MistyRose4},
-        {"moccasin", detail::col::moccasin},
-        {"navajo white", detail::col::navajo_white},
-        {"NavajoWhite", detail::col::NavajoWhite},
-        {"NavajoWhite1", detail::col::NavajoWhite1},
-        {"NavajoWhite2", detail::col::NavajoWhite2},
-        {"NavajoWhite3", detail::col::NavajoWhite3},
-        {"NavajoWhite4", detail::col::NavajoWhite4},
-        {"navy", detail::col::navy},
-        {"navy blue", detail::col::navy_blue},
-        {"NavyBlue", detail::col::NavyBlue},
-        {"old lace", detail::col::old_lace},
-        {"OldLace", detail::col::OldLace},
-        {"olive drab", detail::col::olive_drab},
-        {"OliveDrab", detail::col::OliveDrab},
-        {"OliveDrab1", detail::col::OliveDrab1},
-        {"OliveDrab2", detail::col::OliveDrab2},
-        {"OliveDrab3", detail::col::OliveDrab3},
-        {"OliveDrab4", detail::col::OliveDrab4},
-        {"orange", detail::col::orange},
-        {"orange red", detail::col::orange_red},
-        {"orange1", detail::col::orange1},
-        {"orange2", detail::col::orange2},
-        {"orange3", detail::col::orange3},
-        {"orange4", detail::col::orange4},
-        {"OrangeRed", detail::col::OrangeRed},
-        {"OrangeRed1", detail::col::OrangeRed1},
-        {"OrangeRed2", detail::col::OrangeRed2},
-        {"OrangeRed3", detail::col::OrangeRed3},
-        {"OrangeRed4", detail::col::OrangeRed4},
-        {"orchid", detail::col::orchid},
-        {"orchid1", detail::col::orchid1},
-        {"orchid2", detail::col::orchid2},
-        {"orchid3", detail::col::orchid3},
-        {"orchid4", detail::col::orchid4},
-        {"pale goldenrod", detail::col::pale_goldenrod},
-        {"pale green", detail::col::pale_green},
-        {"pale turquoise", detail::col::pale_turquoise},
-        {"pale violet red", detail::col::pale_violet_red},
-        {"PaleGoldenrod", detail::col::PaleGoldenrod},
-        {"PaleGreen", detail::col::PaleGreen},
-        {"PaleGreen1", detail::col::PaleGreen1},
-        {"PaleGreen2", detail::col::PaleGreen2},
-        {"PaleGreen3", detail::col::PaleGreen3},
-        {"PaleGreen4", detail::col::PaleGreen4},
-        {"PaleTurquoise", detail::col::PaleTurquoise},
-        {"PaleTurquoise1", detail::col::PaleTurquoise1},
-        {"PaleTurquoise2", detail::col::PaleTurquoise2},
-        {"PaleTurquoise3", detail::col::PaleTurquoise3},
-        {"PaleTurquoise4", detail::col::PaleTurquoise4},
-        {"PaleVioletRed", detail::col::PaleVioletRed},
-        {"PaleVioletRed1", detail::col::PaleVioletRed1},
-        {"PaleVioletRed2", detail::col::PaleVioletRed2},
-        {"PaleVioletRed3", detail::col::PaleVioletRed3},
-        {"PaleVioletRed4", detail::col::PaleVioletRed4},
-        {"papaya whip", detail::col::papaya_whip},
-        {"PapayaWhip", detail::col::PapayaWhip},
-        {"peach puff", detail::col::peach_puff},
-        {"PeachPuff", detail::col::PeachPuff},
-        {"PeachPuff1", detail::col::PeachPuff1},
-        {"PeachPuff2", detail::col::PeachPuff2},
-        {"PeachPuff3", detail::col::PeachPuff3},
-        {"PeachPuff4", detail::col::PeachPuff4},
-        {"peru", detail::col::peru},
-        {"pink", detail::col::pink},
-        {"pink1", detail::col::pink1},
-        {"pink2", detail::col::pink2},
-        {"pink3", detail::col::pink3},
-        {"pink4", detail::col::pink4},
-        {"plum", detail::col::plum},
-        {"plum1", detail::col::plum1},
-        {"plum2", detail::col::plum2},
-        {"plum3", detail::col::plum3},
-        {"plum4", detail::col::plum4},
-        {"powder blue", detail::col::powder_blue},
-        {"PowderBlue", detail::col::PowderBlue},
-        {"purple", detail::col::purple},
-        {"purple1", detail::col::purple1},
-        {"purple2", detail::col::purple2},
-        {"purple3", detail::col::purple3},
-        {"purple4", detail::col::purple4},
-        {"red", detail::col::red},
-        {"red1", detail::col::red1},
-        {"red2", detail::col::red2},
-        {"red3", detail::col::red3},
-        {"red4", detail::col::red4},
-        {"rosy brown", detail::col::rosy_brown},
-        {"RosyBrown", detail::col::RosyBrown},
-        {"RosyBrown1", detail::col::RosyBrown1},
-        {"RosyBrown2", detail::col::RosyBrown2},
-        {"RosyBrown3", detail::col::RosyBrown3},
-        {"RosyBrown4", detail::col::RosyBrown4},
-        {"royal blue", detail::col::royal_blue},
-        {"RoyalBlue", detail::col::RoyalBlue},
-        {"RoyalBlue1", detail::col::RoyalBlue1},
-        {"RoyalBlue2", detail::col::RoyalBlue2},
-        {"RoyalBlue3", detail::col::RoyalBlue3},
-        {"RoyalBlue4", detail::col::RoyalBlue4},
-        {"saddle brown", detail::col::saddle_brown},
-        {"SaddleBrown", detail::col::SaddleBrown},
-        {"salmon", detail::col::salmon},
-        {"salmon1", detail::col::salmon1},
-        {"salmon2", detail::col::salmon2},
-        {"salmon3", detail::col::salmon3},
-        {"salmon4", detail::col::salmon4},
-        {"sandy brown", detail::col::sandy_brown},
-        {"SandyBrown", detail::col::SandyBrown},
-        {"sea green", detail::col::sea_green},
-        {"SeaGreen", detail::col::SeaGreen},
-        {"SeaGreen1", detail::col::SeaGreen1},
-        {"SeaGreen2", detail::col::SeaGreen2},
-        {"SeaGreen3", detail::col::SeaGreen3},
-        {"SeaGreen4", detail::col::SeaGreen4},
-        {"seashell", detail::col::seashell},
-        {"seashell1", detail::col::seashell1},
-        {"seashell2", detail::col::seashell2},
-        {"seashell3", detail::col::seashell3},
-        {"seashell4", detail::col::seashell4},
-        {"sienna", detail::col::sienna},
-        {"sienna1", detail::col::sienna1},
-        {"sienna2", detail::col::sienna2},
-        {"sienna3", detail::col::sienna3},
-        {"sienna4", detail::col::sienna4},
-        {"sky blue", detail::col::sky_blue},
-        {"SkyBlue", detail::col::SkyBlue},
-        {"SkyBlue1", detail::col::SkyBlue1},
-        {"SkyBlue2", detail::col::SkyBlue2},
-        {"SkyBlue3", detail::col::SkyBlue3},
-        {"SkyBlue4", detail::col::SkyBlue4},
-        {"slate blue", detail::col::slate_blue},
-        {"slate gray", detail::col::slate_gray},
-        {"slate grey", detail::col::slate_grey},
-        {"SlateBlue", detail::col::SlateBlue},
-        {"SlateBlue1", detail::col::SlateBlue1},
-        {"SlateBlue2", detail::col::SlateBlue2},
-        {"SlateBlue3", detail::col::SlateBlue3},
-        {"SlateBlue4", detail::col::SlateBlue4},
-        {"SlateGray", detail::col::SlateGray},
-        {"SlateGray1", detail::col::SlateGray1},
-        {"SlateGray2", detail::col::SlateGray2},
-        {"SlateGray3", detail::col::SlateGray3},
-        {"SlateGray4", detail::col::SlateGray4},
-        {"SlateGrey", detail::col::SlateGrey},
-        {"snow", detail::col::snow},
-        {"snow1", detail::col::snow1},
-        {"snow2", detail::col::snow2},
-        {"snow3", detail::col::snow3},
-        {"snow4", detail::col::snow4},
-        {"spring green", detail::col::spring_green},
-        {"SpringGreen", detail::col::SpringGreen},
-        {"SpringGreen1", detail::col::SpringGreen1},
-        {"SpringGreen2", detail::col::SpringGreen2},
-        {"SpringGreen3", detail::col::SpringGreen3},
-        {"SpringGreen4", detail::col::SpringGreen4},
-        {"steel blue", detail::col::steel_blue},
-        {"SteelBlue", detail::col::SteelBlue},
-        {"SteelBlue1", detail::col::SteelBlue1},
-        {"SteelBlue2", detail::col::SteelBlue2},
-        {"SteelBlue3", detail::col::SteelBlue3},
-        {"SteelBlue4", detail::col::SteelBlue4},
-        {"tan", detail::col::tan},
-        {"tan1", detail::col::tan1},
-        {"tan2", detail::col::tan2},
-        {"tan3", detail::col::tan3},
-        {"tan4", detail::col::tan4},
-        {"thistle", detail::col::thistle},
-        {"thistle1", detail::col::thistle1},
-        {"thistle2", detail::col::thistle2},
-        {"thistle3", detail::col::thistle3},
-        {"thistle4", detail::col::thistle4},
-        {"tomato", detail::col::tomato},
-        {"tomato1", detail::col::tomato1},
-        {"tomato2", detail::col::tomato2},
-        {"tomato3", detail::col::tomato3},
-        {"tomato4", detail::col::tomato4},
-        {"turquoise", detail::col::turquoise},
-        {"turquoise1", detail::col::turquoise1},
-        {"turquoise2", detail::col::turquoise2},
-        {"turquoise3", detail::col::turquoise3},
-        {"turquoise4", detail::col::turquoise4},
-        {"violet", detail::col::violet},
-        {"violet red", detail::col::violet_red},
-        {"VioletRed", detail::col::VioletRed},
-        {"VioletRed1", detail::col::VioletRed1},
-        {"VioletRed2", detail::col::VioletRed2},
-        {"VioletRed3", detail::col::VioletRed3},
-        {"VioletRed4", detail::col::VioletRed4},
-        {"wheat", detail::col::wheat},
-        {"wheat1", detail::col::wheat1},
-        {"wheat2", detail::col::wheat2},
-        {"wheat3", detail::col::wheat3},
-        {"wheat4", detail::col::wheat4},
-        {"white", detail::col::white},
-        {"white smoke", detail::col::white_smoke},
-        {"WhiteSmoke", detail::col::WhiteSmoke},
-        {"yellow", detail::col::yellow},
-        {"yellow green", detail::col::yellow_green},
-        {"yellow1", detail::col::yellow1},
-        {"yellow2", detail::col::yellow2},
-        {"yellow3", detail::col::yellow3},
-        {"yellow4", detail::col::yellow4},
-        {"YellowGreen", detail::col::YellowGreen}
+            {"alice blue", detail::col::alice_blue},
+            {"AliceBlue", detail::col::AliceBlue},
+            {"antique white", detail::col::antique_white},
+            {"AntiqueWhite", detail::col::AntiqueWhite},
+            {"AntiqueWhite1", detail::col::AntiqueWhite1},
+            {"AntiqueWhite2", detail::col::AntiqueWhite2},
+            {"AntiqueWhite3", detail::col::AntiqueWhite3},
+            {"AntiqueWhite4", detail::col::AntiqueWhite4},
+            {"aquamarine", detail::col::aquamarine},
+            {"aquamarine1", detail::col::aquamarine1},
+            {"aquamarine2", detail::col::aquamarine2},
+            {"aquamarine3", detail::col::aquamarine3},
+            {"aquamarine4", detail::col::aquamarine4},
+            {"azure", detail::col::azure},
+            {"azure1", detail::col::azure1},
+            {"azure2", detail::col::azure2},
+            {"azure3", detail::col::azure3},
+            {"azure4", detail::col::azure4},
+            {"beige", detail::col::beige},
+            {"bisque", detail::col::bisque},
+            {"bisque1", detail::col::bisque1},
+            {"bisque2", detail::col::bisque2},
+            {"bisque3", detail::col::bisque3},
+            {"bisque4", detail::col::bisque4},
+            {"black", detail::col::black},
+            {"blanched almond", detail::col::blanched_almond},
+            {"BlanchedAlmond", detail::col::BlanchedAlmond},
+            {"blue", detail::col::blue},
+            {"blue violet", detail::col::blue_violet},
+            {"blue1", detail::col::blue1},
+            {"blue2", detail::col::blue2},
+            {"blue3", detail::col::blue3},
+            {"blue4", detail::col::blue4},
+            {"BlueViolet", detail::col::BlueViolet},
+            {"brown", detail::col::brown},
+            {"brown1", detail::col::brown1},
+            {"brown2", detail::col::brown2},
+            {"brown3", detail::col::brown3},
+            {"brown4", detail::col::brown4},
+            {"burlywood", detail::col::burlywood},
+            {"burlywood1", detail::col::burlywood1},
+            {"burlywood2", detail::col::burlywood2},
+            {"burlywood3", detail::col::burlywood3},
+            {"burlywood4", detail::col::burlywood4},
+            {"cadet blue", detail::col::cadet_blue},
+            {"CadetBlue", detail::col::CadetBlue},
+            {"CadetBlue1", detail::col::CadetBlue1},
+            {"CadetBlue2", detail::col::CadetBlue2},
+            {"CadetBlue3", detail::col::CadetBlue3},
+            {"CadetBlue4", detail::col::CadetBlue4},
+            {"chartreuse", detail::col::chartreuse},
+            {"chartreuse1", detail::col::chartreuse1},
+            {"chartreuse2", detail::col::chartreuse2},
+            {"chartreuse3", detail::col::chartreuse3},
+            {"chartreuse4", detail::col::chartreuse4},
+            {"chocolate", detail::col::chocolate},
+            {"chocolate1", detail::col::chocolate1},
+            {"chocolate2", detail::col::chocolate2},
+            {"chocolate3", detail::col::chocolate3},
+            {"chocolate4", detail::col::chocolate4},
+            {"coral", detail::col::coral},
+            {"coral1", detail::col::coral1},
+            {"coral2", detail::col::coral2},
+            {"coral3", detail::col::coral3},
+            {"coral4", detail::col::coral4},
+            {"cornflower blue", detail::col::cornflower_blue},
+            {"CornflowerBlue", detail::col::CornflowerBlue},
+            {"cornsilk", detail::col::cornsilk},
+            {"cornsilk1", detail::col::cornsilk1},
+            {"cornsilk2", detail::col::cornsilk2},
+            {"cornsilk3", detail::col::cornsilk3},
+            {"cornsilk4", detail::col::cornsilk4},
+            {"cyan", detail::col::cyan},
+            {"cyan1", detail::col::cyan1},
+            {"cyan2", detail::col::cyan2},
+            {"cyan3", detail::col::cyan3},
+            {"cyan4", detail::col::cyan4},
+            {"dark blue", detail::col::dark_blue},
+            {"dark cyan", detail::col::dark_cyan},
+            {"dark goldenrod", detail::col::dark_goldenrod},
+            {"dark gray", detail::col::dark_gray},
+            {"dark green", detail::col::dark_green},
+            {"dark grey", detail::col::dark_grey},
+            {"dark khaki", detail::col::dark_khaki},
+            {"dark magenta", detail::col::dark_magenta},
+            {"dark olive green", detail::col::dark_olive_green},
+            {"dark orange", detail::col::dark_orange},
+            {"dark orchid", detail::col::dark_orchid},
+            {"dark red", detail::col::dark_red},
+            {"dark salmon", detail::col::dark_salmon},
+            {"dark sea green", detail::col::dark_sea_green},
+            {"dark slate blue", detail::col::dark_slate_blue},
+            {"dark slate gray", detail::col::dark_slate_gray},
+            {"dark slate grey", detail::col::dark_slate_grey},
+            {"dark turquoise", detail::col::dark_turquoise},
+            {"dark violet", detail::col::dark_violet},
+            {"DarkBlue", detail::col::DarkBlue},
+            {"DarkCyan", detail::col::DarkCyan},
+            {"DarkGoldenrod", detail::col::DarkGoldenrod},
+            {"DarkGoldenrod1", detail::col::DarkGoldenrod1},
+            {"DarkGoldenrod2", detail::col::DarkGoldenrod2},
+            {"DarkGoldenrod3", detail::col::DarkGoldenrod3},
+            {"DarkGoldenrod4", detail::col::DarkGoldenrod4},
+            {"DarkGray", detail::col::DarkGray},
+            {"DarkGreen", detail::col::DarkGreen},
+            {"DarkGrey", detail::col::DarkGrey},
+            {"DarkKhaki", detail::col::DarkKhaki},
+            {"DarkMagenta", detail::col::DarkMagenta},
+            {"DarkOliveGreen", detail::col::DarkOliveGreen},
+            {"DarkOliveGreen1", detail::col::DarkOliveGreen1},
+            {"DarkOliveGreen2", detail::col::DarkOliveGreen2},
+            {"DarkOliveGreen3", detail::col::DarkOliveGreen3},
+            {"DarkOliveGreen4", detail::col::DarkOliveGreen4},
+            {"DarkOrange", detail::col::DarkOrange},
+            {"DarkOrange1", detail::col::DarkOrange1},
+            {"DarkOrange2", detail::col::DarkOrange2},
+            {"DarkOrange3", detail::col::DarkOrange3},
+            {"DarkOrange4", detail::col::DarkOrange4},
+            {"DarkOrchid", detail::col::DarkOrchid},
+            {"DarkOrchid1", detail::col::DarkOrchid1},
+            {"DarkOrchid2", detail::col::DarkOrchid2},
+            {"DarkOrchid3", detail::col::DarkOrchid3},
+            {"DarkOrchid4", detail::col::DarkOrchid4},
+            {"DarkRed", detail::col::DarkRed},
+            {"DarkSalmon", detail::col::DarkSalmon},
+            {"DarkSeaGreen", detail::col::DarkSeaGreen},
+            {"DarkSeaGreen1", detail::col::DarkSeaGreen1},
+            {"DarkSeaGreen2", detail::col::DarkSeaGreen2},
+            {"DarkSeaGreen3", detail::col::DarkSeaGreen3},
+            {"DarkSeaGreen4", detail::col::DarkSeaGreen4},
+            {"DarkSlateBlue", detail::col::DarkSlateBlue},
+            {"DarkSlateGray", detail::col::DarkSlateGray},
+            {"DarkSlateGray1", detail::col::DarkSlateGray1},
+            {"DarkSlateGray2", detail::col::DarkSlateGray2},
+            {"DarkSlateGray3", detail::col::DarkSlateGray3},
+            {"DarkSlateGray4", detail::col::DarkSlateGray4},
+            {"DarkSlateGrey", detail::col::DarkSlateGrey},
+            {"DarkTurquoise", detail::col::DarkTurquoise},
+            {"DarkViolet", detail::col::DarkViolet},
+            {"deep pink", detail::col::deep_pink},
+            {"deep sky blue", detail::col::deep_sky_blue},
+            {"DeepPink", detail::col::DeepPink},
+            {"DeepPink1", detail::col::DeepPink1},
+            {"DeepPink2", detail::col::DeepPink2},
+            {"DeepPink3", detail::col::DeepPink3},
+            {"DeepPink4", detail::col::DeepPink4},
+            {"DeepSkyBlue", detail::col::DeepSkyBlue},
+            {"DeepSkyBlue1", detail::col::DeepSkyBlue1},
+            {"DeepSkyBlue2", detail::col::DeepSkyBlue2},
+            {"DeepSkyBlue3", detail::col::DeepSkyBlue3},
+            {"DeepSkyBlue4", detail::col::DeepSkyBlue4},
+            {"dim gray", detail::col::dim_gray},
+            {"dim grey", detail::col::dim_grey},
+            {"DimGray", detail::col::DimGray},
+            {"DimGrey", detail::col::DimGrey},
+            {"dodger blue", detail::col::dodger_blue},
+            {"DodgerBlue", detail::col::DodgerBlue},
+            {"DodgerBlue1", detail::col::DodgerBlue1},
+            {"DodgerBlue2", detail::col::DodgerBlue2},
+            {"DodgerBlue3", detail::col::DodgerBlue3},
+            {"DodgerBlue4", detail::col::DodgerBlue4},
+            {"firebrick", detail::col::firebrick},
+            {"firebrick1", detail::col::firebrick1},
+            {"firebrick2", detail::col::firebrick2},
+            {"firebrick3", detail::col::firebrick3},
+            {"firebrick4", detail::col::firebrick4},
+            {"floral white", detail::col::floral_white},
+            {"FloralWhite", detail::col::FloralWhite},
+            {"forest green", detail::col::forest_green},
+            {"ForestGreen", detail::col::ForestGreen},
+            {"gainsboro", detail::col::gainsboro},
+            {"ghost white", detail::col::ghost_white},
+            {"GhostWhite", detail::col::GhostWhite},
+            {"gold", detail::col::gold},
+            {"gold1", detail::col::gold1},
+            {"gold2", detail::col::gold2},
+            {"gold3", detail::col::gold3},
+            {"gold4", detail::col::gold4},
+            {"goldenrod", detail::col::goldenrod},
+            {"goldenrod1", detail::col::goldenrod1},
+            {"goldenrod2", detail::col::goldenrod2},
+            {"goldenrod3", detail::col::goldenrod3},
+            {"goldenrod4", detail::col::goldenrod4},
+            {"gray", detail::col::gray},
+            {"gray0", detail::col::gray0},
+            {"gray1", detail::col::gray1},
+            {"gray2", detail::col::gray2},
+            {"gray3", detail::col::gray3},
+            {"gray4", detail::col::gray4},
+            {"gray5", detail::col::gray5},
+            {"gray6", detail::col::gray6},
+            {"gray7", detail::col::gray7},
+            {"gray8", detail::col::gray8},
+            {"gray9", detail::col::gray9},
+            {"gray10", detail::col::gray10},
+            {"gray11", detail::col::gray11},
+            {"gray12", detail::col::gray12},
+            {"gray13", detail::col::gray13},
+            {"gray14", detail::col::gray14},
+            {"gray15", detail::col::gray15},
+            {"gray16", detail::col::gray16},
+            {"gray17", detail::col::gray17},
+            {"gray18", detail::col::gray18},
+            {"gray19", detail::col::gray19},
+            {"gray20", detail::col::gray20},
+            {"gray21", detail::col::gray21},
+            {"gray22", detail::col::gray22},
+            {"gray23", detail::col::gray23},
+            {"gray24", detail::col::gray24},
+            {"gray25", detail::col::gray25},
+            {"gray26", detail::col::gray26},
+            {"gray27", detail::col::gray27},
+            {"gray28", detail::col::gray28},
+            {"gray29", detail::col::gray29},
+            {"gray30", detail::col::gray30},
+            {"gray31", detail::col::gray31},
+            {"gray32", detail::col::gray32},
+            {"gray33", detail::col::gray33},
+            {"gray34", detail::col::gray34},
+            {"gray35", detail::col::gray35},
+            {"gray36", detail::col::gray36},
+            {"gray37", detail::col::gray37},
+            {"gray38", detail::col::gray38},
+            {"gray39", detail::col::gray39},
+            {"gray40", detail::col::gray40},
+            {"gray41", detail::col::gray41},
+            {"gray42", detail::col::gray42},
+            {"gray43", detail::col::gray43},
+            {"gray44", detail::col::gray44},
+            {"gray45", detail::col::gray45},
+            {"gray46", detail::col::gray46},
+            {"gray47", detail::col::gray47},
+            {"gray48", detail::col::gray48},
+            {"gray49", detail::col::gray49},
+            {"gray50", detail::col::gray50},
+            {"gray51", detail::col::gray51},
+            {"gray52", detail::col::gray52},
+            {"gray53", detail::col::gray53},
+            {"gray54", detail::col::gray54},
+            {"gray55", detail::col::gray55},
+            {"gray56", detail::col::gray56},
+            {"gray57", detail::col::gray57},
+            {"gray58", detail::col::gray58},
+            {"gray59", detail::col::gray59},
+            {"gray60", detail::col::gray60},
+            {"gray61", detail::col::gray61},
+            {"gray62", detail::col::gray62},
+            {"gray63", detail::col::gray63},
+            {"gray64", detail::col::gray64},
+            {"gray65", detail::col::gray65},
+            {"gray66", detail::col::gray66},
+            {"gray67", detail::col::gray67},
+            {"gray68", detail::col::gray68},
+            {"gray69", detail::col::gray69},
+            {"gray70", detail::col::gray70},
+            {"gray71", detail::col::gray71},
+            {"gray72", detail::col::gray72},
+            {"gray73", detail::col::gray73},
+            {"gray74", detail::col::gray74},
+            {"gray75", detail::col::gray75},
+            {"gray76", detail::col::gray76},
+            {"gray77", detail::col::gray77},
+            {"gray78", detail::col::gray78},
+            {"gray79", detail::col::gray79},
+            {"gray80", detail::col::gray80},
+            {"gray81", detail::col::gray81},
+            {"gray82", detail::col::gray82},
+            {"gray83", detail::col::gray83},
+            {"gray84", detail::col::gray84},
+            {"gray85", detail::col::gray85},
+            {"gray86", detail::col::gray86},
+            {"gray87", detail::col::gray87},
+            {"gray88", detail::col::gray88},
+            {"gray89", detail::col::gray89},
+            {"gray90", detail::col::gray90},
+            {"gray91", detail::col::gray91},
+            {"gray92", detail::col::gray92},
+            {"gray93", detail::col::gray93},
+            {"gray94", detail::col::gray94},
+            {"gray95", detail::col::gray95},
+            {"gray96", detail::col::gray96},
+            {"gray97", detail::col::gray97},
+            {"gray98", detail::col::gray98},
+            {"gray99", detail::col::gray99},
+            {"gray100", detail::col::gray100},
+            {"green", detail::col::green},
+            {"green yellow", detail::col::green_yellow},
+            {"green1", detail::col::green1},
+            {"green2", detail::col::green2},
+            {"green3", detail::col::green3},
+            {"green4", detail::col::green4},
+            {"GreenYellow", detail::col::GreenYellow},
+            {"grey", detail::col::grey},
+            {"grey0", detail::col::grey0},
+            {"grey1", detail::col::grey1},
+            {"grey2", detail::col::grey2},
+            {"grey3", detail::col::grey3},
+            {"grey4", detail::col::grey4},
+            {"grey5", detail::col::grey5},
+            {"grey6", detail::col::grey6},
+            {"grey7", detail::col::grey7},
+            {"grey8", detail::col::grey8},
+            {"grey9", detail::col::grey9},
+            {"grey10", detail::col::grey10},
+            {"grey11", detail::col::grey11},
+            {"grey12", detail::col::grey12},
+            {"grey13", detail::col::grey13},
+            {"grey14", detail::col::grey14},
+            {"grey15", detail::col::grey15},
+            {"grey16", detail::col::grey16},
+            {"grey17", detail::col::grey17},
+            {"grey18", detail::col::grey18},
+            {"grey19", detail::col::grey19},
+            {"grey20", detail::col::grey20},
+            {"grey21", detail::col::grey21},
+            {"grey22", detail::col::grey22},
+            {"grey23", detail::col::grey23},
+            {"grey24", detail::col::grey24},
+            {"grey25", detail::col::grey25},
+            {"grey26", detail::col::grey26},
+            {"grey27", detail::col::grey27},
+            {"grey28", detail::col::grey28},
+            {"grey29", detail::col::grey29},
+            {"grey30", detail::col::grey30},
+            {"grey31", detail::col::grey31},
+            {"grey32", detail::col::grey32},
+            {"grey33", detail::col::grey33},
+            {"grey34", detail::col::grey34},
+            {"grey35", detail::col::grey35},
+            {"grey36", detail::col::grey36},
+            {"grey37", detail::col::grey37},
+            {"grey38", detail::col::grey38},
+            {"grey39", detail::col::grey39},
+            {"grey40", detail::col::grey40},
+            {"grey41", detail::col::grey41},
+            {"grey42", detail::col::grey42},
+            {"grey43", detail::col::grey43},
+            {"grey44", detail::col::grey44},
+            {"grey45", detail::col::grey45},
+            {"grey46", detail::col::grey46},
+            {"grey47", detail::col::grey47},
+            {"grey48", detail::col::grey48},
+            {"grey49", detail::col::grey49},
+            {"grey50", detail::col::grey50},
+            {"grey51", detail::col::grey51},
+            {"grey52", detail::col::grey52},
+            {"grey53", detail::col::grey53},
+            {"grey54", detail::col::grey54},
+            {"grey55", detail::col::grey55},
+            {"grey56", detail::col::grey56},
+            {"grey57", detail::col::grey57},
+            {"grey58", detail::col::grey58},
+            {"grey59", detail::col::grey59},
+            {"grey60", detail::col::grey60},
+            {"grey61", detail::col::grey61},
+            {"grey62", detail::col::grey62},
+            {"grey63", detail::col::grey63},
+            {"grey64", detail::col::grey64},
+            {"grey65", detail::col::grey65},
+            {"grey66", detail::col::grey66},
+            {"grey67", detail::col::grey67},
+            {"grey68", detail::col::grey68},
+            {"grey69", detail::col::grey69},
+            {"grey70", detail::col::grey70},
+            {"grey71", detail::col::grey71},
+            {"grey72", detail::col::grey72},
+            {"grey73", detail::col::grey73},
+            {"grey74", detail::col::grey74},
+            {"grey75", detail::col::grey75},
+            {"grey76", detail::col::grey76},
+            {"grey77", detail::col::grey77},
+            {"grey78", detail::col::grey78},
+            {"grey79", detail::col::grey79},
+            {"grey80", detail::col::grey80},
+            {"grey81", detail::col::grey81},
+            {"grey82", detail::col::grey82},
+            {"grey83", detail::col::grey83},
+            {"grey84", detail::col::grey84},
+            {"grey85", detail::col::grey85},
+            {"grey86", detail::col::grey86},
+            {"grey87", detail::col::grey87},
+            {"grey88", detail::col::grey88},
+            {"grey89", detail::col::grey89},
+            {"grey90", detail::col::grey90},
+            {"grey91", detail::col::grey91},
+            {"grey92", detail::col::grey92},
+            {"grey93", detail::col::grey93},
+            {"grey94", detail::col::grey94},
+            {"grey95", detail::col::grey95},
+            {"grey96", detail::col::grey96},
+            {"grey97", detail::col::grey97},
+            {"grey98", detail::col::grey98},
+            {"grey99", detail::col::grey99},
+            {"grey100", detail::col::grey100},
+            {"honeydew", detail::col::honeydew},
+            {"honeydew1", detail::col::honeydew1},
+            {"honeydew2", detail::col::honeydew2},
+            {"honeydew3", detail::col::honeydew3},
+            {"honeydew4", detail::col::honeydew4},
+            {"hot pink", detail::col::hot_pink},
+            {"HotPink", detail::col::HotPink},
+            {"HotPink1", detail::col::HotPink1},
+            {"HotPink2", detail::col::HotPink2},
+            {"HotPink3", detail::col::HotPink3},
+            {"HotPink4", detail::col::HotPink4},
+            {"indian red", detail::col::indian_red},
+            {"IndianRed", detail::col::IndianRed},
+            {"IndianRed1", detail::col::IndianRed1},
+            {"IndianRed2", detail::col::IndianRed2},
+            {"IndianRed3", detail::col::IndianRed3},
+            {"IndianRed4", detail::col::IndianRed4},
+            {"ivory", detail::col::ivory},
+            {"ivory1", detail::col::ivory1},
+            {"ivory2", detail::col::ivory2},
+            {"ivory3", detail::col::ivory3},
+            {"ivory4", detail::col::ivory4},
+            {"khaki", detail::col::khaki},
+            {"khaki1", detail::col::khaki1},
+            {"khaki2", detail::col::khaki2},
+            {"khaki3", detail::col::khaki3},
+            {"khaki4", detail::col::khaki4},
+            {"lavender", detail::col::lavender},
+            {"lavender blush", detail::col::lavender_blush},
+            {"LavenderBlush", detail::col::LavenderBlush},
+            {"LavenderBlush1", detail::col::LavenderBlush1},
+            {"LavenderBlush2", detail::col::LavenderBlush2},
+            {"LavenderBlush3", detail::col::LavenderBlush3},
+            {"LavenderBlush4", detail::col::LavenderBlush4},
+            {"lawn green", detail::col::lawn_green},
+            {"LawnGreen", detail::col::LawnGreen},
+            {"lemon chiffon", detail::col::lemon_chiffon},
+            {"LemonChiffon", detail::col::LemonChiffon},
+            {"LemonChiffon1", detail::col::LemonChiffon1},
+            {"LemonChiffon2", detail::col::LemonChiffon2},
+            {"LemonChiffon3", detail::col::LemonChiffon3},
+            {"LemonChiffon4", detail::col::LemonChiffon4},
+            {"light blue", detail::col::light_blue},
+            {"light coral", detail::col::light_coral},
+            {"light cyan", detail::col::light_cyan},
+            {"light goldenrod", detail::col::light_goldenrod},
+            {"light goldenrod yellow", detail::col::light_goldenrod_yellow},
+            {"light gray", detail::col::light_gray},
+            {"light green", detail::col::light_green},
+            {"light grey", detail::col::light_grey},
+            {"light pink", detail::col::light_pink},
+            {"light salmon", detail::col::light_salmon},
+            {"light sea green", detail::col::light_sea_green},
+            {"light sky blue", detail::col::light_sky_blue},
+            {"light slate blue", detail::col::light_slate_blue},
+            {"light slate gray", detail::col::light_slate_gray},
+            {"light slate grey", detail::col::light_slate_grey},
+            {"light steel blue", detail::col::light_steel_blue},
+            {"light yellow", detail::col::light_yellow},
+            {"LightBlue", detail::col::LightBlue},
+            {"LightBlue1", detail::col::LightBlue1},
+            {"LightBlue2", detail::col::LightBlue2},
+            {"LightBlue3", detail::col::LightBlue3},
+            {"LightBlue4", detail::col::LightBlue4},
+            {"LightCoral", detail::col::LightCoral},
+            {"LightCyan", detail::col::LightCyan},
+            {"LightCyan1", detail::col::LightCyan1},
+            {"LightCyan2", detail::col::LightCyan2},
+            {"LightCyan3", detail::col::LightCyan3},
+            {"LightCyan4", detail::col::LightCyan4},
+            {"LightGoldenrod", detail::col::LightGoldenrod},
+            {"LightGoldenrod1", detail::col::LightGoldenrod1},
+            {"LightGoldenrod2", detail::col::LightGoldenrod2},
+            {"LightGoldenrod3", detail::col::LightGoldenrod3},
+            {"LightGoldenrod4", detail::col::LightGoldenrod4},
+            {"LightGoldenrodYellow", detail::col::LightGoldenrodYellow},
+            {"LightGray", detail::col::LightGray},
+            {"LightGreen", detail::col::LightGreen},
+            {"LightGrey", detail::col::LightGrey},
+            {"LightPink", detail::col::LightPink},
+            {"LightPink1", detail::col::LightPink1},
+            {"LightPink2", detail::col::LightPink2},
+            {"LightPink3", detail::col::LightPink3},
+            {"LightPink4", detail::col::LightPink4},
+            {"LightSalmon", detail::col::LightSalmon},
+            {"LightSalmon1", detail::col::LightSalmon1},
+            {"LightSalmon2", detail::col::LightSalmon2},
+            {"LightSalmon3", detail::col::LightSalmon3},
+            {"LightSalmon4", detail::col::LightSalmon4},
+            {"LightSeaGreen", detail::col::LightSeaGreen},
+            {"LightSkyBlue", detail::col::LightSkyBlue},
+            {"LightSkyBlue1", detail::col::LightSkyBlue1},
+            {"LightSkyBlue2", detail::col::LightSkyBlue2},
+            {"LightSkyBlue3", detail::col::LightSkyBlue3},
+            {"LightSkyBlue4", detail::col::LightSkyBlue4},
+            {"LightSlateBlue", detail::col::LightSlateBlue},
+            {"LightSlateGray", detail::col::LightSlateGray},
+            {"LightSlateGrey", detail::col::LightSlateGrey},
+            {"LightSteelBlue", detail::col::LightSteelBlue},
+            {"LightSteelBlue1", detail::col::LightSteelBlue1},
+            {"LightSteelBlue2", detail::col::LightSteelBlue2},
+            {"LightSteelBlue3", detail::col::LightSteelBlue3},
+            {"LightSteelBlue4", detail::col::LightSteelBlue4},
+            {"LightYellow", detail::col::LightYellow},
+            {"LightYellow1", detail::col::LightYellow1},
+            {"LightYellow2", detail::col::LightYellow2},
+            {"LightYellow3", detail::col::LightYellow3},
+            {"LightYellow4", detail::col::LightYellow4},
+            {"lime green", detail::col::lime_green},
+            {"LimeGreen", detail::col::LimeGreen},
+            {"linen", detail::col::linen},
+            {"magenta", detail::col::magenta},
+            {"magenta1", detail::col::magenta1},
+            {"magenta2", detail::col::magenta2},
+            {"magenta3", detail::col::magenta3},
+            {"magenta4", detail::col::magenta4},
+            {"maroon", detail::col::maroon},
+            {"maroon1", detail::col::maroon1},
+            {"maroon2", detail::col::maroon2},
+            {"maroon3", detail::col::maroon3},
+            {"maroon4", detail::col::maroon4},
+            {"medium aquamarine", detail::col::medium_aquamarine},
+            {"medium blue", detail::col::medium_blue},
+            {"medium orchid", detail::col::medium_orchid},
+            {"medium purple", detail::col::medium_purple},
+            {"medium sea green", detail::col::medium_sea_green},
+            {"medium slate blue", detail::col::medium_slate_blue},
+            {"medium spring green", detail::col::medium_spring_green},
+            {"medium turquoise", detail::col::medium_turquoise},
+            {"medium violet red", detail::col::medium_violet_red},
+            {"MediumAquamarine", detail::col::MediumAquamarine},
+            {"MediumBlue", detail::col::MediumBlue},
+            {"MediumOrchid", detail::col::MediumOrchid},
+            {"MediumOrchid1", detail::col::MediumOrchid1},
+            {"MediumOrchid2", detail::col::MediumOrchid2},
+            {"MediumOrchid3", detail::col::MediumOrchid3},
+            {"MediumOrchid4", detail::col::MediumOrchid4},
+            {"MediumPurple", detail::col::MediumPurple},
+            {"MediumPurple1", detail::col::MediumPurple1},
+            {"MediumPurple2", detail::col::MediumPurple2},
+            {"MediumPurple3", detail::col::MediumPurple3},
+            {"MediumPurple4", detail::col::MediumPurple4},
+            {"MediumSeaGreen", detail::col::MediumSeaGreen},
+            {"MediumSlateBlue", detail::col::MediumSlateBlue},
+            {"MediumSpringGreen", detail::col::MediumSpringGreen},
+            {"MediumTurquoise", detail::col::MediumTurquoise},
+            {"MediumVioletRed", detail::col::MediumVioletRed},
+            {"midnight blue", detail::col::midnight_blue},
+            {"MidnightBlue", detail::col::MidnightBlue},
+            {"mint cream", detail::col::mint_cream},
+            {"MintCream", detail::col::MintCream},
+            {"misty rose", detail::col::misty_rose},
+            {"MistyRose", detail::col::MistyRose},
+            {"MistyRose1", detail::col::MistyRose1},
+            {"MistyRose2", detail::col::MistyRose2},
+            {"MistyRose3", detail::col::MistyRose3},
+            {"MistyRose4", detail::col::MistyRose4},
+            {"moccasin", detail::col::moccasin},
+            {"navajo white", detail::col::navajo_white},
+            {"NavajoWhite", detail::col::NavajoWhite},
+            {"NavajoWhite1", detail::col::NavajoWhite1},
+            {"NavajoWhite2", detail::col::NavajoWhite2},
+            {"NavajoWhite3", detail::col::NavajoWhite3},
+            {"NavajoWhite4", detail::col::NavajoWhite4},
+            {"navy", detail::col::navy},
+            {"navy blue", detail::col::navy_blue},
+            {"NavyBlue", detail::col::NavyBlue},
+            {"old lace", detail::col::old_lace},
+            {"OldLace", detail::col::OldLace},
+            {"olive drab", detail::col::olive_drab},
+            {"OliveDrab", detail::col::OliveDrab},
+            {"OliveDrab1", detail::col::OliveDrab1},
+            {"OliveDrab2", detail::col::OliveDrab2},
+            {"OliveDrab3", detail::col::OliveDrab3},
+            {"OliveDrab4", detail::col::OliveDrab4},
+            {"orange", detail::col::orange},
+            {"orange red", detail::col::orange_red},
+            {"orange1", detail::col::orange1},
+            {"orange2", detail::col::orange2},
+            {"orange3", detail::col::orange3},
+            {"orange4", detail::col::orange4},
+            {"OrangeRed", detail::col::OrangeRed},
+            {"OrangeRed1", detail::col::OrangeRed1},
+            {"OrangeRed2", detail::col::OrangeRed2},
+            {"OrangeRed3", detail::col::OrangeRed3},
+            {"OrangeRed4", detail::col::OrangeRed4},
+            {"orchid", detail::col::orchid},
+            {"orchid1", detail::col::orchid1},
+            {"orchid2", detail::col::orchid2},
+            {"orchid3", detail::col::orchid3},
+            {"orchid4", detail::col::orchid4},
+            {"pale goldenrod", detail::col::pale_goldenrod},
+            {"pale green", detail::col::pale_green},
+            {"pale turquoise", detail::col::pale_turquoise},
+            {"pale violet red", detail::col::pale_violet_red},
+            {"PaleGoldenrod", detail::col::PaleGoldenrod},
+            {"PaleGreen", detail::col::PaleGreen},
+            {"PaleGreen1", detail::col::PaleGreen1},
+            {"PaleGreen2", detail::col::PaleGreen2},
+            {"PaleGreen3", detail::col::PaleGreen3},
+            {"PaleGreen4", detail::col::PaleGreen4},
+            {"PaleTurquoise", detail::col::PaleTurquoise},
+            {"PaleTurquoise1", detail::col::PaleTurquoise1},
+            {"PaleTurquoise2", detail::col::PaleTurquoise2},
+            {"PaleTurquoise3", detail::col::PaleTurquoise3},
+            {"PaleTurquoise4", detail::col::PaleTurquoise4},
+            {"PaleVioletRed", detail::col::PaleVioletRed},
+            {"PaleVioletRed1", detail::col::PaleVioletRed1},
+            {"PaleVioletRed2", detail::col::PaleVioletRed2},
+            {"PaleVioletRed3", detail::col::PaleVioletRed3},
+            {"PaleVioletRed4", detail::col::PaleVioletRed4},
+            {"papaya whip", detail::col::papaya_whip},
+            {"PapayaWhip", detail::col::PapayaWhip},
+            {"peach puff", detail::col::peach_puff},
+            {"PeachPuff", detail::col::PeachPuff},
+            {"PeachPuff1", detail::col::PeachPuff1},
+            {"PeachPuff2", detail::col::PeachPuff2},
+            {"PeachPuff3", detail::col::PeachPuff3},
+            {"PeachPuff4", detail::col::PeachPuff4},
+            {"peru", detail::col::peru},
+            {"pink", detail::col::pink},
+            {"pink1", detail::col::pink1},
+            {"pink2", detail::col::pink2},
+            {"pink3", detail::col::pink3},
+            {"pink4", detail::col::pink4},
+            {"plum", detail::col::plum},
+            {"plum1", detail::col::plum1},
+            {"plum2", detail::col::plum2},
+            {"plum3", detail::col::plum3},
+            {"plum4", detail::col::plum4},
+            {"powder blue", detail::col::powder_blue},
+            {"PowderBlue", detail::col::PowderBlue},
+            {"purple", detail::col::purple},
+            {"purple1", detail::col::purple1},
+            {"purple2", detail::col::purple2},
+            {"purple3", detail::col::purple3},
+            {"purple4", detail::col::purple4},
+            {"red", detail::col::red},
+            {"red1", detail::col::red1},
+            {"red2", detail::col::red2},
+            {"red3", detail::col::red3},
+            {"red4", detail::col::red4},
+            {"rosy brown", detail::col::rosy_brown},
+            {"RosyBrown", detail::col::RosyBrown},
+            {"RosyBrown1", detail::col::RosyBrown1},
+            {"RosyBrown2", detail::col::RosyBrown2},
+            {"RosyBrown3", detail::col::RosyBrown3},
+            {"RosyBrown4", detail::col::RosyBrown4},
+            {"royal blue", detail::col::royal_blue},
+            {"RoyalBlue", detail::col::RoyalBlue},
+            {"RoyalBlue1", detail::col::RoyalBlue1},
+            {"RoyalBlue2", detail::col::RoyalBlue2},
+            {"RoyalBlue3", detail::col::RoyalBlue3},
+            {"RoyalBlue4", detail::col::RoyalBlue4},
+            {"saddle brown", detail::col::saddle_brown},
+            {"SaddleBrown", detail::col::SaddleBrown},
+            {"salmon", detail::col::salmon},
+            {"salmon1", detail::col::salmon1},
+            {"salmon2", detail::col::salmon2},
+            {"salmon3", detail::col::salmon3},
+            {"salmon4", detail::col::salmon4},
+            {"sandy brown", detail::col::sandy_brown},
+            {"SandyBrown", detail::col::SandyBrown},
+            {"sea green", detail::col::sea_green},
+            {"SeaGreen", detail::col::SeaGreen},
+            {"SeaGreen1", detail::col::SeaGreen1},
+            {"SeaGreen2", detail::col::SeaGreen2},
+            {"SeaGreen3", detail::col::SeaGreen3},
+            {"SeaGreen4", detail::col::SeaGreen4},
+            {"seashell", detail::col::seashell},
+            {"seashell1", detail::col::seashell1},
+            {"seashell2", detail::col::seashell2},
+            {"seashell3", detail::col::seashell3},
+            {"seashell4", detail::col::seashell4},
+            {"sienna", detail::col::sienna},
+            {"sienna1", detail::col::sienna1},
+            {"sienna2", detail::col::sienna2},
+            {"sienna3", detail::col::sienna3},
+            {"sienna4", detail::col::sienna4},
+            {"sky blue", detail::col::sky_blue},
+            {"SkyBlue", detail::col::SkyBlue},
+            {"SkyBlue1", detail::col::SkyBlue1},
+            {"SkyBlue2", detail::col::SkyBlue2},
+            {"SkyBlue3", detail::col::SkyBlue3},
+            {"SkyBlue4", detail::col::SkyBlue4},
+            {"slate blue", detail::col::slate_blue},
+            {"slate gray", detail::col::slate_gray},
+            {"slate grey", detail::col::slate_grey},
+            {"SlateBlue", detail::col::SlateBlue},
+            {"SlateBlue1", detail::col::SlateBlue1},
+            {"SlateBlue2", detail::col::SlateBlue2},
+            {"SlateBlue3", detail::col::SlateBlue3},
+            {"SlateBlue4", detail::col::SlateBlue4},
+            {"SlateGray", detail::col::SlateGray},
+            {"SlateGray1", detail::col::SlateGray1},
+            {"SlateGray2", detail::col::SlateGray2},
+            {"SlateGray3", detail::col::SlateGray3},
+            {"SlateGray4", detail::col::SlateGray4},
+            {"SlateGrey", detail::col::SlateGrey},
+            {"snow", detail::col::snow},
+            {"snow1", detail::col::snow1},
+            {"snow2", detail::col::snow2},
+            {"snow3", detail::col::snow3},
+            {"snow4", detail::col::snow4},
+            {"spring green", detail::col::spring_green},
+            {"SpringGreen", detail::col::SpringGreen},
+            {"SpringGreen1", detail::col::SpringGreen1},
+            {"SpringGreen2", detail::col::SpringGreen2},
+            {"SpringGreen3", detail::col::SpringGreen3},
+            {"SpringGreen4", detail::col::SpringGreen4},
+            {"steel blue", detail::col::steel_blue},
+            {"SteelBlue", detail::col::SteelBlue},
+            {"SteelBlue1", detail::col::SteelBlue1},
+            {"SteelBlue2", detail::col::SteelBlue2},
+            {"SteelBlue3", detail::col::SteelBlue3},
+            {"SteelBlue4", detail::col::SteelBlue4},
+            {"tan", detail::col::tan},
+            {"tan1", detail::col::tan1},
+            {"tan2", detail::col::tan2},
+            {"tan3", detail::col::tan3},
+            {"tan4", detail::col::tan4},
+            {"thistle", detail::col::thistle},
+            {"thistle1", detail::col::thistle1},
+            {"thistle2", detail::col::thistle2},
+            {"thistle3", detail::col::thistle3},
+            {"thistle4", detail::col::thistle4},
+            {"tomato", detail::col::tomato},
+            {"tomato1", detail::col::tomato1},
+            {"tomato2", detail::col::tomato2},
+            {"tomato3", detail::col::tomato3},
+            {"tomato4", detail::col::tomato4},
+            {"turquoise", detail::col::turquoise},
+            {"turquoise1", detail::col::turquoise1},
+            {"turquoise2", detail::col::turquoise2},
+            {"turquoise3", detail::col::turquoise3},
+            {"turquoise4", detail::col::turquoise4},
+            {"violet", detail::col::violet},
+            {"violet red", detail::col::violet_red},
+            {"VioletRed", detail::col::VioletRed},
+            {"VioletRed1", detail::col::VioletRed1},
+            {"VioletRed2", detail::col::VioletRed2},
+            {"VioletRed3", detail::col::VioletRed3},
+            {"VioletRed4", detail::col::VioletRed4},
+            {"wheat", detail::col::wheat},
+            {"wheat1", detail::col::wheat1},
+            {"wheat2", detail::col::wheat2},
+            {"wheat3", detail::col::wheat3},
+            {"wheat4", detail::col::wheat4},
+            {"white", detail::col::white},
+            {"white smoke", detail::col::white_smoke},
+            {"WhiteSmoke", detail::col::WhiteSmoke},
+            {"yellow", detail::col::yellow},
+            {"yellow green", detail::col::yellow_green},
+            {"yellow1", detail::col::yellow1},
+            {"yellow2", detail::col::yellow2},
+            {"yellow3", detail::col::yellow3},
+            {"yellow4", detail::col::yellow4},
+            {"YellowGreen", detail::col::YellowGreen}
     };
 
     /**
@@ -2467,94 +2475,94 @@ namespace cturtle {
     };
 
     const std::unordered_map<std::string, KeyboardKey> NAMED_KEYS = {
-        {"ESC", KEY_ESC},
-        {"F1", KEY_F1},
-        {"F2", KEY_F2},
-        {"F3", KEY_F3},
-        {"F4", KEY_F4},
-        {"F5", KEY_F5},
-        {"F6", KEY_F6},
-        {"F7", KEY_F7},
-        {"F8", KEY_F8},
-        {"F9", KEY_F9},
-        {"F10", KEY_F10},
-        {"F11", KEY_F11},
-        {"F12", KEY_F12},
-        {"PAUSE", KEY_PAUSE},
-        {"1", KEY_1},
-        {"2", KEY_2},
-        {"3", KEY_3},
-        {"4", KEY_4},
-        {"5", KEY_5},
-        {"6", KEY_6},
-        {"7", KEY_7},
-        {"8", KEY_8},
-        {"9", KEY_9},
-        {"0", KEY_0},
-        {"BACKSPACE", KEY_BACKSPACE},
-        {"INSERT", KEY_INSERT},
-        {"HOME", KEY_HOME},
-        {"PAGEUP", KEY_PAGEUP},
-        {"TAB", KEY_TAB},
-        {"Q", KEY_Q},
-        {"W", KEY_W},
-        {"E", KEY_E},
-        {"R", KEY_R},
-        {"T", KEY_T},
-        {"Y", KEY_Y},
-        {"U", KEY_U},
-        {"I", KEY_I},
-        {"O", KEY_O},
-        {"P", KEY_P},
-        {"DELETE", KEY_DELETE},
-        {"END", KEY_END},
-        {"PAGEDOWN", KEY_PAGEDOWN},
-        {"CAPSLOCK", KEY_CAPSLOCK},
-        {"A", KEY_A},
-        {"S", KEY_S},
-        {"D", KEY_D},
-        {"F", KEY_F},
-        {"G", KEY_G},
-        {"H", KEY_H},
-        {"J", KEY_J},
-        {"K", KEY_K},
-        {"L", KEY_L},
-        {"ENTER", KEY_ENTER},
-        {"SHIFTLEFT", KEY_SHIFTLEFT},
-        {"Z", KEY_Z},
-        {"X", KEY_X},
-        {"C", KEY_C},
-        {"V", KEY_V},
-        {"B", KEY_B},
-        {"N", KEY_N},
-        {"M", KEY_M},
-        {"SHIFTRIGHT", KEY_SHIFTRIGHT},
-        {"ARROWUP", KEY_ARROWUP},
-        {"CTRLLEFT", KEY_CTRLLEFT},
-        {"APPLEFT", KEY_APPLEFT},
-        {"ALT", KEY_ALT},
-        {"SPACE", KEY_SPACE},
-        {"ALTGR", KEY_ALTGR},
-        {"APPRIGHT", KEY_APPRIGHT},
-        {"MENU", KEY_MENU},
-        {"CTRLRIGHT", KEY_CTRLRIGHT},
-        {"ARROWLEFT", KEY_ARROWLEFT},
-        {"ARROWDOWN", KEY_ARROWDOWN},
-        {"ARROWRIGHT", KEY_ARROWRIGHT},
-        {"PAD0", KEY_PAD0},
-        {"PAD1", KEY_PAD1},
-        {"PAD2", KEY_PAD2},
-        {"PAD3", KEY_PAD3},
-        {"PAD4", KEY_PAD4},
-        {"PAD5", KEY_PAD5},
-        {"PAD6", KEY_PAD6},
-        {"PAD7", KEY_PAD7},
-        {"PAD8", KEY_PAD8},
-        {"PAD9", KEY_PAD9},
-        {"PADADD", KEY_PADADD},
-        {"PADSUB", KEY_PADSUB},
-        {"PADMUL", KEY_PADMUL},
-        {"PADDIV", KEY_PADDIV}
+            {"ESC", KEY_ESC},
+            {"F1", KEY_F1},
+            {"F2", KEY_F2},
+            {"F3", KEY_F3},
+            {"F4", KEY_F4},
+            {"F5", KEY_F5},
+            {"F6", KEY_F6},
+            {"F7", KEY_F7},
+            {"F8", KEY_F8},
+            {"F9", KEY_F9},
+            {"F10", KEY_F10},
+            {"F11", KEY_F11},
+            {"F12", KEY_F12},
+            {"PAUSE", KEY_PAUSE},
+            {"1", KEY_1},
+            {"2", KEY_2},
+            {"3", KEY_3},
+            {"4", KEY_4},
+            {"5", KEY_5},
+            {"6", KEY_6},
+            {"7", KEY_7},
+            {"8", KEY_8},
+            {"9", KEY_9},
+            {"0", KEY_0},
+            {"BACKSPACE", KEY_BACKSPACE},
+            {"INSERT", KEY_INSERT},
+            {"HOME", KEY_HOME},
+            {"PAGEUP", KEY_PAGEUP},
+            {"TAB", KEY_TAB},
+            {"Q", KEY_Q},
+            {"W", KEY_W},
+            {"E", KEY_E},
+            {"R", KEY_R},
+            {"T", KEY_T},
+            {"Y", KEY_Y},
+            {"U", KEY_U},
+            {"I", KEY_I},
+            {"O", KEY_O},
+            {"P", KEY_P},
+            {"DELETE", KEY_DELETE},
+            {"END", KEY_END},
+            {"PAGEDOWN", KEY_PAGEDOWN},
+            {"CAPSLOCK", KEY_CAPSLOCK},
+            {"A", KEY_A},
+            {"S", KEY_S},
+            {"D", KEY_D},
+            {"F", KEY_F},
+            {"G", KEY_G},
+            {"H", KEY_H},
+            {"J", KEY_J},
+            {"K", KEY_K},
+            {"L", KEY_L},
+            {"ENTER", KEY_ENTER},
+            {"SHIFTLEFT", KEY_SHIFTLEFT},
+            {"Z", KEY_Z},
+            {"X", KEY_X},
+            {"C", KEY_C},
+            {"V", KEY_V},
+            {"B", KEY_B},
+            {"N", KEY_N},
+            {"M", KEY_M},
+            {"SHIFTRIGHT", KEY_SHIFTRIGHT},
+            {"ARROWUP", KEY_ARROWUP},
+            {"CTRLLEFT", KEY_CTRLLEFT},
+            {"APPLEFT", KEY_APPLEFT},
+            {"ALT", KEY_ALT},
+            {"SPACE", KEY_SPACE},
+            {"ALTGR", KEY_ALTGR},
+            {"APPRIGHT", KEY_APPRIGHT},
+            {"MENU", KEY_MENU},
+            {"CTRLRIGHT", KEY_CTRLRIGHT},
+            {"ARROWLEFT", KEY_ARROWLEFT},
+            {"ARROWDOWN", KEY_ARROWDOWN},
+            {"ARROWRIGHT", KEY_ARROWRIGHT},
+            {"PAD0", KEY_PAD0},
+            {"PAD1", KEY_PAD1},
+            {"PAD2", KEY_PAD2},
+            {"PAD3", KEY_PAD3},
+            {"PAD4", KEY_PAD4},
+            {"PAD5", KEY_PAD5},
+            {"PAD6", KEY_PAD6},
+            {"PAD7", KEY_PAD7},
+            {"PAD8", KEY_PAD8},
+            {"PAD9", KEY_PAD9},
+            {"PADADD", KEY_PADADD},
+            {"PADSUB", KEY_PADSUB},
+            {"PADMUL", KEY_PADMUL},
+            {"PADDIV", KEY_PADDIV}
     };
 
     /**\brief The MouseButton Enumeration holds all accepted mouse
@@ -2627,17 +2635,17 @@ namespace cturtle {
         inline int operator[](int index) const{
             return data[index];
         }
-        
+
         ivec2 operator+(const ivec2& other) const{
             return {x + other.x, y + other.y};
         }
-        
+
         ivec2& operator+=(const ivec2& other){
             x += other.x;
             y += other.y;
             return *this;
         }
-        
+
         ivec2 operator-(const ivec2& other) const{
             return {x - other.x, y - other.y};
         }
@@ -2669,7 +2677,7 @@ namespace cturtle {
     inline ivec2 middle(const ivec2& a, const ivec2& b) {
         return ivec2((a.x + b.x) / 2, (a.y + b.y) / 2);
     }
-    
+
     /**\brief Performs a linear interpolation between the two specified points.
      *\param a The first point.
      *\param b The second point.
@@ -2682,8 +2690,8 @@ namespace cturtle {
         else if (progress >= 1)
             return b;
         return {
-            static_cast<int>(std::round(progress * (b.x - a.x))) + a.x,
-            static_cast<int>(std::round(progress * (b.y - a.y))) + a.y
+                static_cast<int>(std::round(progress * (b.x - a.x))) + a.x,
+                static_cast<int>(std::round(progress * (b.y - a.y))) + a.y
         };
     }
 
@@ -2707,9 +2715,9 @@ namespace cturtle {
         /**\brief Copy constructor.
          *\param other The other transform from which to derive value.*/
         Transform(const Transform& other)
-        : value(other.value), rotation(other.rotation) {
+                : value(other.value), rotation(other.rotation) {
         }
-        
+
         /**\brief Point and rotation. constructor.
          * Initializes a transform with the specified rotation, a translation matching the specified point.
          * \param point The translation of this newly constructed transform.
@@ -2846,7 +2854,7 @@ namespace cturtle {
             //This gives pretty accurate rotations rather quickly.
             //No recursive spinning required! :)
             const float origResult = rotation + theta;
-            if (origResult > fullcircle || origResult < 0) 
+            if (origResult > fullcircle || origResult < 0)
                 theta = std::fmod(origResult, fullcircle) - rotation;
 
             const float c = std::cos(theta);
@@ -2967,12 +2975,12 @@ namespace cturtle {
             Point* dstPtr = (dst == nullptr) ? &temp : dst;
 
             dstPtr->x = static_cast<int>(
-                        at(0, 0) * (static_cast<float>(in.x)) +
-                        at(0, 1) * (static_cast<float>(in.y)) + at(0, 2));
+                    at(0, 0) * (static_cast<float>(in.x)) +
+                    at(0, 1) * (static_cast<float>(in.y)) + at(0, 2));
             dstPtr->y = static_cast<int>(
-                        at(1, 0) * (static_cast<float>(in.x)) +
-                        at(1, 1) * (static_cast<float>(in.y)) + at(1, 2));
-            
+                    at(1, 0) * (static_cast<float>(in.x)) +
+                    at(1, 1) * (static_cast<float>(in.y)) + at(1, 2));
+
             return *dstPtr;
         }
 
@@ -3059,30 +3067,30 @@ namespace cturtle {
             imgRef.draw_line(x1, y1, x2, y2, c.rgbPtr());
             return;
         }
-        
+
         const int radius = width / 2;//integer division, be careful here...
         cimg::CImg<int> lineGeom(4, 2);
-        
+
         //convert line (p1, p2) to polygon (p1,p2,p3,p4)... huzzah, O(1) implementation!
         //start with two transforms (one for each coordinate pair), rotated to face towards one-another,
         //with an added 90-degree rotation (1.571~ ish radians).
 
         Transform transforms[2] = {
-            {{x1, y1}, std::atan2(static_cast<float>(y2) - y1, static_cast<float>(x2) - x1) + 1.57079633f},
-            {{x2, y2}, std::atan2(static_cast<float>(y1) - y2, static_cast<float>(x1) - x2) + 1.57079633f}
+                {{x1, y1}, std::atan2(static_cast<float>(y2) - y1, static_cast<float>(x2) - x1) + 1.57079633f},
+                {{x2, y2}, std::atan2(static_cast<float>(y1) - y2, static_cast<float>(x1) - x2) + 1.57079633f}
         };
         Point temp[2];
-        
+
         for(int i = 0; i < 2; i++){//for both of the transforms...
             Transform& trans = transforms[i];
-            
+
             //move it forward and back, getting the adjacent corners of the polygon line
             trans.forward(radius);
             temp[0] = trans.getTranslation();
-            
+
             trans.backward(radius * 2);
             temp[1] = trans.getTranslation();
-            
+
             //then, using a loop, copy our temporary points to the point image.
             //the first transform (pt a) are indices 0, 1
             //the second transform (pt b) are indices 2, 3
@@ -3092,13 +3100,13 @@ namespace cturtle {
                 lineGeom((i * 2) + j, 1) = temp[j][1];
             }
         }
-        
+
         //draw the rounded caps and the fill polygon
         imgRef.draw_circle(x1, y1, radius, c.rgbPtr());//circle 1
         imgRef.draw_polygon(lineGeom, c.rgbPtr());//line fill
         imgRef.draw_circle(x2, y2, radius, c.rgbPtr());//circle 2
     }
-    
+
     /**
      * \brief The Bitmap Font represents monospaced font image files that covers a range of lower ASCII.
      * The default font, for example, covers 32-127 (e.g, char 32 to char 127). This is a particularly
@@ -3115,13 +3123,13 @@ namespace cturtle {
          * @param glyphsY
          */
         BitmapFont(const Image& img, int asciiOffs, int glyphWidth, int glyphHeight, int glyphsX, int glyphsY)
-            : asciiOffset(asciiOffs),
-              glyphWidth(glyphWidth), glyphHeight(glyphHeight),
-              glyphsX(glyphsX), glyphsY(glyphsY){
-            
+                : asciiOffset(asciiOffs),
+                  glyphWidth(glyphWidth), glyphHeight(glyphHeight),
+                  glyphsX(glyphsX), glyphsY(glyphsY){
+
             //fill the glyphs vector...
             const ivec2 glyphSz = {glyphWidth, glyphHeight};
-            
+
             for(unsigned char c = static_cast<char>(asciiOffset); c < UINT8_MAX; c++){
                 const ivec2 min = getGlyphPosition(c);
                 const ivec2 max = (min + glyphSz) - ivec2(1, 1);
@@ -3130,7 +3138,7 @@ namespace cturtle {
                         max.x, max.y));
             }
         }
-        
+
         /**
          * Returns the appropriate image for the specified character.
          * \param c character to retrieve the associated image for.
@@ -3146,7 +3154,7 @@ namespace cturtle {
         inline const Image& operator[](unsigned char c) const{
             return getGlyphImage(c);
         }
-        
+
         /**
          * \brief Returns the position of the specified character in the font image.
          * @param c character to get the position of
@@ -3157,7 +3165,7 @@ namespace cturtle {
                     (static_cast<int>(std::floor(float(c - asciiOffset) / (float)glyphsX))) * glyphHeight
             };
         }
-        
+
         /**
          * \brief Returns the size of a single character glyph, in pixels.
          * @return the width (x) and height (y) of the glyph, in pixels.
@@ -3165,21 +3173,21 @@ namespace cturtle {
         ivec2 getGlyphExtent() const{
             return {glyphWidth, glyphHeight};
         }
-        
+
         /**
          * @return the total number of valid glyphs in this bitmap font.
          */
         int getTotalGlyphs() const{
             return glyphsX * glyphsY;
         }
-        
+
         /**
          * @return a boolean indicating if the specified character is valid within this bitmap font.
          */
         bool isValid(char c) const{
-            return 255 > (c - asciiOffset) > -1;
+            return glyphs.size() > (c - asciiOffset) > -1;
         }
-        
+
         /**
          * \brief Returns the number of glyphs along each axis of the underlying image.
          * @return the number of glyphs along each axis of the underlying image.
@@ -3231,7 +3239,7 @@ namespace cturtle {
          * \param c The color with to draw the geometry.*/
         virtual void draw(const Transform& t, Image& imgRef) const = 0;
     };
-    
+
     /**
      * Text Alignment enumerations, used for aligning multi-line text
      * strings when writing to screens with turtles.
@@ -3252,14 +3260,14 @@ namespace cturtle {
         const BitmapFont& font;
         TextAlign alignment;
         float scale;
-        
+
         Text(const std::string& text, const BitmapFont& font, Color color, float scale = 1.0f, TextAlign alignment = TEXT_ALIGN_LEFT)
-            : text(text), font(font), scale(scale), alignment(alignment){
+                : text(text), font(font), scale(scale), alignment(alignment){
             fillColor = color;
         }
 
         Text(const Text& copy)
-            : text(copy.text), font(copy.font), scale(copy.scale), alignment(copy.alignment){
+                : text(copy.text), font(copy.font), scale(copy.scale), alignment(copy.alignment){
             fillColor = copy.fillColor;
         }
 
@@ -3270,7 +3278,7 @@ namespace cturtle {
         void draw(const Transform& t, Image& imgRef) const{
             //keep track of the length of the longest line of text...
             int longestLine = 0;
-            
+
             //First, split the text into lines.
             std::string temp;
             std::list<std::string> textLines;
@@ -3279,17 +3287,17 @@ namespace cturtle {
                 longestLine = std::max(longestLine, static_cast<int>(temp.size()));
                 textLines.push_back(temp);
             }
-            
+
             //From there we can get some basic metrics.
             const ivec2 glyphSz = font.getGlyphExtent();//the size of a single glyph
             const int lines = textLines.size();//the total number of lines of text
             const int strPixLen = glyphSz.x * longestLine;//the length, in pixels, of the longest line of text
-            
+
             //Create the temporary image.
             //we double the temp image size to get a proper final rotation.
             Image textImage(strPixLen * 2, (glyphSz.y * lines) * 2);
             textImage.channels(0, 3);//force RGBA on temp image
-            
+
             int line = 0;
             //blit each character into the temporary image
 
@@ -3299,7 +3307,7 @@ namespace cturtle {
 
                 //text alignment with some relatively simple maths.
                 int hOffset = 0;
-                
+
                 switch(alignment){
                     case TEXT_ALIGN_LEFT:
                         break;//left align left needs no horizontal offset...
@@ -3310,17 +3318,17 @@ namespace cturtle {
                         hOffset = (strPixLen / 2) - ((text.size() * glyphSz.x) / 2);
                         break;
                 }
-                
+
                 for(int i = 0; i < text.size(); i++) {
                     const char curChar = text[i];
                     if(curChar == ' ' || !font.isValid(curChar))//skip space or out-of-range characters...
                         continue;
-                    
+
                     const Image& tempGlyph = font[curChar];
                     const ivec2 destPosition = {strPixLen + hOffset + (i * glyphSz.x), line * glyphSz.y};
                     textImage.draw_image(destPosition.x, destPosition.y,
-                            tempGlyph);
-                    
+                                         tempGlyph);
+
                     //Apply the fill color with a multiplication filter for the size of each glyph.
                     //for each pixel in the previously written glyph, multiply its color...
                     for(int y = destPosition.y; y < destPosition.y + tempGlyph.height(); y++)
@@ -3328,18 +3336,18 @@ namespace cturtle {
                             for(int c = 0; c < 3; c++)
                                 textImage(x,y,c) *= (fillColor.components[c] / float(UINT8_MAX));
                 }
-                
+
                 lineIter++;
                 line++;
             }
-            
+
             //resize image according to scale
             textImage.resize(static_cast<int>(std::round(textImage.width() * scale)),
-                    static_cast<int>(std::round(textImage.height() * scale)));
+                             static_cast<int>(std::round(textImage.height() * scale)));
 
             //rotate the image with nearest-neighbor interpolation
             textImage.rotate(-toDegrees(t.getRotation()), 1, 0);
-            
+
             //draw the image centered
             //rotating a doubly-sized image makes the origin of the rotation essentially halfway through the image
             //therefore, to draw at the proper location, we need to center it relative to the transform location.
@@ -3416,7 +3424,7 @@ namespace cturtle {
          *\param radius The radius, in pixels, of this circle.
          *\param steps The number of vertices used by this circle.*/
         Circle(int radius, int steps, Color fillColor, int outlineWidth = 0, Color outlineColor = Color())
-            : radius(radius), steps(steps){
+                : radius(radius), steps(steps){
             this->fillColor = fillColor;
             this->outlineWidth = outlineWidth;
             this->outlineColor = outlineColor;
@@ -3425,7 +3433,7 @@ namespace cturtle {
         /**\brief Copy constructor.
          *\param other Another instance of a circle from which to derive value.*/
         Circle(const Circle& other)
-            : radius(other.radius), steps(other.steps){
+                : radius(other.radius), steps(other.steps){
             this->fillColor = fillColor;
             this->outlineWidth = outlineWidth;
             this->outlineColor = outlineColor;
@@ -3477,7 +3485,7 @@ namespace cturtle {
          *          to the contents of the specified initializer list.
          *\param The initializer list from where points are retrieved.*/
         Polygon(const std::initializer_list<Point>& init)
-             : points(init){
+                : points(init){
             this->outlineWidth = outlineWidth;
             this->outlineColor = outlineColor;
             this->fillColor = fillColor;
@@ -3486,7 +3494,7 @@ namespace cturtle {
         /**\brief A copy constructor for another vector of points.
          *\param copy A vector from which to derive points.*/
         Polygon(const std::vector<Point>& copy, Color fillColor, int outlineWidth = 0, Color outlineColor = Color())
-             : points(copy){
+                : points(copy){
             this->outlineWidth = outlineWidth;
             this->outlineColor = outlineColor;
             this->fillColor = fillColor;
@@ -3594,17 +3602,17 @@ namespace cturtle {
             const int halfH = drawHeight / 2;
 
             Point destPoints[4] = {
-                {-halfW, halfH}, //0
-                {-halfW, -halfH}, //1
-                {halfW, -halfH}, //2
-                {halfW, halfH} //3
+                    {-halfW, halfH}, //0
+                    {-halfW, -halfH}, //1
+                    {halfW, -halfH}, //2
+                    {halfW, halfH} //3
             };
 
             Point texturePoints[4] = {
-                {srcX, srcY},
-                {srcX, srcY + srcH},
-                {srcX + srcW, srcY},
-                {srcX + srcW, srcY + srcH}
+                    {srcX, srcY},
+                    {srcX, srcY + srcH},
+                    {srcX + srcW, srcY},
+                    {srcX + srcW, srcY + srcH}
             };
 
             /**Transforms the set of destination points.*/
@@ -3615,9 +3623,9 @@ namespace cturtle {
             //Yes, I know this isn't particularly readable.
             //But its purpose is described in an above commented illustration.
             imgRef.draw_triangle(destPoints[0][0], destPoints[0][1], destPoints[1][0], destPoints[1][1], destPoints[3][0], destPoints[3][1],
-                    spriteImg, texturePoints[0][0], texturePoints[0][1], texturePoints[1][0], texturePoints[1][1], texturePoints[3][0], texturePoints[3][1]);
+                                 spriteImg, texturePoints[0][0], texturePoints[0][1], texturePoints[1][0], texturePoints[1][1], texturePoints[3][0], texturePoints[3][1]);
             imgRef.draw_triangle(destPoints[1][0], destPoints[1][1], destPoints[2][0], destPoints[2][1], destPoints[3][0], destPoints[3][1],
-                    spriteImg, texturePoints[1][0], texturePoints[1][1], texturePoints[2][0], texturePoints[2][1], texturePoints[3][0], texturePoints[3][1]);
+                                 spriteImg, texturePoints[1][0], texturePoints[1][1], texturePoints[2][0], texturePoints[2][1], texturePoints[3][0], texturePoints[3][1]);
 
             if (outlineWidth > 0) {//draw outline using previously generated points.
                 //LineLoop impl
@@ -3650,7 +3658,7 @@ namespace cturtle {
                 components.emplace_back(component.first, component.second->copy());
             }
         }
-        
+
         ~CompoundPolygon(){}
 
         /**
@@ -3661,7 +3669,7 @@ namespace cturtle {
         void addcomponent(const AbstractDrawableObject& obj, const Transform& transform = Transform()) {
             components.emplace_back(transform, obj.copy());
         }
-        
+
         /**
          * Creates a copy of this Compound Polygon allocated with the new keyword.
          * This must be deleted at the responsibility of the invoker.
@@ -3824,37 +3832,37 @@ namespace cturtle {
     class AbstractTurtleScreen{
     public:
         virtual ~AbstractTurtleScreen() = default;
-        
+
         /**
          * Sets the tracer setting for this window.
          */
         virtual void tracer(int countmax, unsigned int delayMS = 10) = 0;
-        
+
         /**
          * Returns the width of the window, in pixels.
          */
         virtual int window_width() const = 0;
-        
+
         /**
          * Returns the height of the window, in pixels.
          */
         virtual int window_height() const = 0;
-        
+
         /**
          * Returns the current background color.
          */
         virtual Color bgcolor() const = 0;
-        
+
         /**
          * Sets the current background color.
          */
         virtual void bgcolor(const Color& c) = 0;
-        
+
         /**
          * Sets the current screen mode.
          */
         virtual void mode(ScreenMode mode) = 0;
-        
+
         /**
          * Returns the current screen mode.
          */
@@ -3892,7 +3900,7 @@ namespace cturtle {
         virtual void update(bool invalidateDraw = false, bool processInput = true) = 0;
         virtual void delay(unsigned int ms) = 0;
         virtual unsigned int delay() = 0;
-        
+
         /**
          * Closes this turtle screen.
          */
@@ -3928,7 +3936,7 @@ namespace cturtle {
          * @return read-write reference to the associated shape
          */
         virtual AbstractDrawableObject& shape(const std::string& name) = 0;
-        
+
         /**
          * @brief Returns a read-only reference to a previously loaded bitmap font.
          * @return a previously loaded font by its specified name.
@@ -3965,7 +3973,7 @@ namespace cturtle {
             }
             return img;
         }
-        
+
         /*The default shapes that screens initialize with.*/
         std::unordered_map<std::string, Polygon> shapes = {
                 //counterclockwise coordinates.
@@ -3997,7 +4005,7 @@ namespace cturtle {
                                 {3, 5},
                                 {5, 5}}}
         };
-        
+
         //Abstract class. Private constructor only allows
         //for derivative classes to be instantiated.
         AbstractTurtleScreen(){};
@@ -4023,12 +4031,12 @@ namespace cturtle {
             screen->add(*this);
             reset();
         }
-        
+
         /**
          * \brief Turtles are not trivially copyable. The copy constructor is explicitly disallowed. 
          */
         Turtle(const Turtle&) = delete;
-        
+
         /**
          * \brief Turtles are not trivially moved. The move constructor is explicitly disallowed.
          */
@@ -4043,7 +4051,7 @@ namespace cturtle {
          * \brief Turtles are not trivially moved. The move operator is explicitly disallowed.
          */
         Turtle& operator=(Turtle&& turtle) = delete;
-        
+
         //Motion
 
         /**\brief Moves the turtle forward the specified number of pixels.
@@ -4113,7 +4121,9 @@ namespace cturtle {
         }
 
         /**\brief Sets the transform location of this turtle.*/
-        void goTo(int x, int y);
+        void goTo(int x, int y){
+            travelTo(Transform(*transform).setTranslation(x,y));
+        }
 
         /**\brief Sets the transform location of this turtle.*/
         inline void goTo(const Point& pt){
@@ -4144,12 +4154,12 @@ namespace cturtle {
         void setx(int x){
             travelTo(Transform(*transform).setTranslationX(x));
         }
-        
+
         /**\brief Sets the Y-axis transform location of this turtle.*/
         void sety(int y){
             travelTo(Transform(*transform).setTranslationY(y));
         }
-        
+
         /**
          * Adds a "dumb" translation to the current turtle's transform.
          * Does not take into account the rotation, or orientation, of the turtle.
@@ -4159,7 +4169,7 @@ namespace cturtle {
         void shift(int x, int y){
             travelTo(Transform(*transform).setTranslation(transform->getTranslateX()+x, transform->getTranslateY()+y));
         }
-        
+
         /**
          * @return a constant reference to the current state of this turtle.
          */
@@ -4181,7 +4191,7 @@ namespace cturtle {
             amt = (screen != nullptr) ? screen->mode() == SM_STANDARD ? amt : -amt : amt;
             travelTo(Transform(*transform).setRotation(amt));
         }
-        
+
         /**
          * Rotates the turtle to face the specified point.
          * @param x coordinate along the x axis to face
@@ -4191,7 +4201,7 @@ namespace cturtle {
         inline void face(int x, int y){
             setheading(towards(x,y) - heading());
         }
-        
+
         /**
          * Rotates the turtle to face the specified point.
          * @param pt point to face towards
@@ -4330,7 +4340,7 @@ namespace cturtle {
         inline bool filling() const{
             return penstate().filling;
         }
-        
+
         /**\brief Begins filling a polygon.
          *\sa fill(bool)*/
         inline void begin_fill() {
@@ -4382,7 +4392,7 @@ namespace cturtle {
             pushText(*transform, color, screen->font(font), text, scale, alignment);
             updateParent(false, false);
         }
-        
+
         /**\brief Puts the current shape of this turtle on the screen
          *        with the current fill color and the outline of the shape.
          *\return The stamp ID of the put stamp.*/
@@ -4390,7 +4400,7 @@ namespace cturtle {
             pushStamp(*transform, state->cursor.get()->copy());
             return state->curStamp;
         }
-        
+
         /**\brief Removes the stamp with the specified ID.*/
         void clearstamp(int stampid){
             auto iter = objects.begin(); //iterator which holds an iterator to the screen's scene list.
@@ -4413,7 +4423,7 @@ namespace cturtle {
 
             updateParent(true,false);
         }
-        
+
         /**\brief Removes all stamps with an ID less than that which is specified.
          *        If the specified stampid is less than 0, it removes ALL stamps.*/
         void clearstamps(int stampid = -1){
@@ -4606,7 +4616,7 @@ namespace cturtle {
 
             if (!state->visible)
                 return;
-            
+
             //Draw all lines queued during filling a shape.
             //This is only populated when the turtle moves between a beginfill
             //and endfill while the pen is down.
@@ -4729,7 +4739,7 @@ namespace cturtle {
             transform = &state->transform;
             state->objectsBefore = objects.size();
         }
-        
+
         /*Pops the top of the pen's state stack.*/
         bool popState(){
             if (stateStack.size() == 1)
@@ -5201,7 +5211,7 @@ namespace cturtle {
     constexpr int SCREEN_DEFAULT_WIDTH = 800;
     constexpr int SCREEN_DEFAULT_HEIGHT = 600;
     constexpr char SCREEN_DEFAULT_TITLE[] = "CTurtle " CTURTLE_VERSION;
-    
+
     /**
      * \brief The InteractiveTurtleScreen class holds and maintains facilities in relation to displaying
      * turtles and consuming input events from users through callbacks.
@@ -5219,10 +5229,10 @@ namespace cturtle {
             initEventThread();
             redraw(true);
             fonts[DEFAULT_FONT] =
-                std::make_unique<BitmapFont>(
-                     decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
-                     DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
-                     DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
+                    std::make_unique<BitmapFont>(
+                            decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
+                            DEFAULT_FONT_GLYPH_WIDTH, DEFAULT_FONT_GLYPH_HEIGHT,
+                            DEFAULT_FONT_GLYPHS_X, DEFAULT_FONT_GLYPHS_Y);
         }
 
         /**Title constructor.
@@ -5247,7 +5257,7 @@ namespace cturtle {
          *\param height The height of the display, in pixels.
          *\param title The title of the display.*/
         InteractiveTurtleScreen(int width, int height, const std::string& title = SCREEN_DEFAULT_TITLE)
-            : display(width, height) {
+                : display(width, height) {
             display.set_title(title.c_str());
             display.set_normalization(0);
             canvas.assign(display);
@@ -5530,7 +5540,7 @@ namespace cturtle {
             if (hasInvalidated) {
                 if(!backgroundImage.is_empty()) canvas.assign(backgroundImage);
                 else canvas.draw_rectangle(0, 0, canvas.width(), canvas.height(), backgroundColor.rgbPtr());
-                
+
                 redrawCounter = 0;//Forced redraw due to canvas invalidation.
             } else {
                 if(redrawCounterMax == 0)//tracer settings may disable rendering for a short time...
@@ -5552,7 +5562,7 @@ namespace cturtle {
                 SceneObject& object = *latestIter;
                 const Transform t(screen.copyConcatenate(object.transform));
                 object.geom->draw(t, canvas);
-                
+
                 latestIter++;
             }
 
@@ -5672,7 +5682,7 @@ namespace cturtle {
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
                 tracer(1, delayMS);
             }
-            
+
             onclick([&](int x, int y) {
                 display.close();
             });
@@ -5698,7 +5708,7 @@ namespace cturtle {
         AbstractDrawableObject& shape(const std::string& name) {
             return shapes[name];
         }
-        
+
         /**
          * Adds the specified bitmap font to the screen.
          * It can be referenced later by its given name.
@@ -5708,7 +5718,7 @@ namespace cturtle {
         void addfont(const std::string& name, const BitmapFont& font){
             fonts[name] = std::make_unique<BitmapFont>(font);
         }
-        
+
         /**
          * Returns a read-only reference to the bitmap font with the specified name.
          * @param name to be given to the font.
@@ -5865,21 +5875,21 @@ namespace cturtle {
 
         //this is an array. 0 for keyDown bindings, 1 for keyUp bindings.
         std::unordered_map<KeyboardKey, std::list<KeyFunc>> keyBindings[2] = {
-            {},
-            {}
+                {},
+                {}
         };
         //similar, mouseb_left mouseb_middle mouseb_right bindings.
         std::list<MouseFunc> mouseBindings[3] = {
-            {},
-            {},
-            {}
+                {},
+                {},
+                {}
         };
         //timer bindings, one function per originating time and delta.
         std::list<std::tuple<TimerFunc, uint64_t, uint64_t>> timerBindings;
 
         //map of fonts. only "default" is initially populated.
         std::unordered_map<std::string, std::unique_ptr<BitmapFont>> fonts;
-        
+
     };
 
     typedef InteractiveTurtleScreen TurtleScreen;
