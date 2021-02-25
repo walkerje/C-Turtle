@@ -35,8 +35,8 @@
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
    
-   Patch                                v1.0.1
-   -----------------2/13/21-------------------
+   Patch                                v1.0.2
+   -----------------2/25/21-------------------
    --- Added
    ~ Implementation for turtle's goTo function that got erroneously removed.
    
@@ -44,7 +44,7 @@
    ~ Change isValid for BitmapFont class to consider the size of the glyph vector.
    
    Patch                                v1.0.1
-   -----------------2/13/21-------------------
+   -----------------2/15/21-------------------
    --- Added
    ~ Added new constructor to Transform class to construct with an position and a rotation.
    
