@@ -36,12 +36,13 @@
    Changelog (see https://keepachangelog.com/)
 
    Patch                                v1.0.3
-   -----------------5/10/21-------------------
+   -----------------6/17/21-------------------
    --- Added
    ~ Querying a color that doesn't exist by name now throws a runtime error detailing the issue.
    ~ Deconstruction behavior is now well-defined for turtle screens and turtles within the same scope.
     ~ no more segfaults when destroying turtles and their screens out-of-order; one or the other can be destructed first.
     ~ bye() and exitonclick() are no longer necessary to close an InterativeTurtleScreen
+   ~ Added xcor() and ycor() functions to the Turtle class (returns x coordinate and y coordinate of the related turtle)
 
    --- Changed
    ~ Rolled-back use of "make_unique" (a C++17 function) in favor of C++11-stable code
