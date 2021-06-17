@@ -7,11 +7,12 @@
 
 
 
-{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+{\ttfamily \#include $<$CTurtle.\+hpp$>$}
 
 
 
-Inheritance diagram for cturtle\+::Abstract\+Drawable\+Object\+:\nopagebreak
+Inheritance diagram for cturtle\+::Abstract\+Drawable\+Object\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,15 +31,12 @@ Collaboration diagram for cturtle\+::Abstract\+Drawable\+Object\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}\label{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}} 
-\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_ab341cf2b8c9bf6cafd11195e21b8ed21}{Abstract\+Drawable\+Object}} ()
-\begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}\label{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}} 
-virtual \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_ae2f6b7c2e982b772779ec2957003b028}{$\sim$\+Abstract\+Drawable\+Object}} ()
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_a5c4178ed299c47ae506eb0c777a37c5b}\label{classcturtle_1_1AbstractDrawableObject_a5c4178ed299c47ae506eb0c777a37c5b}} 
+virtual \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a5c4178ed299c47ae506eb0c777a37c5b}{$\sim$\+Abstract\+Drawable\+Object}} ()=default
 \begin{DoxyCompactList}\small\item\em Empty-- virtual-- default de-\/constructor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}\label{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}} 
 virtual \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_acff3437e999d281773b66e6cf2115372}{copy}} () const =0
-\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with NEW. Result must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d343e0fe577de3978bdad}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const =0
 \begin{DoxyCompactList}\small\item\em This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -50,6 +48,12 @@ virtual void \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e974
 \item 
 int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}} = 0
 \end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcturtle_1_1AbstractDrawableObject_aa23b751ae1ca66463dc1ecd2c751aebc}\label{classcturtle_1_1AbstractDrawableObject_aa23b751ae1ca66463dc1ecd2c751aebc}} 
+\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aa23b751ae1ca66463dc1ecd2c751aebc}{Abstract\+Drawable\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -77,7 +81,7 @@ This function is intended to draw all applicable geometry in this object to the 
 \end{DoxyParams}
 
 
-Implemented in \mbox{\hyperlink{classcturtle_1_1CompoundPolygon_aee485a61907d0a9c135344eadd5c52ad}{cturtle\+::\+Compound\+Polygon}}, \mbox{\hyperlink{classcturtle_1_1Sprite_a7b57808acc51a2610b7d33f542a7f838}{cturtle\+::\+Sprite}}, \mbox{\hyperlink{classcturtle_1_1Polygon_a4a0b6c44656957b141b74bd5c1542622}{cturtle\+::\+Polygon}}, \mbox{\hyperlink{classcturtle_1_1Circle_a7c95f8f4d126e38661e4ee94be58a8c4}{cturtle\+::\+Circle}}, \mbox{\hyperlink{classcturtle_1_1Line_a25ac5b4024bf9209d324b6f8c16affaf}{cturtle\+::\+Line}}, and \mbox{\hyperlink{classcturtle_1_1Text_a80003e4c447def1c7de8daf29a8fc5ec}{cturtle\+::\+Text}}.
+Implemented in \mbox{\hyperlink{classcturtle_1_1CompoundPolygon_a294dd38aa66203f6b53fd0cda895df7c}{cturtle\+::\+Compound\+Polygon}}, \mbox{\hyperlink{classcturtle_1_1Sprite_a1a68bd1f78fe71b3565bbf20a609e878}{cturtle\+::\+Sprite}}, \mbox{\hyperlink{classcturtle_1_1Polygon_afb7ae3ca0a862f9f0aa1c1720a5d40a6}{cturtle\+::\+Polygon}}, \mbox{\hyperlink{classcturtle_1_1Circle_ace43ef3ce3c151a340d269546722d05e}{cturtle\+::\+Circle}}, \mbox{\hyperlink{classcturtle_1_1Line_a024589086dedb6e6892b010daf24dd10}{cturtle\+::\+Line}}, and \mbox{\hyperlink{classcturtle_1_1Text_a094f18085a843e9e92433a6069793f73}{cturtle\+::\+Text}}.
 
 
 
@@ -104,4 +108,4 @@ The width of the outline of the circle, in pixels.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+Turtle.\+hpp\end{DoxyCompactItemize}
+CTurtle.\+hpp\end{DoxyCompactItemize}

@@ -7,7 +7,7 @@ The \mbox{\hyperlink{classcturtle_1_1Sprite}{Sprite}} class represents a selecti
 
 
 
-{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+{\ttfamily \#include $<$CTurtle.\+hpp$>$}
 
 
 
@@ -30,19 +30,19 @@ Collaboration diagram for cturtle\+::Sprite\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcturtle_1_1Sprite_adca3803189c23c887a3f39de00db4bdd}\label{classcturtle_1_1Sprite_adca3803189c23c887a3f39de00db4bdd}} 
-{\bfseries Sprite} (Image \&img, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
+\mbox{\Hypertarget{classcturtle_1_1Sprite_acb74464a84204f125a98d8472be62138}\label{classcturtle_1_1Sprite_acb74464a84204f125a98d8472be62138}} 
+{\bfseries Sprite} (Image \&img, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
 \item 
-\mbox{\Hypertarget{classcturtle_1_1Sprite_a56cdc4cb92ae5a5108cb34c9c284ebb0}\label{classcturtle_1_1Sprite_a56cdc4cb92ae5a5108cb34c9c284ebb0}} 
-{\bfseries Sprite} (Image \&img, int srcX, int srcY, int srcW, int srcH, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
+\mbox{\Hypertarget{classcturtle_1_1Sprite_ab4a57b7e97f38d70eadd6c26d5fe70e2}\label{classcturtle_1_1Sprite_ab4a57b7e97f38d70eadd6c26d5fe70e2}} 
+{\bfseries Sprite} (Image \&img, int srcX, int srcY, int srcW, int srcH, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
 \item 
-\mbox{\Hypertarget{classcturtle_1_1Sprite_a818e253f4d3cbb268e753f5ceee12d1d}\label{classcturtle_1_1Sprite_a818e253f4d3cbb268e753f5ceee12d1d}} 
-{\bfseries Sprite} (const \mbox{\hyperlink{classcturtle_1_1Sprite}{Sprite}} \&\mbox{\hyperlink{classcturtle_1_1Sprite_a96682206c9ba4d31e73526d657fd346b}{copy}})
+\mbox{\Hypertarget{classcturtle_1_1Sprite_a4952730ae65a134267b3dc77656b4596}\label{classcturtle_1_1Sprite_a4952730ae65a134267b3dc77656b4596}} 
+{\bfseries Sprite} (const \mbox{\hyperlink{classcturtle_1_1Sprite}{Sprite}} \&\mbox{\hyperlink{classcturtle_1_1Sprite_a4119a91198b10982ed90daba53eef1fd}{copy}})=default
 \item 
-\mbox{\Hypertarget{classcturtle_1_1Sprite_a96682206c9ba4d31e73526d657fd346b}\label{classcturtle_1_1Sprite_a96682206c9ba4d31e73526d657fd346b}} 
-\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Sprite_a96682206c9ba4d31e73526d657fd346b}{copy}} () const
-\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcturtle_1_1Sprite_a7b57808acc51a2610b7d33f542a7f838}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const
+\mbox{\Hypertarget{classcturtle_1_1Sprite_a4119a91198b10982ed90daba53eef1fd}\label{classcturtle_1_1Sprite_a4119a91198b10982ed90daba53eef1fd}} 
+\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Sprite_a4119a91198b10982ed90daba53eef1fd}{copy}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with NEW. Result must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcturtle_1_1Sprite_a1a68bd1f78fe71b3565bbf20a609e878}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -71,17 +71,18 @@ int {\bfseries draw\+Height} = 0
 \mbox{\Hypertarget{classcturtle_1_1Sprite_a7aff22fa5844b2cb6c6cf95467df2421}\label{classcturtle_1_1Sprite_a7aff22fa5844b2cb6c6cf95467df2421}} 
 Image \& {\bfseries sprite\+Img}
 \end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 The \mbox{\hyperlink{classcturtle_1_1Sprite}{Sprite}} class represents a selection of a larger image. This class ignores color in favor of color provided by the image the sprite corresponds to. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classcturtle_1_1Sprite_a7b57808acc51a2610b7d33f542a7f838}\label{classcturtle_1_1Sprite_a7b57808acc51a2610b7d33f542a7f838}} 
+\mbox{\Hypertarget{classcturtle_1_1Sprite_a1a68bd1f78fe71b3565bbf20a609e878}\label{classcturtle_1_1Sprite_a1a68bd1f78fe71b3565bbf20a609e878}} 
 \index{cturtle::Sprite@{cturtle::Sprite}!draw@{draw}}
 \index{draw@{draw}!cturtle::Sprite@{cturtle::Sprite}}
 \doxysubsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Sprite\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Sprite\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 Draws this \mbox{\hyperlink{classcturtle_1_1Sprite}{Sprite}}. Disregards the \mbox{\hyperlink{classcturtle_1_1Color}{Color}} attribute in favor of sprites colors. Transforms the set of destination points.
 
@@ -91,4 +92,4 @@ Implements \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a7b1ad1e9743d
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+Turtle.\+hpp\end{DoxyCompactItemize}
+CTurtle.\+hpp\end{DoxyCompactItemize}
