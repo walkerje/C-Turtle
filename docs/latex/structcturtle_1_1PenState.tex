@@ -7,7 +7,7 @@ The Pen State structure Holds all pen attributes, which are grouped in this way 
 
 
 
-{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+{\ttfamily \#include $<$CTurtle.\+hpp$>$}
 
 
 
@@ -32,7 +32,7 @@ Collaboration diagram for cturtle\+::Pen\+State\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \mbox{\hyperlink{structcturtle_1_1PenState_ac6b3e58155d09bf78a315c616874fa89}{transform}}
 \item 
-float \mbox{\hyperlink{structcturtle_1_1PenState_af5432bc75dcc374e6269a28a656a6c49}{move\+Speed}} = T\+S\+\_\+\+N\+O\+R\+M\+AL
+float \mbox{\hyperlink{structcturtle_1_1PenState_af5432bc75dcc374e6269a28a656a6c49}{move\+Speed}} = TS\+\_\+\+NORMAL
 \item 
 bool \mbox{\hyperlink{structcturtle_1_1PenState_aa6992297fb8f109e20599c31dd29cd6f}{tracing}} = true
 \item 
@@ -74,7 +74,7 @@ The angle mode. False for degrees, true for radians. \mbox{\Hypertarget{structct
 \doxysubsubsection{\texorpdfstring{cursor}{cursor}}
 {\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}}$>$ cturtle\+::\+Pen\+State\+::cursor = nullptr}
 
-The turtle\textquotesingle{}s cursor geometry. M\+U\+ST A\+S\+S\+I\+GN B\+E\+F\+O\+RE U\+SE. \mbox{\Hypertarget{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}\label{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}} 
+The turtle\textquotesingle{}s cursor geometry. MUST ASSIGN BEFORE USE. \mbox{\Hypertarget{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}\label{structcturtle_1_1PenState_a6ebb8d220523e19a27922ff5d04931de}} 
 \index{cturtle::PenState@{cturtle::PenState}!cursorTilt@{cursorTilt}}
 \index{cursorTilt@{cursorTilt}!cturtle::PenState@{cturtle::PenState}}
 \doxysubsubsection{\texorpdfstring{cursorTilt}{cursorTilt}}
@@ -102,7 +102,7 @@ A boolean indicating if we\textquotesingle{}re trying to fill a shape. \mbox{\Hy
 \index{cturtle::PenState@{cturtle::PenState}!moveSpeed@{moveSpeed}}
 \index{moveSpeed@{moveSpeed}!cturtle::PenState@{cturtle::PenState}}
 \doxysubsubsection{\texorpdfstring{moveSpeed}{moveSpeed}}
-{\footnotesize\ttfamily float cturtle\+::\+Pen\+State\+::move\+Speed = T\+S\+\_\+\+N\+O\+R\+M\+AL}
+{\footnotesize\ttfamily float cturtle\+::\+Pen\+State\+::move\+Speed = TS\+\_\+\+NORMAL}
 
 The movement speed of the turtle, in range of 0...10 \mbox{\Hypertarget{structcturtle_1_1PenState_a7309ce91cbc711775e59a9ce1ed150a5}\label{structcturtle_1_1PenState_a7309ce91cbc711775e59a9ce1ed150a5}} 
 \index{cturtle::PenState@{cturtle::PenState}!objectsBefore@{objectsBefore}}
@@ -144,4 +144,4 @@ A boolean indicating if this turtle is visible.
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+Turtle.\+hpp\end{DoxyCompactItemize}
+CTurtle.\+hpp\end{DoxyCompactItemize}

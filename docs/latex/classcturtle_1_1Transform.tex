@@ -2,20 +2,22 @@
 \label{classcturtle_1_1Transform}\index{cturtle::Transform@{cturtle::Transform}}
 
 
-The \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in C\+Turtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\texttt{ http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}}.  
+The \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\texttt{ http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}}.  
 
 
 
 
-{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+{\ttfamily \#include $<$CTurtle.\+hpp$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}{Transform}} ()
 \item 
-\mbox{\hyperlink{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}{Transform}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&other)
+\mbox{\hyperlink{classcturtle_1_1Transform_a012f3e33883315a056ef4d1d3a9c4a26}{Transform}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&other)=default
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcturtle_1_1Transform_ae90e99903f88d0e18f9cddf388fd215f}{Transform}} (const \mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} \&point, float \mbox{\hyperlink{classcturtle_1_1Transform_a79f7e11fb2b3d1093458100783cdd984}{rotation}})
+\begin{DoxyCompactList}\small\item\em Point and rotation constructor. Initializes a transform with the specified rotation, a translation matching the specified point. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \& \mbox{\hyperlink{classcturtle_1_1Transform_a0102d86a459937597b4755650b94b4a2}{identity}} ()
 \begin{DoxyCompactList}\small\item\em Sets this transform to an identity. When you concatenate an identity transform onto another object, The resulting point is the same as it would have been pre-\/concatenation. Such is the point of an identity transform, and is why Transforms are initialized to have this value. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classcturtle_1_1Transform_a77fe29e1fbf23aec97f988ca5f1bd3c3}\label{classcturtle_1_1Transform_a77fe29e1fbf23aec97f988ca5f1bd3c3}} 
@@ -64,7 +66,7 @@ void \mbox{\hyperlink{classcturtle_1_1Transform_a5eb270c2614cc18c23623b24feb6968
 \begin{DoxyCompactList}\small\item\em Assigns the value of this transform to that of another. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \mbox{\hyperlink{classcturtle_1_1Transform_aa8631732daaddc8336ed29f5462d1fef}{transform}} (\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} in, \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} $\ast$dst=nullptr) const
 \begin{DoxyCompactList}\small\item\em Transforms a point according to this transform. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename I\+T\+E\+R\+\_\+T $>$ }\\void \mbox{\hyperlink{classcturtle_1_1Transform_aae183c07fb323d0dfe8b3d633d59415c}{transform\+Set}} (I\+T\+E\+R\+\_\+T cur, I\+T\+E\+R\+\_\+T end) const
+{\footnotesize template$<$typename ITER\+\_\+T $>$ }\\void \mbox{\hyperlink{classcturtle_1_1Transform_aae183c07fb323d0dfe8b3d633d59415c}{transform\+Set}} (ITER\+\_\+T cur, ITER\+\_\+T end) const
 \begin{DoxyCompactList}\small\item\em Transforms a set of points given a begin and end iterator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} \mbox{\hyperlink{classcturtle_1_1Transform_afc24321e5d8da21c310fd830aa76da84}{operator()}} (\mbox{\hyperlink{structcturtle_1_1ivec2}{Point}} in) const
 \begin{DoxyCompactList}\small\item\em Operator overload to transform a single point. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -90,7 +92,7 @@ float \mbox{\hyperlink{classcturtle_1_1Transform_a79f7e11fb2b3d1093458100783cdd9
 
 
 \doxysubsection{Detailed Description}
-The \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in C\+Turtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\texttt{ http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}}. 
+The \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} class provides a myriad of functions to simply transform points. This class it the backbone of almost all cartesian plane math in CTurtle. An adapted 3x3 matrix of the following link\+: \href{http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/}{\texttt{ http\+://www.\+opengl-\/tutorial.\+org/beginners-\/tutorials/tutorial-\/3-\/matrices/}}. 
 
 \doxysubsection{Member Typedef Documentation}
 \mbox{\Hypertarget{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}\label{classcturtle_1_1Transform_a2952f427614626cb6b72553fb8451d8a}} 
@@ -105,14 +107,14 @@ The underlying matrix type. It\textquotesingle{}s defined simply as an array of 
 \mbox{\Hypertarget{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}\label{classcturtle_1_1Transform_a8b3953d07dfbe1f41ef5074144106d32}} 
 \index{cturtle::Transform@{cturtle::Transform}!Transform@{Transform}}
 \index{Transform@{Transform}!cturtle::Transform@{cturtle::Transform}}
-\doxysubsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Constructs an empty transform. Initializes, by default, as an identity transform. \mbox{\Hypertarget{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}\label{classcturtle_1_1Transform_a007759937e9ad468e5ea41687571a417}} 
+Constructs an empty transform. Initializes, by default, as an identity transform. \mbox{\Hypertarget{classcturtle_1_1Transform_a012f3e33883315a056ef4d1d3a9c4a26}\label{classcturtle_1_1Transform_a012f3e33883315a056ef4d1d3a9c4a26}} 
 \index{cturtle::Transform@{cturtle::Transform}!Transform@{Transform}}
 \index{Transform@{Transform}!cturtle::Transform@{cturtle::Transform}}
-\doxysubsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 
 
@@ -121,6 +123,23 @@ Copy constructor.
 
 \begin{DoxyParams}{Parameters}
 {\em other} & The other transform from which to derive value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcturtle_1_1Transform_ae90e99903f88d0e18f9cddf388fd215f}\label{classcturtle_1_1Transform_ae90e99903f88d0e18f9cddf388fd215f}} 
+\index{cturtle::Transform@{cturtle::Transform}!Transform@{Transform}}
+\index{Transform@{Transform}!cturtle::Transform@{cturtle::Transform}}
+\doxysubsubsection{\texorpdfstring{Transform()}{Transform()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily cturtle\+::\+Transform\+::\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structcturtle_1_1ivec2}{ivec2}} \&}]{point,  }\item[{float}]{rotation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Point and rotation constructor. Initializes a transform with the specified rotation, a translation matching the specified point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The translation of this newly constructed transform. \\
+\hline
+{\em rotation} & The rotation of this newly constructed transform. \\
 \hline
 \end{DoxyParams}
 
@@ -500,8 +519,8 @@ Also assigns the value of dst pointer to the result.
 \index{cturtle::Transform@{cturtle::Transform}!transformSet@{transformSet}}
 \index{transformSet@{transformSet}!cturtle::Transform@{cturtle::Transform}}
 \doxysubsubsection{\texorpdfstring{transformSet()}{transformSet()}}
-{\footnotesize\ttfamily template$<$typename I\+T\+E\+R\+\_\+T $>$ \\
-void cturtle\+::\+Transform\+::transform\+Set (\begin{DoxyParamCaption}\item[{I\+T\+E\+R\+\_\+T}]{cur,  }\item[{I\+T\+E\+R\+\_\+T}]{end }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename ITER\+\_\+T $>$ \\
+void cturtle\+::\+Transform\+::transform\+Set (\begin{DoxyParamCaption}\item[{ITER\+\_\+T}]{cur,  }\item[{ITER\+\_\+T}]{end }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -553,4 +572,4 @@ The value of this transform.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+Turtle.\+hpp\end{DoxyCompactItemize}
+CTurtle.\+hpp\end{DoxyCompactItemize}

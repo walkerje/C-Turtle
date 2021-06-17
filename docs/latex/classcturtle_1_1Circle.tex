@@ -7,7 +7,7 @@ The \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} class holds a radius and t
 
 
 
-{\ttfamily \#include $<$C\+Turtle.\+hpp$>$}
+{\ttfamily \#include $<$CTurtle.\+hpp$>$}
 
 
 
@@ -30,17 +30,17 @@ Collaboration diagram for cturtle\+::Circle\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcturtle_1_1Circle_adcb8d37883313b9694ac0add0cf4a2cb}\label{classcturtle_1_1Circle_adcb8d37883313b9694ac0add0cf4a2cb}} 
-\mbox{\hyperlink{classcturtle_1_1Circle_adcb8d37883313b9694ac0add0cf4a2cb}{Circle}} ()
+\mbox{\Hypertarget{classcturtle_1_1Circle_adc2f1cb13db5aa45558541ebb5a6f975}\label{classcturtle_1_1Circle_adc2f1cb13db5aa45558541ebb5a6f975}} 
+\mbox{\hyperlink{classcturtle_1_1Circle_adc2f1cb13db5aa45558541ebb5a6f975}{Circle}} ()=default
 \begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classcturtle_1_1Circle_ae9fff4148fa917a5bac60301985ea085}{Circle}} (int \mbox{\hyperlink{classcturtle_1_1Circle_a01dfc45c6a56b58e040e4de2cc8abda5}{radius}}, int \mbox{\hyperlink{classcturtle_1_1Circle_a5bf905891d9a0d21b08070698c71321e}{steps}}, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a37d635a02ad3e5206a6eb99b7b5f1963}{fill\+Color}}, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
+\mbox{\hyperlink{classcturtle_1_1Circle_a8c63fb9d9b6c0bafa51519bbdf910f2d}{Circle}} (int \mbox{\hyperlink{classcturtle_1_1Circle_a01dfc45c6a56b58e040e4de2cc8abda5}{radius}}, int \mbox{\hyperlink{classcturtle_1_1Circle_a5bf905891d9a0d21b08070698c71321e}{steps}}, const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_a37d635a02ad3e5206a6eb99b7b5f1963}{fill\+Color}}, int \mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_aeffaecc245057e9a42e5688671a77f52}{outline\+Width}}=0, const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject_abd04640855e7623bb84b52babd8b32b6}{outline\+Color}}=\mbox{\hyperlink{classcturtle_1_1Color}{Color}}())
 \begin{DoxyCompactList}\small\item\em Radius and step assignment constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classcturtle_1_1Circle_a2a74f8664da6643f8327c2fa49659cdd}{Circle}} (const \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} \&other)
+\mbox{\hyperlink{classcturtle_1_1Circle_a07e85dc7f96facbfa3c2e2791209e7e9}{Circle}} (const \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} \&other)=default
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcturtle_1_1Circle_aa326797d515e89c8b75099018e6d0118}\label{classcturtle_1_1Circle_aa326797d515e89c8b75099018e6d0118}} 
-\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Circle_aa326797d515e89c8b75099018e6d0118}{copy}} () const
-\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with N\+EW. Result Must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classcturtle_1_1Circle_a7c95f8f4d126e38661e4ee94be58a8c4}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const
+\mbox{\Hypertarget{classcturtle_1_1Circle_ae6ba7c80556d4073fb3a223d38d24108}\label{classcturtle_1_1Circle_ae6ba7c80556d4073fb3a223d38d24108}} 
+\mbox{\hyperlink{classcturtle_1_1AbstractDrawableObject}{Abstract\+Drawable\+Object}} $\ast$ \mbox{\hyperlink{classcturtle_1_1Circle_ae6ba7c80556d4073fb3a223d38d24108}{copy}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a pointer to a copy of this drawable object, allocated with NEW. Result must be deleted at the responsibility of the invoker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcturtle_1_1Circle_ace43ef3ce3c151a340d269546722d05e}{draw}} (const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&t, Image \&img\+Ref) const override
 \begin{DoxyCompactList}\small\item\em This function is intended to draw all applicable geometry in this object to the specified image, with the specified transform, with the specified color. This function is intended to be overloaded by child classes to draw applicable geometry to an image, acting as a canvas. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -49,17 +49,18 @@ int \mbox{\hyperlink{classcturtle_1_1Circle_a01dfc45c6a56b58e040e4de2cc8abda5}{r
 \item 
 int \mbox{\hyperlink{classcturtle_1_1Circle_a5bf905891d9a0d21b08070698c71321e}{steps}} = 10
 \end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 The \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} class holds a radius and total number of steps, used to generate and draw a circles geometry. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classcturtle_1_1Circle_ae9fff4148fa917a5bac60301985ea085}\label{classcturtle_1_1Circle_ae9fff4148fa917a5bac60301985ea085}} 
+\mbox{\Hypertarget{classcturtle_1_1Circle_a8c63fb9d9b6c0bafa51519bbdf910f2d}\label{classcturtle_1_1Circle_a8c63fb9d9b6c0bafa51519bbdf910f2d}} 
 \index{cturtle::Circle@{cturtle::Circle}!Circle@{Circle}}
 \index{Circle@{Circle}!cturtle::Circle@{cturtle::Circle}}
 \doxysubsubsection{\texorpdfstring{Circle()}{Circle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{int}]{radius,  }\item[{int}]{steps,  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{fill\+Color,  }\item[{int}]{outline\+Width = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classcturtle_1_1Color}{Color}}}]{outline\+Color = {\ttfamily \mbox{\hyperlink{classcturtle_1_1Color}{Color}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily cturtle\+::\+Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{int}]{radius,  }\item[{int}]{steps,  }\item[{const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&}]{fill\+Color,  }\item[{int}]{outline\+Width = {\ttfamily 0},  }\item[{const \mbox{\hyperlink{classcturtle_1_1Color}{Color}} \&}]{outline\+Color = {\ttfamily \mbox{\hyperlink{classcturtle_1_1Color}{Color}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -72,11 +73,11 @@ Radius and step assignment constructor.
 {\em steps} & The number of vertices used by this circle. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classcturtle_1_1Circle_a2a74f8664da6643f8327c2fa49659cdd}\label{classcturtle_1_1Circle_a2a74f8664da6643f8327c2fa49659cdd}} 
+\mbox{\Hypertarget{classcturtle_1_1Circle_a07e85dc7f96facbfa3c2e2791209e7e9}\label{classcturtle_1_1Circle_a07e85dc7f96facbfa3c2e2791209e7e9}} 
 \index{cturtle::Circle@{cturtle::Circle}!Circle@{Circle}}
 \index{Circle@{Circle}!cturtle::Circle@{cturtle::Circle}}
 \doxysubsubsection{\texorpdfstring{Circle()}{Circle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily cturtle\+::\+Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily cturtle\+::\+Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Circle}{Circle}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 
 
@@ -90,11 +91,11 @@ Copy constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classcturtle_1_1Circle_a7c95f8f4d126e38661e4ee94be58a8c4}\label{classcturtle_1_1Circle_a7c95f8f4d126e38661e4ee94be58a8c4}} 
+\mbox{\Hypertarget{classcturtle_1_1Circle_ace43ef3ce3c151a340d269546722d05e}\label{classcturtle_1_1Circle_ace43ef3ce3c151a340d269546722d05e}} 
 \index{cturtle::Circle@{cturtle::Circle}!draw@{draw}}
 \index{draw@{draw}!cturtle::Circle@{cturtle::Circle}}
 \doxysubsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily void cturtle\+::\+Circle\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cturtle\+::\+Circle\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcturtle_1_1Transform}{Transform}} \&}]{t,  }\item[{Image \&}]{img\+Ref }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -132,4 +133,4 @@ Total number of steps, or vertices, generated in the draw function. The higher t
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\+Turtle.\+hpp\end{DoxyCompactItemize}
+CTurtle.\+hpp\end{DoxyCompactItemize}
