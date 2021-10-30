@@ -35,6 +35,12 @@
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
 
+   Patch                                v1.0.4
+   -----------------10/30/21-------------------
+   --- Changed
+   ~ Fixed a rounding-related position bug making it seem like negative translations were off-by-one while positive ones are not.
+    ~ Only round X and Y coordinate positions if, and only if, it will be used for rendering and explicit integer logic purposes.
+
    Patch                                v1.0.3
    -----------------6/17/21-------------------
    --- Added
@@ -105,7 +111,7 @@
 
 #define CTURTLE_VERSION_MAJOR "1"
 #define CTURTLE_VERSION_MINOR "0"
-#define CTURTLE_VERSION_PATCH "3"
+#define CTURTLE_VERSION_PATCH "4"
 #define CTURTLE_VERSION "v" CTURTLE_VERSION_MAJOR "." CTURTLE_VERSION_MINOR "." CTURTLE_VERSION_PATCH
 
 #ifdef CTURTLE_HEADLESS
@@ -2795,9 +2801,8 @@ namespace cturtle {
 
         /**Moves this transform "forward" according to its rotation.*/
         Transform& forward(float distance) {
-            //Adding the round here fixed rounding issues!
-            at(0, 2) += std::round(std::cos(rotation) * distance); //x component
-            at(1, 2) += std::round(std::sin(rotation) * distance); //y component
+            at(0, 2) += std::cos(rotation) * distance; //x component
+            at(1, 2) += std::sin(rotation) * distance; //y component
             return *this;
         }
 
@@ -2820,7 +2825,7 @@ namespace cturtle {
         /**\brief Returns the translation of this transform as a point.
          *\return The point which represents the transform.*/
         Point getTranslation() const {
-            return {(int) at(0, 2), (int) at(1, 2)};
+            return {(int) std::round(at(0, 2)), (int) std::round(at(1, 2))};
         }
 
         /**\brief Sets the X axis translation of this transform.
