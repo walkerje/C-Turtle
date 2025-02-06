@@ -28,12 +28,18 @@
    +#+           +#+     +#+    +#+ +#+    +#+    +#+     +#+        +#+
    #+#    #+#    #+#     #+#    #+# #+#    #+#    #+#     #+#        #+#
     ########     ###      ########  ###    ###    ###     ########## ########## 
-   =================================v1.0.2====================================>
-   
+   =================================v1.0.5====================================>
+
    GitHub: https://github.com/walkerje/C-Turtle
-   Documentation: http://walkerje.me/C-Turtle/docs/html/annotated.html
+   Documentation: https://bitshiftmountain.com/projects/cturtle/docs/
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
+
+   Patch                                v1.0.5
+   -----------------02/06/25-------------------
+   --- Changed
+   ~ Updated dead links to documentation to new host.
+   ~ Removed rendered docs.
 
    Patch                                v1.0.4
    -----------------10/30/21-------------------
@@ -58,20 +64,20 @@
    -----------------2/25/21-------------------
    --- Added
    ~ Implementation for turtle's goTo function that got erroneously removed.
-   
+
    --- Changed
    ~ Change isValid for BitmapFont class to consider the size of the glyph vector.
-   
+
    Patch                                v1.0.1
    -----------------2/15/21-------------------
    --- Added
    ~ Added new constructor to Transform class to construct with an position and a rotation.
-   
+
    --- Changed
    ~ Preprocessor check for M_PI under MSVC was malformed; replaced ifndef with ifdef
    ~ Implemented polygon line filling for drawLine function, reducing complexity to O(1) from O(n).
    ~ Removed 100-pixel line width maximum from drawLine function.
-   
+
    Release                              v1.0.0
    -----------------2/13/21-------------------
    --- Added
@@ -81,8 +87,8 @@
    ~ "face" function to Turtles to orient the turtle towards another Point.
    ~ "addfont" and "font" function to the TurtleScreen class to register and retrieve user-provided Bitmap Fonts.
    ~ Appended version number to default title constructors in the TurtleScreen class.
-   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)  
-   
+   ~ Version numbering defines CTURTLE_VERSION_(MAJOR|MINOR|PATCH)
+
    --- Changed
    ~ Moved turtle function implementations to the inside of the Turtle Class
    ~ Moved default shape map definition to AbstractTurtleScreen rather than individual screens.
@@ -90,18 +96,18 @@
    ~ Organized include statements, and the top of the file in general.
    ~ Updated Documentation
    ~ Changed ivec2 implementation to use a union between an anonymous structure and an 2-wide array of integers
-   
+
    --- Removed
    ~ N/A
-   
+
    Release                              v0.2.X
    ------------------4/23/20------------------
    ~ See GitHub commit histories 744dd6d through e7e17de
-   
+
    Release                              v0.1.X
    ------------------4/23/20------------------
    ~ See GitHub commit histories a93dc4d through 744dd6d
-   
+
    Release                              v0.0.X
    -------------------9/7/19------------------
    ~ See GitHub commit histories 12888e7 through a93dc4d
@@ -572,13 +578,13 @@ inline void jo_gif_end(jo_gif_t *gif) {
 #include <list>         //For the ever-useful list data structure.
 #include <unordered_map>//For named color and keys.
 #include <chrono>       //For time management for movement animations and callbacks.
-#include <random>       //For random color creation. 
+#include <random>       //For random color creation.
 #include <functional>   //For event function callbacks.
 #include <tuple>        //Used for CompoundShapes
 #include <cstring>      //For memcpy
 #include <vector>       //For Polygon point storage
 #include <cmath>        //For rounding, etc
-#include <algorithm>    //For std::count 
+#include <algorithm>    //For std::count
 #include <array>        //For Transform storage.
 #include <string>       //Strings...
 #include <cstdint>      //For well-defined integer types.
@@ -1450,12 +1456,12 @@ namespace cturtle {
     }
 
     /**
-     * \brief The primary representation of Color for this library. 
+     * \brief The primary representation of Color for this library.
      * Represented as a simple RGB color composed of unsigned bytes,
      * Color objects can be referenced by string and by packed integer.
      * \sa detail::resolveColorComp()
      * \sa detail::resolveColorInt()
-     * \sa fromName() 
+     * \sa fromName()
      */
     class Color {
     public:
@@ -3922,7 +3928,7 @@ namespace cturtle {
         virtual std::list<SceneObject>& getScene() = 0;
 
         /**
-         * @brief Returns a read-write reference to the registered shape with the specified name. 
+         * @brief Returns a read-write reference to the registered shape with the specified name.
          * @param name of the shape
          * @return read-write reference to the associated shape
          */
@@ -3938,7 +3944,7 @@ namespace cturtle {
          * Decodes the default font image from memory. The font is encoded
          * as 1 bit per pixel (on/off) for simplicity, and is relatively
          * easily decoded through bit-shifting.
-         * 
+         *
          * The loading of this was delegated to the AbstractTurtleScreen class
          * simply because all derived classes should have an idea of their
          * own internal states, however they will ALL have these managed states,
@@ -4025,7 +4031,7 @@ namespace cturtle {
         }
 
         /**
-         * \brief Turtles are not trivially copyable. The copy constructor is explicitly disallowed. 
+         * \brief Turtles are not trivially copyable. The copy constructor is explicitly disallowed.
          */
         Turtle(const Turtle&) = delete;
 
@@ -5046,7 +5052,7 @@ namespace cturtle {
             if(redrawCounter > 0 || redrawCounter >= redrawCounterMax){
                 tracer(1, delayMS);
             }
-            
+
             jo_gif_end(&gif);
 
 #ifndef CTURTLE_HEADLESS_NO_HTML
@@ -5172,7 +5178,7 @@ namespace cturtle {
         AbstractDrawableObject& shape(const std::string& name){
             return shapes[name];
         }
-        
+
         /**
          * Returns a read-only reference to the bitmap font with the specified name.
          * For the case of OfflineTurtleScreen instances, this ALWAYS returns a reference
@@ -5225,7 +5231,7 @@ namespace cturtle {
         int redrawCounter = 0;
         /**Redraw counter max.*/
         int redrawCounterMax = 1;
-        
+
         std::unique_ptr<BitmapFont> defaultFont =
                 std::unique_ptr<BitmapFont>(new BitmapFont(
                         decodeDefaultFont(), DEFAULT_FONT_ASCII_OFFSET,
@@ -5574,7 +5580,7 @@ namespace cturtle {
 
             //get the iterator pointing to the oldest scene object that hasn't been drawn yet
             //if the scene has been invalidated, the latest object is the first one in the scene.
-            //otherwise, 
+            //otherwise,
             auto latestIter = !hasInvalidated ? std::prev(objects.end(), fromBack) : objects.begin();
 
             const Transform screen = screentransform();

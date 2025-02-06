@@ -1,6 +1,0 @@
-<map id="cturtle::Text" name="cturtle::Text">
-<area shape="rect" id="node1" title="The Text class represents a basic string that is drawn on the screen." alt="" coords="177,213,268,240"/>
-<area shape="rect" id="node2" href="$classcturtle_1_1AbstractDrawableObject.html" title="AbstractDrawableObject is a base class, intended to be inherited from by all drawable objects...." alt="" coords="5,109,176,151"/>
-<area shape="rect" id="node3" href="$classcturtle_1_1Color.html" title="The primary representation of Color for this library. Represented as a simple RGB color composed of u..." alt="" coords="42,5,139,32"/>
-<area shape="rect" id="node4" href="$classcturtle_1_1BitmapFont.html" title="The Bitmap Font represents monospaced font image files that covers a range of lower ASCII...." alt="" coords="200,117,333,143"/>
-</map>
