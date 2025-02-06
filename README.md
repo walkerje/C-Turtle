@@ -5,7 +5,7 @@
   <br>
 </p>
 
-# C-Turtle 1.0.5 | [Documentation](https://bitshiftmountain.com/projects/cturtle/docs/) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
+# C-Turtle 1.0.5 | [Documentation](https://bitshiftmountain.com/projects/cturtle/docs) | [Try Me on Repl.it!](https://repl.it/talk/share/C-Turtle/79779)
 
 ## This project is looking for contributors.
 ### I currently do not have the time to active maintain this project.

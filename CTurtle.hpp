@@ -31,7 +31,7 @@
    =================================v1.0.5====================================>
 
    GitHub: https://github.com/walkerje/C-Turtle
-   Documentation: https://bitshiftmountain.com/projects/cturtle/docs/
+   Documentation: https://bitshiftmountain.com/projects/cturtle/docs
    Semantic Versioning (see https://semver.org/)
    Changelog (see https://keepachangelog.com/)
 
